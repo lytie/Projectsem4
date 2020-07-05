@@ -1026,7 +1026,7 @@ section
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: rgba(35,6,67,0.72);
+	background:#dca73a8a;
 	content: '';
 	visibility: hidden;
 	opacity: 0;
@@ -1068,7 +1068,7 @@ section
 	line-height: 46px;
 	font-size: 18px;
 	font-weight: 600;
-	color: #FFFFFF;
+	color: #fff;
 }
 .food_item_tag:hover
 {

@@ -2744,7 +2744,7 @@ li .richText-btn[data-command=toggleCode] {
   width: 1px;
   height: 120px;
   background: #ebebeb;
-  content: "";
+  
 }
 .profile-agent-content .profile-agent-widget ul {
   padding-top: 5px;

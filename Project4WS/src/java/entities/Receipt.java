@@ -12,17 +12,15 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -31,129 +29,117 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Admin
  */
 @Entity
-@Table(name = "Receipt", catalog = "Project4DB", schema = "dbo")
+@Table(name = "receipt", catalog = "prj4db", schema = "")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Receipt.findAll", query = "SELECT r FROM Receipt r"),
-    @NamedQuery(name = "Receipt.findByReceiptID", query = "SELECT r FROM Receipt r WHERE r.receiptID = :receiptID"),
-    @NamedQuery(name = "Receipt.findByCreateDate", query = "SELECT r FROM Receipt r WHERE r.createDate = :createDate"),
+    @NamedQuery(name = "Receipt.findByReceiptId", query = "SELECT r FROM Receipt r WHERE r.receiptId = :receiptId"),
+    @NamedQuery(name = "Receipt.findByPayDate", query = "SELECT r FROM Receipt r WHERE r.payDate = :payDate"),
     @NamedQuery(name = "Receipt.findBySubtotal", query = "SELECT r FROM Receipt r WHERE r.subtotal = :subtotal"),
     @NamedQuery(name = "Receipt.findByTax", query = "SELECT r FROM Receipt r WHERE r.tax = :tax"),
     @NamedQuery(name = "Receipt.findByTotal", query = "SELECT r FROM Receipt r WHERE r.total = :total"),
-    @NamedQuery(name = "Receipt.findByPaymentMethod", query = "SELECT r FROM Receipt r WHERE r.paymentMethod = :paymentMethod"),
-    @NamedQuery(name = "Receipt.findByStatus", query = "SELECT r FROM Receipt r WHERE r.status = :status")})
+    @NamedQuery(name = "Receipt.findByPayStatus", query = "SELECT r FROM Receipt r WHERE r.payStatus = :payStatus")})
 public class Receipt implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "ReceiptID", nullable = false)
-    private Integer receiptID;
-    @Column(name = "CreateDate")
+    @Column(name = "ReceiptId", nullable = false)
+    private Integer receiptId;
+    @Column(name = "PayDate")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date createDate;
+    private Date payDate;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "Subtotal", precision = 53)
-    private Double subtotal;
-    @Column(name = "Tax", precision = 53)
-    private Double tax;
-    @Column(name = "Total", precision = 53)
-    private Double total;
-    @Size(max = 50)
-    @Column(name = "PaymentMethod", length = 50)
-    private String paymentMethod;
-    @Column(name = "Status")
-    private Boolean status;
-    @OneToMany(mappedBy = "receiptID")
-    private List<ReceiptComponent> receiptComponentList;
-    @JoinColumn(name = "QRCode", referencedColumnName = "QRCodeID")
-    @ManyToOne
-    private QRCode qRCode;
+    @Column(name = "Subtotal", precision = 12, scale = 0)
+    private Float subtotal;
+    @Column(name = "Tax", precision = 12, scale = 0)
+    private Float tax;
+    @Column(name = "Total", precision = 12, scale = 0)
+    private Float total;
+    @Column(name = "PayStatus")
+    private Boolean payStatus;
+    @OneToMany(mappedBy = "receiptId")
+    private List<Qrcode> qrcodeList;
+    @OneToMany(mappedBy = "receipt")
+    private List<Receiptcomponent> receiptcomponentList;
 
     public Receipt() {
     }
 
-    public Receipt(Integer receiptID) {
-        this.receiptID = receiptID;
+    public Receipt(Integer receiptId) {
+        this.receiptId = receiptId;
     }
 
-    public Integer getReceiptID() {
-        return receiptID;
+    public Integer getReceiptId() {
+        return receiptId;
     }
 
-    public void setReceiptID(Integer receiptID) {
-        this.receiptID = receiptID;
+    public void setReceiptId(Integer receiptId) {
+        this.receiptId = receiptId;
     }
 
-    public Date getCreateDate() {
-        return createDate;
+    public Date getPayDate() {
+        return payDate;
     }
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    public void setPayDate(Date payDate) {
+        this.payDate = payDate;
     }
 
-    public Double getSubtotal() {
+    public Float getSubtotal() {
         return subtotal;
     }
 
-    public void setSubtotal(Double subtotal) {
+    public void setSubtotal(Float subtotal) {
         this.subtotal = subtotal;
     }
 
-    public Double getTax() {
+    public Float getTax() {
         return tax;
     }
 
-    public void setTax(Double tax) {
+    public void setTax(Float tax) {
         this.tax = tax;
     }
 
-    public Double getTotal() {
+    public Float getTotal() {
         return total;
     }
 
-    public void setTotal(Double total) {
+    public void setTotal(Float total) {
         this.total = total;
     }
 
-    public String getPaymentMethod() {
-        return paymentMethod;
+    public Boolean getPayStatus() {
+        return payStatus;
     }
 
-    public void setPaymentMethod(String paymentMethod) {
-        this.paymentMethod = paymentMethod;
-    }
-
-    public Boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(Boolean status) {
-        this.status = status;
+    public void setPayStatus(Boolean payStatus) {
+        this.payStatus = payStatus;
     }
 
     @XmlTransient
-    public List<ReceiptComponent> getReceiptComponentList() {
-        return receiptComponentList;
+    public List<Qrcode> getQrcodeList() {
+        return qrcodeList;
     }
 
-    public void setReceiptComponentList(List<ReceiptComponent> receiptComponentList) {
-        this.receiptComponentList = receiptComponentList;
+    public void setQrcodeList(List<Qrcode> qrcodeList) {
+        this.qrcodeList = qrcodeList;
     }
 
-    public QRCode getQRCode() {
-        return qRCode;
+    @XmlTransient
+    public List<Receiptcomponent> getReceiptcomponentList() {
+        return receiptcomponentList;
     }
 
-    public void setQRCode(QRCode qRCode) {
-        this.qRCode = qRCode;
+    public void setReceiptcomponentList(List<Receiptcomponent> receiptcomponentList) {
+        this.receiptcomponentList = receiptcomponentList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (receiptID != null ? receiptID.hashCode() : 0);
+        hash += (receiptId != null ? receiptId.hashCode() : 0);
         return hash;
     }
 
@@ -164,7 +150,7 @@ public class Receipt implements Serializable {
             return false;
         }
         Receipt other = (Receipt) object;
-        if ((this.receiptID == null && other.receiptID != null) || (this.receiptID != null && !this.receiptID.equals(other.receiptID))) {
+        if ((this.receiptId == null && other.receiptId != null) || (this.receiptId != null && !this.receiptId.equals(other.receiptId))) {
             return false;
         }
         return true;
@@ -172,7 +158,7 @@ public class Receipt implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Receipt[ receiptID=" + receiptID + " ]";
+        return "entities.Receipt[ receiptId=" + receiptId + " ]";
     }
     
 }

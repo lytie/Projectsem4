@@ -11,14 +11,17 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -28,61 +31,152 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Admin
  */
 @Entity
-@Table(name = "Room", catalog = "Project4DB", schema = "dbo")
+@Table(name = "room", catalog = "prj4db", schema = "")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Room.findAll", query = "SELECT r FROM Room r"),
-    @NamedQuery(name = "Room.findByRoomID", query = "SELECT r FROM Room r WHERE r.roomID = :roomID")})
+    @NamedQuery(name = "Room.findByRoomId", query = "SELECT r FROM Room r WHERE r.roomId = :roomId"),
+    @NamedQuery(name = "Room.findByPrice", query = "SELECT r FROM Room r WHERE r.price = :price"),
+    @NamedQuery(name = "Room.findByStatus", query = "SELECT r FROM Room r WHERE r.status = :status"),
+    @NamedQuery(name = "Room.findByDescription", query = "SELECT r FROM Room r WHERE r.description = :description"),
+    @NamedQuery(name = "Room.findByAdultOpacity", query = "SELECT r FROM Room r WHERE r.adultOpacity = :adultOpacity"),
+    @NamedQuery(name = "Room.findByChildrenOpacity", query = "SELECT r FROM Room r WHERE r.childrenOpacity = :childrenOpacity")})
 public class Room implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "RoomID", nullable = false, length = 50)
-    private String roomID;
-    @OneToMany(mappedBy = "currentRoomNumber")
-    private List<QRCode> qRCodeList;
-    @JoinColumn(name = "RoomTypeID", referencedColumnName = "RoomTypeID")
+    @Column(name = "RoomId", nullable = false)
+    private Integer roomId;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "Price", precision = 12, scale = 0)
+    private Float price;
+    @Column(name = "Status")
+    private Boolean status;
+    @Size(max = 255)
+    @Column(name = "Description", length = 255)
+    private String description;
+    @Column(name = "AdultOpacity")
+    private Integer adultOpacity;
+    @Column(name = "ChildrenOpacity")
+    private Integer childrenOpacity;
+    @ManyToMany(mappedBy = "roomList")
+    private List<Convenient> convenientList;
+    @OneToMany(mappedBy = "room")
+    private List<Qrcode> qrcodeList;
+    @OneToMany(mappedBy = "roomId")
+    private List<Roomimage> roomimageList;
+    @JoinColumn(name = "LocationId", referencedColumnName = "LocationId")
     @ManyToOne
-    private RoomType roomTypeID;
+    private Location locationId;
+    @JoinColumns({
+        @JoinColumn(name = "RoomTypeId", referencedColumnName = "RoomTypeId"),
+        @JoinColumn(name = "RoomTypeId", referencedColumnName = "RoomTypeId")})
+    @ManyToOne
+    private Roomtype roomtype;
 
     public Room() {
     }
 
-    public Room(String roomID) {
-        this.roomID = roomID;
+    public Room(Integer roomId) {
+        this.roomId = roomId;
     }
 
-    public String getRoomID() {
-        return roomID;
+    public Integer getRoomId() {
+        return roomId;
     }
 
-    public void setRoomID(String roomID) {
-        this.roomID = roomID;
+    public void setRoomId(Integer roomId) {
+        this.roomId = roomId;
+    }
+
+    public Float getPrice() {
+        return price;
+    }
+
+    public void setPrice(Float price) {
+        this.price = price;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Integer getAdultOpacity() {
+        return adultOpacity;
+    }
+
+    public void setAdultOpacity(Integer adultOpacity) {
+        this.adultOpacity = adultOpacity;
+    }
+
+    public Integer getChildrenOpacity() {
+        return childrenOpacity;
+    }
+
+    public void setChildrenOpacity(Integer childrenOpacity) {
+        this.childrenOpacity = childrenOpacity;
     }
 
     @XmlTransient
-    public List<QRCode> getQRCodeList() {
-        return qRCodeList;
+    public List<Convenient> getConvenientList() {
+        return convenientList;
     }
 
-    public void setQRCodeList(List<QRCode> qRCodeList) {
-        this.qRCodeList = qRCodeList;
+    public void setConvenientList(List<Convenient> convenientList) {
+        this.convenientList = convenientList;
     }
 
-    public RoomType getRoomTypeID() {
-        return roomTypeID;
+    @XmlTransient
+    public List<Qrcode> getQrcodeList() {
+        return qrcodeList;
     }
 
-    public void setRoomTypeID(RoomType roomTypeID) {
-        this.roomTypeID = roomTypeID;
+    public void setQrcodeList(List<Qrcode> qrcodeList) {
+        this.qrcodeList = qrcodeList;
+    }
+
+    @XmlTransient
+    public List<Roomimage> getRoomimageList() {
+        return roomimageList;
+    }
+
+    public void setRoomimageList(List<Roomimage> roomimageList) {
+        this.roomimageList = roomimageList;
+    }
+
+    public Location getLocationId() {
+        return locationId;
+    }
+
+    public void setLocationId(Location locationId) {
+        this.locationId = locationId;
+    }
+
+    public Roomtype getRoomtype() {
+        return roomtype;
+    }
+
+    public void setRoomtype(Roomtype roomtype) {
+        this.roomtype = roomtype;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (roomID != null ? roomID.hashCode() : 0);
+        hash += (roomId != null ? roomId.hashCode() : 0);
         return hash;
     }
 
@@ -93,7 +187,7 @@ public class Room implements Serializable {
             return false;
         }
         Room other = (Room) object;
-        if ((this.roomID == null && other.roomID != null) || (this.roomID != null && !this.roomID.equals(other.roomID))) {
+        if ((this.roomId == null && other.roomId != null) || (this.roomId != null && !this.roomId.equals(other.roomId))) {
             return false;
         }
         return true;
@@ -101,7 +195,7 @@ public class Room implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Room[ roomID=" + roomID + " ]";
+        return "entities.Room[ roomId=" + roomId + " ]";
     }
     
 }

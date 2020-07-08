@@ -11,12 +11,13 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -26,38 +27,42 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Admin
  */
 @Entity
-@Table(name = "Location", catalog = "Project4DB", schema = "dbo")
+@Table(name = "location", catalog = "prj4db", schema = "")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Location.findAll", query = "SELECT l FROM Location l"),
-    @NamedQuery(name = "Location.findByLocationID", query = "SELECT l FROM Location l WHERE l.locationID = :locationID"),
-    @NamedQuery(name = "Location.findByLocationName", query = "SELECT l FROM Location l WHERE l.locationName = :locationName")})
+    @NamedQuery(name = "Location.findByLocationId", query = "SELECT l FROM Location l WHERE l.locationId = :locationId"),
+    @NamedQuery(name = "Location.findByLocationName", query = "SELECT l FROM Location l WHERE l.locationName = :locationName"),
+    @NamedQuery(name = "Location.findByUrl", query = "SELECT l FROM Location l WHERE l.url = :url")})
 public class Location implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "LocationID", nullable = false)
-    private Integer locationID;
+    @Column(name = "LocationId", nullable = false)
+    private Integer locationId;
     @Size(max = 50)
     @Column(name = "LocationName", length = 50)
     private String locationName;
-    @OneToMany(mappedBy = "locationID")
-    private List<RoomType> roomTypeList;
+    @Size(max = 500)
+    @Column(name = "url", length = 500)
+    private String url;
+    @OneToMany(mappedBy = "locationId")
+    private List<Room> roomList;
 
     public Location() {
     }
 
-    public Location(Integer locationID) {
-        this.locationID = locationID;
+    public Location(Integer locationId) {
+        this.locationId = locationId;
     }
 
-    public Integer getLocationID() {
-        return locationID;
+    public Integer getLocationId() {
+        return locationId;
     }
 
-    public void setLocationID(Integer locationID) {
-        this.locationID = locationID;
+    public void setLocationId(Integer locationId) {
+        this.locationId = locationId;
     }
 
     public String getLocationName() {
@@ -68,19 +73,27 @@ public class Location implements Serializable {
         this.locationName = locationName;
     }
 
-    @XmlTransient
-    public List<RoomType> getRoomTypeList() {
-        return roomTypeList;
+    public String getUrl() {
+        return url;
     }
 
-    public void setRoomTypeList(List<RoomType> roomTypeList) {
-        this.roomTypeList = roomTypeList;
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    @XmlTransient
+    public List<Room> getRoomList() {
+        return roomList;
+    }
+
+    public void setRoomList(List<Room> roomList) {
+        this.roomList = roomList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (locationID != null ? locationID.hashCode() : 0);
+        hash += (locationId != null ? locationId.hashCode() : 0);
         return hash;
     }
 
@@ -91,7 +104,7 @@ public class Location implements Serializable {
             return false;
         }
         Location other = (Location) object;
-        if ((this.locationID == null && other.locationID != null) || (this.locationID != null && !this.locationID.equals(other.locationID))) {
+        if ((this.locationId == null && other.locationId != null) || (this.locationId != null && !this.locationId.equals(other.locationId))) {
             return false;
         }
         return true;
@@ -99,7 +112,7 @@ public class Location implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Location[ locationID=" + locationID + " ]";
+        return "entities.Location[ locationId=" + locationId + " ]";
     }
     
 }

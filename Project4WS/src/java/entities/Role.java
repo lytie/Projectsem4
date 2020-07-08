@@ -11,12 +11,13 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -26,38 +27,38 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Admin
  */
 @Entity
-@Table(name = "Role", catalog = "Project4DB", schema = "dbo")
+@Table(name = "role", catalog = "prj4db", schema = "")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Role.findAll", query = "SELECT r FROM Role r"),
-    @NamedQuery(name = "Role.findByRoleID", query = "SELECT r FROM Role r WHERE r.roleID = :roleID"),
+    @NamedQuery(name = "Role.findByRoleId", query = "SELECT r FROM Role r WHERE r.roleId = :roleId"),
     @NamedQuery(name = "Role.findByRoleName", query = "SELECT r FROM Role r WHERE r.roleName = :roleName")})
 public class Role implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "RoleID", nullable = false)
-    private Integer roleID;
+    @Column(name = "RoleId", nullable = false)
+    private Integer roleId;
     @Size(max = 50)
     @Column(name = "RoleName", length = 50)
     private String roleName;
-    @OneToMany(mappedBy = "roleID")
-    private List<Account> accountList;
+    @OneToMany(mappedBy = "roleId")
+    private List<Accountemployee> accountemployeeList;
 
     public Role() {
     }
 
-    public Role(Integer roleID) {
-        this.roleID = roleID;
+    public Role(Integer roleId) {
+        this.roleId = roleId;
     }
 
-    public Integer getRoleID() {
-        return roleID;
+    public Integer getRoleId() {
+        return roleId;
     }
 
-    public void setRoleID(Integer roleID) {
-        this.roleID = roleID;
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 
     public String getRoleName() {
@@ -69,18 +70,18 @@ public class Role implements Serializable {
     }
 
     @XmlTransient
-    public List<Account> getAccountList() {
-        return accountList;
+    public List<Accountemployee> getAccountemployeeList() {
+        return accountemployeeList;
     }
 
-    public void setAccountList(List<Account> accountList) {
-        this.accountList = accountList;
+    public void setAccountemployeeList(List<Accountemployee> accountemployeeList) {
+        this.accountemployeeList = accountemployeeList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (roleID != null ? roleID.hashCode() : 0);
+        hash += (roleId != null ? roleId.hashCode() : 0);
         return hash;
     }
 
@@ -91,7 +92,7 @@ public class Role implements Serializable {
             return false;
         }
         Role other = (Role) object;
-        if ((this.roleID == null && other.roleID != null) || (this.roleID != null && !this.roleID.equals(other.roleID))) {
+        if ((this.roleId == null && other.roleId != null) || (this.roleId != null && !this.roleId.equals(other.roleId))) {
             return false;
         }
         return true;
@@ -99,7 +100,7 @@ public class Role implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Role[ roleID=" + roleID + " ]";
+        return "entities.Role[ roleId=" + roleId + " ]";
     }
     
 }

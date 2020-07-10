@@ -11,10 +11,10 @@ Created:
 [Table of contents]
 
 1.  Template default CSS
-	1.1	Variables
-	1.2	Mixins
-	1.3	Flexbox
-	1.4	Reset
+  1.1 Variables
+  1.2 Mixins
+  1.3 Flexbox
+  1.4 Reset
 2.  Helper Css
 3.  Header Section
 4.  Hero Section
@@ -2735,6 +2735,8 @@ li .richText-btn[data-command=toggleCode] {
 }
 .profile-agent-content .profile-agent-widget {
   padding-right: 50px;
+  border-right: 0.5px #939393 solid;
+
   position: relative;
 }
 .profile-agent-content .profile-agent-widget:after {
@@ -2762,17 +2764,28 @@ li .richText-btn[data-command=toggleCode] {
 .profile-agent-content .profile-agent-widget ul li span {
   font-weight: 600;
   float: right;
+  width: 40%;
+}
+.profile-agent-content .profile-agent-widget ul li span span {
+  font-weight: 600;
+  float: right;
 }
 .profile-agent-content .profile-agent-newslatter {
   padding-top: 10px;
 }
-.profile-agent-content .profile-agent-newslatter h5 {
-  color: #111111;
-  font-weight: 700;
-  margin-bottom: 25px;
+.profile-agent-content .profile-agent-newslatter ul li span {
+  font-weight: 600;
+  float: right;
 }
-.profile-agent-content .profile-agent-newslatter form {
-  position: relative;
+.profile-agent-content .profile-agent-newslatter ul li {
+  list-style: none;
+  font-size: 14px;
+  color: #111111;
+  font-weight: 500;
+  line-height: 36px;
+  overflow: hidden;
+  -webkit-transition: all 22s;
+  transition: all 0.2s;
 }
 .profile-agent-content .profile-agent-newslatter form input {
   height: 50px;

@@ -2762,6 +2762,12 @@ li .richText-btn[data-command=toggleCode] {
 .profile-agent-content .profile-agent-widget ul li span {
   font-weight: 600;
   float: right;
+  
+}
+.profile-agent-content .profile-agent-widget ul li .span {
+  font-weight: 600;
+ 
+  margin-right: 50%;
 }
 .profile-agent-content .profile-agent-newslatter {
   padding-top: 10px;

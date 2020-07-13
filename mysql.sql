@@ -30,7 +30,7 @@ CREATE TABLE `accountcustomer` (
   `Phone` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`AccountCustomerId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,6 +39,7 @@ CREATE TABLE `accountcustomer` (
 
 LOCK TABLES `accountcustomer` WRITE;
 /*!40000 ALTER TABLE `accountcustomer` DISABLE KEYS */;
+INSERT INTO `accountcustomer` VALUES (1,'abc@gmail.com','123456','Trịnh Thiêm Bảo','03940435',NULL);
 /*!40000 ALTER TABLE `accountcustomer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -73,32 +74,6 @@ LOCK TABLES `accountemployee` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `area`
---
-
-DROP TABLE IF EXISTS `area`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `area` (
-  `AreaId` int NOT NULL AUTO_INCREMENT,
-  `AreaName` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `Price` float DEFAULT NULL,
-  `Description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `url` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`AreaId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `area`
---
-
-LOCK TABLES `area` WRITE;
-/*!40000 ALTER TABLE `area` DISABLE KEYS */;
-/*!40000 ALTER TABLE `area` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `convenient`
 --
 
@@ -120,6 +95,32 @@ CREATE TABLE `convenient` (
 LOCK TABLES `convenient` WRITE;
 /*!40000 ALTER TABLE `convenient` DISABLE KEYS */;
 /*!40000 ALTER TABLE `convenient` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `entertainment`
+--
+
+DROP TABLE IF EXISTS `entertainment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `entertainment` (
+  `EntertainmentId` int NOT NULL AUTO_INCREMENT,
+  `EntertainmentName` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `TicketPrice` float DEFAULT NULL,
+  `EntertainmentDescription` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `EntertainmentUrl` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  PRIMARY KEY (`EntertainmentId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `entertainment`
+--
+
+LOCK TABLES `entertainment` WRITE;
+/*!40000 ALTER TABLE `entertainment` DISABLE KEYS */;
+/*!40000 ALTER TABLE `entertainment` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -181,10 +182,10 @@ DROP TABLE IF EXISTS `foodanddrink`;
 CREATE TABLE `foodanddrink` (
   `FoodAndDrinkId` int NOT NULL AUTO_INCREMENT,
   `TypeId` int DEFAULT NULL,
-  `Name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `Price` float DEFAULT NULL,
-  `Description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `url` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `FoodAndDrinkName` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `FoodAndDrinkPrice` float DEFAULT NULL,
+  `FoodAndDrinkDescription` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `FoodAndDrinkurl` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`FoodAndDrinkId`),
   KEY `FK_foodanddrink_fndtype` (`TypeId`),
   CONSTRAINT `FK_foodanddrink_fndtype` FOREIGN KEY (`TypeId`) REFERENCES `fndtype` (`TypeId`)
@@ -201,6 +202,28 @@ LOCK TABLES `foodanddrink` WRITE;
 UNLOCK TABLES;
 
 --
+-- Temporary view structure for view `history`
+--
+
+DROP TABLE IF EXISTS `history`;
+/*!50001 DROP VIEW IF EXISTS `history`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `history` AS SELECT 
+ 1 AS `url`,
+ 1 AS `RoomTypeName`,
+ 1 AS `LocationName`,
+ 1 AS `CheckInDate`,
+ 1 AS `CheckOutDate`,
+ 1 AS `Subtotal`,
+ 1 AS `Tax`,
+ 1 AS `Deposits`,
+ 1 AS `Total`,
+ 1 AS `ReceiptId`,
+ 1 AS `AccountCustomerId`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `location`
 --
 
@@ -210,7 +233,7 @@ DROP TABLE IF EXISTS `location`;
 CREATE TABLE `location` (
   `LocationId` int NOT NULL AUTO_INCREMENT,
   `LocationName` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `url` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `LocationUrl` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`LocationId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -244,6 +267,8 @@ CREATE TABLE `qrcode` (
   `Deposits` float DEFAULT NULL,
   `ReceiptId` int DEFAULT NULL,
   `Url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `AccountCustomerId` int DEFAULT NULL,
+  `Status` bit(1) DEFAULT NULL,
   PRIMARY KEY (`QrCodeId`),
   KEY `FK_qrcode_receipt` (`ReceiptId`),
   KEY `FK_qrcode_room` (`RoomId`),
@@ -377,6 +402,23 @@ LOCK TABLES `room` WRITE;
 UNLOCK TABLES;
 
 --
+-- Temporary view structure for view `roombooking`
+--
+
+DROP TABLE IF EXISTS `roombooking`;
+/*!50001 DROP VIEW IF EXISTS `roombooking`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `roombooking` AS SELECT 
+ 1 AS `RoomTypeName`,
+ 1 AS `BedOptions`,
+ 1 AS `RoomSize`,
+ 1 AS `url`,
+ 1 AS `RoomId`,
+ 1 AS `Price`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `roomconvenient`
 --
 
@@ -454,6 +496,74 @@ LOCK TABLES `roomtype` WRITE;
 /*!40000 ALTER TABLE `roomtype` DISABLE KEYS */;
 /*!40000 ALTER TABLE `roomtype` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Temporary view structure for view `v_convenientroom`
+--
+
+DROP TABLE IF EXISTS `v_convenientroom`;
+/*!50001 DROP VIEW IF EXISTS `v_convenientroom`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `v_convenientroom` AS SELECT 
+ 1 AS `RoomId`,
+ 1 AS `ConvenientName`,
+ 1 AS `url`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Final view structure for view `history`
+--
+
+/*!50001 DROP VIEW IF EXISTS `history`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `history` AS select `c`.`url` AS `url`,`c`.`RoomTypeName` AS `RoomTypeName`,`d`.`LocationName` AS `LocationName`,`a`.`CheckInDate` AS `CheckInDate`,`a`.`CheckOutDate` AS `CheckOutDate`,`e`.`Subtotal` AS `Subtotal`,`e`.`Tax` AS `Tax`,`a`.`Deposits` AS `Deposits`,`e`.`Total` AS `Total`,`a`.`ReceiptId` AS `ReceiptId`,`a`.`AccountCustomerId` AS `AccountCustomerId` from ((((`qrcode` `a` join `room` `b` on((`a`.`RoomId` = `b`.`RoomId`))) join `roomtype` `c` on((`b`.`RoomTypeId` = `c`.`RoomTypeId`))) join `location` `d` on((`b`.`LocationId` = `d`.`LocationId`))) join `receipt` `e` on((`a`.`ReceiptId` = `e`.`ReceiptId`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `roombooking`
+--
+
+/*!50001 DROP VIEW IF EXISTS `roombooking`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `roombooking` AS select `a`.`RoomTypeName` AS `RoomTypeName`,`a`.`BedOptions` AS `BedOptions`,`a`.`RoomSize` AS `RoomSize`,`a`.`url` AS `url`,`b`.`RoomId` AS `RoomId`,`b`.`Price` AS `Price` from (`roomtype` `a` join `room` `b` on((`a`.`RoomTypeId` = `b`.`RoomTypeId`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `v_convenientroom`
+--
+
+/*!50001 DROP VIEW IF EXISTS `v_convenientroom`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `v_convenientroom` AS select `a`.`RoomId` AS `RoomId`,`c`.`ConvenientName` AS `ConvenientName`,`c`.`url` AS `url` from ((`roomconvenient` `a` join `room` `b` on((`a`.`RoomId` = `b`.`RoomId`))) join `convenient` `c` on((`a`.`ConvenientId` = `c`.`ConvenientId`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -464,4 +574,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-06 20:30:08
+-- Dump completed on 2020-07-13 15:34:24

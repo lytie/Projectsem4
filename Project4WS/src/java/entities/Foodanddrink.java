@@ -36,6 +36,18 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Foodanddrink.findByDescription", query = "SELECT f FROM Foodanddrink f WHERE f.description = :description"),
     @NamedQuery(name = "Foodanddrink.findByUrl", query = "SELECT f FROM Foodanddrink f WHERE f.url = :url")})
 public class Foodanddrink implements Serializable {
+    @Size(max = 50)
+    @Column(name = "FoodAndDrinkName", length = 50)
+    private String foodAndDrinkName;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "FoodAndDrinkPrice", precision = 12, scale = 0)
+    private Float foodAndDrinkPrice;
+    @Size(max = 255)
+    @Column(name = "FoodAndDrinkDescription", length = 255)
+    private String foodAndDrinkDescription;
+    @Size(max = 500)
+    @Column(name = "FoodAndDrinkurl", length = 500)
+    private String foodAndDrinkurl;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -136,6 +148,38 @@ public class Foodanddrink implements Serializable {
     @Override
     public String toString() {
         return "entities.Foodanddrink[ foodAndDrinkId=" + foodAndDrinkId + " ]";
+    }
+
+    public String getFoodAndDrinkName() {
+        return foodAndDrinkName;
+    }
+
+    public void setFoodAndDrinkName(String foodAndDrinkName) {
+        this.foodAndDrinkName = foodAndDrinkName;
+    }
+
+    public Float getFoodAndDrinkPrice() {
+        return foodAndDrinkPrice;
+    }
+
+    public void setFoodAndDrinkPrice(Float foodAndDrinkPrice) {
+        this.foodAndDrinkPrice = foodAndDrinkPrice;
+    }
+
+    public String getFoodAndDrinkDescription() {
+        return foodAndDrinkDescription;
+    }
+
+    public void setFoodAndDrinkDescription(String foodAndDrinkDescription) {
+        this.foodAndDrinkDescription = foodAndDrinkDescription;
+    }
+
+    public String getFoodAndDrinkurl() {
+        return foodAndDrinkurl;
+    }
+
+    public void setFoodAndDrinkurl(String foodAndDrinkurl) {
+        this.foodAndDrinkurl = foodAndDrinkurl;
     }
     
 }

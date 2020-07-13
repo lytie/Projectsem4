@@ -47,6 +47,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Qrcode.findByDeposits", query = "SELECT q FROM Qrcode q WHERE q.deposits = :deposits"),
     @NamedQuery(name = "Qrcode.findByUrl", query = "SELECT q FROM Qrcode q WHERE q.url = :url")})
 public class Qrcode implements Serializable {
+    @Column(name = "AccountCustomerId")
+    private Integer accountCustomerId;
+    @Column(name = "Status")
+    private Boolean status;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -225,6 +229,22 @@ public class Qrcode implements Serializable {
     @Override
     public String toString() {
         return "entities.Qrcode[ qrCodeId=" + qrCodeId + " ]";
+    }
+
+    public Integer getAccountCustomerId() {
+        return accountCustomerId;
+    }
+
+    public void setAccountCustomerId(Integer accountCustomerId) {
+        this.accountCustomerId = accountCustomerId;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
     
 }

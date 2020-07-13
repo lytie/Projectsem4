@@ -21,7 +21,7 @@
 					<!-- Logo -->
 					<div class="logo">
 						<a href="index.html">
-                                                    <img src="images/icons/newlogo2.png" alt="IMG-LOGO" data-logofixed="images/icons/newlogo1.png">
+                                                    <img src="../images/customerpageimg/icons/newlogo2.png" alt="IMG-LOGO" data-logofixed="../images/customerpageimg/icons/newlogo1.png">
 						</a>
 					</div>
 
@@ -94,7 +94,7 @@
 						<tbody>
 							<tr>
 								<td class="product-thumbnail">
-									<img src="images/bg-intro-03.jpg" alt="Image" class="img-fluid">
+									<img src="../images/customerpageimg/bg-intro-03.jpg" alt="Image" class="img-fluid">
 								</td>
 								<td class="product-name">
 									<h2 class="h5 text-black">Top Up T-Shirt</h2>
@@ -123,7 +123,7 @@
 
 							<tr>
 								<td class="product-thumbnail">
-									<img src="images/bg-intro-03.jpg" alt="Image" class="img-fluid">
+									<img src="../images/customerpageimg/bg-intro-03.jpg" alt="Image" class="img-fluid">
 								</td>
 								<td class="product-name">
 									<h2 class="h5 text-black">Top Up T-Shirt</h2>
@@ -151,7 +151,7 @@
 							</tr>
                                                         <tr>
 								<td class="product-thumbnail">
-									<img src="images/bg-intro-03.jpg" alt="Image" class="img-fluid">
+									<img src="../images/customerpageimg/bg-intro-03.jpg" alt="Image" class="img-fluid">
 								</td>
 								<td class="product-name">
 									<h2 class="h5 text-black">Top Up T-Shirt</h2>

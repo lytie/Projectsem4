@@ -211,10 +211,10 @@
                             <h1>Explore Hot Locations</h1>
                         </div>
                         <div class="locations_container d-flex flex-row align-items-start justify-content-between flex-wrap">
-                            
+                           
                             <!-- Location -->
                             <div class="location">
-                                <img src="images/location_1.jpg" alt="">
+                                <img src="../images/location_1.jpg" alt="">
                                 <div class="location_title text-center">
                                     <div><a href="single.html">Amsterdam<div>+</div></a></div>
                                 </div>

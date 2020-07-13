@@ -21,7 +21,7 @@
 <!--===============================================================================================-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
 <!--===============================================================================================-->
-	<link rel="icon" type="image/png" href="images/icons/favicon.png"/>
+	<link rel="icon" type="image/png" href="../images/customerpageimg/icons/favicon.png"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
@@ -65,7 +65,7 @@
 	<%@ include file="cpheader.jsp" %>
 	
 	<!-- Title Page -->
-	<section class="bg-title-page flex-c-m p-t-160 p-b-80 p-l-15 p-r-15" style="background-image: url(images/bg-title-page-01.jpg);">
+	<section class="bg-title-page flex-c-m p-t-160 p-b-80 p-l-15 p-r-15" style="background-image: url(../images/customerpageimg/bg-title-page-01.jpg);">
 		<h2 class="tit6 t-center">
 			Haven de luxe Menu
 		</h2>
@@ -82,7 +82,7 @@
 					<!-- Block3 -->
 				<div class="col-md-6 blo3 flex-w flex-col-l-sm m-b-30">
 						<div class="pic-blo3 size20 bo-rad-10 hov-img-zoom m-r-28">
-							<a href="#"><img src="images/lunch-01.jpg" alt="IMG-MENU"></a>
+							<a href="#"><img src="../images/customerpageimg/lunch-01.jpg" alt="IMG-MENU"></a>
 						</div>
 
 						<div class="text-blo3 size21 flex-col-l-m">
@@ -104,7 +104,7 @@
 				<!-- Block3 -->
 				<div class="col-md-6 blo3 flex-w flex-col-l-sm m-b-30">
 						<div class="pic-blo3 size20 bo-rad-10 hov-img-zoom m-r-28">
-							<a href="#"><img src="images/lunch-03.jpg" alt="IMG-MENU"></a>
+							<a href="#"><img src="../images/customerpageimg/lunch-03.jpg" alt="IMG-MENU"></a>
 						</div>
 
 						<div class="text-blo3 size21 flex-col-l-m">
@@ -126,7 +126,7 @@
 				<!-- Block3 -->
 				<div class="col-md-6 blo3 flex-w flex-col-l-sm m-b-30">
 						<div class="pic-blo3 size20 bo-rad-10 hov-img-zoom m-r-28">
-							<a href="#"><img src="images/lunch-05.jpg" alt="IMG-MENU"></a>
+							<a href="#"><img src="../images/customerpageimg/lunch-05.jpg" alt="IMG-MENU"></a>
 						</div>
 
 						<div class="text-blo3 size21 flex-col-l-m">
@@ -146,7 +146,7 @@
 				<!-- Block3 -->
 				<div class="col-md-6 blo3 flex-w flex-col-l-sm m-b-30">
 						<div class="pic-blo3 size20 bo-rad-10 hov-img-zoom m-r-28">
-							<a href="#"><img src="images/lunch-02.jpg" alt="IMG-MENU"></a>
+							<a href="#"><img src="../images/customerpageimg/lunch-02.jpg" alt="IMG-MENU"></a>
 						</div>
 
 						<div class="text-blo3 size21 flex-col-l-m">
@@ -167,7 +167,7 @@
 				<!-- Block3 -->
 				<div class="col-md-6 blo3 flex-w flex-col-l-sm m-b-30">
 						<div class="pic-blo3 size20 bo-rad-10 hov-img-zoom m-r-28">
-							<a href="#"><img src="images/lunch-04.jpg" alt="IMG-MENU"></a>
+							<a href="#"><img src="../images/customerpageimg/lunch-04.jpg" alt="IMG-MENU"></a>
 						</div>
 
 						<div class="text-blo3 size21 flex-col-l-m">
@@ -188,7 +188,7 @@
 				<!-- Block3 -->
 				<div class="col-md-6 blo3 flex-w flex-col-l-sm m-b-30">
 						<div class="pic-blo3 size20 bo-rad-10 hov-img-zoom m-r-28">
-							<a href="#"><img src="images/lunch-06.jpg" alt="IMG-MENU"></a>
+							<a href="#"><img src="../images/customerpageimg/lunch-06.jpg" alt="IMG-MENU"></a>
 						</div>
 
 						<div class="text-blo3 size21 flex-col-l-m">

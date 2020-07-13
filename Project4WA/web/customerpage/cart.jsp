@@ -22,7 +22,7 @@
 	<!--===============================================================================================-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
 	<!--===============================================================================================-->
-	<link rel="icon" type="image/png" href="images/icons/favicon.png" />
+	<link rel="icon" type="image/png" href="../images/customerpageimg/icons/favicon.png" />
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
 	<!--===============================================================================================-->
@@ -67,7 +67,7 @@
 
 	<!-- Title Page -->
 	<section class="bg-title-page flex-c-m p-t-160 p-b-80 p-l-15 p-r-15"
-		style="background-image: url(images/bg-title-page-02.jpg);">
+		style="background-image: url(../images/customerpageimg/bg-title-page-02.jpg);">
 		<h2 class="tit6 t-center">
 			Your Order
 		</h2>
@@ -134,7 +134,7 @@
 				<div class="row">
 					<div class="col-md-6">
                                             <h2 class="m-b-20">Scan qr code to pay your bill</h2>
-                                                <img src="../images/image.png" style="max-width: 100%;max-height: 100%" alt="lunch-04"/>
+                                                <img src="../../images/customerpageimg/image.png" style="max-width: 100%;max-height: 100%" alt="lunch-04"/>
                                 
 					</div>
 					<div class="col-md-6 pl-5">

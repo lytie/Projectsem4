@@ -20,7 +20,7 @@
 <!--===============================================================================================-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
 <!--===============================================================================================-->
-	<link rel="icon" type="image/png" href="images/icons/favicon.png"/>
+	<link rel="icon" type="image/png" href="../images/customerpageimg/icons/favicon.png"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
@@ -64,7 +64,7 @@
 	<%@ include file="cpheader.jsp" %>
 
 	<!-- Title Page -->
-	<section class="bg-title-page flex-c-m p-t-160 p-b-80 p-l-15 p-r-15" style="background-image: url(images/services-page-01.jpg);">
+	<section class="bg-title-page flex-c-m p-t-160 p-b-80 p-l-15 p-r-15" style="background-image: url(../images/customerpageimg/services-page-01.jpg);">
 		<h2 class="tit6 t-center">
 			Haven de luxe services
 		</h2>
@@ -85,7 +85,7 @@
 					<!-- Block3 -->
 					<div class="blo3 flex-w flex-col-l-sm m-b-30">
 						<div class="pic-blo3 size20 bo-rad-10 hov-img-zoom m-r-28">
-							<a href="#"><img src="images/experience1.jpg" alt="IMG-MENU"></a>
+							<a href="#"><img src="../images/customerpageimg/experience1.jpg" alt="IMG-MENU"></a>
 						</div>
 
 						<div class="text-blo3 size21 flex-col-l-m">
@@ -106,7 +106,7 @@
 					<!-- Block3 -->
 					<div class="blo3 flex-w flex-col-l-sm m-b-30">
 						<div class="pic-blo3 size20 bo-rad-10 hov-img-zoom m-r-28">
-							<a href="#"><img src="images/experience2.jpg" alt="IMG-MENU"></a>
+							<a href="#"><img src="../images/customerpageimg/experience2.jpg" alt="IMG-MENU"></a>
 						</div>
 
 						<div class="text-blo3 size21 flex-col-l-m">
@@ -127,7 +127,7 @@
 					<!-- Block3 -->
 					<div class="blo3 flex-w flex-col-l-sm m-b-30">
 						<div class="pic-blo3 size20 bo-rad-10 hov-img-zoom m-r-28">
-							<a href="#"><img src="images/experience3.jpg" alt="IMG-MENU"></a>
+							<a href="#"><img src="../images/customerpageimg/experience3.jpg" alt="IMG-MENU"></a>
 						</div>
 
 						<div class="text-blo3 size21 flex-col-l-m">
@@ -150,7 +150,7 @@
 					<!-- Block3 -->
 					<div class="blo3 flex-w flex-col-l-sm m-b-30">
 						<div class="pic-blo3 size20 bo-rad-10 hov-img-zoom m-r-28">
-							<a href="#"><img src="images/experience4.jpg" alt="IMG-MENU"></a>
+							<a href="#"><img src="../images/customerpageimg/experience4.jpg" alt="IMG-MENU"></a>
 						</div>
 
 						<div class="text-blo3 size21 flex-col-l-m">
@@ -171,7 +171,7 @@
 					<!-- Block3 -->
 					<div class="blo3 flex-w flex-col-l-sm m-b-30">
 						<div class="pic-blo3 size20 bo-rad-10 hov-img-zoom m-r-28">
-							<a href="#"><img src="images/experience5.jpg" alt="IMG-MENU"></a>
+							<a href="#"><img src="../images/customerpageimg/experience5.jpg" alt="IMG-MENU"></a>
 						</div>
 
 						<div class="text-blo3 size21 flex-col-l-m">
@@ -192,7 +192,7 @@
 					<!-- Block3 -->
 					<div class="blo3 flex-w flex-col-l-sm m-b-30">
 						<div class="pic-blo3 size20 bo-rad-10 hov-img-zoom m-r-28">
-							<a href="#"><img src="images/lunch-06.jpg" alt="IMG-MENU"></a>
+							<a href="#"><img src="../images/customerpageimg/lunch-06.jpg" alt="IMG-MENU"></a>
 						</div>
 
 						<div class="text-blo3 size21 flex-col-l-m">

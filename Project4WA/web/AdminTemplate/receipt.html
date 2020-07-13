@@ -4,13 +4,17 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 3 | Invoice</title>
+    <title>AdminLTE 3 | DataTables</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="./plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="./plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="./plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="./dist/css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
@@ -140,20 +144,21 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="./index.html" class="brand-link">
-                <img src="./dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">ADMIN</span>
-            </a>
+            <a href="index.html" class="brand-link">
+      <img src="dist/img/logo.png" alt="AdminLTE Logo" class="brand-image img-square "
+           style="opacity: .8">
+      <span class="brand-text font-weight-light">Haven Deluxe</span>
+    </a>
 
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Sidebar user (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="./dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                        <img src="./dist/img/user2-160x160.jpg" class="img-square elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Alexander Pierce</a>
+                        <a href="index.html" class="d-block">HOME PAGE</a>
                     </div>
                 </div>
 
@@ -162,65 +167,17 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+                        
                         <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>
-                                    Dashboard
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="./index.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>REVENNUE</p>
-                                    </a>
-                                </li>
-
-                            </ul>
-                        </li>
-
-
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-table"></i>
+                            <a href="employee.html" class="nav-link">
+                                <i class="nav-icon fa fa-user"></i>
                                 <p>
                                     Employee
-                                    <i class="fas fa-angle-left right"></i>
+                                    
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="../tables/validation.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Add Employee</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../tables/data.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Service</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../tables/employee.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Employee</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../tables/jsgrid.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>jsGrid</p>
-                                    </a>
-                                </li>
-                            </ul>
+                            
                         </li>
-                        <li class="nav-header">EXAMPLES</li>
-
-
-
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-book"></i>
@@ -233,30 +190,18 @@
 
 
                                 <li class="nav-item">
-                                    <a href="../examples/customers.html" class="nav-link">
+                                    <a href="customers.html" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Information</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="../examples/project-add.html" class="nav-link">
+                                    <a href="receipt.html" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Project Add</p>
+                                        <p>Receipt</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="../examples/invoice.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Cart</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../examples/contacts.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Contact</p>
-                                    </a>
-                                </li>
-
+                                
                             </ul>
                         </li>
                         <li class="nav-item has-treeview">
@@ -269,29 +214,55 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="../tables/room.html" class="nav-link">
+                                    <a href="room.html" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>List Room</p>
                                     </a>
                                 </li>
                             </ul>
-                        </li>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-university"></i>
-                                <p>
-                                    Location
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="../tables/location.html" class="nav-link">
-                                        <i class="fa fa-university "></i>
-                                        <p>List Location</p>
+                                    <a href="roomImage.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Room Image</p>
                                     </a>
                                 </li>
                             </ul>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="roomtype.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Room Type</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="location.html" class="nav-link">
+                                <i class="nav-icon fa fa-map-signs"></i>
+                                <p>
+                                    Location
+                                </p>
+                            </a>
+                            
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="convenient.html" class="nav-link">
+                                <i class="nav-icon fa fa-wifi"></i>
+                                <p>
+                                    Convenient
+                                </p>
+                            </a>
+                            
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="service.html" class="nav-link">
+                                <i class="nav-icon fa fa-asterisk"></i>
+                                <p>
+                                    Entertainment
+                                </p>
+                            </a>
+                            
                         </li>
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
@@ -303,14 +274,14 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="../mailbox/mailbox.html" class="nav-link">
+                                    <a href="mailbox.html" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Inbox</p>
                                     </a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="../mailbox/read-mail.html" class="nav-link">
+                                    <a href="read-mail.html" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Read</p>
                                     </a>
@@ -353,6 +324,7 @@
 
                             </ul>
                         </li>
+
                 </nav>
                 <!-- /.sidebar-menu -->
             </div>
@@ -362,135 +334,148 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
-            <section class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1>Invoice</h1>
-                        </div>
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Invoice</li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.container-fluid -->
-            </section>
+            
 
+            <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
-                            <div class="callout callout-info">
-                                <h5><i class="fas fa-info"></i> Note:</h5>
-                                This page has been enhanced for printing. Click the print button at the bottom of the invoice to test.
-                            </div>
-
-
-                            <!-- Main content -->
-                            <div class="invoice p-3 mb-3">
-                                <!-- title row -->
-                                <div class="row">
-                                    <div class="col-12">
-                                        <h4>
-                                            <i class="fas fa-globe"></i> AdminLTE, Inc.
-                                            <small class="float-right">Date: 2/10/2014</small>
-                                        </h4>
+                            <div class="card">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Invoice List</h3>
                                     </div>
-                                    <!-- /.col -->
-                                </div>
-                                <!-- info row -->
-                                <div class="row invoice-info">
-                                    <div class="col-sm-4 invoice-col">
-                                        From
-                                        <address>
-                    <strong>Admin, Inc.</strong><br>
-                    795 Folsom Ave, Suite 600<br>
-                    San Francisco, CA 94107<br>
-                    Phone: (804) 123-5432<br>
-                    Email: info@almasaeedstudio.com
-                  </address>
-                                    </div>
-                                    <!-- /.col -->
-                                    <div class="col-sm-4 invoice-col">
-                                        To
-                                        <address>
-                    <strong>John Doe</strong><br>
-                    795 Folsom Ave, Suite 600<br>
-                    San Francisco, CA 94107<br>
-                    Phone: (555) 539-1037<br>
-                    Email: john.doe@example.com
-                  </address>
-                                    </div>
-                                    <!-- /.col -->
-                                    <div class="col-sm-4 invoice-col">
-                                        <b>Invoice #007612</b><br>
-                                        <br>
-                                        <b>Order ID:</b> 4F3S8J<br>
-                                        <b>Payment Due:</b> 2/22/2014<br>
-                                        <b>Account:</b> 968-34567
-                                    </div>
-                                    <!-- /.col -->
-                                </div>
-                                <!-- /.row -->
-
-                                <!-- Table row -->
-                                <div class="row">
-                                    <div class="col-12 table-responsive">
-                                        <table class="table table-striped">
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                        <table id="example1" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th>Qty</th>
-                                                    <th>Product</th>
-                                                    <th>Serial #</th>
-                                                    <th>Description</th>
-                                                    <th>Subtotal</th>
+                                                    <th>PayDate :</th>
+                                                    <th>Subtotal :</th>
+                                                    <th>Tax :</th>
+                                                    <th>Total :</th>
+                                                    <th>Pay Status :</th>
+                                                    <th>Action</th>
+
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>1</td>
-                                                    <td>Call of Duty</td>
-                                                    <td>455-981-221</td>
-                                                    <td>El snort testosterone trophy driving gloves handsome</td>
-                                                    <td>$64.50</td>
+                                                    <td>Trident</td>
+                                                    <td>Trident</td>
+                                                    <td>Trident</td>
+                                                    <td>Trident</td>
+                                                    <td>Internet Explorer 4.0</td>
+                                                    <td>
+                                                        <a class="btn btn-info btn-sm" href="#">
+                                                            <i class="fas fa-pencil-alt">
+                                                          </i> Edit
+                                                        </a>
+                                                        
+                                                    </td>
                                                 </tr>
                                                 <tr>
-                                                    <td>1</td>
-                                                    <td>Need for Speed IV</td>
-                                                    <td>247-925-726</td>
-                                                    <td>Wes Anderson umami biodiesel</td>
-                                                    <td>$50.00</td>
+                                                    <td>Trident</td>
+                                                    <td>Trident</td>
+                                                    <td>Trident</td>
+                                                    <td>Trident</td>
+                                                    <td>Internet Explorer 5.0</td>
+                                                    
+                                                    <td>
+
+                                                        <a class="btn btn-info btn-sm" href="#">
+                                                            <i class="fas fa-pencil-alt">
+                              </i> Edit
+                                                        </a>
+                                                        
+                                                    </td>
                                                 </tr>
                                                 <tr>
-                                                    <td>1</td>
-                                                    <td>Monsters DVD</td>
-                                                    <td>735-845-642</td>
-                                                    <td>Terry Richardson helvetica tousled street art master</td>
-                                                    <td>$10.70</td>
+                                                    <td>Trident</td>
+                                                    <td>Internet Explorer 5.5
+                                                    </td>
+                                                    <td>Trident</td>
+                                                    <td>Trident</td>
+                                                    <td>Trident</td>
+                                                    <td>
+
+                                                        <a class="btn btn-info btn-sm" href="#">
+                                                            <i class="fas fa-pencil-alt">
+                              </i> Edit
+                                                        </a>
+                                                        
+                                                    </td>
                                                 </tr>
                                                 <tr>
-                                                    <td>1</td>
-                                                    <td>Grown Ups Blue Ray</td>
-                                                    <td>422-568-642</td>
-                                                    <td>Tousled lomo letterpress</td>
-                                                    <td>$25.99</td>
+                                                    <td>Trident</td>
+                                                    <td>Internet Explorer 6
+                                                    </td>
+                                                    <td>Trident</td>
+                                                    <td>Trident</td>
+                                                    <td>Trident</td>
+                                                    <td>
+
+                                                        <a class="btn btn-info btn-sm" href="#">
+                                                            <i class="fas fa-pencil-alt">
+                              </i> Edit
+                                                        </a>
+                                                        
+                                                    </td>
                                                 </tr>
+                                                <tr>
+                                                    <td>Trident</td>
+                                                    <td>Internet Explorer 7</td>
+                                                    <td>Trident</td>
+                                                    <td>Trident</td>
+                                                    <td>Trident</td>
+                                                    <td>
+
+                                                        <a class="btn btn-info btn-sm" href="#">
+                                                            <i class="fas fa-pencil-alt">
+                              </i> Edit
+                                                        </a>
+                                                       
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Trident</td>
+                                                    <td>AOL browser (AOL desktop)</td>
+                                                    <td>Trident</td>
+                                                    <td>Trident</td>
+                                                    <td>Trident</td>
+                                                    <td>
+
+                                                        <a class="btn btn-info btn-sm" href="#">
+                                                            <i class="fas fa-pencil-alt">
+                              </i> Edit
+                                                        </a>
+                                                        
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Gecko</td>
+                                                    <td>Firefox 1.0</td>
+                                                    <td>Trident</td>
+                                                    <td>Trident</td>
+                                                    <td>Trident</td>
+                                                    <td>
+
+                                                        <a class="btn btn-info btn-sm" href="#">
+                                                            <i class="fas fa-pencil-alt">
+                              </i> Edit
+                                                        </a>
+                                                        
+                                                    </td>
+                                                </tr>
+
                                             </tbody>
+
                                         </table>
                                     </div>
-                                    <!-- /.col -->
+                                    <!-- /.card-body -->
                                 </div>
-                                <!-- /.row -->
-
-
-                                <!-- /.row -->
-
-                                <!-- this row will not appear when printing -->
-
-                                <!-- /.invoice -->
+                                <!-- /.card -->
                             </div>
                             <!-- /.col -->
                         </div>
@@ -501,7 +486,7 @@
             <!-- /.content -->
             </div>
             <!-- /.content-wrapper -->
-            <footer class="main-footer no-print">
+            <footer class="main-footer">
                 <div class="float-right d-none d-sm-block">
                     <b>Version</b> 3.0.5
                 </div>
@@ -520,10 +505,33 @@
         <script src="./plugins/jquery/jquery.min.js"></script>
         <!-- Bootstrap 4 -->
         <script src="./plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- DataTables -->
+        <script src="./plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="./plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+        <script src="./plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+        <script src="./plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
         <!-- AdminLTE App -->
         <script src="./dist/js/adminlte.min.js"></script>
         <!-- AdminLTE for demo purposes -->
         <script src="./dist/js/demo.js"></script>
+        <!-- page script -->
+        <script>
+            $(function() {
+                $("#example1").DataTable({
+                    "responsive": true,
+                    "autoWidth": false,
+                });
+                $('#example2').DataTable({
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": false,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": false,
+                    "responsive": true,
+                });
+            });
+        </script>
 </body>
 
 </html>

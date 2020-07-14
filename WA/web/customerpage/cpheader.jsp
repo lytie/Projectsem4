@@ -19,7 +19,7 @@
 					<!-- Logo -->
 					<div class="logo">
 						<a href="index.html">
-                                                    <img src="../images/customerpageimg/icons/newlogo2.png" alt="IMG-LOGO" data-logofixed="../images/customerpageimg/icons/newlogo1.png">
+                                                    <img src="./images/customerpageimg/icons/newlogo2.png" alt="IMG-LOGO" data-logofixed="./images/customerpageimg/icons/newlogo1.png">
 						</a>
 					</div>
 
@@ -28,26 +28,26 @@
 						<nav class="menu">
 							<ul class="main_menu">
 								<li>
-									<a href="index.jsp">Home</a>
+									<a href="CustomerPageIndexServlet">Home</a>
 								</li>
 								<li>
-									<a href="menu.jsp">Menu</a>
-								</li>
-
-								<li>
-									<a href="servicesmenu.jsp">Entertainment</a>
+									<a href="CustomerPageMenuServlet">Menu</a>
 								</li>
 
 								<li>
-									<a href="information.jsp">Your Information</a>
+									<a href="CustomerPageServicesMenuServlet">Entertainment</a>
 								</li>
 
 								<li>
-									<a href="cart.jsp">Your bill</a>
+									<a href="CustomerPageInformationServlet">Your Information</a>
 								</li>
 
 								<li>
-									<a href="contact.jsp">Feedback</a>
+									<a href="CustomerPageCartServlet">Your bill</a>
+								</li>
+
+								<li>
+									<a href="CustomerPageContactServlet">Feedback</a>
 								</li>
 							</ul>
 						</nav>
@@ -92,7 +92,7 @@
 						<tbody>
 							<tr>
 								<td class="product-thumbnail">
-									<img src="../images/customerpageimg/bg-intro-03.jpg" alt="Image" class="img-fluid">
+									<img src="./images/customerpageimg/bg-intro-03.jpg" alt="Image" class="img-fluid">
 								</td>
 								<td class="product-name">
 									<h2 class="h5 text-black">Top Up T-Shirt</h2>
@@ -121,7 +121,7 @@
 
 							<tr>
 								<td class="product-thumbnail">
-									<img src="../images/customerpageimg/bg-intro-03.jpg" alt="Image" class="img-fluid">
+									<img src="./images/customerpageimg/bg-intro-03.jpg" alt="Image" class="img-fluid">
 								</td>
 								<td class="product-name">
 									<h2 class="h5 text-black">Top Up T-Shirt</h2>
@@ -149,7 +149,7 @@
 							</tr>
                                                         <tr>
 								<td class="product-thumbnail">
-									<img src="../images/customerpageimg/bg-intro-03.jpg" alt="Image" class="img-fluid">
+									<img src="./images/customerpageimg/bg-intro-03.jpg" alt="Image" class="img-fluid">
 								</td>
 								<td class="product-name">
 									<h2 class="h5 text-black">Top Up T-Shirt</h2>

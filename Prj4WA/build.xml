@@ -7,8 +7,18 @@
 <!-- the Compile on Save feature is turned off for the project. -->
 <!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
 <!-- in the project's Project Properties dialog box.-->
+<<<<<<< HEAD
+<<<<<<< HEAD:Prj4WA/build.xml
 <project name="Prj4WA" default="default" basedir=".">
     <description>Builds, tests, and runs the project Prj4WA.</description>
+=======
+<project name="Prj4WS" default="default" basedir=".">
+    <description>Builds, tests, and runs the project Prj4WS.</description>
+>>>>>>> a590bb36d3168af502d11e7c2f4ed4158bdb497e:Prj4WS/build.xml
+=======
+<project name="Prj4WA" default="default" basedir=".">
+    <description>Builds, tests, and runs the project Prj4WA.</description>
+>>>>>>> a590bb36d3168af502d11e7c2f4ed4158bdb497e
     <import file="nbproject/build-impl.xml"/>
     <!--
 

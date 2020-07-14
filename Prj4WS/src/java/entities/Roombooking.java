@@ -52,7 +52,7 @@ public class Roombooking implements Serializable {
     @Column(name = "RoomId", nullable = false)
     private int roomId;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "Price", precision = 12, scale = 0)
+    @Column(name = "Price", precision = 12)
     private Float price;
     @Id
     private Long id;

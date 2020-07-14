@@ -52,11 +52,11 @@ public class Receiptcomponent implements Serializable {
     @Column(name = "ComponentName", length = 100)
     private String componentName;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "Price", precision = 12, scale = 0)
+    @Column(name = "Price", precision = 12)
     private Float price;
     @Column(name = "Quantity")
     private Integer quantity;
-    @Column(name = "Subtotal", precision = 12, scale = 0)
+    @Column(name = "Subtotal", precision = 12)
     private Float subtotal;
     @Size(max = 500)
     @Column(name = "url", length = 500)

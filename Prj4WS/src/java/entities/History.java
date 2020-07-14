@@ -57,13 +57,13 @@ public class History implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date checkOutDate;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "Subtotal", precision = 12, scale = 0)
+    @Column(name = "Subtotal", precision = 12)
     private Float subtotal;
-    @Column(name = "Tax", precision = 12, scale = 0)
+    @Column(name = "Tax", precision = 12)
     private Float tax;
-    @Column(name = "Deposits", precision = 12, scale = 0)
+    @Column(name = "Deposits", precision = 12)
     private Float deposits;
-    @Column(name = "Total", precision = 12, scale = 0)
+    @Column(name = "Total", precision = 12)
     private Float total;
     @Column(name = "ReceiptId")
     private Integer receiptId;

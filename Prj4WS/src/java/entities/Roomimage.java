@@ -23,7 +23,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
+<<<<<<< HEAD
  * @author ADMIN
+=======
+ * @author Admin
+>>>>>>> a590bb36d3168af502d11e7c2f4ed4158bdb497e
  */
 @Entity
 @Table(name = "roomimage", catalog = "prj4db", schema = "")

@@ -21,7 +21,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
+<<<<<<< HEAD
  * @author ADMIN
+=======
+ * @author Admin
+>>>>>>> a590bb36d3168af502d11e7c2f4ed4158bdb497e
  */
 @Entity
 @Table(name = "entertainment", catalog = "prj4db", schema = "")
@@ -44,7 +48,11 @@ public class Entertainment implements Serializable {
     @Column(name = "EntertainmentName", length = 100)
     private String entertainmentName;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+<<<<<<< HEAD
     @Column(name = "TicketPrice", precision = 12, scale = 0)
+=======
+    @Column(name = "TicketPrice", precision = 12)
+>>>>>>> a590bb36d3168af502d11e7c2f4ed4158bdb497e
     private Float ticketPrice;
     @Size(max = 255)
     @Column(name = "EntertainmentDescription", length = 255)

@@ -26,7 +26,11 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
+<<<<<<< HEAD
  * @author ADMIN
+=======
+ * @author Admin
+>>>>>>> a590bb36d3168af502d11e7c2f4ed4158bdb497e
  */
 @Entity
 @Table(name = "receipt", catalog = "prj4db", schema = "")
@@ -50,11 +54,19 @@ public class Receipt implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date payDate;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+<<<<<<< HEAD
     @Column(name = "Subtotal", precision = 12, scale = 0)
     private Float subtotal;
     @Column(name = "Tax", precision = 12, scale = 0)
     private Float tax;
     @Column(name = "Total", precision = 12, scale = 0)
+=======
+    @Column(name = "Subtotal", precision = 12)
+    private Float subtotal;
+    @Column(name = "Tax", precision = 12)
+    private Float tax;
+    @Column(name = "Total", precision = 12)
+>>>>>>> a590bb36d3168af502d11e7c2f4ed4158bdb497e
     private Float total;
     @Column(name = "PayStatus")
     private Boolean payStatus;

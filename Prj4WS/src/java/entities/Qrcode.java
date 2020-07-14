@@ -75,7 +75,7 @@ public class Qrcode implements Serializable {
     @Column(name = "ChildrenNum")
     private Integer childrenNum;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "Deposits", precision = 12, scale = 0)
+    @Column(name = "Deposits", precision = 12)
     private Float deposits;
     @Size(max = 255)
     @Column(name = "Url", length = 255)

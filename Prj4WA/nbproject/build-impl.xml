@@ -17,7 +17,16 @@
         - cleanup
 
         -->
+<<<<<<< HEAD
 <project xmlns:webproject1="http://www.netbeans.org/ns/web-project/1" xmlns:webproject2="http://www.netbeans.org/ns/web-project/2" xmlns:webproject3="http://www.netbeans.org/ns/web-project/3" basedir=".." default="default" name="Prj4WA-impl">
+=======
+<<<<<<< HEAD:Prj4WS/nbproject/build-impl.xml
+<project xmlns:webproject1="http://www.netbeans.org/ns/web-project/1" xmlns:webproject2="http://www.netbeans.org/ns/web-project/2" xmlns:webproject3="http://www.netbeans.org/ns/web-project/3" basedir=".." default="default" name="Prj4WS-impl">
+    <import file="rest-build.xml"/>
+=======
+<project xmlns:webproject1="http://www.netbeans.org/ns/web-project/1" xmlns:webproject2="http://www.netbeans.org/ns/web-project/2" xmlns:webproject3="http://www.netbeans.org/ns/web-project/3" basedir=".." default="default" name="Prj4WA-impl">
+>>>>>>> a590bb36d3168af502d11e7c2f4ed4158bdb497e:Prj4WA/nbproject/build-impl.xml
+>>>>>>> a590bb36d3168af502d11e7c2f4ed4158bdb497e
     <import file="ant-deploy.xml"/>
     <fail message="Please build using Ant 1.7.1 or higher.">
         <condition>
@@ -495,7 +504,15 @@ or ant -Dj2ee.platform.classpath=&lt;server_classpath&gt; (where no properties f
                     </fileset>
                 </union>
                 <taskdef classname="org.testng.TestNGAntTask" classpath="${run.test.classpath}" name="testng"/>
+<<<<<<< HEAD
                 <testng classfilesetref="test.set" failureProperty="tests.failed" listeners="org.testng.reporters.VerboseReporter" methods="${testng.methods.arg}" mode="${testng.mode}" outputdir="${build.test.results.dir}" suitename="Prj4WA" testname="TestNG tests" workingDir="${basedir}">
+=======
+<<<<<<< HEAD:Prj4WS/nbproject/build-impl.xml
+                <testng classfilesetref="test.set" failureProperty="tests.failed" listeners="org.testng.reporters.VerboseReporter" methods="${testng.methods.arg}" mode="${testng.mode}" outputdir="${build.test.results.dir}" suitename="Prj4WS" testname="TestNG tests" workingDir="${basedir}">
+=======
+                <testng classfilesetref="test.set" failureProperty="tests.failed" listeners="org.testng.reporters.VerboseReporter" methods="${testng.methods.arg}" mode="${testng.mode}" outputdir="${build.test.results.dir}" suitename="Prj4WA" testname="TestNG tests" workingDir="${basedir}">
+>>>>>>> a590bb36d3168af502d11e7c2f4ed4158bdb497e:Prj4WA/nbproject/build-impl.xml
+>>>>>>> a590bb36d3168af502d11e7c2f4ed4158bdb497e
                     <xmlfileset dir="${build.test.classes.dir}" includes="@{testincludes}"/>
                     <propertyset>
                         <propertyref prefix="test-sys-prop."/>
@@ -645,7 +662,15 @@ or ant -Dj2ee.platform.classpath=&lt;server_classpath&gt; (where no properties f
                 <condition else="-testclass @{testClass}" property="test.class.or.method" value="-methods @{testClass}.@{testMethod}">
                     <isset property="test.method"/>
                 </condition>
+<<<<<<< HEAD
                 <condition else="-suitename Prj4WA -testname @{testClass} ${test.class.or.method}" property="testng.cmd.args" value="@{testClass}">
+=======
+<<<<<<< HEAD:Prj4WS/nbproject/build-impl.xml
+                <condition else="-suitename Prj4WS -testname @{testClass} ${test.class.or.method}" property="testng.cmd.args" value="@{testClass}">
+=======
+                <condition else="-suitename Prj4WA -testname @{testClass} ${test.class.or.method}" property="testng.cmd.args" value="@{testClass}">
+>>>>>>> a590bb36d3168af502d11e7c2f4ed4158bdb497e:Prj4WA/nbproject/build-impl.xml
+>>>>>>> a590bb36d3168af502d11e7c2f4ed4158bdb497e
                     <matches pattern=".*\.xml" string="@{testClass}"/>
                 </condition>
                 <delete dir="${build.test.results.dir}" quiet="true"/>

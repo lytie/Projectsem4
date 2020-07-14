@@ -46,7 +46,7 @@ public class Foodanddrink implements Serializable {
     @Column(name = "FoodAndDrinkName", length = 50)
     private String foodAndDrinkName;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "FoodAndDrinkPrice", precision = 12, scale = 0)
+    @Column(name = "FoodAndDrinkPrice", precision = 12)
     private Float foodAndDrinkPrice;
     @Size(max = 255)
     @Column(name = "FoodAndDrinkDescription", length = 255)

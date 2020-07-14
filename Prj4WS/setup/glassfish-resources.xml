@@ -6,9 +6,9 @@
         <property name="portNumber" value="3306"/>
         <property name="databaseName" value="prj4db"/>
         <property name="User" value="root"/>
-        <property name="Password" value="123456"/>
+        <property name="Password" value="password"/>
         <property name="URL" value="jdbc:mysql://localhost:3306/prj4db?autoReconnect=true&amp;useSSL=false"/>
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
     </jdbc-connection-pool>
-    <jdbc-resource enabled="true" jndi-name="Prj4DB" object-type="user" pool-name="mysql_prj4db_rootPool"/>
+    <jdbc-resource enabled="true" jndi-name="Prj4DB" object-passwordtype="user" pool-name="mysql_prj4db_rootPool"/>
 </resources>

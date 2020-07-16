@@ -44,20 +44,20 @@ public class HistoryFacadeREST extends AbstractFacade<History> {
     @PUT
     @Path("{id}")
     @Consumes({"application/xml", "application/json"})
-    public void edit(@PathParam("id") String id, History entity) {
+    public void edit(@PathParam("id") Long id, History entity) {
         super.edit(entity);
     }
 
     @DELETE
     @Path("{id}")
-    public void remove(@PathParam("id") String id) {
+    public void remove(@PathParam("id") Long id) {
         super.remove(super.find(id));
     }
 
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
-    public History find(@PathParam("id") String id) {
+    public History find(@PathParam("id") Long id) {
         return super.find(id);
     }
 

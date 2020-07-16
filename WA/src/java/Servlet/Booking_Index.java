@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import wsc.*;
 import entities.*;
 import javax.ws.rs.core.GenericType;
+
 /**
  *
  * @author longly
@@ -33,32 +34,30 @@ public class Booking_Index extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-       
-//      list  img_hero
-                
-            Img_hero ih=new Img_hero();
-            GenericType<List<ImgHero>> responseType =new GenericType< List<ImgHero>>(){};
-            
-            List<ImgHero> list=ih.findAll_JSON(responseType);
-            request.setAttribute("listImgHero", list);
-            
-            
-            
-//            list location
-LocationClient location=new LocationClient();
-GenericType<List<Location>> gen=new GenericType<List<Location>>(){};
-List<Location> listLoc=location.findAll_JSON(gen);
-request.setAttribute("listLocation", listLoc);
 
+//      list  img_hero
+        Img_hero ih = new Img_hero();
+        GenericType<List<ImgHero>> responseType = new GenericType< List<ImgHero>>() {
+        };
+
+        List<ImgHero> list = ih.findAll_JSON(responseType);
+        request.setAttribute("listImgHero", list);
+
+//            list location
+        LocationClient location = new LocationClient();
+        GenericType<List<Location>> gen = new GenericType<List<Location>>() {
+        };
+        List<Location> listLoc = location.findAll_JSON(gen);
+        request.setAttribute("listLocation", listLoc);
 
 //Top type room
-RoomtypeClient type=new RoomtypeClient();
-GenericType<List<Roomtype>> typ =new GenericType<List<Roomtype>>(){};
-List<Roomtype> listType=type.findAll_JSON(typ);
-request.setAttribute("listType", listType);
+        RoomtypeClient type = new RoomtypeClient();
+        GenericType<List<Roomtype>> typ = new GenericType<List<Roomtype>>() {
+        };
+        List<Roomtype> listType = type.findAll_JSON(typ);
+        request.setAttribute("listType", listType);
 
-
-       request.getRequestDispatcher("Booking/index.jsp").forward(request, response);
+        request.getRequestDispatcher("Booking/index.jsp").forward(request, response);
 
     }
 

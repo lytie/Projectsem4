@@ -32,6 +32,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "ImgHero.findByTextTitle", query = "SELECT i FROM ImgHero i WHERE i.textTitle = :textTitle")
     , @NamedQuery(name = "ImgHero.findByTextShort", query = "SELECT i FROM ImgHero i WHERE i.textShort = :textShort")})
 public class ImgHero implements Serializable {
+    @Column(name = "choose")
+    private Boolean choose;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -111,6 +113,14 @@ public class ImgHero implements Serializable {
     @Override
     public String toString() {
         return "entities.ImgHero[ idHero=" + idHero + " ]";
+    }
+
+    public Boolean getChoose() {
+        return choose;
+    }
+
+    public void setChoose(Boolean choose) {
+        this.choose = choose;
     }
     
 }

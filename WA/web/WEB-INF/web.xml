@@ -37,6 +37,10 @@
         <servlet-name>CustomerPageServicesMenuServlet</servlet-name>
         <servlet-class>Servlet.CustomerPageServicesMenuServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminPageEntertainmentServlet</servlet-name>
+        <servlet-class>Servlet.AdminPageEntertainmentServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CustomerPageMenuServlet</servlet-name>
         <url-pattern>/CustomerPageMenuServlet</url-pattern>
@@ -68,6 +72,10 @@
     <servlet-mapping>
         <servlet-name>CustomerPageServicesMenuServlet</servlet-name>
         <url-pattern>/CustomerPageServicesMenuServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminPageEntertainmentServlet</servlet-name>
+        <url-pattern>/AdminPageEntertainmentServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -16,32 +16,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
-	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
-<!--===============================================================================================-->
-	<link rel="icon" type="image/png" href="../images/customerpageimg/icons/favicon.png"/>
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/themify/themify-icons.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/slick/slick.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/lightbox2/css/lightbox.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="css/util.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<%@ include file="csslink.jsp" %>
 <!--===============================================================================================-->
 <script type="text/javascript">
   var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
@@ -61,7 +36,7 @@
 
 
 	<!-- Title Page -->
-	<section class="bg-title-page flex-c-m p-t-160 p-b-80 p-l-15 p-r-15" style="background-image: url(../images/customerpageimg/bg-title-page-02.jpg);">
+	<section class="bg-title-page flex-c-m p-t-160 p-b-80 p-l-15 p-r-15" style="background-image: url(./images/customerpageimg/bg-title-page-02.jpg);">
 		<h2 class="tit6 t-center">
 			Contact
 		</h2>
@@ -74,7 +49,7 @@
 		<!-- Map -->
 		<div class="container">
 			<div class="map bo8 bo-rad-10 of-hidden">
-				<div class="contact-map size37" id="google_map" data-map-x="40.704644" data-map-y="-74.011987" data-pin="../images/customerpageimg/icons/icon-position-map.png" data-scrollwhell="0" data-draggable="1"></div>
+				<div class="contact-map size37" id="google_map" data-map-x="40.704644" data-map-y="-74.011987" data-pin="./images/customerpageimg/icons/icon-position-map.png" data-scrollwhell="0" data-draggable="1"></div>
 			</div>
 		</div>
 
@@ -139,7 +114,7 @@
 				<div class="col-sm-8 col-md-4 col-lg-4 m-l-r-auto p-t-30">
 					<div class="dis-flex m-l-23">
 						<div class="p-r-40 p-t-6">
-							<img src="../images/customerpageimg/icons/map-icon.png" alt="IMG-ICON">
+							<img src="./images/customerpageimg/icons/map-icon.png" alt="IMG-ICON">
 						</div>
 
 						<div class="flex-col-l">
@@ -157,7 +132,7 @@
 				<div class="col-sm-8 col-md-3 col-lg-4 m-l-r-auto p-t-30">
 					<div class="dis-flex m-l-23">
 						<div class="p-r-40 p-t-6">
-							<img src="../images/customerpageimg/icons/phone-icon.png" alt="IMG-ICON">
+							<img src="./images/customerpageimg/icons/phone-icon.png" alt="IMG-ICON">
 						</div>
 
 
@@ -176,7 +151,7 @@
 				<div class="col-sm-8 col-md-5 col-lg-4 m-l-r-auto p-t-30">
 					<div class="dis-flex m-l-23">
 						<div class="p-r-40 p-t-6">
-							<img src="../images/customerpageimg/icons/clock-icon.png" alt="IMG-ICON">
+							<img src="./images/customerpageimg/icons/clock-icon.png" alt="IMG-ICON">
 						</div>
 
 
@@ -204,34 +179,7 @@
 
 
 <!--===============================================================================================-->
-	<script type="text/javascript" src="vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-	<script type="text/javascript" src="vendor/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
-	<script type="text/javascript" src="vendor/bootstrap/js/popper.js"></script>
-	<script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-	<script type="text/javascript" src="vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
-	<script type="text/javascript" src="vendor/daterangepicker/moment.min.js"></script>
-	<script type="text/javascript" src="vendor/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
-	<script type="text/javascript" src="vendor/slick/slick.min.js"></script>
-	<script type="text/javascript" src="js/slick-custom.js"></script>
-<!--===============================================================================================-->
-	<script type="text/javascript" src="vendor/parallax100/parallax100.js"></script>
-	<script type="text/javascript">
-        $('.parallax100').parallax100();
-	</script>
-<!--===============================================================================================-->
-	<script type="text/javascript" src="vendor/countdowntime/countdowntime.js"></script>
-<!--===============================================================================================-->
-	<script type="text/javascript" src="vendor/lightbox2/js/lightbox.min.js"></script>
-<!--===============================================================================================-->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKFWBqlKAGCeS1rMVoaNlwyayu0e0YRes"></script>
-	<script src="js/map-custom.js"></script>
-<!--===============================================================================================-->
-	<script src="js/main.js"></script>
+	<%@ include file="jslink.jsp" %>
 
 </body>
 </html>

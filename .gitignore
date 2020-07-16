@@ -24,4 +24,11 @@
 /WS/dist/
 /WA/nbproject/private/
 /WA/build/
+<<<<<<< HEAD
 /WA/dist/
+=======
+/WA/dist/
+/Paypal/nbproject/private/
+/Paypal/build/
+/Paypal/dist/
+>>>>>>> fec6df7f0e40ed3098146cdcb7de76652e603ec8

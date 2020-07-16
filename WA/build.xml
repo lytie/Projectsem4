@@ -7,8 +7,18 @@
 <!-- the Compile on Save feature is turned off for the project. -->
 <!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
 <!-- in the project's Project Properties dialog box.-->
+<<<<<<< HEAD
+<<<<<<< HEAD:WA/build.xml
 <project name="WA" default="default" basedir=".">
     <description>Builds, tests, and runs the project WA.</description>
+=======
+<project name="Paypal" default="default" basedir=".">
+    <description>Builds, tests, and runs the project Paypal.</description>
+>>>>>>> fec6df7f0e40ed3098146cdcb7de76652e603ec8:Paypal/build.xml
+=======
+<project name="WA" default="default" basedir=".">
+    <description>Builds, tests, and runs the project WA.</description>
+>>>>>>> fec6df7f0e40ed3098146cdcb7de76652e603ec8
     <import file="nbproject/build-impl.xml"/>
     <!--
 

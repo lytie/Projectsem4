@@ -19,32 +19,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
-	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
-<!--===============================================================================================-->
-	<link rel="icon" type="image/png" href="../images/customerpageimg/icons/favicon.png"/>
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/themify/themify-icons.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/slick/slick.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/lightbox2/css/lightbox.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="css/util.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
+        <%@ include file="csslink.jsp" %>
+
 <!--===============================================================================================-->
 </head>
 <body class="animsition">
@@ -52,7 +28,7 @@
 	<%@ include file="cpheader.jsp" %>
 
 	<!-- Title Page -->
-	<section class="bg-title-page flex-c-m p-t-160 p-b-80 p-l-15 p-r-15" style="background-image: url(../images/customerpageimg/bg-title-page-03.jpg);">
+	<section class="bg-title-page flex-c-m p-t-160 p-b-80 p-l-15 p-r-15" style="background-image: url(./images/customerpageimg/bg-title-page-03.jpg);">
 		<h2 class="tit6 t-center">
 			About Us
 		</h2>
@@ -76,7 +52,7 @@
 
 
 	<!-- Video -->
-	<section class="section-video parallax100" style="background-image: url(../images/customerpageimg/header-menu-01.jpg);">
+	<section class="section-video parallax100" style="background-image: url(./images/customerpageimg/header-menu-01.jpg);">
 		<div class="content-video t-center p-t-225 p-b-250">
 			<span class="tit2 p-l-15 p-r-15">
 				Discover
@@ -118,7 +94,7 @@
 
 				<div class="col-md-6 p-b-30">
 					<div class="wrap-pic-delicious size2 bo-rad-10 hov-img-zoom m-l-r-auto">
-						<img src="../images/customerpageimg/our-story-01.jpg" alt="IMG-OUR">
+						<img src="./images/customerpageimg/our-story-01.jpg" alt="IMG-OUR">
 					</div>
 				</div>
 			</div>
@@ -128,7 +104,7 @@
 			<div class="row p-t-170">
 				<div class="col-md-6 p-b-30">
 					<div class="wrap-pic-romantic size2 bo-rad-10 hov-img-zoom m-l-r-auto">
-						<img src="../images/customerpageimg/our-story-02.jpg" alt="IMG-OUR">
+						<img src="./images/customerpageimg/our-story-02.jpg" alt="IMG-OUR">
 					</div>
 				</div>
 
@@ -153,7 +129,7 @@
 
 
 	<!-- Banner -->
-	<div class="parallax0 parallax100" style="background-image: url(../images/customerpageimg/bg-cover-video-02.jpg);">
+	<div class="parallax0 parallax100" style="background-image: url(./images/customerpageimg/bg-cover-video-02.jpg);">
 		<div class="overlay0-parallax t-center size33"></div>
 	</div>
 
@@ -174,7 +150,7 @@
 					<!-- -Block5 -->
 					<div class="blo5 pos-relative p-t-60">
 						<div class="pic-blo5 size14 bo4 wrap-cir-pic hov-img-zoom ab-c-t">
-							<a href="#"><img src="../images/customerpageimg/avatar-02.jpg" alt="IGM-AVATAR"></a>
+							<a href="#"><img src="./images/customerpageimg/avatar-02.jpg" alt="IGM-AVATAR"></a>
 						</div>
 
 						<div class="text-blo5 size34 t-center bo-rad-10 bo7 p-t-90 p-l-35 p-r-35 p-b-30">
@@ -197,7 +173,7 @@
 					<!-- -Block5 -->
 					<div class="blo5 pos-relative p-t-60">
 						<div class="pic-blo5 size14 bo4 wrap-cir-pic hov-img-zoom ab-c-t">
-							<a href="#"><img src="../images/customerpageimg/avatar-03.jpg" alt="IGM-AVATAR"></a>
+							<a href="#"><img src="./images/customerpageimg/avatar-03.jpg" alt="IGM-AVATAR"></a>
 						</div>
 
 						<div class="text-blo5 size34 t-center bo-rad-10 bo7 p-t-90 p-l-35 p-r-35 p-b-30">
@@ -220,7 +196,7 @@
 					<!-- -Block5 -->
 					<div class="blo5 pos-relative p-t-60">
 						<div class="pic-blo5 size14 bo4 wrap-cir-pic hov-img-zoom ab-c-t">
-							<a href="#"><img src="../images/customerpageimg/avatar-05.jpg" alt="IGM-AVATAR"></a>
+							<a href="#"><img src="./images/customerpageimg/avatar-05.jpg" alt="IGM-AVATAR"></a>
 						</div>
 
 						<div class="text-blo5 size34 t-center bo-rad-10 bo7 p-t-90 p-l-35 p-r-35 p-b-30">
@@ -271,7 +247,7 @@
 			<div class="close-mo-video-01 trans-0-4" data-dismiss="modal" aria-label="Close">&times;</div>
 
 			<div class="wrap-video-mo-01">
-				<div class="w-full wrap-pic-w op-0-0"><img src="../images/customerpageimg/icons/video-16-9.jpg" alt="IMG"></div>
+				<div class="w-full wrap-pic-w op-0-0"><img src="./images/customerpageimg/icons/video-16-9.jpg" alt="IMG"></div>
 				<div class="video-mo-01">
 					<iframe src="https://www.youtube.com/embed/5k1hSu2gdKE?rel=0&amp;showinfo=0" allowfullscreen></iframe>
 				</div>
@@ -280,33 +256,7 @@
 	</div>
 
 <!--===============================================================================================-->
-	<script type="text/javascript" src="vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-	<script type="text/javascript" src="vendor/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
-	<script type="text/javascript" src="vendor/bootstrap/js/popper.js"></script>
-	<script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-	<script type="text/javascript" src="vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
-	<script type="text/javascript" src="vendor/daterangepicker/moment.min.js"></script>
-	<script type="text/javascript" src="vendor/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
-	<script type="text/javascript" src="vendor/slick/slick.min.js"></script>
-	<script type="text/javascript" src="js/slick-custom.js"></script>
-<!--===============================================================================================-->
-	<script type="text/javascript" src="vendor/parallax100/parallax100.js"></script>
-	<script type="text/javascript">
-        $('.parallax100').parallax100();
-	</script>
-<!--===============================================================================================-->
-	<script type="text/javascript" src="vendor/countdowntime/countdowntime.js"></script>
-<!--===============================================================================================-->
-	<script type="text/javascript" src="vendor/lightbox2/js/lightbox.min.js"></script>
-<!--===============================================================================================-->
-	<script type="text/javascript" src="vendor/isotope/isotope.pkgd.min.js"></script>
-<!--===============================================================================================-->
-	<script src="js/main.js"></script>
+	<%@ include file="jslink.jsp" %>
 
 </body>
 </html>

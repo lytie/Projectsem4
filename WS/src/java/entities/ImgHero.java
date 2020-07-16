@@ -3,6 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+<<<<<<< HEAD
+=======
+
+>>>>>>> 272f3bbc3cf0f310af7760cd3099d452f5e5544d
 package entities;
 
 import java.io.Serializable;
@@ -20,12 +24,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
+<<<<<<< HEAD
  * @author longly
+=======
+ * @author Admin
+>>>>>>> 272f3bbc3cf0f310af7760cd3099d452f5e5544d
  */
 @Entity
 @Table(name = "img_hero", catalog = "prj4db", schema = "")
 @XmlRootElement
 @NamedQueries({
+<<<<<<< HEAD
     @NamedQuery(name = "ImgHero.findAll", query = "SELECT i FROM ImgHero i")
     , @NamedQuery(name = "ImgHero.findByIdHero", query = "SELECT i FROM ImgHero i WHERE i.idHero = :idHero")
     , @NamedQuery(name = "ImgHero.findByImg", query = "SELECT i FROM ImgHero i WHERE i.img = :img")
@@ -33,6 +42,15 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "ImgHero.findByTextShort", query = "SELECT i FROM ImgHero i WHERE i.textShort = :textShort")})
 public class ImgHero implements Serializable {
 
+=======
+    @NamedQuery(name = "ImgHero.findAll", query = "SELECT i FROM ImgHero i"),
+    @NamedQuery(name = "ImgHero.findByIdHero", query = "SELECT i FROM ImgHero i WHERE i.idHero = :idHero"),
+    @NamedQuery(name = "ImgHero.findByImg", query = "SELECT i FROM ImgHero i WHERE i.img = :img"),
+    @NamedQuery(name = "ImgHero.findByTextTitle", query = "SELECT i FROM ImgHero i WHERE i.textTitle = :textTitle"),
+    @NamedQuery(name = "ImgHero.findByTextShort", query = "SELECT i FROM ImgHero i WHERE i.textShort = :textShort"),
+    @NamedQuery(name = "ImgHero.findByChoose", query = "SELECT i FROM ImgHero i WHERE i.choose = :choose")})
+public class ImgHero implements Serializable {
+>>>>>>> 272f3bbc3cf0f310af7760cd3099d452f5e5544d
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,6 +66,11 @@ public class ImgHero implements Serializable {
     @Size(max = 150)
     @Column(name = "text_short", length = 150)
     private String textShort;
+<<<<<<< HEAD
+=======
+    @Column(name = "choose")
+    private Boolean choose;
+>>>>>>> 272f3bbc3cf0f310af7760cd3099d452f5e5544d
 
     public ImgHero() {
     }
@@ -88,6 +111,17 @@ public class ImgHero implements Serializable {
         this.textShort = textShort;
     }
 
+<<<<<<< HEAD
+=======
+    public Boolean getChoose() {
+        return choose;
+    }
+
+    public void setChoose(Boolean choose) {
+        this.choose = choose;
+    }
+
+>>>>>>> 272f3bbc3cf0f310af7760cd3099d452f5e5544d
     @Override
     public int hashCode() {
         int hash = 0;

@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import wsc.*;
 import entities.*;
 import javax.ws.rs.core.GenericType;
+
+
 /**
  *
  * @author longly
@@ -33,6 +35,7 @@ public class Booking_Index extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
        
 //      list  img_hero
                 
@@ -59,6 +62,11 @@ request.setAttribute("listType", listType);
 
 
        request.getRequestDispatcher("Booking/index.jsp").forward(request, response);
+
+
+//      list  img_hero
+        
+
 
     }
 

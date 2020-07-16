@@ -41,6 +41,15 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Room.findByAdultOpacity", query = "SELECT r FROM Room r WHERE r.adultOpacity = :adultOpacity"),
     @NamedQuery(name = "Room.findByChildrenOpacity", query = "SELECT r FROM Room r WHERE r.childrenOpacity = :childrenOpacity")})
 public class Room implements Serializable {
+    @Size(max = 80)
+    @Column(name = "BedOption", length = 80)
+    private String bedOption;
+    @Size(max = 45)
+    @Column(name = "Size", length = 45)
+    private String size;
+    @Size(max = 45)
+    @Column(name = "View", length = 45)
+    private String view;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -193,6 +202,30 @@ public class Room implements Serializable {
     @Override
     public String toString() {
         return "entities.Room[ roomId=" + roomId + " ]";
+    }
+
+    public String getBedOption() {
+        return bedOption;
+    }
+
+    public void setBedOption(String bedOption) {
+        this.bedOption = bedOption;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public String getView() {
+        return view;
+    }
+
+    public void setView(String view) {
+        this.view = view;
     }
     
 }

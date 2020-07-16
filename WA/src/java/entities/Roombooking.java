@@ -34,6 +34,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Roombooking.findByRoomId", query = "SELECT r FROM Roombooking r WHERE r.roomId = :roomId"),
     @NamedQuery(name = "Roombooking.findByPrice", query = "SELECT r FROM Roombooking r WHERE r.price = :price")})
 public class Roombooking implements Serializable {
+    @Size(max = 45)
+    @Column(name = "View", length = 45)
+    private String view;
     private static final long serialVersionUID = 1L;
     @Size(max = 50)
     @Column(name = "RoomTypeName", length = 50)
@@ -114,6 +117,14 @@ public class Roombooking implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getView() {
+        return view;
+    }
+
+    public void setView(String view) {
+        this.view = view;
     }
     
 }

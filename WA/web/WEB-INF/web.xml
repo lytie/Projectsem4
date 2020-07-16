@@ -3,11 +3,15 @@
     <context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
+<<<<<<< HEAD
     </context-param>
     
                     
   
     
+=======
+    </context-param>    
+>>>>>>> 272f3bbc3cf0f310af7760cd3099d452f5e5544d
     <servlet>
         <servlet-name>CustomerPageMenuServlet</servlet-name>
         <servlet-class>Servlet.CustomerPageMenuServlet</servlet-class>
@@ -43,12 +47,17 @@
     </servlet>
     <servlet>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <servlet-name>AdminPageEntertainmentServlet</servlet-name>
         <servlet-class>Servlet.AdminPageEntertainmentServlet</servlet-class>
 =======
         <servlet-name>Booking_Index</servlet-name>
         <servlet-class>Servlet.Booking_Index</servlet-class>
 >>>>>>> 639463fe468817b62650063476074cb71f17838e
+=======
+        <servlet-name>Booking_Index</servlet-name>
+        <servlet-class>Servlet.Booking_Index</servlet-class>
+>>>>>>> 272f3bbc3cf0f310af7760cd3099d452f5e5544d
     </servlet>
     <servlet-mapping>
         <servlet-name>CustomerPageMenuServlet</servlet-name>
@@ -84,12 +93,17 @@
     </servlet-mapping>
     <servlet-mapping>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <servlet-name>AdminPageEntertainmentServlet</servlet-name>
         <url-pattern>/AdminPageEntertainmentServlet</url-pattern>
 =======
         <servlet-name>Booking_Index</servlet-name>
         <url-pattern>/Booking_Index</url-pattern>
 >>>>>>> 639463fe468817b62650063476074cb71f17838e
+=======
+        <servlet-name>Booking_Index</servlet-name>
+        <url-pattern>/Booking_Index</url-pattern>
+>>>>>>> 272f3bbc3cf0f310af7760cd3099d452f5e5544d
     </servlet-mapping>
     <session-config>
         <session-timeout>

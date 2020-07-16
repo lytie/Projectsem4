@@ -4,6 +4,10 @@
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
     </context-param>
+    
+                    
+  
+    
     <servlet>
         <servlet-name>CustomerPageMenuServlet</servlet-name>
         <servlet-class>Servlet.CustomerPageMenuServlet</servlet-class>
@@ -38,8 +42,13 @@
         <servlet-class>Servlet.CustomerPageServicesMenuServlet</servlet-class>
     </servlet>
     <servlet>
+<<<<<<< HEAD
         <servlet-name>AdminPageEntertainmentServlet</servlet-name>
         <servlet-class>Servlet.AdminPageEntertainmentServlet</servlet-class>
+=======
+        <servlet-name>Booking_Index</servlet-name>
+        <servlet-class>Servlet.Booking_Index</servlet-class>
+>>>>>>> 639463fe468817b62650063476074cb71f17838e
     </servlet>
     <servlet-mapping>
         <servlet-name>CustomerPageMenuServlet</servlet-name>
@@ -74,8 +83,13 @@
         <url-pattern>/CustomerPageServicesMenuServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+<<<<<<< HEAD
         <servlet-name>AdminPageEntertainmentServlet</servlet-name>
         <url-pattern>/AdminPageEntertainmentServlet</url-pattern>
+=======
+        <servlet-name>Booking_Index</servlet-name>
+        <url-pattern>/Booking_Index</url-pattern>
+>>>>>>> 639463fe468817b62650063476074cb71f17838e
     </servlet-mapping>
     <session-config>
         <session-timeout>

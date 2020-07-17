@@ -3,28 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package Servlet;
 
-import entities.Qrcode;
-import entities.Receiptcomponent;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.ws.rs.core.GenericType;
-import wsc.QrcodeClient;
-import wsc.ReceiptcomponentClient;
 
 /**
  *
  * @author Admin
  */
-public class CustomerPageCartServlet extends HttpServlet {
+public class SessionCartServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,26 +33,20 @@ public class CustomerPageCartServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String qrcodeid = request.getParameter("id");
-            QrcodeClient qrcodeClient = new QrcodeClient();
-            GenericType<Qrcode> genericType = new GenericType<Qrcode>() {
-            };
-            Qrcode qrcode = new Qrcode();
-            qrcode = qrcodeClient.find_JSON(genericType, qrcodeid);
-            if (qrcode != null) {
-                HttpSession session = request.getSession();
-                session.setAttribute("qrcodeid", qrcodeid);
-                ReceiptcomponentClient receiptcomponentClient = new ReceiptcomponentClient();
-                GenericType<List<Receiptcomponent>> genType = new GenericType<List<Receiptcomponent>>() {};
-                List<Receiptcomponent> list = new ArrayList<Receiptcomponent>();
-                list = receiptcomponentClient.findbyReceiptID_JSON(genType, String.valueOf(qrcode.getReceiptId().getReceiptId()));
-                request.setAttribute("list", list);
-                request.setAttribute("qrcode", qrcode);
-                request.getRequestDispatcher("/customerpage/cart.jsp").forward(request, response);
-            } else {
-                out.print("false");
-            }
             /* TODO output your page here. You may use following sample code. */
+            String action = request.getParameter("action");
+            String menuid = request.getParameter("menuid");
+            String entertainmentid = request.getParameter("entertainmentid");
+
+            if (action.equals("Add")) {
+                
+            } else if (action.equals("Update")) {
+            } else if (action.equals("Delete")) {
+            }
+        
+            HttpSession session = request.getSession();
+            if (session.getAttribute("cart") == null) {
+            }
         }
     }
 

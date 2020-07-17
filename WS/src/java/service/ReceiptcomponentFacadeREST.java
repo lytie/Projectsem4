@@ -69,6 +69,14 @@ public class ReceiptcomponentFacadeREST extends AbstractFacade<Receiptcomponent>
     }
 
     @GET
+    @Path("findbyReceiptID/{id}")
+    @Produces({"application/xml", "application/json"})
+    public List<Receiptcomponent> findbyReceiptID(@PathParam("id") Integer receiptId) {
+        String query = "SELECT * FROM receiptcomponent where ReceiptId = ?";
+        return (List<Receiptcomponent>) em.createNativeQuery(query,Receiptcomponent.class).setParameter(1, receiptId).getResultList();
+    }
+    
+    @GET
     @Path("{from}/{to}")
     @Produces({"application/xml", "application/json"})
     public List<Receiptcomponent> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {

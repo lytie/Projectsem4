@@ -248,7 +248,7 @@
 							<div class="row">
 								<div class="col-md-12">
 									<button class="btn btn-warning btn-lg btn-block" style="color: white;"
-										onclick="window.location='checkout.html'">Buy ticket</button>
+										onclick="window.location='checkout.html'">Buy</button>
 								</div>
 							</div>
 						</div>

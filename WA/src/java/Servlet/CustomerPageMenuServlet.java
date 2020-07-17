@@ -37,6 +37,7 @@ public class CustomerPageMenuServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
+        
         try (PrintWriter out = response.getWriter()) {
            FoodanddrinkClient foodanddrinkClient = new FoodanddrinkClient();
            GenericType<List<Foodanddrink>> genericType = new GenericType<List<Foodanddrink>>(){};

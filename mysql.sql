@@ -1,10 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `prj4db` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `prj4db`;
--- MySQL dump 10.13  Distrib 8.0.19, for macos10.15 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.19, for Win64 (x86_64)
 --
 -- Host: localhost    Database: prj4db
 -- ------------------------------------------------------
--- Server version	5.7.26
+-- Server version	8.0.19
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -25,12 +23,12 @@ DROP TABLE IF EXISTS `accountcustomer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `accountcustomer` (
-  `AccountCustomerId` int(11) NOT NULL AUTO_INCREMENT,
-  `Email` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Password` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `FullName` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `Phone` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `AccountCustomerId` int NOT NULL AUTO_INCREMENT,
+  `Email` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Password` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `FullName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `Phone` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `token` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`AccountCustomerId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -53,17 +51,17 @@ DROP TABLE IF EXISTS `accountemployee`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `accountemployee` (
-  `accountId` int(11) NOT NULL AUTO_INCREMENT,
-  `Email` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Password` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `FullName` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
-  `Phone` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `accountId` int NOT NULL AUTO_INCREMENT,
+  `Email` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Password` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `FullName` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `Phone` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `DateOfBirth` datetime DEFAULT NULL,
-  `RoleId` int(11) DEFAULT NULL,
+  `RoleId` int DEFAULT NULL,
   PRIMARY KEY (`accountId`),
   KEY `FK_accountemployee_role` (`RoleId`),
   CONSTRAINT `FK_accountemployee_role` FOREIGN KEY (`RoleId`) REFERENCES `role` (`RoleId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,6 +70,7 @@ CREATE TABLE `accountemployee` (
 
 LOCK TABLES `accountemployee` WRITE;
 /*!40000 ALTER TABLE `accountemployee` DISABLE KEYS */;
+INSERT INTO `accountemployee` VALUES (1,'bao@gmail.com','123456','Trịnh Thiêm Bảo','0940223412','2000-10-10 00:00:00',1),(2,'thai@gmail.com','123456','Nguyễn Quốc Thái','0903441287','2000-12-06 00:00:00',1);
 /*!40000 ALTER TABLE `accountemployee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -83,9 +82,9 @@ DROP TABLE IF EXISTS `convenient`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `convenient` (
-  `ConvenientId` int(11) NOT NULL AUTO_INCREMENT,
-  `ConvenientName` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
-  `url` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ConvenientId` int NOT NULL AUTO_INCREMENT,
+  `ConvenientName` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `url` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`ConvenientId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -108,13 +107,13 @@ DROP TABLE IF EXISTS `entertainment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `entertainment` (
-  `EntertainmentId` int(11) NOT NULL AUTO_INCREMENT,
-  `EntertainmentName` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `EntertainmentId` int NOT NULL AUTO_INCREMENT,
+  `EntertainmentName` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `TicketPrice` float DEFAULT NULL,
-  `EntertainmentDescription` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `EntertainmentUrl` varchar(500) CHARACTER SET utf8 DEFAULT NULL,
+  `EntertainmentDescription` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `EntertainmentUrl` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`EntertainmentId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -123,6 +122,7 @@ CREATE TABLE `entertainment` (
 
 LOCK TABLES `entertainment` WRITE;
 /*!40000 ALTER TABLE `entertainment` DISABLE KEYS */;
+INSERT INTO `entertainment` VALUES (1,'Water Park',1000,'Lorem i sum ','experience5.jpg'),(2,'Spa',500,'Lorem i sum ','experience2.jpg'),(3,'Wine Castle',200,'Lorem i sum ','experience3.jpg'),(4,'Safari Zone',1000,'Lorem i sum ','experience4.jpg');
 /*!40000 ALTER TABLE `entertainment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -134,9 +134,9 @@ DROP TABLE IF EXISTS `feedback`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `feedback` (
-  `FeedBackId` int(11) NOT NULL AUTO_INCREMENT,
-  `FeedBackMessage` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `QrCodeId` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `FeedBackId` int NOT NULL AUTO_INCREMENT,
+  `FeedBackMessage` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `QrCodeId` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`FeedBackId`),
   KEY `FK_feedback_qrcode` (`QrCodeId`),
   CONSTRAINT `FK_feedback_qrcode` FOREIGN KEY (`QrCodeId`) REFERENCES `qrcode` (`QrCodeId`)
@@ -160,8 +160,8 @@ DROP TABLE IF EXISTS `fndtype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `fndtype` (
-  `TypeId` int(11) NOT NULL AUTO_INCREMENT,
-  `TypeName` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `TypeId` int NOT NULL AUTO_INCREMENT,
+  `TypeName` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`TypeId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -183,16 +183,16 @@ DROP TABLE IF EXISTS `foodanddrink`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `foodanddrink` (
-  `FoodAndDrinkId` int(11) NOT NULL AUTO_INCREMENT,
-  `TypeId` int(11) DEFAULT NULL,
-  `FoodAndDrinkName` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `FoodAndDrinkId` int NOT NULL AUTO_INCREMENT,
+  `TypeId` int DEFAULT NULL,
+  `FoodAndDrinkName` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `FoodAndDrinkPrice` float DEFAULT NULL,
-  `FoodAndDrinkDescription` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `FoodAndDrinkurl` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `FoodAndDrinkDescription` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `FoodAndDrinkurl` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`FoodAndDrinkId`),
   KEY `FK_foodanddrink_fndtype` (`TypeId`),
   CONSTRAINT `FK_foodanddrink_fndtype` FOREIGN KEY (`TypeId`) REFERENCES `fndtype` (`TypeId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -201,6 +201,7 @@ CREATE TABLE `foodanddrink` (
 
 LOCK TABLES `foodanddrink` WRITE;
 /*!40000 ALTER TABLE `foodanddrink` DISABLE KEYS */;
+INSERT INTO `foodanddrink` VALUES (1,NULL,'Costolette di agnello',100,'lorem i sum','our-menu-02.jpg'),(2,NULL,' Miele di pollo alla griglia',80,'lorem i sum','our-menu-04.jpg'),(3,NULL,'Macallan Fine & Rare Scotch Whisky',500,'lorem i sum','our-menu-05.jpg'),(4,NULL,'Strawberry Cheese Cake',40,'lorem i sum','our-menu-19.jpg');
 /*!40000 ALTER TABLE `foodanddrink` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -234,10 +235,10 @@ DROP TABLE IF EXISTS `img_hero`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `img_hero` (
-  `id_hero` int(11) NOT NULL AUTO_INCREMENT,
-  `img` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `text_Title` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `text_short` varchar(150) CHARACTER SET utf8 DEFAULT NULL,
+  `id_hero` int NOT NULL AUTO_INCREMENT,
+  `img` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `text_Title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `text_short` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `choose` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id_hero`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
@@ -261,9 +262,9 @@ DROP TABLE IF EXISTS `location`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `location` (
-  `LocationId` int(11) NOT NULL AUTO_INCREMENT,
-  `LocationName` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
-  `LocationUrl` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `LocationId` int NOT NULL AUTO_INCREMENT,
+  `LocationName` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `LocationUrl` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`LocationId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -286,19 +287,19 @@ DROP TABLE IF EXISTS `qrcode`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `qrcode` (
-  `QrCodeId` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `CustomerName` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
-  `EmailSendedTo` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `QrCodeId` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `CustomerName` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `EmailSendedTo` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `CreateDate` datetime DEFAULT NULL,
   `CheckInDate` datetime DEFAULT NULL,
   `CheckOutDate` datetime DEFAULT NULL,
-  `RoomId` int(11) DEFAULT NULL,
-  `AdultsNum` int(11) DEFAULT NULL,
-  `ChildrenNum` int(11) DEFAULT NULL,
+  `RoomId` int DEFAULT NULL,
+  `AdultsNum` int DEFAULT NULL,
+  `ChildrenNum` int DEFAULT NULL,
   `Deposits` float DEFAULT NULL,
-  `ReceiptId` int(11) DEFAULT NULL,
-  `Url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `AccountCustomerId` int(11) DEFAULT NULL,
+  `ReceiptId` int DEFAULT NULL,
+  `Url` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `AccountCustomerId` int DEFAULT NULL,
   `Status` bit(1) DEFAULT NULL,
   PRIMARY KEY (`QrCodeId`),
   KEY `FK_qrcode_receipt` (`ReceiptId`),
@@ -314,6 +315,7 @@ CREATE TABLE `qrcode` (
 
 LOCK TABLES `qrcode` WRITE;
 /*!40000 ALTER TABLE `qrcode` DISABLE KEYS */;
+INSERT INTO `qrcode` VALUES ('38FN8490FNU82RRwWcF','Bảo Trịnh Thiêm','abc@gmail.com','2020-07-13 00:00:00','2020-07-15 00:00:00','2020-07-17 00:00:00',1,2,0,4,1,NULL,NULL,_binary '');
 /*!40000 ALTER TABLE `qrcode` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -325,14 +327,14 @@ DROP TABLE IF EXISTS `receipt`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `receipt` (
-  `ReceiptId` int(11) NOT NULL AUTO_INCREMENT,
+  `ReceiptId` int NOT NULL AUTO_INCREMENT,
   `PayDate` datetime DEFAULT NULL,
   `Subtotal` float DEFAULT NULL,
   `Tax` float DEFAULT NULL,
   `Total` float DEFAULT NULL,
   `PayStatus` bit(1) DEFAULT NULL,
   PRIMARY KEY (`ReceiptId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -341,6 +343,7 @@ CREATE TABLE `receipt` (
 
 LOCK TABLES `receipt` WRITE;
 /*!40000 ALTER TABLE `receipt` DISABLE KEYS */;
+INSERT INTO `receipt` VALUES (1,NULL,540,54,590,_binary '\0');
 /*!40000 ALTER TABLE `receipt` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -352,19 +355,19 @@ DROP TABLE IF EXISTS `receiptcomponent`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `receiptcomponent` (
-  `ReceiptComponentId` int(11) NOT NULL AUTO_INCREMENT,
-  `ReceiptId` int(11) DEFAULT NULL,
-  `ComponentName` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `ReceiptComponentId` int NOT NULL AUTO_INCREMENT,
+  `ReceiptId` int DEFAULT NULL,
+  `ComponentName` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `Price` float DEFAULT NULL,
-  `Quantity` int(11) DEFAULT NULL,
+  `Quantity` int DEFAULT NULL,
   `Subtotal` float DEFAULT NULL,
-  `url` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `url` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `OrderDate` datetime DEFAULT NULL,
-  `OrdererName` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `OrdererName` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`ReceiptComponentId`),
   KEY `FK_receiptcomponent_receipt` (`ReceiptId`),
   CONSTRAINT `FK_receiptcomponent_receipt` FOREIGN KEY (`ReceiptId`) REFERENCES `receipt` (`ReceiptId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -373,6 +376,7 @@ CREATE TABLE `receiptcomponent` (
 
 LOCK TABLES `receiptcomponent` WRITE;
 /*!40000 ALTER TABLE `receiptcomponent` DISABLE KEYS */;
+INSERT INTO `receiptcomponent` VALUES (1,1,'Room-Bungalow',40,1,40,'Typeroom_Bungalow.jpg','2020-07-15 00:00:00','Bảo Trịnh Thiêm'),(2,1,'Wine Castle',200,2,400,'experience3.jpg','2020-07-16 00:00:00','Bảo Trịnh Thiêm'),(3,1,'Costolette di agnello',100,1,100,'our-menu-02.jpg','2020-07-16 00:00:00','Bảo Trịnh Thiêm');
 /*!40000 ALTER TABLE `receiptcomponent` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -384,10 +388,10 @@ DROP TABLE IF EXISTS `role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `role` (
-  `RoleId` int(11) NOT NULL AUTO_INCREMENT,
-  `RoleName` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `RoleId` int NOT NULL AUTO_INCREMENT,
+  `RoleName` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`RoleId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -396,6 +400,7 @@ CREATE TABLE `role` (
 
 LOCK TABLES `role` WRITE;
 /*!40000 ALTER TABLE `role` DISABLE KEYS */;
+INSERT INTO `role` VALUES (1,'admin'),(2,'reception'),(3,'ticket collector');
 /*!40000 ALTER TABLE `role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -407,17 +412,17 @@ DROP TABLE IF EXISTS `room`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `room` (
-  `RoomId` int(11) NOT NULL AUTO_INCREMENT,
-  `LocationId` int(11) DEFAULT NULL,
-  `RoomTypeId` int(11) DEFAULT NULL,
+  `RoomId` int NOT NULL AUTO_INCREMENT,
+  `LocationId` int DEFAULT NULL,
+  `RoomTypeId` int DEFAULT NULL,
   `Price` float DEFAULT NULL,
   `Status` bit(1) DEFAULT NULL,
-  `Description` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `AdultOpacity` int(11) DEFAULT NULL,
-  `ChildrenOpacity` int(11) DEFAULT NULL,
-  `BedOption` varchar(80) CHARACTER SET utf8 DEFAULT NULL,
-  `Size` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
-  `View` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `AdultOpacity` int DEFAULT NULL,
+  `ChildrenOpacity` int DEFAULT NULL,
+  `BedOption` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `Size` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `View` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`RoomId`),
   KEY `FK_room_location` (`LocationId`),
   KEY `FK_room_roomtype` (`RoomTypeId`),
@@ -462,8 +467,8 @@ DROP TABLE IF EXISTS `roomconvenient`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `roomconvenient` (
-  `RoomId` int(11) DEFAULT NULL,
-  `ConvenientId` int(11) DEFAULT NULL,
+  `RoomId` int DEFAULT NULL,
+  `ConvenientId` int DEFAULT NULL,
   KEY `FK_roomconvenient_convenient` (`ConvenientId`),
   KEY `FK_roomconvenient_room` (`RoomId`),
   CONSTRAINT `FK_roomconvenient_convenient` FOREIGN KEY (`ConvenientId`) REFERENCES `convenient` (`ConvenientId`),
@@ -489,9 +494,9 @@ DROP TABLE IF EXISTS `roomimage`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `roomimage` (
-  `RoomImageId` int(11) NOT NULL AUTO_INCREMENT,
-  `RoomId` int(11) DEFAULT NULL,
-  `Url` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `RoomImageId` int NOT NULL AUTO_INCREMENT,
+  `RoomId` int DEFAULT NULL,
+  `Url` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`RoomImageId`),
   KEY `FK_roomimage_room` (`RoomId`),
   CONSTRAINT `FK_roomimage_room` FOREIGN KEY (`RoomId`) REFERENCES `room` (`RoomId`)
@@ -516,10 +521,10 @@ DROP TABLE IF EXISTS `roomtype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `roomtype` (
-  `RoomTypeId` int(11) NOT NULL AUTO_INCREMENT,
-  `RoomTypeName` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
-  `Description` varchar(500) CHARACTER SET utf8 DEFAULT NULL,
-  `url` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `RoomTypeId` int NOT NULL AUTO_INCREMENT,
+  `RoomTypeName` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `Description` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `url` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`RoomTypeId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -547,10 +552,6 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `ConvenientName`,
  1 AS `url`*/;
 SET character_set_client = @saved_cs_client;
-
---
--- Dumping events for database 'prj4db'
---
 
 --
 -- Final view structure for view `history`
@@ -615,4 +616,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-16 18:17:05
+-- Dump completed on 2020-07-17 17:09:23

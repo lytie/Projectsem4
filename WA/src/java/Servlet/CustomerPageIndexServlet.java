@@ -6,12 +6,17 @@
 
 package Servlet;
 
+import entities.Qrcode;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.ws.rs.core.GenericType;
+import wsc.QrcodeClient;
 
 /**
  *
@@ -32,8 +37,20 @@ public class CustomerPageIndexServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            String qrcodeid = request.getParameter("id");
+            QrcodeClient qrcodeClient = new QrcodeClient();
+            GenericType<Qrcode> genericType = new GenericType<Qrcode>(){};
+            Qrcode qrcode = new Qrcode();
+            qrcode = qrcodeClient.find_JSON(genericType, qrcodeid);
+            if (qrcode != null) {
+                HttpSession session = request.getSession();
+                session.setAttribute("qrcodeid", qrcodeid);
+                request.getRequestDispatcher("/customerpage/index.jsp").forward(request, response);
+            }else{
+                out.print("false");
+            }
             /* TODO output your page here. You may use following sample code. */
-            request.getRequestDispatcher("/customerpage/index.jsp").forward(request, response);
+            
         }
     }
 
@@ -49,6 +66,7 @@ public class CustomerPageIndexServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         processRequest(request, response);
     }
 

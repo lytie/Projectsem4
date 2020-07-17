@@ -6,12 +6,17 @@
 
 package Servlet;
 
+import entities.Qrcode;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.ws.rs.core.GenericType;
+import wsc.QrcodeClient;
 
 /**
  *
@@ -32,8 +37,20 @@ public class CustomerPageInformationServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            request.getRequestDispatcher("/customerpage/information.jsp").forward(request, response);
+            String qrcodeid = request.getParameter("id");
+            QrcodeClient qrcodeClient = new QrcodeClient();
+            GenericType<Qrcode> genericType = new GenericType<Qrcode>(){};
+            Qrcode qrcode = new Qrcode();
+            qrcode = qrcodeClient.find_JSON(genericType, qrcodeid);
+            if (qrcode != null) {
+                HttpSession session = request.getSession();
+                session.setAttribute("qrcodeid", qrcodeid);
+                request.setAttribute("qrcode", qrcode);  
+                request.getRequestDispatcher("/customerpage/information.jsp").forward(request, response);
+            }else{
+                out.print("false");
+            }
+            /* TODO output your page here. You may use following sample code. */          
         }
     }
 

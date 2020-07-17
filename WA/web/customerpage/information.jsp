@@ -4,6 +4,10 @@
     Author     : Admin
 --%>
 
+
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="entities.Qrcode"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 
@@ -43,7 +47,10 @@
 			Informations
 		</h2>
 	</section>
-
+        <%
+                                Qrcode qrcode = (Qrcode) request.getAttribute("qrcode");
+                                SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+                            %>
 
 
 	<!-- Gallery -->
@@ -56,20 +63,19 @@
                 </div>
                 <div class="col-md-8">
                     <div style="background-color: #dddddd40;height: 100%;" class=" p-md-4">
-                        <h2 class="mb-3">Trịnh Thiêm Bảo</h2>
+                        <h2 class="mb-3"><%=qrcode.getCustomerName()%></h2>
                         <div class="row">
                             <div class="p-3 col-md-6">
-                                <p>CodeId: <span class="p-l-20">1QWERTTYUIOPASDFGHJKL</span></p>
-                                <p>Phone: <span class="p-l-20">0234022645</span></p>
-                                <p>Email: <span class="p-l-20">abc@gmail.com</span></p>
-                                <p>Check-in Date: <span class="p-l-20">7/7/2020</span></p>
-                                <p>Check-out Date: <span class="p-l-20">8/8/2020</span></p>
+                                <p>CodeId: <span class="p-l-20"><%=qrcode.getQrCodeId()%></span></p>
+                                <p>Email: <span class="p-l-20"><%=qrcode.getEmailSendedTo()%></span></p>
+                                <p>Check-in Date: <span class="p-l-20"><%= format.format(qrcode.getCheckInDate())%></span></p>
+                                <p>Check-out Date: <span class="p-l-20"><%= format.format(qrcode.getCheckOutDate())%></span></p>
                             </div>
                             <div class="p-3 col-md-6">
-                                <p>Room number: <span class="p-l-20">1</span></p>
-                                <p>Number of adults: <span class="p-l-20">2</span></p>
-                                <p>Number of children: <span class="p-l-20">0</span></p>
-                                <p>Deposits: <span class="p-l-20">1500</span></p>
+                                <p>Room number: <span class="p-l-20"><%=qrcode.getRoomId().getRoomId()%></span></p>
+                                <p>Number of adults: <span class="p-l-20"><%=qrcode.getAdultsNum()%></span></p>
+                                <p>Number of children: <span class="p-l-20"><%=qrcode.getChildrenNum()%></span></p>
+                                <p>Deposits: <span class="p-l-20">$ <%=qrcode.getDeposits()%></span></p>
                             </div>
                         </div>        
                         <button class="btn" style="background-color: #dca73a;color: #fff; border-color:#dca73a ;"><a style="color: white;" href="cart.html">Click to see your bills</a></button>        

@@ -44,6 +44,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Room.findBySize", query = "SELECT r FROM Room r WHERE r.size = :size"),
     @NamedQuery(name = "Room.findByView", query = "SELECT r FROM Room r WHERE r.view = :view")})
 public class Room implements Serializable {
+
+    @Column(name = "capacity")
+    private Integer capacity;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -229,6 +232,14 @@ public class Room implements Serializable {
     @Override
     public String toString() {
         return "entities.Room[ roomId=" + roomId + " ]";
+    }
+
+    public Integer getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
     }
     
 }

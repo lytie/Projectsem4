@@ -1,10 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `prj4db` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `prj4db`;
--- MySQL dump 10.13  Distrib 8.0.19, for macos10.15 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.19, for Win64 (x86_64)
 --
 -- Host: localhost    Database: prj4db
 -- ------------------------------------------------------
--- Server version	5.7.26
+-- Server version	8.0.19
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -25,12 +23,12 @@ DROP TABLE IF EXISTS `accountcustomer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `accountcustomer` (
-  `AccountCustomerId` int(11) NOT NULL AUTO_INCREMENT,
-  `Email` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Password` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `FullName` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `Phone` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `AccountCustomerId` int NOT NULL AUTO_INCREMENT,
+  `Email` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Password` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `FullName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `Phone` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `token` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`AccountCustomerId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -53,13 +51,13 @@ DROP TABLE IF EXISTS `accountemployee`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `accountemployee` (
-  `accountId` int(11) NOT NULL AUTO_INCREMENT,
-  `Email` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Password` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `FullName` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
-  `Phone` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `accountId` int NOT NULL AUTO_INCREMENT,
+  `Email` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Password` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `FullName` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `Phone` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `DateOfBirth` datetime DEFAULT NULL,
-  `RoleId` int(11) DEFAULT NULL,
+  `RoleId` int DEFAULT NULL,
   PRIMARY KEY (`accountId`),
   KEY `FK_accountemployee_role` (`RoleId`),
   CONSTRAINT `FK_accountemployee_role` FOREIGN KEY (`RoleId`) REFERENCES `role` (`RoleId`)
@@ -84,9 +82,9 @@ DROP TABLE IF EXISTS `convenient`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `convenient` (
-  `ConvenientId` int(11) NOT NULL AUTO_INCREMENT,
-  `ConvenientName` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
-  `url` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ConvenientId` int NOT NULL AUTO_INCREMENT,
+  `ConvenientName` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `url` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`ConvenientId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -102,33 +100,6 @@ INSERT INTO `convenient` VALUES (1,'Air Conditioned','Air_Conditioned.png'),(2,'
 UNLOCK TABLES;
 
 --
--- Table structure for table `entertainment`
---
-
-DROP TABLE IF EXISTS `entertainment`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `entertainment` (
-  `EntertainmentId` int(11) NOT NULL AUTO_INCREMENT,
-  `EntertainmentName` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
-  `TicketPrice` float DEFAULT NULL,
-  `EntertainmentDescription` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `EntertainmentUrl` varchar(500) CHARACTER SET utf8 DEFAULT NULL,
-  PRIMARY KEY (`EntertainmentId`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `entertainment`
---
-
-LOCK TABLES `entertainment` WRITE;
-/*!40000 ALTER TABLE `entertainment` DISABLE KEYS */;
-INSERT INTO `entertainment` VALUES (1,'Water Park',1000,'Lorem i sum ','experience5.jpg'),(2,'Spa',500,'Lorem i sum ','experience2.jpg'),(3,'Wine Castle',200,'Lorem i sum ','experience3.jpg'),(4,'Safari Zone',1000,'Lorem i sum ','experience4.jpg');
-/*!40000 ALTER TABLE `entertainment` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `feedback`
 --
 
@@ -136,9 +107,9 @@ DROP TABLE IF EXISTS `feedback`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `feedback` (
-  `FeedBackId` int(11) NOT NULL AUTO_INCREMENT,
-  `FeedBackMessage` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `QrCodeId` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `FeedBackId` int NOT NULL AUTO_INCREMENT,
+  `FeedBackMessage` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `QrCodeId` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`FeedBackId`),
   KEY `FK_feedback_qrcode` (`QrCodeId`),
   CONSTRAINT `FK_feedback_qrcode` FOREIGN KEY (`QrCodeId`) REFERENCES `qrcode` (`QrCodeId`)
@@ -152,59 +123,6 @@ CREATE TABLE `feedback` (
 LOCK TABLES `feedback` WRITE;
 /*!40000 ALTER TABLE `feedback` DISABLE KEYS */;
 /*!40000 ALTER TABLE `feedback` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `fndtype`
---
-
-DROP TABLE IF EXISTS `fndtype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fndtype` (
-  `TypeId` int(11) NOT NULL AUTO_INCREMENT,
-  `TypeName` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
-  PRIMARY KEY (`TypeId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `fndtype`
---
-
-LOCK TABLES `fndtype` WRITE;
-/*!40000 ALTER TABLE `fndtype` DISABLE KEYS */;
-/*!40000 ALTER TABLE `fndtype` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `foodanddrink`
---
-
-DROP TABLE IF EXISTS `foodanddrink`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `foodanddrink` (
-  `FoodAndDrinkId` int(11) NOT NULL AUTO_INCREMENT,
-  `TypeId` int(11) DEFAULT NULL,
-  `FoodAndDrinkName` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
-  `FoodAndDrinkPrice` float DEFAULT NULL,
-  `FoodAndDrinkDescription` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `FoodAndDrinkurl` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`FoodAndDrinkId`),
-  KEY `FK_foodanddrink_fndtype` (`TypeId`),
-  CONSTRAINT `FK_foodanddrink_fndtype` FOREIGN KEY (`TypeId`) REFERENCES `fndtype` (`TypeId`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `foodanddrink`
---
-
-LOCK TABLES `foodanddrink` WRITE;
-/*!40000 ALTER TABLE `foodanddrink` DISABLE KEYS */;
-INSERT INTO `foodanddrink` VALUES (1,NULL,'Costolette di agnello',100,'lorem i sum','our-menu-02.jpg'),(2,NULL,' Miele di pollo alla griglia',80,'lorem i sum','our-menu-04.jpg'),(3,NULL,'Macallan Fine & Rare Scotch Whisky',500,'lorem i sum','our-menu-05.jpg'),(4,NULL,'Strawberry Cheese Cake',40,'lorem i sum','our-menu-19.jpg');
-/*!40000 ALTER TABLE `foodanddrink` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -237,10 +155,10 @@ DROP TABLE IF EXISTS `img_hero`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `img_hero` (
-  `id_hero` int(11) NOT NULL AUTO_INCREMENT,
-  `img` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `text_Title` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `text_short` varchar(150) CHARACTER SET utf8 DEFAULT NULL,
+  `id_hero` int NOT NULL AUTO_INCREMENT,
+  `img` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `text_Title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `text_short` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `choose` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id_hero`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
@@ -264,9 +182,9 @@ DROP TABLE IF EXISTS `location`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `location` (
-  `LocationId` int(11) NOT NULL AUTO_INCREMENT,
-  `LocationName` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
-  `LocationUrl` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `LocationId` int NOT NULL AUTO_INCREMENT,
+  `LocationName` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `LocationUrl` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`LocationId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -289,19 +207,19 @@ DROP TABLE IF EXISTS `qrcode`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `qrcode` (
-  `QrCodeId` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `CustomerName` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
-  `EmailSendedTo` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `QrCodeId` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `CustomerName` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `EmailSendedTo` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `CreateDate` datetime DEFAULT NULL,
   `CheckInDate` datetime DEFAULT NULL,
   `CheckOutDate` datetime DEFAULT NULL,
-  `RoomId` int(11) DEFAULT NULL,
-  `AdultsNum` int(11) DEFAULT NULL,
-  `ChildrenNum` int(11) DEFAULT NULL,
+  `RoomId` int DEFAULT NULL,
+  `AdultsNum` int DEFAULT NULL,
+  `ChildrenNum` int DEFAULT NULL,
   `Deposits` float DEFAULT NULL,
-  `ReceiptId` int(11) DEFAULT NULL,
-  `Url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `AccountCustomerId` int(11) DEFAULT NULL,
+  `ReceiptId` int DEFAULT NULL,
+  `Url` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `AccountCustomerId` int DEFAULT NULL,
   `Status` bit(1) DEFAULT NULL,
   PRIMARY KEY (`QrCodeId`),
   KEY `FK_qrcode_receipt` (`ReceiptId`),
@@ -329,7 +247,7 @@ DROP TABLE IF EXISTS `receipt`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `receipt` (
-  `ReceiptId` int(11) NOT NULL AUTO_INCREMENT,
+  `ReceiptId` int NOT NULL AUTO_INCREMENT,
   `PayDate` datetime DEFAULT NULL,
   `Subtotal` float DEFAULT NULL,
   `Tax` float DEFAULT NULL,
@@ -357,15 +275,15 @@ DROP TABLE IF EXISTS `receiptcomponent`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `receiptcomponent` (
-  `ReceiptComponentId` int(11) NOT NULL AUTO_INCREMENT,
-  `ReceiptId` int(11) DEFAULT NULL,
-  `ComponentName` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `ReceiptComponentId` int NOT NULL AUTO_INCREMENT,
+  `ReceiptId` int DEFAULT NULL,
+  `ComponentName` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `Price` float DEFAULT NULL,
-  `Quantity` int(11) DEFAULT NULL,
+  `Quantity` int DEFAULT NULL,
   `Subtotal` float DEFAULT NULL,
-  `url` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `url` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `OrderDate` datetime DEFAULT NULL,
-  `OrdererName` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `OrdererName` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`ReceiptComponentId`),
   KEY `FK_receiptcomponent_receipt` (`ReceiptId`),
   CONSTRAINT `FK_receiptcomponent_receipt` FOREIGN KEY (`ReceiptId`) REFERENCES `receipt` (`ReceiptId`)
@@ -390,8 +308,8 @@ DROP TABLE IF EXISTS `role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `role` (
-  `RoleId` int(11) NOT NULL AUTO_INCREMENT,
-  `RoleName` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `RoleId` int NOT NULL AUTO_INCREMENT,
+  `RoleName` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`RoleId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -414,16 +332,16 @@ DROP TABLE IF EXISTS `room`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `room` (
-  `RoomId` int(11) NOT NULL AUTO_INCREMENT,
-  `LocationId` int(11) DEFAULT NULL,
-  `RoomTypeId` int(11) DEFAULT NULL,
+  `RoomId` int NOT NULL AUTO_INCREMENT,
+  `LocationId` int DEFAULT NULL,
+  `RoomTypeId` int DEFAULT NULL,
   `Price` float DEFAULT NULL,
   `Status` bit(1) DEFAULT NULL,
-  `Description` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `BedOption` varchar(80) CHARACTER SET utf8 DEFAULT NULL,
-  `Size` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
-  `View` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `capacity` int(11) DEFAULT NULL,
+  `Description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `BedOption` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `Size` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `View` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `capacity` int DEFAULT NULL,
   PRIMARY KEY (`RoomId`),
   KEY `FK_room_location` (`LocationId`),
   KEY `FK_room_roomtype` (`RoomTypeId`),
@@ -468,13 +386,15 @@ DROP TABLE IF EXISTS `roomconvenient`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `roomconvenient` (
-  `RoomId` int(11) DEFAULT NULL,
-  `ConvenientId` int(11) DEFAULT NULL,
+  `RoomId` int DEFAULT NULL,
+  `ConvenientId` int DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`),
   KEY `FK_roomconvenient_convenient` (`ConvenientId`),
   KEY `FK_roomconvenient_room` (`RoomId`),
   CONSTRAINT `FK_roomconvenient_convenient` FOREIGN KEY (`ConvenientId`) REFERENCES `convenient` (`ConvenientId`),
   CONSTRAINT `FK_roomconvenient_room` FOREIGN KEY (`RoomId`) REFERENCES `room` (`RoomId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=226 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -483,7 +403,7 @@ CREATE TABLE `roomconvenient` (
 
 LOCK TABLES `roomconvenient` WRITE;
 /*!40000 ALTER TABLE `roomconvenient` DISABLE KEYS */;
-INSERT INTO `roomconvenient` VALUES (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),(1,8),(1,9),(3,1),(3,2),(3,3),(3,4),(3,5),(3,6),(3,7),(3,8),(3,9),(4,1),(4,2),(4,3),(4,4),(4,5),(4,6),(4,7),(4,8),(4,9),(2,1),(2,2),(2,3),(2,4),(2,5),(2,6),(2,7),(2,8),(2,9),(5,1),(5,2),(5,3),(5,4),(5,5),(5,6),(5,7),(5,8),(5,9),(6,1),(6,2),(6,3),(6,4),(6,5),(6,6),(6,7),(6,8),(6,9),(7,1),(7,2),(7,3),(7,4),(7,5),(7,6),(7,7),(7,8),(7,9),(8,1),(8,2),(8,3),(8,4),(8,5),(8,6),(8,7),(8,8),(8,9),(9,1),(9,2),(9,3),(9,4),(9,5),(9,6),(9,7),(9,8),(9,9),(10,1),(10,2),(10,3),(10,4),(10,5),(10,6),(10,7),(10,8),(10,9),(11,1),(11,2),(11,3),(11,4),(11,5),(11,6),(11,7),(11,8),(11,9),(12,1),(12,2),(12,3),(12,4),(12,5),(12,6),(12,7),(12,8),(12,9),(13,1),(13,2),(13,3),(13,4),(13,5),(13,6),(13,7),(13,8),(13,9),(14,1),(14,2),(14,3),(14,4),(14,5),(14,6),(14,7),(14,8),(14,9),(15,1),(15,2),(15,3),(15,4),(15,5),(15,6),(15,7),(15,8),(15,9),(16,1),(16,2),(16,3),(16,4),(16,5),(16,6),(16,7),(16,8),(16,9),(17,1),(17,2),(17,3),(17,4),(17,5),(17,6),(17,7),(17,8),(17,9),(18,1),(18,2),(18,3),(18,4),(18,5),(18,6),(18,7),(18,8),(18,9),(19,1),(19,2),(19,3),(19,4),(19,5),(19,6),(19,7),(19,8),(19,9),(20,1),(20,2),(20,3),(20,4),(20,5),(20,6),(20,7),(20,8),(20,9),(21,1),(21,2),(21,3),(21,4),(21,5),(21,6),(21,7),(21,8),(21,9),(22,1),(22,2),(22,3),(22,4),(22,5),(22,6),(22,7),(22,8),(22,9),(23,1),(23,2),(23,3),(23,4),(23,5),(23,6),(23,7),(23,8),(23,9),(24,1),(24,2),(24,3),(24,4),(24,5),(24,6),(24,7),(24,8),(24,9),(25,1),(25,2),(25,3),(25,4),(25,5),(25,6),(25,7),(25,8),(25,9);
+INSERT INTO `roomconvenient` VALUES (1,1,1),(1,2,2),(1,3,3),(1,4,4),(1,5,5),(1,6,6),(1,7,7),(1,8,8),(1,9,9),(3,1,10),(3,2,11),(3,3,12),(3,4,13),(3,5,14),(3,6,15),(3,7,16),(3,8,17),(3,9,18),(4,1,19),(4,2,20),(4,3,21),(4,4,22),(4,5,23),(4,6,24),(4,7,25),(4,8,26),(4,9,27),(2,1,28),(2,2,29),(2,3,30),(2,4,31),(2,5,32),(2,6,33),(2,7,34),(2,8,35),(2,9,36),(5,1,37),(5,2,38),(5,3,39),(5,4,40),(5,5,41),(5,6,42),(5,7,43),(5,8,44),(5,9,45),(6,1,46),(6,2,47),(6,3,48),(6,4,49),(6,5,50),(6,6,51),(6,7,52),(6,8,53),(6,9,54),(7,1,55),(7,2,56),(7,3,57),(7,4,58),(7,5,59),(7,6,60),(7,7,61),(7,8,62),(7,9,63),(8,1,64),(8,2,65),(8,3,66),(8,4,67),(8,5,68),(8,6,69),(8,7,70),(8,8,71),(8,9,72),(9,1,73),(9,2,74),(9,3,75),(9,4,76),(9,5,77),(9,6,78),(9,7,79),(9,8,80),(9,9,81),(10,1,82),(10,2,83),(10,3,84),(10,4,85),(10,5,86),(10,6,87),(10,7,88),(10,8,89),(10,9,90),(11,1,91),(11,2,92),(11,3,93),(11,4,94),(11,5,95),(11,6,96),(11,7,97),(11,8,98),(11,9,99),(12,1,100),(12,2,101),(12,3,102),(12,4,103),(12,5,104),(12,6,105),(12,7,106),(12,8,107),(12,9,108),(13,1,109),(13,2,110),(13,3,111),(13,4,112),(13,5,113),(13,6,114),(13,7,115),(13,8,116),(13,9,117),(14,1,118),(14,2,119),(14,3,120),(14,4,121),(14,5,122),(14,6,123),(14,7,124),(14,8,125),(14,9,126),(15,1,127),(15,2,128),(15,3,129),(15,4,130),(15,5,131),(15,6,132),(15,7,133),(15,8,134),(15,9,135),(16,1,136),(16,2,137),(16,3,138),(16,4,139),(16,5,140),(16,6,141),(16,7,142),(16,8,143),(16,9,144),(17,1,145),(17,2,146),(17,3,147),(17,4,148),(17,5,149),(17,6,150),(17,7,151),(17,8,152),(17,9,153),(18,1,154),(18,2,155),(18,3,156),(18,4,157),(18,5,158),(18,6,159),(18,7,160),(18,8,161),(18,9,162),(19,1,163),(19,2,164),(19,3,165),(19,4,166),(19,5,167),(19,6,168),(19,7,169),(19,8,170),(19,9,171),(20,1,172),(20,2,173),(20,3,174),(20,4,175),(20,5,176),(20,6,177),(20,7,178),(20,8,179),(20,9,180),(21,1,181),(21,2,182),(21,3,183),(21,4,184),(21,5,185),(21,6,186),(21,7,187),(21,8,188),(21,9,189),(22,1,190),(22,2,191),(22,3,192),(22,4,193),(22,5,194),(22,6,195),(22,7,196),(22,8,197),(22,9,198),(23,1,199),(23,2,200),(23,3,201),(23,4,202),(23,5,203),(23,6,204),(23,7,205),(23,8,206),(23,9,207),(24,1,208),(24,2,209),(24,3,210),(24,4,211),(24,5,212),(24,6,213),(24,7,214),(24,8,215),(24,9,216),(25,1,217),(25,2,218),(25,3,219),(25,4,220),(25,5,221),(25,6,222),(25,7,223),(25,8,224),(25,9,225);
 /*!40000 ALTER TABLE `roomconvenient` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -495,9 +415,9 @@ DROP TABLE IF EXISTS `roomimage`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `roomimage` (
-  `RoomImageId` int(11) NOT NULL AUTO_INCREMENT,
-  `RoomId` int(11) DEFAULT NULL,
-  `Url` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `RoomImageId` int NOT NULL AUTO_INCREMENT,
+  `RoomId` int DEFAULT NULL,
+  `Url` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`RoomImageId`),
   KEY `FK_roomimage_room` (`RoomId`),
   CONSTRAINT `FK_roomimage_room` FOREIGN KEY (`RoomId`) REFERENCES `room` (`RoomId`)
@@ -522,10 +442,10 @@ DROP TABLE IF EXISTS `roomtype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `roomtype` (
-  `RoomTypeId` int(11) NOT NULL AUTO_INCREMENT,
-  `RoomTypeName` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
-  `Description` varchar(500) CHARACTER SET utf8 DEFAULT NULL,
-  `url` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `RoomTypeId` int NOT NULL AUTO_INCREMENT,
+  `RoomTypeName` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `Description` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `url` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`RoomTypeId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -541,6 +461,60 @@ INSERT INTO `roomtype` VALUES (1,'Bungalow','This type of single-storey house or
 UNLOCK TABLES;
 
 --
+-- Table structure for table `service`
+--
+
+DROP TABLE IF EXISTS `service`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `service` (
+  `ServiceId` int NOT NULL AUTO_INCREMENT,
+  `SerivceTypeId` int DEFAULT NULL,
+  `ServiceName` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `ServicePrice` float DEFAULT NULL,
+  `ServiceDescription` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `Serviceurl` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`ServiceId`),
+  KEY `FK_foodanddrink_fndtype` (`SerivceTypeId`),
+  CONSTRAINT `fk_service_servicetype` FOREIGN KEY (`SerivceTypeId`) REFERENCES `servicetype` (`ServiceTypeId`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `service`
+--
+
+LOCK TABLES `service` WRITE;
+/*!40000 ALTER TABLE `service` DISABLE KEYS */;
+INSERT INTO `service` VALUES (1,1,'Costolette di agnello',100,'lorem i sum','our-menu-02.jpg'),(2,1,' Miele di pollo alla griglia',80,'lorem i sum','our-menu-04.jpg'),(3,2,'Macallan Fine & Rare Scotch Whisky',500,'lorem i sum','our-menu-05.jpg'),(4,1,'Strawberry Cheese Cake',40,'lorem i sum','our-menu-19.jpg'),(5,3,'Water Park',1000,'lorem i sum','experience5.jpg'),(6,3,'Spa',500,'lorem i sum','experience2.jpg'),(7,3,'Wine Castle',200,'lorem i sum','experience3.jpg'),(8,3,'Safari Zone',1000,'lorem i sum','experience4.jpg');
+/*!40000 ALTER TABLE `service` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `servicetype`
+--
+
+DROP TABLE IF EXISTS `servicetype`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `servicetype` (
+  `ServiceTypeId` int NOT NULL AUTO_INCREMENT,
+  `TypeName` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  PRIMARY KEY (`ServiceTypeId`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `servicetype`
+--
+
+LOCK TABLES `servicetype` WRITE;
+/*!40000 ALTER TABLE `servicetype` DISABLE KEYS */;
+INSERT INTO `servicetype` VALUES (1,'Food'),(2,'Drink'),(3,'Ticket');
+/*!40000 ALTER TABLE `servicetype` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Temporary view structure for view `v_convenientroom`
 --
 
@@ -553,10 +527,6 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `ConvenientName`,
  1 AS `url`*/;
 SET character_set_client = @saved_cs_client;
-
---
--- Dumping events for database 'prj4db'
---
 
 --
 -- Final view structure for view `history`
@@ -621,4 +591,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-17 22:52:24
+-- Dump completed on 2020-07-17 23:10:17

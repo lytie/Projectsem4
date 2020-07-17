@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package service;
 
 import java.util.Set;
@@ -33,10 +27,7 @@ public class ApplicationConfig extends Application {
         resources.add(service.AccountcustomerFacadeREST.class);
         resources.add(service.AccountemployeeFacadeREST.class);
         resources.add(service.ConvenientFacadeREST.class);
-        resources.add(service.EntertainmentFacadeREST.class);
         resources.add(service.FeedbackFacadeREST.class);
-        resources.add(service.FndtypeFacadeREST.class);
-        resources.add(service.FoodanddrinkFacadeREST.class);
         resources.add(service.HistoryFacadeREST.class);
         resources.add(service.ImgHeroFacadeREST.class);
         resources.add(service.LocationFacadeREST.class);
@@ -46,8 +37,11 @@ public class ApplicationConfig extends Application {
         resources.add(service.RoleFacadeREST.class);
         resources.add(service.RoomFacadeREST.class);
         resources.add(service.RoombookingFacadeREST.class);
+        resources.add(service.RoomconvenientFacadeREST.class);
         resources.add(service.RoomimageFacadeREST.class);
         resources.add(service.RoomtypeFacadeREST.class);
+        resources.add(service.ServiceFacadeREST.class);
+        resources.add(service.ServicetypeFacadeREST.class);
         resources.add(service.VConvenientroomFacadeREST.class);
     }
     

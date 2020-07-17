@@ -44,20 +44,20 @@ public class RoombookingFacadeREST extends AbstractFacade<Roombooking> {
     @PUT
     @Path("{id}")
     @Consumes({"application/xml", "application/json"})
-    public void edit(@PathParam("id") Long id, Roombooking entity) {
+    public void edit(@PathParam("id") String id, Roombooking entity) {
         super.edit(entity);
     }
 
     @DELETE
     @Path("{id}")
-    public void remove(@PathParam("id") Long id) {
+    public void remove(@PathParam("id") String id) {
         super.remove(super.find(id));
     }
 
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
-    public Roombooking find(@PathParam("id") Long id) {
+    public Roombooking find(@PathParam("id") String id) {
         return super.find(id);
     }
 

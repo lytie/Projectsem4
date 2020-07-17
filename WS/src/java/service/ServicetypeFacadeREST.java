@@ -6,7 +6,7 @@
 
 package service;
 
-import entities.Fndtype;
+import entities.Servicetype;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -25,26 +25,26 @@ import javax.ws.rs.Produces;
  * @author Admin
  */
 @Stateless
-@Path("entities.fndtype")
-public class FndtypeFacadeREST extends AbstractFacade<Fndtype> {
+@Path("entities.servicetype")
+public class ServicetypeFacadeREST extends AbstractFacade<Servicetype> {
     @PersistenceContext(unitName = "WSPU")
     private EntityManager em;
 
-    public FndtypeFacadeREST() {
-        super(Fndtype.class);
+    public ServicetypeFacadeREST() {
+        super(Servicetype.class);
     }
 
     @POST
     @Override
     @Consumes({"application/xml", "application/json"})
-    public void create(Fndtype entity) {
+    public void create(Servicetype entity) {
         super.create(entity);
     }
 
     @PUT
     @Path("{id}")
     @Consumes({"application/xml", "application/json"})
-    public void edit(@PathParam("id") Integer id, Fndtype entity) {
+    public void edit(@PathParam("id") Integer id, Servicetype entity) {
         super.edit(entity);
     }
 
@@ -57,21 +57,21 @@ public class FndtypeFacadeREST extends AbstractFacade<Fndtype> {
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
-    public Fndtype find(@PathParam("id") Integer id) {
+    public Servicetype find(@PathParam("id") Integer id) {
         return super.find(id);
     }
 
     @GET
     @Override
     @Produces({"application/xml", "application/json"})
-    public List<Fndtype> findAll() {
+    public List<Servicetype> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
     @Produces({"application/xml", "application/json"})
-    public List<Fndtype> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+    public List<Servicetype> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
 

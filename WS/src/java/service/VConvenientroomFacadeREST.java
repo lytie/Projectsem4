@@ -44,20 +44,20 @@ public class VConvenientroomFacadeREST extends AbstractFacade<VConvenientroom> {
     @PUT
     @Path("{id}")
     @Consumes({"application/xml", "application/json"})
-    public void edit(@PathParam("id") Long id, VConvenientroom entity) {
+    public void edit(@PathParam("id") String id, VConvenientroom entity) {
         super.edit(entity);
     }
 
     @DELETE
     @Path("{id}")
-    public void remove(@PathParam("id") Long id) {
+    public void remove(@PathParam("id") String id) {
         super.remove(super.find(id));
     }
 
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
-    public VConvenientroom find(@PathParam("id") Long id) {
+    public VConvenientroom find(@PathParam("id") String id) {
         return super.find(id);
     }
 

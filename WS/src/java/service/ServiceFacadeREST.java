@@ -6,7 +6,7 @@
 
 package service;
 
-import entities.Foodanddrink;
+import entities.Service;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -25,26 +25,26 @@ import javax.ws.rs.Produces;
  * @author Admin
  */
 @Stateless
-@Path("entities.foodanddrink")
-public class FoodanddrinkFacadeREST extends AbstractFacade<Foodanddrink> {
+@Path("entities.service")
+public class ServiceFacadeREST extends AbstractFacade<Service> {
     @PersistenceContext(unitName = "WSPU")
     private EntityManager em;
 
-    public FoodanddrinkFacadeREST() {
-        super(Foodanddrink.class);
+    public ServiceFacadeREST() {
+        super(Service.class);
     }
 
     @POST
     @Override
     @Consumes({"application/xml", "application/json"})
-    public void create(Foodanddrink entity) {
+    public void create(Service entity) {
         super.create(entity);
     }
 
     @PUT
     @Path("{id}")
     @Consumes({"application/xml", "application/json"})
-    public void edit(@PathParam("id") Integer id, Foodanddrink entity) {
+    public void edit(@PathParam("id") Integer id, Service entity) {
         super.edit(entity);
     }
 
@@ -57,21 +57,21 @@ public class FoodanddrinkFacadeREST extends AbstractFacade<Foodanddrink> {
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
-    public Foodanddrink find(@PathParam("id") Integer id) {
+    public Service find(@PathParam("id") Integer id) {
         return super.find(id);
     }
 
     @GET
     @Override
     @Produces({"application/xml", "application/json"})
-    public List<Foodanddrink> findAll() {
+    public List<Service> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
     @Produces({"application/xml", "application/json"})
-    public List<Foodanddrink> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+    public List<Service> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
 

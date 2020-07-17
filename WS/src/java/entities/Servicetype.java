@@ -27,38 +27,38 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Admin
  */
 @Entity
-@Table(name = "fndtype", catalog = "prj4db", schema = "")
+@Table(name = "servicetype", catalog = "prj4db", schema = "")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Fndtype.findAll", query = "SELECT f FROM Fndtype f"),
-    @NamedQuery(name = "Fndtype.findByTypeId", query = "SELECT f FROM Fndtype f WHERE f.typeId = :typeId"),
-    @NamedQuery(name = "Fndtype.findByTypeName", query = "SELECT f FROM Fndtype f WHERE f.typeName = :typeName")})
-public class Fndtype implements Serializable {
+    @NamedQuery(name = "Servicetype.findAll", query = "SELECT s FROM Servicetype s"),
+    @NamedQuery(name = "Servicetype.findByServiceTypeId", query = "SELECT s FROM Servicetype s WHERE s.serviceTypeId = :serviceTypeId"),
+    @NamedQuery(name = "Servicetype.findByTypeName", query = "SELECT s FROM Servicetype s WHERE s.typeName = :typeName")})
+public class Servicetype implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "TypeId", nullable = false)
-    private Integer typeId;
+    @Column(name = "ServiceTypeId", nullable = false)
+    private Integer serviceTypeId;
     @Size(max = 100)
     @Column(name = "TypeName", length = 100)
     private String typeName;
-    @OneToMany(mappedBy = "typeId")
-    private List<Foodanddrink> foodanddrinkList;
+    @OneToMany(mappedBy = "serivceTypeId")
+    private List<Service> serviceList;
 
-    public Fndtype() {
+    public Servicetype() {
     }
 
-    public Fndtype(Integer typeId) {
-        this.typeId = typeId;
+    public Servicetype(Integer serviceTypeId) {
+        this.serviceTypeId = serviceTypeId;
     }
 
-    public Integer getTypeId() {
-        return typeId;
+    public Integer getServiceTypeId() {
+        return serviceTypeId;
     }
 
-    public void setTypeId(Integer typeId) {
-        this.typeId = typeId;
+    public void setServiceTypeId(Integer serviceTypeId) {
+        this.serviceTypeId = serviceTypeId;
     }
 
     public String getTypeName() {
@@ -70,29 +70,29 @@ public class Fndtype implements Serializable {
     }
 
     @XmlTransient
-    public List<Foodanddrink> getFoodanddrinkList() {
-        return foodanddrinkList;
+    public List<Service> getServiceList() {
+        return serviceList;
     }
 
-    public void setFoodanddrinkList(List<Foodanddrink> foodanddrinkList) {
-        this.foodanddrinkList = foodanddrinkList;
+    public void setServiceList(List<Service> serviceList) {
+        this.serviceList = serviceList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (typeId != null ? typeId.hashCode() : 0);
+        hash += (serviceTypeId != null ? serviceTypeId.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Fndtype)) {
+        if (!(object instanceof Servicetype)) {
             return false;
         }
-        Fndtype other = (Fndtype) object;
-        if ((this.typeId == null && other.typeId != null) || (this.typeId != null && !this.typeId.equals(other.typeId))) {
+        Servicetype other = (Servicetype) object;
+        if ((this.serviceTypeId == null && other.serviceTypeId != null) || (this.serviceTypeId != null && !this.serviceTypeId.equals(other.serviceTypeId))) {
             return false;
         }
         return true;
@@ -100,7 +100,7 @@ public class Fndtype implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Fndtype[ typeId=" + typeId + " ]";
+        return "entities.Servicetype[ serviceTypeId=" + serviceTypeId + " ]";
     }
     
 }

@@ -6,7 +6,7 @@
 
 package service;
 
-import entities.Entertainment;
+import entities.Roomconvenient;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -25,26 +25,26 @@ import javax.ws.rs.Produces;
  * @author Admin
  */
 @Stateless
-@Path("entities.entertainment")
-public class EntertainmentFacadeREST extends AbstractFacade<Entertainment> {
+@Path("entities.roomconvenient")
+public class RoomconvenientFacadeREST extends AbstractFacade<Roomconvenient> {
     @PersistenceContext(unitName = "WSPU")
     private EntityManager em;
 
-    public EntertainmentFacadeREST() {
-        super(Entertainment.class);
+    public RoomconvenientFacadeREST() {
+        super(Roomconvenient.class);
     }
 
     @POST
     @Override
     @Consumes({"application/xml", "application/json"})
-    public void create(Entertainment entity) {
+    public void create(Roomconvenient entity) {
         super.create(entity);
     }
 
     @PUT
     @Path("{id}")
     @Consumes({"application/xml", "application/json"})
-    public void edit(@PathParam("id") Integer id, Entertainment entity) {
+    public void edit(@PathParam("id") Integer id, Roomconvenient entity) {
         super.edit(entity);
     }
 
@@ -57,21 +57,21 @@ public class EntertainmentFacadeREST extends AbstractFacade<Entertainment> {
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
-    public Entertainment find(@PathParam("id") Integer id) {
+    public Roomconvenient find(@PathParam("id") Integer id) {
         return super.find(id);
     }
 
     @GET
     @Override
     @Produces({"application/xml", "application/json"})
-    public List<Entertainment> findAll() {
+    public List<Roomconvenient> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
     @Produces({"application/xml", "application/json"})
-    public List<Entertainment> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+    public List<Roomconvenient> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
 

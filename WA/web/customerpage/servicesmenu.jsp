@@ -73,7 +73,7 @@
                                     </span>
 
                                     <span class="txt22 m-t-20">
-                                        $<%=service.getServicePrice()%> <a href="" class="btn btn-outline-warning "  >Add to orders</a>
+                                        $<%=service.getServicePrice()%> <a href="SessionCartServlet?action=add&serviceid=<%=service.getServiceId()%>" class="btn btn-outline-warning "  >Add to orders</a>
                                     </span>
                                 </div>
 

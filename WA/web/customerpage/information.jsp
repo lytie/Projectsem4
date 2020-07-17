@@ -50,6 +50,7 @@
         <%
                                 Qrcode qrcode = (Qrcode) request.getAttribute("qrcode");
                                 SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+                                String qrid= (String) session.getAttribute("qrcodeid");
                             %>
 
 
@@ -78,7 +79,7 @@
                                 <p>Deposits: <span class="p-l-20">$ <%=qrcode.getDeposits()%></span></p>
                             </div>
                         </div>        
-                        <button class="btn" style="background-color: #dca73a;color: #fff; border-color:#dca73a ;"><a style="color: white;" href="cart.html">Click to see your bills</a></button>        
+                        <button class="btn" style="background-color: #dca73a;color: #fff; border-color:#dca73a ;"><a style="color: white;" href="CustomerPageCartServlet?id=<%= qrid%>">Click to see your bills</a></button>        
                     </div>  
                 </div>
             </div>

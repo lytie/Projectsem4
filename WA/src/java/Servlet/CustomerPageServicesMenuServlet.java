@@ -5,6 +5,7 @@
  */
 package Servlet;
 
+import entities.Qrcode;
 import entities.Service;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,7 +15,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.GenericType;
+import wsc.QrcodeClient;
 import wsc.ServiceClient;
 
 /**
@@ -57,6 +60,18 @@ public class CustomerPageServicesMenuServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String qrcodeid = request.getParameter("id");
+            QrcodeClient qrcodeClient = new QrcodeClient();
+            GenericType<Qrcode> genericType = new GenericType<Qrcode>(){};
+            Qrcode qrcode = new Qrcode();
+            qrcode = qrcodeClient.find_JSON(genericType, qrcodeid);
+            if (qrcode != null) {
+                HttpSession session = request.getSession();
+                session.setAttribute("qrcodeid", qrcodeid);
+                //request.getRequestDispatcher("/customerpage/index.jsp").forward(request, response);
+            }else{
+                //out.print("false");
+            }
         processRequest(request, response);
     }
 

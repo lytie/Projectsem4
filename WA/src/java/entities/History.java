@@ -10,7 +10,6 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -69,8 +68,6 @@ public class History implements Serializable {
     private Integer receiptId;
     @Column(name = "AccountCustomerId")
     private Integer accountCustomerId;
-    @Id
-    private Long id;
 
     public History() {
     }
@@ -161,14 +158,6 @@ public class History implements Serializable {
 
     public void setAccountCustomerId(Integer accountCustomerId) {
         this.accountCustomerId = accountCustomerId;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
     
 }

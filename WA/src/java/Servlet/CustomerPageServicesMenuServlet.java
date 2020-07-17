@@ -5,7 +5,7 @@
  */
 package Servlet;
 
-import entities.Entertainment;
+import entities.Service;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.GenericType;
-import wsc.EntertainmentClient;
+import wsc.ServiceClient;
 
 /**
  *
@@ -36,10 +36,10 @@ public class CustomerPageServicesMenuServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            EntertainmentClient entertainmentClient = new EntertainmentClient();
-            GenericType<List<Entertainment>> genericType = new GenericType<List<Entertainment>>(){};
-            List<Entertainment> list = new ArrayList<Entertainment>();
-            list = entertainmentClient.findAll_JSON(genericType);
+            ServiceClient serviceClient = new ServiceClient();
+            GenericType<List<Service>> genericType = new GenericType<List<Service>>() {};
+            List<Service> list = new ArrayList<Service>();
+            list = serviceClient.listticket_JSON(genericType);
             request.setAttribute("list", list);
             request.getRequestDispatcher("/customerpage/servicesmenu.jsp").forward(request, response);
         }

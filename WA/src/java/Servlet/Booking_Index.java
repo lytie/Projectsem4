@@ -37,7 +37,7 @@ public class Booking_Index extends HttpServlet {
         request.setCharacterEncoding("utf-8");
 
 //      list  img_hero
-        Img_hero ih = new Img_hero();
+        ImgHeroClient ih = new ImgHeroClient();
         GenericType<List<ImgHero>> responseType = new GenericType< List<ImgHero>>() {
         };
 

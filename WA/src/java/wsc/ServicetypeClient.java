@@ -11,11 +11,11 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
 
 /**
- * Jersey REST client generated for REST resource:EntertainmentFacadeREST
- * [entities.entertainment]<br>
+ * Jersey REST client generated for REST resource:ServicetypeFacadeREST
+ * [entities.servicetype]<br>
  * USAGE:
  * <pre>
- *        EntertainmentClient client = new EntertainmentClient();
+ *        ServicetypeClient client = new ServicetypeClient();
  *        Object response = client.XXX(...);
  *        // do whatever with response
  *        client.close();
@@ -23,14 +23,14 @@ import javax.ws.rs.client.WebTarget;
  *
  * @author Admin
  */
-public class EntertainmentClient {
+public class ServicetypeClient {
     private WebTarget webTarget;
     private Client client;
     private static final String BASE_URI = "http://localhost:8080/WS/webresources";
 
-    public EntertainmentClient() {
+    public ServicetypeClient() {
         client = javax.ws.rs.client.ClientBuilder.newClient();
-        webTarget = client.target(BASE_URI).path("entities.entertainment");
+        webTarget = client.target(BASE_URI).path("entities.servicetype");
     }
 
     public String countREST() throws ClientErrorException {

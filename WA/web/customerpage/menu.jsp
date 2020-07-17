@@ -4,7 +4,7 @@
     Author     : Admin
 --%>
 
-<%@page import="entities.Foodanddrink"%>
+<%@page import="entities.Service"%>
 <%@page import="entities.Accountcustomer"%>
 <%@page import="java.util.List"%>
 <%@page language="java" contentType="text/html" pageEncoding="UTF-8"%>
@@ -55,26 +55,26 @@
 		<div class="container">
 			<div class="row p-t-108 p-b-70">	
                             <%
-                                List<Foodanddrink> list = (List<Foodanddrink>) request.getAttribute("list");
-                                for (Foodanddrink foodanddrink : list) {
+                                List<Service> list = (List<Service>) request.getAttribute("list");
+                                for (Service service : list) {
                             %>
                             <!-- Block3 -->
                             <div class="col-md-6 blo3 flex-w flex-col-l-sm m-b-30">
                                 <div class="pic-blo3 size20 bo-rad-10 hov-img-zoom m-r-28">
-                                    <a href="#"><img src="./images/customerpageimg/<%=foodanddrink.getFoodAndDrinkurl()%>" alt="IMG-MENU"></a>
+                                    <a href="#"><img src="./images/customerpageimg/<%=service.getServiceurl()%>" alt="IMG-MENU"></a>
                                 </div>
 
                                 <div class="text-blo3 size21 flex-col-l-m">
                                     <a href="#" class="txt21 m-b-3">
-                                        <%=foodanddrink.getFoodAndDrinkName()%>
+                                        <%=service.getServiceName()%>
                                     </a>
 
                                     <span class="txt23">
-                                        <%=foodanddrink.getFoodAndDrinkDescription()%>
+                                        <%=service.getServiceDescription()%>
                                     </span>
 
                                     <span class="txt22 m-t-20">
-                                        $<%=foodanddrink.getFoodAndDrinkPrice()%> <a href="" class="btn btn-outline-warning "  >Add to orders</a>
+                                        $<%=service.getServicePrice()%> <a href="" class="btn btn-outline-warning "  >Add to orders</a>
                                     </span>
                                 </div>
 

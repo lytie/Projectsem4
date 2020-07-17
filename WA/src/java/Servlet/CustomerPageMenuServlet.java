@@ -6,7 +6,7 @@
 
 package Servlet;
 
-import entities.Foodanddrink;
+import entities.Service;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.GenericType;
-import wsc.FoodanddrinkClient;
+import wsc.ServiceClient;
 
 /**
  *
@@ -39,10 +39,10 @@ public class CustomerPageMenuServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         
         try (PrintWriter out = response.getWriter()) {
-           FoodanddrinkClient foodanddrinkClient = new FoodanddrinkClient();
-           GenericType<List<Foodanddrink>> genericType = new GenericType<List<Foodanddrink>>(){};
-           List<Foodanddrink> list = new ArrayList<Foodanddrink>();
-           list = foodanddrinkClient.findAll_JSON(genericType);
+           ServiceClient serviceClient = new ServiceClient();
+           GenericType<List<Service>> genericType = new GenericType<List<Service>>(){};
+           List<Service> list = new ArrayList<Service>();
+           list = serviceClient.listfood_JSON(genericType);
            request.setAttribute("list", list);  
            request.getRequestDispatcher("/customerpage/menu.jsp").forward(request, response);
         }

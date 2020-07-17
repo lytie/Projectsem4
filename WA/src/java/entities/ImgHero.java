@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package entities;
 
 import java.io.Serializable;
@@ -20,21 +21,19 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author longly
+ * @author Admin
  */
 @Entity
 @Table(name = "img_hero", catalog = "prj4db", schema = "")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "ImgHero.findAll", query = "SELECT i FROM ImgHero i")
-    , @NamedQuery(name = "ImgHero.findByIdHero", query = "SELECT i FROM ImgHero i WHERE i.idHero = :idHero")
-    , @NamedQuery(name = "ImgHero.findByImg", query = "SELECT i FROM ImgHero i WHERE i.img = :img")
-    , @NamedQuery(name = "ImgHero.findByTextTitle", query = "SELECT i FROM ImgHero i WHERE i.textTitle = :textTitle")
-    , @NamedQuery(name = "ImgHero.findByTextShort", query = "SELECT i FROM ImgHero i WHERE i.textShort = :textShort")})
+    @NamedQuery(name = "ImgHero.findAll", query = "SELECT i FROM ImgHero i"),
+    @NamedQuery(name = "ImgHero.findByIdHero", query = "SELECT i FROM ImgHero i WHERE i.idHero = :idHero"),
+    @NamedQuery(name = "ImgHero.findByImg", query = "SELECT i FROM ImgHero i WHERE i.img = :img"),
+    @NamedQuery(name = "ImgHero.findByTextTitle", query = "SELECT i FROM ImgHero i WHERE i.textTitle = :textTitle"),
+    @NamedQuery(name = "ImgHero.findByTextShort", query = "SELECT i FROM ImgHero i WHERE i.textShort = :textShort"),
+    @NamedQuery(name = "ImgHero.findByChoose", query = "SELECT i FROM ImgHero i WHERE i.choose = :choose")})
 public class ImgHero implements Serializable {
-    @Column(name = "choose")
-    private Boolean choose;
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,6 +49,8 @@ public class ImgHero implements Serializable {
     @Size(max = 150)
     @Column(name = "text_short", length = 150)
     private String textShort;
+    @Column(name = "choose")
+    private Boolean choose;
 
     public ImgHero() {
     }
@@ -90,6 +91,14 @@ public class ImgHero implements Serializable {
         this.textShort = textShort;
     }
 
+    public Boolean getChoose() {
+        return choose;
+    }
+
+    public void setChoose(Boolean choose) {
+        this.choose = choose;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -113,14 +122,6 @@ public class ImgHero implements Serializable {
     @Override
     public String toString() {
         return "entities.ImgHero[ idHero=" + idHero + " ]";
-    }
-
-    public Boolean getChoose() {
-        return choose;
-    }
-
-    public void setChoose(Boolean choose) {
-        this.choose = choose;
     }
     
 }

@@ -9,7 +9,6 @@ package entities;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -38,8 +37,6 @@ public class VConvenientroom implements Serializable {
     @Size(max = 500)
     @Column(name = "url", length = 500)
     private String url;
-    @Id
-    private Long id;
 
     public VConvenientroom() {
     }
@@ -66,14 +63,6 @@ public class VConvenientroom implements Serializable {
 
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
     
 }

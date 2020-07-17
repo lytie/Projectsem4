@@ -11,11 +11,11 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
 
 /**
- * Jersey REST client generated for REST resource:FndtypeFacadeREST
- * [entities.fndtype]<br>
+ * Jersey REST client generated for REST resource:ServiceFacadeREST
+ * [entities.service]<br>
  * USAGE:
  * <pre>
- *        FndtypeClient client = new FndtypeClient();
+ *        ServiceClient client = new ServiceClient();
  *        Object response = client.XXX(...);
  *        // do whatever with response
  *        client.close();
@@ -23,14 +23,26 @@ import javax.ws.rs.client.WebTarget;
  *
  * @author Admin
  */
-public class FndtypeClient {
+public class ServiceClient {
     private WebTarget webTarget;
     private Client client;
     private static final String BASE_URI = "http://localhost:8080/WS/webresources";
 
-    public FndtypeClient() {
+    public ServiceClient() {
         client = javax.ws.rs.client.ClientBuilder.newClient();
-        webTarget = client.target(BASE_URI).path("entities.fndtype");
+        webTarget = client.target(BASE_URI).path("entities.service");
+    }
+
+    public <T> T listfood_XML(javax.ws.rs.core.GenericType<T> responseType) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path("listfood");
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
+    }
+
+    public <T> T listfood_JSON(javax.ws.rs.core.GenericType<T> responseType) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path("listfood");
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
     public String countREST() throws ClientErrorException {
@@ -45,6 +57,30 @@ public class FndtypeClient {
 
     public void edit_JSON(Object requestEntity, String id) throws ClientErrorException {
         webTarget.path(java.text.MessageFormat.format("{0}", new Object[]{id})).request(javax.ws.rs.core.MediaType.APPLICATION_JSON).put(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
+    }
+
+    public <T> T listdrink_XML(javax.ws.rs.core.GenericType<T> responseType) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path("listdrink");
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
+    }
+
+    public <T> T listdrink_JSON(javax.ws.rs.core.GenericType<T> responseType) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path("listdrink");
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+
+    public <T> T listticket_XML(javax.ws.rs.core.GenericType<T> responseType) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path("listticket");
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
+    }
+
+    public <T> T listticket_JSON(javax.ws.rs.core.GenericType<T> responseType) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path("listticket");
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
     public <T> T find_XML(javax.ws.rs.core.GenericType<T> responseType, String id) throws ClientErrorException {

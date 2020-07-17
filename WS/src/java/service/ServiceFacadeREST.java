@@ -82,6 +82,27 @@ public class ServiceFacadeREST extends AbstractFacade<Service> {
         return String.valueOf(super.count());
     }
 
+    @GET
+    @Path("listfood")
+    @Produces({"application/xml", "application/json"})
+    public List<Service> listfood() {
+        String query = "SELECT * FROM service where SerivceTypeId = 1";
+        return em.createNativeQuery(query, Service.class).getResultList();
+    }
+    @GET
+    @Path("listdrink")
+    @Produces({"application/xml", "application/json"})
+    public List<Service> listdrink() {
+        String query = "SELECT * FROM service where SerivceTypeId = 2";
+        return em.createNativeQuery(query, Service.class).getResultList();
+    }
+    @GET
+    @Path("listticket")
+    @Produces({"application/xml", "application/json"})
+    public List<Service> listticket() {
+        String query = "SELECT * FROM service where SerivceTypeId = 3";
+        return em.createNativeQuery(query, Service.class).getResultList();
+    }
     @Override
     protected EntityManager getEntityManager() {
         return em;

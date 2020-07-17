@@ -11,11 +11,11 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
 
 /**
- * Jersey REST client generated for REST resource:FoodanddrinkFacadeREST
- * [entities.foodanddrink]<br>
+ * Jersey REST client generated for REST resource:ImgHeroFacadeREST
+ * [entities.imghero]<br>
  * USAGE:
  * <pre>
- *        FoodanddrinkClient client = new FoodanddrinkClient();
+ *        ImgHeroClient client = new ImgHeroClient();
  *        Object response = client.XXX(...);
  *        // do whatever with response
  *        client.close();
@@ -23,14 +23,14 @@ import javax.ws.rs.client.WebTarget;
  *
  * @author Admin
  */
-public class FoodanddrinkClient {
+public class ImgHeroClient {
     private WebTarget webTarget;
     private Client client;
     private static final String BASE_URI = "http://localhost:8080/WS/webresources";
 
-    public FoodanddrinkClient() {
+    public ImgHeroClient() {
         client = javax.ws.rs.client.ClientBuilder.newClient();
-        webTarget = client.target(BASE_URI).path("entities.foodanddrink");
+        webTarget = client.target(BASE_URI).path("entities.imghero");
     }
 
     public String countREST() throws ClientErrorException {

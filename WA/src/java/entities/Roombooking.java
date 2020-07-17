@@ -10,7 +10,6 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -30,23 +29,24 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Roombooking.findByRoomTypeName", query = "SELECT r FROM Roombooking r WHERE r.roomTypeName = :roomTypeName"),
     @NamedQuery(name = "Roombooking.findByBedOptions", query = "SELECT r FROM Roombooking r WHERE r.bedOptions = :bedOptions"),
     @NamedQuery(name = "Roombooking.findByRoomSize", query = "SELECT r FROM Roombooking r WHERE r.roomSize = :roomSize"),
+    @NamedQuery(name = "Roombooking.findByView", query = "SELECT r FROM Roombooking r WHERE r.view = :view"),
     @NamedQuery(name = "Roombooking.findByUrl", query = "SELECT r FROM Roombooking r WHERE r.url = :url"),
     @NamedQuery(name = "Roombooking.findByRoomId", query = "SELECT r FROM Roombooking r WHERE r.roomId = :roomId"),
     @NamedQuery(name = "Roombooking.findByPrice", query = "SELECT r FROM Roombooking r WHERE r.price = :price")})
 public class Roombooking implements Serializable {
-    @Size(max = 45)
-    @Column(name = "View", length = 45)
-    private String view;
     private static final long serialVersionUID = 1L;
     @Size(max = 50)
     @Column(name = "RoomTypeName", length = 50)
     private String roomTypeName;
-    @Size(max = 50)
-    @Column(name = "BedOptions", length = 50)
+    @Size(max = 80)
+    @Column(name = "BedOptions", length = 80)
     private String bedOptions;
-    @Size(max = 50)
-    @Column(name = "RoomSize", length = 50)
+    @Size(max = 45)
+    @Column(name = "RoomSize", length = 45)
     private String roomSize;
+    @Size(max = 45)
+    @Column(name = "View", length = 45)
+    private String view;
     @Size(max = 500)
     @Column(name = "url", length = 500)
     private String url;
@@ -57,8 +57,6 @@ public class Roombooking implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "Price", precision = 12)
     private Float price;
-    @Id
-    private Long id;
 
     public Roombooking() {
     }
@@ -87,6 +85,14 @@ public class Roombooking implements Serializable {
         this.roomSize = roomSize;
     }
 
+    public String getView() {
+        return view;
+    }
+
+    public void setView(String view) {
+        this.view = view;
+    }
+
     public String getUrl() {
         return url;
     }
@@ -109,22 +115,6 @@ public class Roombooking implements Serializable {
 
     public void setPrice(Float price) {
         this.price = price;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getView() {
-        return view;
-    }
-
-    public void setView(String view) {
-        this.view = view;
     }
     
 }

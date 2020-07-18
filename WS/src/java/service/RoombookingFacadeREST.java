@@ -75,6 +75,31 @@ public class RoombookingFacadeREST extends AbstractFacade<Roombooking> {
         return super.findRange(new int[]{from, to});
     }
 
+    
+    @GET
+    @Path("bookRoom")
+    @Produces({"application/xml", "application/json"})
+    public List<Roombooking> bookRoom(@PathParam("InDate") String InDate,@PathParam("OutDate") String OutDate,@PathParam("Location") int Location,@PathParam("Capacity") int Capacity) {
+        
+        String query="select * from roombooking "
+                + "where RoomId in(select RoomId  from room "
+                + "where RoomId not in(select qrcode.RoomId from qrcode "
+                + "where (CheckInDate between ? and ?) "
+                + "or (CheckOutDate between ? and ?)"
+                + " or (? between CheckInDate and CheckOutDate))"
+                + " and  LocationId=?"
+                + " and capacity<=?)";
+        
+        return  em.createNativeQuery(query).setParameter(1, InDate)
+                .setParameter(2, OutDate)
+                .setParameter(3, InDate)
+                .setParameter(4, OutDate)
+                .setParameter(5, InDate)
+                .setParameter(6, Location)
+                .setParameter(7, Capacity).getResultList();
+        
+    }
+    
     @GET
     @Path("count")
     @Produces("text/plain")

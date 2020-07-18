@@ -75,6 +75,17 @@ public class ImgHeroFacadeREST extends AbstractFacade<ImgHero> {
         return super.findRange(new int[]{from, to});
     }
 
+     @GET
+    @Path("HeroImg")
+    @Produces({"application/xml", "application/json"})
+    public List<ImgHero> HeroImg() {
+        String query="SELECT * FROM img_hero where choose=true limit 5";
+        
+        return em.createNativeQuery(query,ImgHero.class).getResultList();
+    }
+    
+    
+    
     @GET
     @Path("count")
     @Produces("text/plain")

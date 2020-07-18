@@ -75,6 +75,41 @@ public class RoomtypeFacadeREST extends AbstractFacade<Roomtype> {
         return super.findRange(new int[]{from, to});
     }
 
+     @GET
+    @Path("topType")
+    @Produces({"application/xml", "application/json"})
+    public List<Roomtype> topType() {
+          String query="select roomtype.RoomTypeId, roomtype.RoomTypeName,roomtype.Description,roomtype.url from qrcode "
+                  + "join room on qrcode.RoomId=room.RoomId "
+                  + "join roomtype on room.RoomTypeId =roomtype.RoomTypeId  "
+                  + "group by roomtype.RoomTypeId  "
+                  + "order by count(roomtype.RoomTypeId ) desc "
+                  + "limit 6";
+        
+        List<Roomtype> list= em.createNativeQuery(query,Roomtype.class).getResultList();
+        
+        if(list.size()<6){
+            int limit=6-list.size();
+            String q="select roomtype.RoomTypeId, roomtype.RoomTypeName,roomtype.Description,roomtype.url from roomtype where roomtype.RoomTypeId not in "
+                    + "(select roomtype.RoomTypeId  from qrcode "
+                    + "join room on qrcode.RoomId=room.RoomId "
+                    + "join roomtype on room.RoomTypeId =roomtype.RoomTypeId  "
+                    + "group by roomtype.RoomTypeId  "
+                    + "order by count(roomtype.RoomTypeId ) desc) "
+                    + "limit ?;";
+            List<Roomtype> l=em.createNativeQuery(q,Roomtype.class).setParameter(1, limit).getResultList();
+//            for (int i = 0; i < l.size(); i++) {
+//                list.add(l.get(i));
+//                
+//            }
+            list.addAll(l);
+        }
+        
+        return list;
+        
+    }
+    
+    
     @GET
     @Path("count")
     @Produces("text/plain")

@@ -75,6 +75,18 @@ public class RoomimageFacadeREST extends AbstractFacade<Roomimage> {
         return super.findRange(new int[]{from, to});
     }
 
+    
+     @GET
+    @Path("getImg")
+    @Produces({"application/xml", "application/json"})
+    public List<Roomimage> getImg(@PathParam("idRoom") Integer idRoom) {
+        
+        String query="SELECT * FROM roomimage where RoomId=?";
+        return  em.createNativeQuery(query,Roomimage.class).setParameter(1, idRoom).getResultList();
+        
+        
+    }
+    
     @GET
     @Path("count")
     @Produces("text/plain")

@@ -41,14 +41,14 @@ public class Booking_Index extends HttpServlet {
         GenericType<List<ImgHero>> responseType = new GenericType< List<ImgHero>>() {
         };
 
-        List<ImgHero> list = ih.findAll_JSON(responseType);
+        List<ImgHero> list = ih.HeroImg_JSON(responseType);
         request.setAttribute("listImgHero", list);
 
 //            list location
         LocationClient location = new LocationClient();
         GenericType<List<Location>> gen = new GenericType<List<Location>>() {
         };
-        List<Location> listLoc = location.findAll_JSON(gen);
+        List<Location> listLoc = location.topLocation_JSON(gen);
         request.setAttribute("listLocation", listLoc);
 
 //Top type room

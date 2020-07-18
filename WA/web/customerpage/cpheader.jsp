@@ -59,34 +59,7 @@
                             </li>
                         </ul>
                         <%
-                        } else {
-                        %>
-                        <ul class="main_menu">
-                            <li>
-                                <a href="CustomerPageIndexServlet">Home</a>
-                            </li>
-                            <li>
-                                <a href="CustomerPageMenuServlet">Menu</a>
-                            </li>
-
-                            <li>
-                                <a href="CustomerPageServicesMenuServlet">Entertainment</a>
-                            </li>
-
-                            <li>
-                                <a href="CustomerPageInformationServlet">Your Information</a>
-                            </li>
-
-                            <li>
-                                <a href="CustomerPageCartServlet">Your bill</a>
-                            </li>
-
-                            <li>
-                                <a href="CustomerPageContactServlet">Feedback</a>
-                            </li>
-                        </ul>
-                        <%
-                            }
+                        } else {}
                         %>
                     </nav>
                 </div>
@@ -141,15 +114,15 @@
                         </thead>
                         <tbody>
                             <%
-                                float total = 0;
-                                float subtotal = 0;
-                                float tax = 0;
+                                float sessiontotal = 0;
+                                float sessionsubtotal = 0;
+                                float sessiontax = 0;
                                 if (session.getAttribute("cart") != null) {
                                     List<Item> cart = (List<Item>) session.getAttribute("cart");
                                     for (Item item : cart) {
-                                        subtotal += item.getService().getServicePrice() * item.getQuantity();
-                                        tax = subtotal * 10 / 100;
-                                        total = subtotal + tax;
+                                        sessionsubtotal += item.getService().getServicePrice() * item.getQuantity();
+                                        sessiontax = sessionsubtotal * 10 / 100;
+                                        sessiontotal = sessionsubtotal + sessiontax;
 
                             %>
                             <tr>
@@ -207,7 +180,7 @@
                                     <span class="text-black">Subtotal</span>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <strong class="text-black">$<%=subtotal%></strong>
+                                    <strong class="text-black">$<%=sessionsubtotal%></strong>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -215,7 +188,7 @@
                                     <span class="text-black">Tax</span>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <strong class="text-black">$<%=tax%></strong>
+                                    <strong class="text-black">$<%=sessiontax%></strong>
                                 </div>
                             </div>
                             <div class="row mb-5">
@@ -223,7 +196,7 @@
                                     <span class="text-black">Total</span>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <strong class="text-black">$<%=total%></strong>
+                                    <strong class="text-black">$<%=sessiontotal%></strong>
                                 </div>
                             </div>
 

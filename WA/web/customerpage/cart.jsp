@@ -151,8 +151,9 @@
 
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <button class="btn btn-warning btn-lg btn-block" style="color: white;"
-                                                onclick="window.location = 'checkout.html'">Proceed To Checkout</button>
+                                        <button class="btn btn-warning btn-lg btn-block" style="color: white;">
+                                            <a href="AuthorizePaymentServlet?id=<%=qrcode.getQrCodeId()%>">Proceed To Checkout</a>
+                                        </button>
                                     </div>
                                 </div>
                             </div>

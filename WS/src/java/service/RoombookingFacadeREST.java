@@ -6,10 +6,12 @@
 package service;
 
 import entities.Roombooking;
+import java.sql.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TemporalType;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -75,29 +77,43 @@ public class RoombookingFacadeREST extends AbstractFacade<Roombooking> {
     public List<Roombooking> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
-    
+
     @GET
     @Path("bookRoom/{InDate}/{OutDate}/{Location}/{Capacity}")
     @Produces({"application/xml", "application/json"})
-    public List<Roombooking> bookRoom(@PathParam("InDate") String InDate,@PathParam("OutDate") String OutDate,@PathParam("Location") int Location,@PathParam("Capacity") int Capacity) {
-        
-        String query="select * from roombooking "
+    public List<Roombooking> bookRoom(@PathParam("InDate") String InDate, @PathParam("OutDate") String OutDate,@PathParam("Location") Integer Location,@PathParam("Capacity") Integer Capacity) {
+
+        String query = "select * from roombooking \n" +
+"                where RoomId in(select RoomId  from room \n" +
+"                where RoomId not in(select qrcode.RoomId from qrcode \n" +
+"                where (CheckInDate  between ? and ?) \n" +
+"                or (CheckOutDate between ? and ?)\n" +
+"                 or (? between CheckInDate and CheckOutDate)\n" +
+"                 and  LocationId= ?\n" +
+"                 and capacity>= ? ))";
+
+        /*String query2 = "select * from roombooking "
                 + "where RoomId in(select RoomId  from room "
                 + "where RoomId not in(select qrcode.RoomId from qrcode "
-                + "where (CheckInDate between ? and ?) "
+                + "where (CheckInDate  between ? and ?) "
                 + "or (CheckOutDate between ? and ?)"
-                + " or (? between CheckInDate and CheckOutDate))"
-                + " and  LocationId=?"
-                + " and capacity<=?)";
-        
-        return  em.createNativeQuery(query).setParameter(1, InDate)
+                + "or (? between CheckInDate and CheckOutDate)))";*/
+        return em.createNativeQuery(query, Roombooking.class)
+                .setParameter(1, InDate)
                 .setParameter(2, OutDate)
                 .setParameter(3, InDate)
                 .setParameter(4, OutDate)
                 .setParameter(5, InDate)
                 .setParameter(6, Location)
-                .setParameter(7, Capacity).getResultList();
-        
+                .setParameter(7, Capacity).getResultList(); 
+        /*return em.createNativeQuery(query2,Roombooking.class)
+                .setParameter(1, InDate)
+                .setParameter(2, OutDate)
+                .setParameter(3, InDate)
+                .setParameter(4, OutDate)
+                .setParameter(5, InDate)
+                .getResultList();*/
+
     }
 
     @GET
@@ -111,5 +127,5 @@ public class RoombookingFacadeREST extends AbstractFacade<Roombooking> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
 }

@@ -14,6 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import wsc.*;
 import entities.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ws.rs.core.GenericType;
 
 /**
@@ -76,8 +80,8 @@ public class Booking_Index extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
-
-        processRequest(request, response);
+        
+            processRequest(request, response);
     }
 
     /**

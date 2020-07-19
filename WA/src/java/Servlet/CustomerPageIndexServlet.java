@@ -31,20 +31,28 @@ public class CustomerPageIndexServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String qrcodeid = request.getParameter("id");
+            HttpSession session = request.getSession();
             QrcodeClient qrcodeClient = new QrcodeClient();
-            GenericType<Qrcode> genericType = new GenericType<Qrcode>(){};
+            GenericType<Qrcode> genericType = new GenericType<Qrcode>() {
+            };
             Qrcode qrcode = new Qrcode();
-            qrcode = qrcodeClient.find_JSON(genericType, qrcodeid);
-            if (qrcode != null) {
-                HttpSession session = request.getSession();
-                session.setAttribute("qrcodeid", qrcodeid);
+            if (session.getAttribute("qrcodeid") == null) {
+                if (request.getParameter("id") == null) {
+                    out.print("Error");
+                } else {
+                    qrcode = qrcodeClient.find_JSON(genericType, request.getParameter("id"));
+                    if (qrcode != null) {
+                        session.setAttribute("qrcodeid", qrcode.getQrCodeId());
+                        request.getRequestDispatcher("/CustomerPageIndexServlet").forward(request, response);
+                    } else {
+                        out.print("Not found qrcode");
+                    }
+                }
+            } else {
                 request.getRequestDispatcher("/customerpage/index.jsp").forward(request, response);
-            }else{
-                out.print("false");
             }
+
             /* TODO output your page here. You may use following sample code. */
-            
         }
     }
 
@@ -60,7 +68,7 @@ public class CustomerPageIndexServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         processRequest(request, response);
     }
 

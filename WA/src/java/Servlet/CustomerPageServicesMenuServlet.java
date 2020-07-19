@@ -34,12 +34,32 @@ public class CustomerPageServicesMenuServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            ServiceClient serviceClient = new ServiceClient();
-            GenericType<List<Service>> genericType = new GenericType<List<Service>>() {};
-            List<Service> list = new ArrayList<Service>();
-            list = serviceClient.listticket_JSON(genericType);
-            request.setAttribute("list", list);
-            request.getRequestDispatcher("/customerpage/servicesmenu.jsp").forward(request, response);
+            HttpSession session = request.getSession();
+            QrcodeClient qrcodeClient = new QrcodeClient();
+            GenericType<Qrcode> genericType = new GenericType<Qrcode>() {
+            };
+            Qrcode qrcode = new Qrcode();
+            if (session.getAttribute("qrcodeid") == null) {
+                if (request.getParameter("id") == null) {
+                    out.print("Error");
+                } else {
+                    qrcode = qrcodeClient.find_JSON(genericType, request.getParameter("id"));
+                    if (qrcode != null) {
+                        session.setAttribute("qrcodeid", qrcode.getQrCodeId());
+                        request.getRequestDispatcher("/CustomerPageServicesMenuServlet").forward(request, response);
+                    } else {
+                        out.print("Not found qrcode");
+                    }
+                }
+            } else {
+                ServiceClient serviceClient = new ServiceClient();
+                GenericType<List<Service>> genericListService = new GenericType<List<Service>>() {
+                };
+                List<Service> list = new ArrayList<Service>();
+                list = serviceClient.listticket_JSON(genericListService);
+                request.setAttribute("list", list);
+                request.getRequestDispatcher("/customerpage/servicesmenu.jsp").forward(request, response);
+            }
         }
     }
 

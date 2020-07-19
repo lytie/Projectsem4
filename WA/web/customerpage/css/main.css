@@ -719,12 +719,12 @@ input[type="date" i] {
 .sidebar {
   position: fixed;
   z-index: 1200;
-  width: 390px;
+  width: 790px;
   height: 100%;
   overflow: auto;
   background-color: white;
   top: 0;
-  right: -390px;
+  right: -790px;
 }
 
 @media (max-width: 576px) {

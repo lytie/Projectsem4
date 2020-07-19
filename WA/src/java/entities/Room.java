@@ -15,7 +15,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -38,18 +37,11 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Room.findByPrice", query = "SELECT r FROM Room r WHERE r.price = :price"),
     @NamedQuery(name = "Room.findByStatus", query = "SELECT r FROM Room r WHERE r.status = :status"),
     @NamedQuery(name = "Room.findByDescription", query = "SELECT r FROM Room r WHERE r.description = :description"),
-    @NamedQuery(name = "Room.findByAdultOpacity", query = "SELECT r FROM Room r WHERE r.adultOpacity = :adultOpacity"),
-    @NamedQuery(name = "Room.findByChildrenOpacity", query = "SELECT r FROM Room r WHERE r.childrenOpacity = :childrenOpacity")})
+    @NamedQuery(name = "Room.findByBedOption", query = "SELECT r FROM Room r WHERE r.bedOption = :bedOption"),
+    @NamedQuery(name = "Room.findBySize", query = "SELECT r FROM Room r WHERE r.size = :size"),
+    @NamedQuery(name = "Room.findByView", query = "SELECT r FROM Room r WHERE r.view = :view"),
+    @NamedQuery(name = "Room.findByCapacity", query = "SELECT r FROM Room r WHERE r.capacity = :capacity")})
 public class Room implements Serializable {
-    @Size(max = 80)
-    @Column(name = "BedOption", length = 80)
-    private String bedOption;
-    @Size(max = 45)
-    @Column(name = "Size", length = 45)
-    private String size;
-    @Size(max = 45)
-    @Column(name = "View", length = 45)
-    private String view;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -64,12 +56,17 @@ public class Room implements Serializable {
     @Size(max = 255)
     @Column(name = "Description", length = 255)
     private String description;
-    @Column(name = "AdultOpacity")
-    private Integer adultOpacity;
-    @Column(name = "ChildrenOpacity")
-    private Integer childrenOpacity;
-    @ManyToMany(mappedBy = "roomList")
-    private List<Convenient> convenientList;
+    @Size(max = 80)
+    @Column(name = "BedOption", length = 80)
+    private String bedOption;
+    @Size(max = 45)
+    @Column(name = "Size", length = 45)
+    private String size;
+    @Size(max = 45)
+    @Column(name = "View", length = 45)
+    private String view;
+    @Column(name = "capacity")
+    private Integer capacity;
     @OneToMany(mappedBy = "roomId")
     private List<Qrcode> qrcodeList;
     @OneToMany(mappedBy = "roomId")
@@ -80,6 +77,8 @@ public class Room implements Serializable {
     @JoinColumn(name = "RoomTypeId", referencedColumnName = "RoomTypeId")
     @ManyToOne
     private Roomtype roomTypeId;
+    @OneToMany(mappedBy = "roomId")
+    private List<Roomconvenient> roomconvenientList;
 
     public Room() {
     }
@@ -120,29 +119,36 @@ public class Room implements Serializable {
         this.description = description;
     }
 
-    public Integer getAdultOpacity() {
-        return adultOpacity;
+    public String getBedOption() {
+        return bedOption;
     }
 
-    public void setAdultOpacity(Integer adultOpacity) {
-        this.adultOpacity = adultOpacity;
+    public void setBedOption(String bedOption) {
+        this.bedOption = bedOption;
     }
 
-    public Integer getChildrenOpacity() {
-        return childrenOpacity;
+    public String getSize() {
+        return size;
     }
 
-    public void setChildrenOpacity(Integer childrenOpacity) {
-        this.childrenOpacity = childrenOpacity;
+    public void setSize(String size) {
+        this.size = size;
     }
 
-    @XmlTransient
-    public List<Convenient> getConvenientList() {
-        return convenientList;
+    public String getView() {
+        return view;
     }
 
-    public void setConvenientList(List<Convenient> convenientList) {
-        this.convenientList = convenientList;
+    public void setView(String view) {
+        this.view = view;
+    }
+
+    public Integer getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
     }
 
     @XmlTransient
@@ -179,6 +185,15 @@ public class Room implements Serializable {
         this.roomTypeId = roomTypeId;
     }
 
+    @XmlTransient
+    public List<Roomconvenient> getRoomconvenientList() {
+        return roomconvenientList;
+    }
+
+    public void setRoomconvenientList(List<Roomconvenient> roomconvenientList) {
+        this.roomconvenientList = roomconvenientList;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -202,30 +217,6 @@ public class Room implements Serializable {
     @Override
     public String toString() {
         return "entities.Room[ roomId=" + roomId + " ]";
-    }
-
-    public String getBedOption() {
-        return bedOption;
-    }
-
-    public void setBedOption(String bedOption) {
-        this.bedOption = bedOption;
-    }
-
-    public String getSize() {
-        return size;
-    }
-
-    public void setSize(String size) {
-        this.size = size;
-    }
-
-    public String getView() {
-        return view;
-    }
-
-    public void setView(String view) {
-        this.view = view;
     }
     
 }

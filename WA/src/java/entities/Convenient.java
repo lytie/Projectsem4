@@ -14,11 +14,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -49,11 +47,8 @@ public class Convenient implements Serializable {
     @Size(max = 500)
     @Column(name = "url", length = 500)
     private String url;
-    @JoinTable(name = "roomconvenient", joinColumns = {
-        @JoinColumn(name = "ConvenientId", referencedColumnName = "ConvenientId")}, inverseJoinColumns = {
-        @JoinColumn(name = "RoomId", referencedColumnName = "RoomId")})
-    @ManyToMany
-    private List<Room> roomList;
+    @OneToMany(mappedBy = "convenientId")
+    private List<Roomconvenient> roomconvenientList;
 
     public Convenient() {
     }
@@ -87,12 +82,12 @@ public class Convenient implements Serializable {
     }
 
     @XmlTransient
-    public List<Room> getRoomList() {
-        return roomList;
+    public List<Roomconvenient> getRoomconvenientList() {
+        return roomconvenientList;
     }
 
-    public void setRoomList(List<Room> roomList) {
-        this.roomList = roomList;
+    public void setRoomconvenientList(List<Roomconvenient> roomconvenientList) {
+        this.roomconvenientList = roomconvenientList;
     }
 
     @Override

@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package service;
 
 import entities.Roomimage;
@@ -75,6 +69,18 @@ public class RoomimageFacadeREST extends AbstractFacade<Roomimage> {
         return super.findRange(new int[]{from, to});
     }
 
+    
+     @GET
+    @Path("getImg/{idRoom}")
+    @Produces({"application/xml", "application/json"})
+    public List<Roomimage> getImg(@PathParam("idRoom") Integer idRoom) {
+        
+        String query="SELECT * FROM roomimage where RoomId=?";
+        return  em.createNativeQuery(query,Roomimage.class).setParameter(1, idRoom).getResultList();
+        
+        
+    }
+    
     @GET
     @Path("count")
     @Produces("text/plain")
@@ -86,5 +92,4 @@ public class RoomimageFacadeREST extends AbstractFacade<Roomimage> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
 }

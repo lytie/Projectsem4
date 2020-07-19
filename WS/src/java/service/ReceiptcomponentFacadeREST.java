@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package service;
 
 import entities.Receiptcomponent;
@@ -68,6 +62,13 @@ public class ReceiptcomponentFacadeREST extends AbstractFacade<Receiptcomponent>
         return super.findAll();
     }
 
+    @GET
+    @Path("findbyReceiptID/{id}")
+    @Produces({"application/xml", "application/json"})
+    public List<Receiptcomponent> findbyReceiptID(@PathParam("id") Integer receiptId) {
+        String query = "Select * from receiptcomponent where ReceiptId = ?";
+        return em.createNativeQuery(query, Receiptcomponent.class).setParameter(1, receiptId).getResultList();
+    }
     @GET
     @Path("{from}/{to}")
     @Produces({"application/xml", "application/json"})

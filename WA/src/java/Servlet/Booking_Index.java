@@ -34,20 +34,21 @@ public class Booking_Index extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
 
 //      list  img_hero
-        Img_hero ih = new Img_hero();
+        ImgHeroClient ih = new ImgHeroClient();
         GenericType<List<ImgHero>> responseType = new GenericType< List<ImgHero>>() {
         };
 
-        List<ImgHero> list = ih.findAll_JSON(responseType);
+        List<ImgHero> list = ih.HeroImg_JSON(responseType);
         request.setAttribute("listImgHero", list);
 
 //            list location
         LocationClient location = new LocationClient();
         GenericType<List<Location>> gen = new GenericType<List<Location>>() {
         };
-        List<Location> listLoc = location.findAll_JSON(gen);
+        List<Location> listLoc = location.topLocation_JSON(gen);
         request.setAttribute("listLocation", listLoc);
 
 //Top type room
@@ -73,6 +74,9 @@ public class Booking_Index extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
+
         processRequest(request, response);
     }
 
@@ -87,6 +91,9 @@ public class Booking_Index extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
+
         processRequest(request, response);
     }
 

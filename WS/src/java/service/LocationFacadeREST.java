@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package service;
 
 import entities.Location;
@@ -74,6 +68,41 @@ public class LocationFacadeREST extends AbstractFacade<Location> {
     public List<Location> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
+    
+     @GET
+    @Path("topLocation")
+    @Produces({"application/xml", "application/json"})
+    public List<Location> topLocation() {
+        String query="select location.LocationId, location.LocationName,location.LocationUrl from qrcode "
+                + "join room on qrcode.RoomId=room.RoomId "
+                + "join location on room.LocationId=location.LocationId "
+                + "group by room.RoomId"
+                + " order by count(room.RoomId) desc "
+                + "limit 5";
+        
+        List<Location> list= em.createNativeQuery(query,Location.class).getResultList();
+        
+        if(list.size()<5){
+            int limit=5-list.size();
+            String q="select location.LocationId, location.LocationName,location.LocationUrl from location "
+                    + "where location.LocationId not in "
+                    + "(select location.LocationId from qrcode join room on qrcode.RoomId=room.RoomId "
+                    + "join location on room.LocationId=location.LocationId "
+                    + "group by location.LocationId "
+                    + "order by count(location.LocationId) desc) limit ?";
+            List<Location> l=em.createNativeQuery(q,Location.class).setParameter(1, limit).getResultList();
+//            for (int i = 0; i < l.size(); i++) {
+//                list.add(l.get(i));
+//                
+//            }
+            list.addAll(l);
+        }
+        
+        return list;
+        
+    }
+    
+    
 
     @GET
     @Path("count")

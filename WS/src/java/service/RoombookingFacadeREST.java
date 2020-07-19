@@ -88,7 +88,7 @@ public class RoombookingFacadeREST extends AbstractFacade<Roombooking> {
                 + "or (CheckOutDate between ? and ?)"
                 + " or (? between CheckInDate and CheckOutDate))"
                 + " and  LocationId=?"
-                + " and capacity<=?)";
+                + " and capacity>=?)";
         
         return  em.createNativeQuery(query).setParameter(1, InDate)
                 .setParameter(2, OutDate)

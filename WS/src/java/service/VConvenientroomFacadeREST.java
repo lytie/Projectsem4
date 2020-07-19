@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package service;
 
 import entities.VConvenientroom;
@@ -19,14 +18,16 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 /**
  *
- * @author Admin
+ * @author longly
  */
 @Stateless
 @Path("entities.vconvenientroom")
 public class VConvenientroomFacadeREST extends AbstractFacade<VConvenientroom> {
+
     @PersistenceContext(unitName = "WSPU")
     private EntityManager em;
 
@@ -36,45 +37,45 @@ public class VConvenientroomFacadeREST extends AbstractFacade<VConvenientroom> {
 
     @POST
     @Override
-    @Consumes({"application/xml", "application/json"})
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(VConvenientroom entity) {
         super.create(entity);
     }
 
     @PUT
     @Path("{id}")
-    @Consumes({"application/xml", "application/json"})
-    public void edit(@PathParam("id") String id, VConvenientroom entity) {
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public void edit(@PathParam("id") Integer id, VConvenientroom entity) {
         super.edit(entity);
     }
 
     @DELETE
     @Path("{id}")
-    public void remove(@PathParam("id") String id) {
+    public void remove(@PathParam("id") Integer id) {
         super.remove(super.find(id));
     }
 
     @GET
     @Path("{id}")
-    @Produces({"application/xml", "application/json"})
-    public VConvenientroom find(@PathParam("id") String id) {
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public VConvenientroom find(@PathParam("id") Integer id) {
         return super.find(id);
     }
 
     @GET
     @Override
-    @Produces({"application/xml", "application/json"})
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<VConvenientroom> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
-    @Produces({"application/xml", "application/json"})
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<VConvenientroom> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
-    
+
      @GET
     @Path("convenientImg/{idRoom}")
     @Produces({"application/xml", "application/json"})
@@ -83,10 +84,9 @@ public class VConvenientroomFacadeREST extends AbstractFacade<VConvenientroom> {
         return  em.createNativeQuery(query,VConvenientroom.class).setParameter(1, idRoom).getResultList();
     }
     
-
     @GET
     @Path("count")
-    @Produces("text/plain")
+    @Produces(MediaType.TEXT_PLAIN)
     public String countREST() {
         return String.valueOf(super.count());
     }

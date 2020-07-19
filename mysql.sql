@@ -1,8 +1,10 @@
--- MySQL dump 10.13  Distrib 8.0.19, for Win64 (x86_64)
+CREATE DATABASE  IF NOT EXISTS `prj4db` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `prj4db`;
+-- MySQL dump 10.13  Distrib 8.0.19, for macos10.15 (x86_64)
 --
 -- Host: localhost    Database: prj4db
 -- ------------------------------------------------------
--- Server version	8.0.19
+-- Server version	5.7.26
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -23,12 +25,12 @@ DROP TABLE IF EXISTS `accountcustomer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `accountcustomer` (
-  `AccountCustomerId` int NOT NULL AUTO_INCREMENT,
-  `Email` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Password` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `FullName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `Phone` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `token` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `AccountCustomerId` int(11) NOT NULL AUTO_INCREMENT,
+  `Email` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Password` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `FullName` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `Phone` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`AccountCustomerId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -51,13 +53,13 @@ DROP TABLE IF EXISTS `accountemployee`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `accountemployee` (
-  `accountId` int NOT NULL AUTO_INCREMENT,
-  `Email` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Password` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `FullName` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `Phone` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `accountId` int(11) NOT NULL AUTO_INCREMENT,
+  `Email` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Password` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `FullName` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `Phone` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `DateOfBirth` datetime DEFAULT NULL,
-  `RoleId` int DEFAULT NULL,
+  `RoleId` int(11) DEFAULT NULL,
   PRIMARY KEY (`accountId`),
   KEY `FK_accountemployee_role` (`RoleId`),
   CONSTRAINT `FK_accountemployee_role` FOREIGN KEY (`RoleId`) REFERENCES `role` (`RoleId`)
@@ -82,9 +84,9 @@ DROP TABLE IF EXISTS `convenient`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `convenient` (
-  `ConvenientId` int NOT NULL AUTO_INCREMENT,
-  `ConvenientName` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `url` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ConvenientId` int(11) NOT NULL AUTO_INCREMENT,
+  `ConvenientName` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `url` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`ConvenientId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -107,9 +109,9 @@ DROP TABLE IF EXISTS `feedback`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `feedback` (
-  `FeedBackId` int NOT NULL AUTO_INCREMENT,
-  `FeedBackMessage` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `QrCodeId` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `FeedBackId` int(11) NOT NULL AUTO_INCREMENT,
+  `FeedBackMessage` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `QrCodeId` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`FeedBackId`),
   KEY `FK_feedback_qrcode` (`QrCodeId`),
   CONSTRAINT `FK_feedback_qrcode` FOREIGN KEY (`QrCodeId`) REFERENCES `qrcode` (`QrCodeId`)
@@ -155,10 +157,10 @@ DROP TABLE IF EXISTS `img_hero`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `img_hero` (
-  `id_hero` int NOT NULL AUTO_INCREMENT,
-  `img` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `text_Title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `text_short` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `id_hero` int(11) NOT NULL AUTO_INCREMENT,
+  `img` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `text_Title` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `text_short` varchar(150) CHARACTER SET utf8 DEFAULT NULL,
   `choose` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id_hero`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
@@ -182,9 +184,9 @@ DROP TABLE IF EXISTS `location`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `location` (
-  `LocationId` int NOT NULL AUTO_INCREMENT,
-  `LocationName` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `LocationUrl` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `LocationId` int(11) NOT NULL AUTO_INCREMENT,
+  `LocationName` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `LocationUrl` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`LocationId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -207,19 +209,19 @@ DROP TABLE IF EXISTS `qrcode`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `qrcode` (
-  `QrCodeId` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `CustomerName` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `EmailSendedTo` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `QrCodeId` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `CustomerName` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `EmailSendedTo` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `CreateDate` datetime DEFAULT NULL,
   `CheckInDate` datetime DEFAULT NULL,
   `CheckOutDate` datetime DEFAULT NULL,
-  `RoomId` int DEFAULT NULL,
-  `AdultsNum` int DEFAULT NULL,
-  `ChildrenNum` int DEFAULT NULL,
+  `RoomId` int(11) DEFAULT NULL,
+  `AdultsNum` int(11) DEFAULT NULL,
+  `ChildrenNum` int(11) DEFAULT NULL,
   `Deposits` float DEFAULT NULL,
-  `ReceiptId` int DEFAULT NULL,
-  `Url` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `AccountCustomerId` int DEFAULT NULL,
+  `ReceiptId` int(11) DEFAULT NULL,
+  `Url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `AccountCustomerId` int(11) DEFAULT NULL,
   `Status` bit(1) DEFAULT NULL,
   PRIMARY KEY (`QrCodeId`),
   KEY `FK_qrcode_receipt` (`ReceiptId`),
@@ -247,7 +249,7 @@ DROP TABLE IF EXISTS `receipt`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `receipt` (
-  `ReceiptId` int NOT NULL AUTO_INCREMENT,
+  `ReceiptId` int(11) NOT NULL AUTO_INCREMENT,
   `PayDate` datetime DEFAULT NULL,
   `Subtotal` float DEFAULT NULL,
   `Tax` float DEFAULT NULL,
@@ -275,15 +277,15 @@ DROP TABLE IF EXISTS `receiptcomponent`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `receiptcomponent` (
-  `ReceiptComponentId` int NOT NULL AUTO_INCREMENT,
-  `ReceiptId` int DEFAULT NULL,
-  `ComponentName` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `ReceiptComponentId` int(11) NOT NULL AUTO_INCREMENT,
+  `ReceiptId` int(11) DEFAULT NULL,
+  `ComponentName` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   `Price` float DEFAULT NULL,
-  `Quantity` int DEFAULT NULL,
+  `Quantity` int(11) DEFAULT NULL,
   `Subtotal` float DEFAULT NULL,
-  `url` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `url` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   `OrderDate` datetime DEFAULT NULL,
-  `OrdererName` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `OrdererName` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`ReceiptComponentId`),
   KEY `FK_receiptcomponent_receipt` (`ReceiptId`),
   CONSTRAINT `FK_receiptcomponent_receipt` FOREIGN KEY (`ReceiptId`) REFERENCES `receipt` (`ReceiptId`)
@@ -308,8 +310,8 @@ DROP TABLE IF EXISTS `role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `role` (
-  `RoleId` int NOT NULL AUTO_INCREMENT,
-  `RoleName` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `RoleId` int(11) NOT NULL AUTO_INCREMENT,
+  `RoleName` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`RoleId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -332,16 +334,16 @@ DROP TABLE IF EXISTS `room`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `room` (
-  `RoomId` int NOT NULL AUTO_INCREMENT,
-  `LocationId` int DEFAULT NULL,
-  `RoomTypeId` int DEFAULT NULL,
+  `RoomId` int(11) NOT NULL AUTO_INCREMENT,
+  `LocationId` int(11) DEFAULT NULL,
+  `RoomTypeId` int(11) DEFAULT NULL,
   `Price` float DEFAULT NULL,
   `Status` bit(1) DEFAULT NULL,
-  `Description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `BedOption` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `Size` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `View` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `capacity` int DEFAULT NULL,
+  `Description` varchar(2550) CHARACTER SET utf8 DEFAULT NULL,
+  `BedOption` varchar(80) CHARACTER SET utf8 DEFAULT NULL,
+  `Size` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
+  `View` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `capacity` int(11) DEFAULT NULL,
   PRIMARY KEY (`RoomId`),
   KEY `FK_room_location` (`LocationId`),
   KEY `FK_room_roomtype` (`RoomTypeId`),
@@ -356,7 +358,7 @@ CREATE TABLE `room` (
 
 LOCK TABLES `room` WRITE;
 /*!40000 ALTER TABLE `room` DISABLE KEYS */;
-INSERT INTO `room` VALUES (1,3,1,40,_binary '\0',NULL,'1 Single','32','Ocean',4),(2,1,1,50,_binary '\0',NULL,'1 Single','32','Garden',4),(3,3,1,45,_binary '\0',NULL,'1 Single','32','Beachfront',4),(4,1,1,55,_binary '\0',NULL,'1 Single','32','Garden',4),(5,1,2,34,_binary '\0',NULL,'1 Single','32','City',4),(6,4,2,43,_binary '\0',NULL,'1 Single','32','Ocean',4),(7,4,2,43,_binary '\0',NULL,'1 twin','32','Ocean',5),(8,3,2,43,_binary '\0',NULL,'1 Single','35','Ocean',4),(9,3,2,35,_binary '\0',NULL,'1 twin','40','Ocean',5),(10,4,2,45,_binary '\0',NULL,' 1 Single King','42','Ocean',5),(11,1,2,45,_binary '\0',NULL,'1 Single','56','City',4),(12,5,2,46,_binary '\0',NULL,' 1 Single King','38','Garden',5),(13,5,2,43,_binary '\0',NULL,' 1 Single King','42','Garden',5),(14,5,3,41,_binary '\0',NULL,' 1 Single King','50','Garden',5),(15,5,4,40,_binary '\0',NULL,' 1 Single King','40','Mountains',5),(16,1,4,51,_binary '\0',NULL,'1 twin','41','Garden',5),(17,3,4,53,_binary '\0',NULL,'1 Single','43','Ocean',4),(18,4,5,54,_binary '\0',NULL,'1 Single','100','Ocean',4),(19,5,5,43,_binary '\0',NULL,' 1 Single King','70','Garden',5),(20,5,5,43,_binary '\0',NULL,'1 Single','65','Garden',4),(21,1,6,44,_binary '\0',NULL,'1 twin King','42','City',6),(22,2,6,49,_binary '\0',NULL,' 1 Single King & 1 Single & 1 twin','100','Garden',11),(23,2,6,48,_binary '\0',NULL,'1 Single & 1 twin','40','Garden',8),(24,2,6,48,_binary '\0',NULL,'1 Single','43','Garden',4),(25,2,6,48,_binary '\0',NULL,'1 twin','43','Garden',4);
+INSERT INTO `room` VALUES (1,3,1,40,_binary '\0','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.','1 Single','32','Ocean',4),(2,1,1,50,_binary '\0','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.','1 Single','32','Garden',4),(3,3,1,45,_binary '\0','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.','1 Single','32','Beachfront',4),(4,1,1,55,_binary '\0','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.','1 Single','32','Garden',4),(5,1,2,34,_binary '\0','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.','1 Single','32','City',4),(6,4,2,43,_binary '\0','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.','1 Single','32','Ocean',4),(7,4,2,43,_binary '\0','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.','1 twin','32','Ocean',5),(8,3,2,43,_binary '\0','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.','1 Single','35','Ocean',4),(9,3,2,35,_binary '\0','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.','1 twin','40','Ocean',5),(10,4,2,45,_binary '\0','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.',' 1 Single King','42','Ocean',5),(11,1,2,45,_binary '\0','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.','1 Single','56','City',4),(12,5,2,46,_binary '\0','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.',' 1 Single King','38','Garden',5),(13,5,2,43,_binary '\0','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.',' 1 Single King','42','Garden',5),(14,5,3,41,_binary '\0','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.',' 1 Single King','50','Garden',5),(15,5,4,40,_binary '\0','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.',' 1 Single King','40','Mountains',5),(16,1,4,51,_binary '\0','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.','1 twin','41','Garden',5),(17,3,4,53,_binary '\0','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.','1 Single','43','Ocean',4),(18,4,5,54,_binary '\0','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.','1 Single','100','Ocean',4),(19,5,5,43,_binary '\0','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.',' 1 Single King','70','Garden',5),(20,5,5,43,_binary '\0','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.','1 Single','65','Garden',4),(21,1,6,44,_binary '\0','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.','1 twin King','42','City',6),(22,2,6,49,_binary '\0','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.',' 1 Single King & 1 Single & 1 twin','100','Garden',11),(23,2,6,48,_binary '\0','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.','1 Single & 1 twin','40','Garden',8),(24,2,6,48,_binary '\0','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.','1 Single','43','Garden',4),(25,2,6,48,_binary '\0','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.','1 twin','43','Garden',4);
 /*!40000 ALTER TABLE `room` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -386,9 +388,9 @@ DROP TABLE IF EXISTS `roomconvenient`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `roomconvenient` (
-  `RoomId` int DEFAULT NULL,
-  `ConvenientId` int DEFAULT NULL,
-  `id` int NOT NULL AUTO_INCREMENT,
+  `RoomId` int(11) DEFAULT NULL,
+  `ConvenientId` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`),
   KEY `FK_roomconvenient_convenient` (`ConvenientId`),
   KEY `FK_roomconvenient_room` (`RoomId`),
@@ -415,9 +417,9 @@ DROP TABLE IF EXISTS `roomimage`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `roomimage` (
-  `RoomImageId` int NOT NULL AUTO_INCREMENT,
-  `RoomId` int DEFAULT NULL,
-  `Url` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `RoomImageId` int(11) NOT NULL AUTO_INCREMENT,
+  `RoomId` int(11) DEFAULT NULL,
+  `Url` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`RoomImageId`),
   KEY `FK_roomimage_room` (`RoomId`),
   CONSTRAINT `FK_roomimage_room` FOREIGN KEY (`RoomId`) REFERENCES `room` (`RoomId`)
@@ -442,10 +444,10 @@ DROP TABLE IF EXISTS `roomtype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `roomtype` (
-  `RoomTypeId` int NOT NULL AUTO_INCREMENT,
-  `RoomTypeName` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `Description` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `url` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `RoomTypeId` int(11) NOT NULL AUTO_INCREMENT,
+  `RoomTypeName` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `Description` varchar(500) CHARACTER SET utf8 DEFAULT NULL,
+  `url` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`RoomTypeId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -468,12 +470,12 @@ DROP TABLE IF EXISTS `service`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `service` (
-  `ServiceId` int NOT NULL AUTO_INCREMENT,
-  `SerivceTypeId` int DEFAULT NULL,
-  `ServiceName` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `ServiceId` int(11) NOT NULL AUTO_INCREMENT,
+  `SerivceTypeId` int(11) DEFAULT NULL,
+  `ServiceName` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
   `ServicePrice` float DEFAULT NULL,
-  `ServiceDescription` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `Serviceurl` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ServiceDescription` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `Serviceurl` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`ServiceId`),
   KEY `FK_foodanddrink_fndtype` (`SerivceTypeId`),
   CONSTRAINT `fk_service_servicetype` FOREIGN KEY (`SerivceTypeId`) REFERENCES `servicetype` (`ServiceTypeId`)
@@ -498,8 +500,8 @@ DROP TABLE IF EXISTS `servicetype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `servicetype` (
-  `ServiceTypeId` int NOT NULL AUTO_INCREMENT,
-  `TypeName` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `ServiceTypeId` int(11) NOT NULL AUTO_INCREMENT,
+  `TypeName` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`ServiceTypeId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -525,8 +527,13 @@ SET @saved_cs_client     = @@character_set_client;
 /*!50001 CREATE VIEW `v_convenientroom` AS SELECT 
  1 AS `RoomId`,
  1 AS `ConvenientName`,
- 1 AS `url`*/;
+ 1 AS `url`,
+ 1 AS `id`*/;
 SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping events for database 'prj4db'
+--
 
 --
 -- Final view structure for view `history`
@@ -574,10 +581,10 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
 /*!50001 SET character_set_client      = utf8mb4 */;
 /*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `v_convenientroom` AS select `a`.`RoomId` AS `RoomId`,`c`.`ConvenientName` AS `ConvenientName`,`c`.`url` AS `url` from ((`roomconvenient` `a` join `room` `b` on((`a`.`RoomId` = `b`.`RoomId`))) join `convenient` `c` on((`a`.`ConvenientId` = `c`.`ConvenientId`))) */;
+/*!50001 VIEW `v_convenientroom` AS select `a`.`RoomId` AS `RoomId`,`c`.`ConvenientName` AS `ConvenientName`,`c`.`url` AS `url`,`a`.`id` AS `id` from ((`roomconvenient` `a` join `room` `b` on((`a`.`RoomId` = `b`.`RoomId`))) join `convenient` `c` on((`a`.`ConvenientId` = `c`.`ConvenientId`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -591,4 +598,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-17 23:10:17
+-- Dump completed on 2020-07-19 16:29:54

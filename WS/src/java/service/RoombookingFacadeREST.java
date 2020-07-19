@@ -81,14 +81,14 @@ public class RoombookingFacadeREST extends AbstractFacade<Roombooking> {
     @Produces({"application/xml", "application/json"})
     public List<Roombooking> bookRoom(@PathParam("InDate") String InDate,@PathParam("OutDate") String OutDate,@PathParam("Location") int Location,@PathParam("Capacity") int Capacity) {
         
-        String query="select * from roombooking "
-                + "where RoomId in(select RoomId  from room "
-                + "where RoomId not in(select qrcode.RoomId from qrcode "
-                + "where (CheckInDate between ? and ?) "
-                + "or (CheckOutDate between ? and ?)"
-                + " or (? between CheckInDate and CheckOutDate))"
-                + " and  LocationId=?"
-                + " and capacity<=?)";
+        String query="select roombooking.RoomTypeName,roombooking.BedOptions,"
+                + "roombooking.RoomSize,roombooking.View,roombooking.url,"
+                + "roombooking.RoomId,roombooking.Price from roombooking "
+                + "where RoomId in (select RoomId  from room where RoomId " +
+" not in(select qrcode.RoomId from qrcode where " +
+" (CheckInDate between ? and ?) " +
+" or (CheckOutDate between ? and ?) " +
+" or (? between CheckInDate and CheckOutDate)) and  LocationId=? and capacity>=?) ";
         
         return  em.createNativeQuery(query).setParameter(1, InDate)
                 .setParameter(2, OutDate)

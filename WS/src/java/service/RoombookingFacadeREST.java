@@ -77,9 +77,9 @@ public class RoombookingFacadeREST extends AbstractFacade<Roombooking> {
 
     
     @GET
-    @Path("bookRoom")
+    @Path("bookRoom/{InDate}/{OutDate}/{Location}/{Capacity}")
     @Produces({"application/xml", "application/json"})
-    public List<Roombooking> bookRoom(@PathParam("InDate") String InDate,@PathParam("OutDate") String OutDate,@PathParam("Location") int Location,@PathParam("Capacity") int Capacity) {
+    public List<Roombooking> bookRoom(@PathParam("InDate") String InDate,@PathParam("OutDate") String OutDate,@PathParam("Location")  Integer Location,@PathParam("Capacity")  Integer Capacity) {
         
         String query="select * from roombooking "
                 + "where RoomId in(select RoomId  from room "

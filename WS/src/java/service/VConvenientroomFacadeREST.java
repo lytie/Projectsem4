@@ -76,7 +76,7 @@ public class VConvenientroomFacadeREST extends AbstractFacade<VConvenientroom> {
     }
     
      @GET
-    @Path("convenientImg")
+    @Path("convenientImg/{idRoom}")
     @Produces({"application/xml", "application/json"})
     public List<VConvenientroom> convenientImg(@PathParam("idRoom") int idRoom) {
           String query="SELECT * FROM v_convenientroom where RoomId=?";

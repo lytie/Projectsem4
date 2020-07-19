@@ -77,7 +77,7 @@ public class RoomimageFacadeREST extends AbstractFacade<Roomimage> {
 
     
      @GET
-    @Path("getImg")
+    @Path("getImg/{idRoom}")
     @Produces({"application/xml", "application/json"})
     public List<Roomimage> getImg(@PathParam("idRoom") Integer idRoom) {
         

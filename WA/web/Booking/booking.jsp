@@ -201,7 +201,7 @@
         <div class="view">
             <section class="grids">
 
-                <!--                get room-->
+                <!-- get room-->
                 <c:forEach items="${booking_bookMB.listRoomBook()}" var="rb">
 
                     <section class="make-customer-area customar-padding fix">

@@ -79,15 +79,15 @@ public class VConvenientroomClient {
         webTarget.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
     }
 
-    public <T> T convenientImg_XML(javax.ws.rs.core.GenericType<T> responseType) throws ClientErrorException {
+    public <T> T convenientImg_XML(javax.ws.rs.core.GenericType<T> responseType, int idRoom) throws ClientErrorException {
         WebTarget resource = webTarget;
-        resource = resource.path("convenientImg");
+        resource = resource.path(java.text.MessageFormat.format("convenientImg/{0}", new Object[]{idRoom}));
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
     }
 
-    public <T> T convenientImg_JSON(javax.ws.rs.core.GenericType<T> responseType) throws ClientErrorException {
+    public <T> T convenientImg_JSON(javax.ws.rs.core.GenericType<T> responseType, int idRoom) throws ClientErrorException {
         WebTarget resource = webTarget;
-        resource = resource.path("convenientImg");
+        resource = resource.path(java.text.MessageFormat.format("convenientImg/{0}", new Object[]{idRoom}));
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 

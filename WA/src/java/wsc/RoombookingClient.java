@@ -93,15 +93,15 @@ public class RoombookingClient {
         webTarget.path(java.text.MessageFormat.format("{0}", new Object[]{id})).request().delete();
     }
 
-    public <T> T bookRoom_XML(javax.ws.rs.core.GenericType<T> responseType) throws ClientErrorException {
+    public <T> T bookRoom_XML(javax.ws.rs.core.GenericType<T> responseType, String InDate, String OutDate, int Location, int Capacity) throws ClientErrorException {
         WebTarget resource = webTarget;
-        resource = resource.path("bookRoom");
+        resource = resource.path(java.text.MessageFormat.format("bookRoom/{0}/{1}/{2}/{3}", new Object[]{InDate, OutDate, Location, Capacity}));
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
     }
 
-    public <T> T bookRoom_JSON(javax.ws.rs.core.GenericType<T> responseType) throws ClientErrorException {
+    public <T> T bookRoom_JSON(javax.ws.rs.core.GenericType<T> responseType, String InDate, String OutDate, int Location, int Capacity) throws ClientErrorException {
         WebTarget resource = webTarget;
-        resource = resource.path("bookRoom");
+        resource = resource.path(java.text.MessageFormat.format("bookRoom/{0}/{1}/{2}/{3}", new Object[]{InDate, OutDate, Location, Capacity}));
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 

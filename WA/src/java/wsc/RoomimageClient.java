@@ -47,15 +47,15 @@ public class RoomimageClient {
         webTarget.path(java.text.MessageFormat.format("{0}", new Object[]{id})).request(javax.ws.rs.core.MediaType.APPLICATION_JSON).put(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
     }
 
-    public <T> T getImg_XML(javax.ws.rs.core.GenericType<T> responseType) throws ClientErrorException {
+    public <T> T getImg_XML(javax.ws.rs.core.GenericType<T> responseType, int idRoom) throws ClientErrorException {
         WebTarget resource = webTarget;
-        resource = resource.path("getImg");
+        resource = resource.path(java.text.MessageFormat.format("getImg/{0}", new Object[]{idRoom}));
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
     }
 
-    public <T> T getImg_JSON(javax.ws.rs.core.GenericType<T> responseType) throws ClientErrorException {
+    public <T> T getImg_JSON(javax.ws.rs.core.GenericType<T> responseType, int idRoom) throws ClientErrorException {
         WebTarget resource = webTarget;
-        resource = resource.path("getImg");
+        resource = resource.path(java.text.MessageFormat.format("getImg/{0}", new Object[]{idRoom}));
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 

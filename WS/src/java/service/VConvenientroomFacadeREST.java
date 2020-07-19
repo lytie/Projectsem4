@@ -75,6 +75,14 @@ public class VConvenientroomFacadeREST extends AbstractFacade<VConvenientroom> {
     public List<VConvenientroom> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
+    
+      @GET
+    @Path("convenientImg/{idRoom}")
+    @Produces({"application/xml", "application/json"})
+    public List<VConvenientroom> convenientImg(@PathParam("idRoom") int idRoom) {
+          String query="SELECT * FROM v_convenientroom where RoomId=?";
+        return  em.createNativeQuery(query,VConvenientroom.class).setParameter(1, idRoom).getResultList();
+    }
 
     @GET
     @Path("count")

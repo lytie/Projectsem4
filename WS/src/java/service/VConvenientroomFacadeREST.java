@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package service;
 
 import entities.VConvenientroom;
@@ -71,14 +76,6 @@ public class VConvenientroomFacadeREST extends AbstractFacade<VConvenientroom> {
         return super.findRange(new int[]{from, to});
     }
 
-     @GET
-    @Path("convenientImg/{idRoom}")
-    @Produces({"application/xml", "application/json"})
-    public List<VConvenientroom> convenientImg(@PathParam("idRoom") int idRoom) {
-          String query="SELECT * FROM v_convenientroom where RoomId=?";
-        return  em.createNativeQuery(query,VConvenientroom.class).setParameter(1, idRoom).getResultList();
-    }
-    
     @GET
     @Path("count")
     @Produces(MediaType.TEXT_PLAIN)

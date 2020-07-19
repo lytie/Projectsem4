@@ -31,6 +31,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class VConvenientroom implements Serializable {
     private static final long serialVersionUID = 1L;
     @Column(name = "RoomId")
+    @Id
     private Integer roomId;
     @Size(max = 50)
     @Column(name = "ConvenientName", length = 50)
@@ -38,8 +39,8 @@ public class VConvenientroom implements Serializable {
     @Size(max = 500)
     @Column(name = "url", length = 500)
     private String url;
-    @Id
-    private Long id;
+    
+    
 
     public VConvenientroom() {
     }
@@ -68,12 +69,6 @@ public class VConvenientroom implements Serializable {
         this.url = url;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+  
     
 }

@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -65,8 +66,10 @@ public class History implements Serializable {
     @Column(name = "Total", precision = 12)
     private Float total;
     @Column(name = "ReceiptId")
+    @Id
     private Integer receiptId;
     @Column(name = "AccountCustomerId")
+    
     private Integer accountCustomerId;
 
     public History() {

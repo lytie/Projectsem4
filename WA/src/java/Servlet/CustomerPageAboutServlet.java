@@ -30,8 +30,26 @@ public class CustomerPageAboutServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            request.getRequestDispatcher("/customerpage/about.jsp").forward(request, response);
+            HttpSession session = request.getSession();
+            QrcodeClient qrcodeClient = new QrcodeClient();
+            GenericType<Qrcode> genericType = new GenericType<Qrcode>() {
+            };
+            Qrcode qrcode = new Qrcode();
+            if (session.getAttribute("qrcodeid") == null) {
+                if (request.getParameter("id") == null) {
+                    out.print("Error");
+                } else {
+                    qrcode = qrcodeClient.find_JSON(genericType, request.getParameter("id"));
+                    if (qrcode != null) {
+                        session.setAttribute("qrcodeid", qrcode.getQrCodeId());
+                        request.getRequestDispatcher("/CustomerPageAboutServlet").forward(request, response);
+                    } else {
+                        out.print("Not found qrcode");
+                    }
+                }
+            } else {
+                request.getRequestDispatcher("/customerpage/about.jsp").forward(request, response);
+            }     
         }
     }
 

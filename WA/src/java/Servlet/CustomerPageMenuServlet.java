@@ -36,15 +36,35 @@ public class CustomerPageMenuServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
 
         try (PrintWriter out = response.getWriter()) {
-            ServiceClient serviceClient = new ServiceClient();
-            GenericType<List<Service>> genericType = new GenericType<List<Service>>() {};
-            List<Service> listfood = new ArrayList<Service>();
-            List<Service> listdrink = new ArrayList<Service>();
-            listfood = serviceClient.listfood_JSON(genericType);
-            listdrink = serviceClient.listdrink_JSON(genericType);
-            request.setAttribute("listfood", listfood);
-            request.setAttribute("listdrink", listdrink);
-            request.getRequestDispatcher("/customerpage/menu.jsp").forward(request, response);
+            HttpSession session = request.getSession();
+            QrcodeClient qrcodeClient = new QrcodeClient();
+            GenericType<Qrcode> genericType = new GenericType<Qrcode>() {
+            };
+            Qrcode qrcode = new Qrcode();
+            if (session.getAttribute("qrcodeid") == null ) {
+                if (request.getParameter("id") == null) {
+                    out.print("Error");
+                } else {
+                    qrcode = qrcodeClient.find_JSON(genericType, request.getParameter("id"));
+                    if (qrcode != null) {
+                        session.setAttribute("qrcodeid", qrcode.getQrCodeId());
+                        request.getRequestDispatcher("/CustomerPageMenuServlet").forward(request, response);
+                    } else {
+                        out.print("Not found qrcode");
+                    }
+                }
+            } else {
+                ServiceClient serviceClient = new ServiceClient();
+                GenericType<List<Service>> genericListService = new GenericType<List<Service>>() {
+                };
+                List<Service> listfood = new ArrayList<Service>();
+                List<Service> listdrink = new ArrayList<Service>();
+                listfood = serviceClient.listfood_JSON(genericListService);
+                listdrink = serviceClient.listdrink_JSON(genericListService);
+                request.setAttribute("listfood", listfood);
+                request.setAttribute("listdrink", listdrink);
+                request.getRequestDispatcher("/customerpage/menu.jsp").forward(request, response);
+            }
         }
     }
 
@@ -60,18 +80,7 @@ public class CustomerPageMenuServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            String qrcodeid = request.getParameter("id");
-            QrcodeClient qrcodeClient = new QrcodeClient();
-            GenericType<Qrcode> genericType = new GenericType<Qrcode>(){};
-            Qrcode qrcode = new Qrcode();
-            qrcode = qrcodeClient.find_JSON(genericType, qrcodeid);
-            if (qrcode != null) {
-                HttpSession session = request.getSession();
-                session.setAttribute("qrcodeid", qrcodeid);
-                //request.getRequestDispatcher("/customerpage/index.jsp").forward(request, response);
-            }else{
-                //out.print("false");
-            }
+
         processRequest(request, response);
     }
 
@@ -86,7 +95,7 @@ public class CustomerPageMenuServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         processRequest(request, response);
     }
 

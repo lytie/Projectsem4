@@ -83,21 +83,16 @@ public class RoombookingFacadeREST extends AbstractFacade<Roombooking> {
     @Produces({"application/xml", "application/json"})
     public List<Roombooking> bookRoom(@PathParam("InDate") String InDate, @PathParam("OutDate") String OutDate,@PathParam("Location") Integer Location,@PathParam("Capacity") Integer Capacity) {
 
-        String query = "select * from roombooking \n" +
-"                where RoomId in(select RoomId  from room \n" +
-"                where RoomId not in(select qrcode.RoomId from qrcode \n" +
-"                where (CheckInDate  between ? and ?) \n" +
-"                or (CheckOutDate between ? and ?)\n" +
-"                 or (? between CheckInDate and CheckOutDate)\n" +
-"                 and  LocationId= ?\n" +
+        String query = "select * from roombooking " +
+"                where RoomId in(select RoomId  from room " +
+"                where RoomId not in(select qrcode.RoomId from qrcode " +
+"                where (CheckInDate  between ? and ?) " +
+"                or (CheckOutDate between ? and ?)" +
+"                 or (? between CheckInDate and CheckOutDate)" +
+"                 and  LocationId= ?" +
 "                 and capacity>= ? ))";
 
-        /*String query2 = "select * from roombooking "
-                + "where RoomId in(select RoomId  from room "
-                + "where RoomId not in(select qrcode.RoomId from qrcode "
-                + "where (CheckInDate  between ? and ?) "
-                + "or (CheckOutDate between ? and ?)"
-                + "or (? between CheckInDate and CheckOutDate)))";*/
+       
         return em.createNativeQuery(query, Roombooking.class)
                 .setParameter(1, InDate)
                 .setParameter(2, OutDate)
@@ -106,13 +101,7 @@ public class RoombookingFacadeREST extends AbstractFacade<Roombooking> {
                 .setParameter(5, InDate)
                 .setParameter(6, Location)
                 .setParameter(7, Capacity).getResultList(); 
-        /*return em.createNativeQuery(query2,Roombooking.class)
-                .setParameter(1, InDate)
-                .setParameter(2, OutDate)
-                .setParameter(3, InDate)
-                .setParameter(4, OutDate)
-                .setParameter(5, InDate)
-                .getResultList();*/
+        
 
     }
 

@@ -222,7 +222,7 @@
                                             <div style="display: grid;grid-template-columns: auto auto auto;">
                                                 <p>VIEW: <sqan>${rb.view}</sqan></p>
                                                 <p>BED OPTIONS: <sqan>${rb.bedOptions}</sqan></p>
-                                                <p>ROOM SIZE: <span>${rb.roomSize} m<sup>2</sup></span></p>
+                                                <p>ROOM SIZE: <sqan>${rb.roomSize} m<sup>2</sup> </sqan></p>
 
                                             </div>
                                         </div>
@@ -285,9 +285,9 @@
 
                                                             </li>
                                                             <!--                                                        list data-sile-to-->
-                                                            <c:forEach items="${booking_bookMB.listDot(rb.roomId)}" var="dot">
+                                                            
                                                             <li data-target="#demo" data-slide-to="${dot.intValue()}"></li>
-                                                            </c:forEach>
+                                                           
                                                         </ul>
                                                         <div class="carousel-inner">
                                                             <!--                                                        list carousel-->

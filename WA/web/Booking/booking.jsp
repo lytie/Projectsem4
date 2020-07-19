@@ -248,7 +248,7 @@
                                                 <span class="extra">${rb.view}</span>
                                                 <span class="extra">${rb.bedOptions}</span>
                                                 <span class="extra">${rb.roomSize} m<sup>2</sup></span>
-                                               
+
                                             </div>
 
                                         </div>
@@ -279,29 +279,37 @@
                                         <div class="container-fluid p-0">
                                             <div class="row">
                                                 <div class="col-xl-5 col-lg-6">
-                                                    <div id="demo" class="carousel slide" data-ride="carousel">
+                                                    <div id="D${rb.roomId}" class="carousel slide" data-ride="carousel">
                                                         <ul class="carousel-indicators">
-                                                            <li data-target="#demo" data-slide-to="0" class="active">
+                                                            <li data-target="#D${rb.roomId}" data-slide-to="0" class="active">
 
                                                             </li>
                                                             <!--                                                        list data-sile-to-->
-                                                            
-                                                            <li data-target="#demo" data-slide-to="${dot.intValue()}"></li>
-                                                           
+                                                            <c:forEach items="${booking_bookMB.listDot(rb.roomId)}" var="dot">
+                                                                <li data-target="D${rb.roomId}" data-slide-to="${dot.intValue()}"></li>
+                                                                </c:forEach>
                                                         </ul>
                                                         <div class="carousel-inner">
                                                             <!--                                                        list carousel-->
-                                                            <c:forEach items="${booking_bookMB.listRoomImg(rb.roomId)}" var="img">
-                                                            <div class="carousel-item active">
-                                                                <img src="<%=common.urlImg%>/images/${img.url}" alt="img" >
+                                                            <c:forEach items="${booking_bookMB.listRoomImg(rb.roomId)}" var="img" >
+                                                                <c:if  test="${booking_bookMB.listRoomImg(rb.roomId).indexOf(img)==0}">
+                                                                <div class="carousel-item active"> 
+                                                                    <img src="<%=common.urlImg%>/images/${img.url}" alt="img" >
 
-                                                            </div>
+                                                                </div>
+                                                                </c:if>
+                                                                <c:if  test="${booking_bookMB.listRoomImg(rb.roomId).indexOf(img)!=0}">
+                                                                <div class="carousel-item"> 
+                                                                    <img src="<%=common.urlImg%>/images/${img.url}" alt="img" >
+
+                                                                </div>
+                                                                </c:if>
                                                             </c:forEach>
                                                         </div>
-                                                        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                                                        <a class="carousel-control-prev" href="#D${rb.roomId}" data-slide="prev">
                                                             <span class="carousel-control-prev-icon"></span>
                                                         </a>
-                                                        <a class="carousel-control-next" href="#demo" data-slide="next">
+                                                        <a class="carousel-control-next" href="#D${rb.roomId}" data-slide="next">
                                                             <span class="carousel-control-next-icon"></span>
                                                         </a>
                                                     </div>
@@ -311,10 +319,10 @@
                                                     <div style="display: grid; grid-template-columns: auto auto auto auto;">
                                                         <!--                                                    list icon-->
                                                         <c:forEach items="${booking_bookMB.listConvenient(rb.roomId)}" var="convenient">
-                                                        <div>
-                                                            <img src="<%=common.urlImg%>/icon/${convenient.url}" alt="${convenient.convenientName}" width="25%">
-                                                            <p>${convenient.convenientName}</p>
-                                                        </div>
+                                                            <div>
+                                                                <img src="<%=common.urlImg%>/icon/${convenient.url}" alt="${convenient.convenientName}" width="25%">
+                                                                <p>${convenient.convenientName}</p>
+                                                            </div>
                                                         </c:forEach>
 
 
@@ -324,7 +332,7 @@
                                             </div>
                                         </div>
                                     </section>
-                                    
+
                                     <p>
                                         Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
                                 </div>

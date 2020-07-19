@@ -91,10 +91,6 @@ public class LocationFacadeREST extends AbstractFacade<Location> {
                     + "group by location.LocationId "
                     + "order by count(location.LocationId) desc) limit ?";
             List<Location> l=em.createNativeQuery(q,Location.class).setParameter(1, limit).getResultList();
-//            for (int i = 0; i < l.size(); i++) {
-//                list.add(l.get(i));
-//                
-//            }
             list.addAll(l);
         }
         

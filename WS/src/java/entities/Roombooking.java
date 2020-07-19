@@ -54,12 +54,12 @@ public class Roombooking implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "RoomId", nullable = false)
+    @Id
     private int roomId;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    // @Max(value=?)  @Min(value=?)//if you kintnow range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "Price", precision = 12)
     private Float price;
-    @Id
-    private Long id;
+   
 
     public Roombooking() {
     }
@@ -120,12 +120,6 @@ public class Roombooking implements Serializable {
         this.price = price;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+   
     
 }

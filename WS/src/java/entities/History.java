@@ -67,10 +67,11 @@ public class History implements Serializable {
     private Float total;
     @Column(name = "ReceiptId")
     private Integer receiptId;
+    @Id
     @Column(name = "AccountCustomerId")
     private Integer accountCustomerId;
-    @Id
-    private Long id;
+    
+   
 
     public History() {
     }
@@ -163,12 +164,6 @@ public class History implements Serializable {
         this.accountCustomerId = accountCustomerId;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+   
     
 }

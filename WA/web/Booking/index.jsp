@@ -1,6 +1,7 @@
 
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@page  import="bean.common"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -45,7 +46,7 @@
         <%@include file="Preloader.html" %>
 
         <!-- Header Start -->
-        <%@include file="header.html" %>
+        <%@include file="header.jsp" %>
 
         <!-- body content-->
         <main>
@@ -54,7 +55,7 @@
             <div class="slider-area ">
                 <!-- Mobile Menu -->
                 <div class="slider-active dot-style">
-                    <c:forEach items="${booking_IndexMB.listImgHero()}" var="lh">
+                    <c:forEach items="${booking_bookMB.listImgHero()}" var="lh">
                         <div class="single-slider  hero-overly slider-height d-flex align-items-center"
                              data-background="<%=common.urlImg%>/img/${lh.img}">
                             <div class="container">
@@ -80,7 +81,8 @@
                 <div class="container">
                     <div class="row ">
                         <div class="col-12">
-                            <form action="">
+                            
+                            <form action="../Booking_bookServlet">
                                 <div class="booking-wrap d-flex justify-content-between align-items-center" id="range">
 
                                     <!-- select in date -->
@@ -92,7 +94,7 @@
                                         <div class="boking-datepicker" >
 
                                             <i class="gj-icon" role="right-icon" >event</i>
-                                            <input id="datepicker1"  name="start" />
+                                            <input id="datepicker1"  name="start"/>
                                         </div>
                                     </div>
                                     <!-- Single Select Box -->
@@ -115,8 +117,8 @@
                                         <div class="select-this">
 
                                             <div class="select-itms">
-                                                <select name="selectLocation" id="select3">
-                                                    <c:forEach items="${booking_IndexMB.listLocation()}" var="ll">
+                                                <select name="selectLocation" id="select3" >
+                                                    <c:forEach items="${booking_bookMB.listLocation()}" var="ll">
                                                         <option value="${ll.locationId}">${ll.locationName}</option>
                                                     </c:forEach>
                                                 </select>
@@ -188,7 +190,7 @@
                             <div class="locations_container d-flex flex-row align-items-start justify-content-between flex-wrap">
 
                                 <!--                                 Location  -->
-                                <c:forEach items="${booking_IndexMB.toplistLocation()}" var="topl">
+                                <c:forEach items="${booking_bookMB.toplistLocation()}" var="topl">
 
                                     <div class="location">
                                         <img src="<%=common.urlImg%>/img/${topl.locationUrl}" alt="" width="100%" height="140">
@@ -254,7 +256,7 @@
                     <div class="row">
 
                         <!--                            top type room-->
-                        <c:forEach items="${booking_IndexMB.toplistRoomtype()}" var="toplr">
+                        <c:forEach items="${booking_bookMB.toplistRoomtype()}" var="toplr">
                             <div class="col-xl-4 col-lg-6 col-md-6">
                                
                                 <div class="single-room mb-50">
@@ -376,7 +378,8 @@
             const elem3 = document.getElementById('range');
             const datepicker3 = new DateRangePicker(elem3, {
                 minDate: new Date(),
-                buttonClass: 'btn'
+                buttonClass: 'btn',
+                format: 'yyyy-mm-dd'
             });</script>
         <script src="dist/js/datepicker.min.js">
         </script>

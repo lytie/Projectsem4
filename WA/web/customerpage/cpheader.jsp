@@ -30,37 +30,30 @@
                 <!-- Menu -->
                 <div class="wrap_menu p-l-45 p-l-0-xl">
                     <nav class="menu">
-                        <%
-                            if (session.getAttribute("qrcodeid") != null) {
-                                String qrid = (String) session.getAttribute("qrcodeid");
-                        %>
                         <ul class="main_menu">
                             <li>
-                                <a href="CustomerPageIndexServlet?id=<%= qrid%>">Home</a>
+                                <a href="CustomerPageIndexServlet">Home</a>
                             </li>
                             <li>
-                                <a href="CustomerPageMenuServlet?id=<%= qrid%>">Menu</a>
-                            </li>
-
-                            <li>
-                                <a href="CustomerPageServicesMenuServlet?id=<%= qrid%>">Entertainment</a>
+                                <a href="CustomerPageMenuServlet">Menu</a>
                             </li>
 
                             <li>
-                                <a href="CustomerPageInformationServlet?id=<%= qrid%>">Your Information</a>
+                                <a href="CustomerPageServicesMenuServlet">Entertainment</a>
                             </li>
 
                             <li>
-                                <a href="CustomerPageCartServlet?id=<%= qrid%>">Your bill</a>
+                                <a href="CustomerPageInformationServlet">Your Information</a>
                             </li>
 
                             <li>
-                                <a href="CustomerPageContactServlet?id=<%= qrid%>">Feedback</a>
+                                <a href="CustomerPageCartServlet">Your bill</a>
+                            </li>
+
+                            <li>
+                                <a href="CustomerPageContactServlet">Feedback</a>
                             </li>
                         </ul>
-                        <%
-                        } else {}
-                        %>
                     </nav>
                 </div>
 

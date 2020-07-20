@@ -7,6 +7,8 @@ package Servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,48 +34,67 @@ public class Booking_bookServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
+        String inDate = request.getParameter("start");
+        String outDate = request.getParameter("end");
+        int location = Integer.parseInt(request.getParameter("selectLocation"));
+        int adult = Integer.parseInt(request.getParameter("selectAdult"));
+        int children = Integer.parseInt(request.getParameter("selectChildren"));
+        if (inDate == null ||inDate.isEmpty() || outDate == null ||outDate.isEmpty()) {
+            request.setAttribute("check", "false");
+        }else{
+            request.setAttribute("check", "true");
+        }
         HttpSession session = request.getSession();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");  
+        Date date = new Date();  
 
         if (session.getAttribute("inDate") == null) {
-            session.setAttribute("inDate", request.getParameter("start"));
+            session.setAttribute("inDate", formatter.format(date));
+            request.setAttribute("inDate", formatter.format(date));
+        } else {
+            session.setAttribute("inDate", inDate);
+            request.setAttribute("inDate", (String) session.getAttribute("inDate"));
         }
 
         if (session.getAttribute("outDate") == null) {
-            session.setAttribute("outDate", request.getParameter("end"));
+            session.setAttribute("outDate", formatter.format(date));
+            request.setAttribute("outDate", formatter.format(date));
+        } else {
+            session.setAttribute("outDate", outDate);
+            request.setAttribute("outDate", (String) session.getAttribute("outDate"));
         }
 
         if (session.getAttribute("location") == null) {
-            session.setAttribute("location", request.getParameter("selectLocation"));
+            session.setAttribute("location", 1);
+            request.setAttribute("location", 1);
+        } else {
+            session.setAttribute("location", location);
+            request.setAttribute("location", Integer.valueOf(String.valueOf(session.getAttribute("location"))));
         }
 
         if (session.getAttribute("adult") == null) {
-            session.setAttribute("adult", Integer.parseInt(request.getParameter("selectAdult")));
+            session.setAttribute("adult", 1);
+            request.setAttribute("adult", 1);
+        } else {
+            session.setAttribute("adult", adult);
+            request.setAttribute("adult", Integer.valueOf(String.valueOf(session.getAttribute("adult"))));
         }
 
         if (session.getAttribute("children") == null) {
-            session.setAttribute("children", Integer.parseInt(request.getParameter("selectChildren")));
+            session.setAttribute("children", 1);
+            request.setAttribute("children", 1);
+        } else {
+            session.setAttribute("children", children);
+            request.setAttribute("children", Integer.valueOf(String.valueOf(session.getAttribute("children"))));
         }
+
         if (session.getAttribute("capation") == null) {
-            session.setAttribute("capation", Integer.parseInt(request.getParameter("selectAdult")) + Integer.parseInt(request.getParameter("selectChildren")));
+            session.setAttribute("capation", adult + children);
+            request.setAttribute("capation", 3);
+        } else {
+            session.setAttribute("capation", adult + children);
+            request.setAttribute("capation", Integer.valueOf(String.valueOf(session.getAttribute("capation"))));
         }
-//     String inDate=   request.getParameter("start");
-//     String outDate= request.getParameter("end");
-//    int location=Integer.parseInt(request.getParameter("selectLocation"));
-//    int adult=Integer.parseInt(request.getParameter("selectAdult"));
-//    int children=Integer.parseInt(request.getParameter("selectChildren"));
-        String check = "false";
-
-//    request.setAttribute("inDate", inDate);
-//    request.setAttribute("outDate", outDate);
-//    request.setAttribute("location", location);
-//    request.setAttribute("adult", adult);
-//    request.setAttribute("children", children);
-//    request.setAttribute("capation", adult+children);
-        if (!request.getParameter("start").isEmpty() || !request.getParameter("end").isEmpty()) {
-            check = "true";
-        }
-        request.setAttribute("check", check);
-
         request.getRequestDispatcher("Booking/booking.jsp").forward(request, response);
 
     }

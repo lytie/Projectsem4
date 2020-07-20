@@ -6,6 +6,8 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="h" uri="http://java.sun.com/jsf/html" %>
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="bean.common" %>
 <!DOCTYPE html>
@@ -111,7 +113,27 @@
                                     <div class="boking-datepicker" >
 
                                         <i class="gj-icon" role="right-icon" >event</i>
-                                        <input id="datepicker1"  name="start" value="${sessionScope.inDate}"/>
+                                        <%/*
+                                            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");  
+                                            Date date = new Date();  
+                                            String inDate = formatter.format(date);
+                                            String outDate = formatter.format(date) ;
+                                            int selectLocation = 1;
+                                            int selectAdult = 0 ;
+                                            int selectChildren = 0 ;
+                                            if(session.getAttribute("inDate")!=null){
+                                                inDate = (String)session.getAttribute("inDate");
+                                            }if(session.getAttribute("outDate")!=null){
+                                                outDate = (String)session.getAttribute("outDate");
+                                            }if(session.getAttribute("location")!=null){
+                                                selectLocation = Integer.valueOf(String.valueOf(session.getAttribute("location")));
+                                            }if(session.getAttribute("adult")!=null){
+                                                selectChildren = Integer.valueOf(String.valueOf(session.getAttribute("adult")));
+                                            }if(session.getAttribute("children")!=null){
+                                                selectChildren = Integer.valueOf(String.valueOf(session.getAttribute("children")));
+                                            }*/
+                                        %>
+                                        <input id="datepicker1"  name="start" value="${inDate}"/>
                                     </div>
                                 </div>
                                 <!-- Single Select Box -->
@@ -122,7 +144,7 @@
                                     </div>
                                     <div class="boking-datepicker">
                                         <i class="gj-icon" role="right-icon">event</i>
-                                        <input id="datepicker2"  name="end" value="${sessionScope.outDate}" />
+                                        <input id="datepicker2"  name="end" value="${outDate}" />
                                     </div>
                                 </div>
 
@@ -132,16 +154,16 @@
                                         <span>Locations:</span>
                                     </div>
                                     <div class="select-this">
-                                        
-                                            <div class="select-itms">
 
-                                                <select name="selectLocation" id="select3">
-                                                    <c:forEach items="${booking_bookMB.listLocation()}" var="ll">
-                                                        <option value="${ll.locationId}" <c:if test="${ll.locationId ==sessionScope.location}">selected</c:if>>${ll.locationName}</option>
-                                                    </c:forEach>
-                                                </select>
-                                            </div>
-                                        
+                                        <div class="select-itms">
+
+                                            <select name="selectLocation" id="select3">
+                                                <c:forEach items="${booking_bookMB.listLocation()}" var="ll">
+                                                    <option value="${ll.locationId}" <c:if test="${ll.locationId ==location}">selected</c:if>>${ll.locationName}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+
                                     </div>
                                 </div>
                                 <!-- Single Select Box -->
@@ -150,67 +172,64 @@
                                         <span>Adults:</span>
                                     </div>
                                     <div class="select-this">
-                                        
-                                            <div class="select-itms">
-                                                <select name="selectAdult" id="select1">
-                                                    <option value="0" <c:if test="${sessionScope.adult==0}">selected</c:if>>0</option>
-                                                    <option value="2" <c:if test="${sessionScope.adult==2}">selected</c:if>>1</option>
-                                                    <option value="4" <c:if test="${sessionScope.adult==4}">selected</c:if>>2</option>
-                                                    <option value="6" <c:if test="${sessionScope.adult==6}">selected</c:if>>3</option>
-                                                    <option value="8" <c:if test="${sessionScope.adult==8}">selected</c:if>>4</option>
+
+                                        <div class="select-itms">
+                                            <select name="selectAdult" id="select1">
+                                                <option value="0" <c:if test="${adult==2}">selected</c:if>>0</option>
+                                                <option value="2" <c:if test="${adult==2}">selected</c:if>>1</option>
+                                                <option value="4" <c:if test="${adult==4}">selected</c:if>>2</option>
+                                                <option value="6" <c:if test="${adult==6}">selected</c:if>>3</option>
+                                                <option value="8" <c:if test="${adult==8}">selected</c:if>>4</option>
                                                 </select>
                                             </div>
-                                        
+
+                                        </div>
                                     </div>
-                                </div>
-                                <!-- Single Select Box -->
-                                <div class="single-select-box mb-30">
-                                    <div class="boking-tittle">
-                                        <span>Children:</span>
-                                    </div>
-                                    <div class="select-this">
-                                        
+                                    <!-- Single Select Box -->
+                                    <div class="single-select-box mb-30">
+                                        <div class="boking-tittle">
+                                            <span>Children:</span>
+                                        </div>
+                                        <div class="select-this">
+
                                             <div class="select-itms">
                                                 <select name="selectChildren" id="select2">
-                                                    <option value="0" <c:if test="${sessionScope.children==0}">selected</c:if>>0</option>
-                                                    <option value="1" <c:if test="${sessionScope.children==1}">selected</c:if>>1</option>
-                                                    <option value="2" <c:if test="${sessionScope.children==2}">selected</c:if>>2</option>
-                                                    <option value="3" <c:if test="${sessionScope.children==3}">selected</c:if>>3</option>
-                                                    <option value="4" <c:if test="${sessionScope.children==4}">selected</c:if>>4</option>
+                                                    <option value="0" <c:if test="${children==1}">selected</c:if>>0</option>
+                                                <option value="1" <c:if test="${children==1}">selected</c:if>>1</option>
+                                                <option value="2" <c:if test="${children==2}">selected</c:if>>2</option>
+                                                <option value="3" <c:if test="${children==3}">selected</c:if>>3</option>
+                                                <option value="4" <c:if test="${children==4}">selected</c:if>>4</option>
                                                 </select>
                                             </div>
-                                       
+
+                                        </div>
                                     </div>
+
+                                    <!-- Single Select Box -->
+                                    <div class="single-select-box pt-45 mb-30">
+
+                                        <input type="submit" class="btn select-btn" value="Book Now"/>
+                                    </div>
+
+
                                 </div>
-
-                                <!-- Single Select Box -->
-                                <div class="single-select-box pt-45 mb-30">
-
-                                    <input type="submit" class="btn select-btn" value="Book Now"/>
-                                </div>
-
-
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Booking Room End-->
-        <!-- Product grid -->
+            <!-- Booking Room End-->
+            <!-- Product grid -->
 
-        <!-- Room -->
-        <!-- Make Room Start-->
-        <div class="view">
-            <section class="grids">
-                <%
-                    
-                    
-                    if(request.getAttribute("check")=="true")
-                    {
-                %>
-                <!--                get room-->
-                <c:forEach items="${booking_bookMB.listRoomBook(sessionScope.inDate, sessionScope.outDate, sessionScope.location, sessionScope.capation)}" var="rb">
+            <!-- Room -->
+            <!-- Make Room Start-->
+            <div class="view">
+                <section class="grids">
+                    <!--                get room-->
+                    <%
+                        if(request.getAttribute("check")== "true"){
+                    %>
+                <c:forEach items="${booking_bookMB.listRoomBook(inDate, outDate, location, capation)}" var="rb">
 
                     <section class="make-customer-area customar-padding fix">
                         <div class="container-fluid p-0">
@@ -228,7 +247,7 @@
                                         <input type="hidden" name="nameRoom" value=""/>
                                         <div class="caption-details">
                                             <p class="pera-dtails">Price: ${rb.price}$ </p>
-                                            
+
                                             <div style="display: grid;grid-template-columns: auto auto auto;">
                                                 <p>VIEW: <sqan>${rb.view}</sqan></p>
                                                 <p>BED OPTIONS: <sqan>${rb.bedOptions}</sqan></p>
@@ -264,7 +283,7 @@
                                         </div>
 
                                         <div class="header-btn">
-                                            <a href="Booking_ConfirmInfo?id=${rb.roomId}" class="btn  ">Booking</a>
+                                            <a href="Booking_ConfirmInfo?name=${rb.roomTypeName} - ${booking_bookMB.location(rb.roomId).locationName} ${booking_bookMB.room(rb.roomId).roomId}&price=${rb.price}&id=${rb.roomId}" class="btn  ">Booking</a>
                                         </div>
 
                                     </div>
@@ -303,16 +322,16 @@
                                                             <!--                                                        list carousel-->
                                                             <c:forEach items="${booking_bookMB.listRoomImg(rb.roomId)}" var="img" >
                                                                 <c:if  test="${booking_bookMB.listRoomImg(rb.roomId).indexOf(img)==0}">
-                                                                <div class="carousel-item active"> 
-                                                                    <img src="<%=common.urlImg%>/images/${img.url}" alt="img" >
+                                                                    <div class="carousel-item active"> 
+                                                                        <img src="<%=common.urlImg%>/images/${img.url}" alt="img" >
 
-                                                                </div>
+                                                                    </div>
                                                                 </c:if>
                                                                 <c:if  test="${booking_bookMB.listRoomImg(rb.roomId).indexOf(img)!=0}">
-                                                                <div class="carousel-item"> 
-                                                                    <img src="<%=common.urlImg%>/images/${img.url}" alt="img" >
+                                                                    <div class="carousel-item"> 
+                                                                        <img src="<%=common.urlImg%>/images/${img.url}" alt="img" >
 
-                                                                </div>
+                                                                    </div>
                                                                 </c:if>
                                                             </c:forEach>
                                                         </div>
@@ -355,15 +374,16 @@
                             </div>
                         </div>
                     </div>
-                                                    
-                                                    
+
+
                 </c:forEach>
-                <%}else{
+<%
+}else{
 %>
 <div>Not found</div>
 <%
 }
-                    %>
+%>
             </section>
         </div>
         <!-- product compare wrapper -->
@@ -371,10 +391,14 @@
             <button class="action action--close"><i class="fa fa-remove"></i><span class="action__text action__text--invisible">Close comparison overlay</span></button>
         </section>
         <!-- Make customer End-->
-                                                   
-    
-                                                   
-                                                    
+
+
+        ${booking_bookMB.inDate=inDate}   
+        ${booking_bookMB.outDate=outDate}
+        ${booking_bookMB.adult=adult}
+        ${booking_bookMB.children=children}
+        ${booking_bookMB.location=location}
+
 
         <!-- Footer Start-->
         <%@include file="footer.html" %>
@@ -437,26 +461,20 @@
         <script src="<%=common.url%>/dist/js/datepicker-full.js">
         </script>
         <script>
-
-
-
-            const elem1 = document.querySelector('input[name="start"]');
-            const datepicker1 = new Datepicker(elem1, {
-                buttonClass: 'btn'
-            });
-            const elem2 = document.getElementById('inline');
-            const datepicker2 = new Datepicker(elem2, {
-                buttonClass: 'btn'
-            });
-            const elem3 = document.getElementById('range');
-            const datepicker3 = new DateRangePicker(elem3, {
-                minDate: new Date(),
-                buttonClass: 'btn',
-                format: 'yyyy-mm-dd'
-            });
-
-
-        </script>
+                    const elem1 = document.querySelector('input[name="start"]');
+                    const datepicker1 = new Datepicker(elem1, {
+                    buttonClass: 'btn'
+                    });
+                    const elem2 = document.getElementById('inline');
+                    const datepicker2 = new Datepicker(elem2, {
+                    buttonClass: 'btn'
+                    });
+                    const elem3 = document.getElementById('range');
+                    const datepicker3 = new DateRangePicker(elem3, {
+                    minDate: new Date(),
+                            buttonClass: 'btn',
+                            format: 'yyyy-mm-dd'
+                    });</script>
         <script src="<%=common.url%>/dist/js/datepicker.min.js">
         </script>
         <script src="<%=common.url%>/dist/js/locales/fr.min.js">

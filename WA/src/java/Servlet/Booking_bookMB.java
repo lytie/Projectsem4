@@ -133,7 +133,7 @@ public class Booking_bookMB implements Serializable {
     }
     
     //list Room avtive
-    public List<Roombooking> listRoomBook(String inDate,String outDate,int location,int capation){
+    public List<Roombooking> listRoomBook(String inDate,String outDate,String location,String capation){
         RoombookingClient rbc=new RoombookingClient();
         GenericType<List<Roombooking>> gRbc=new GenericType<List<Roombooking>>(){};
         return rbc.bookRoom_JSON(gRbc, inDate, outDate, location, capation);

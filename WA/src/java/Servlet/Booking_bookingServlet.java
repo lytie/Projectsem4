@@ -11,13 +11,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author longly
  */
-public class Booking_bookServlet extends HttpServlet {
+public class Booking_bookingServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,51 +30,11 @@ public class Booking_bookServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        HttpSession session = request.getSession();
-
-        if (session.getAttribute("inDate") == null) {
-            session.setAttribute("inDate", request.getParameter("start"));
-        }
-
-        if (session.getAttribute("outDate") == null) {
-            session.setAttribute("outDate", request.getParameter("end"));
-        }
-
-        if (session.getAttribute("location") == null) {
-            session.setAttribute("location", request.getParameter("selectLocation"));
-        }
-
-        if (session.getAttribute("adult") == null) {
-            session.setAttribute("adult", Integer.parseInt(request.getParameter("selectAdult")));
-        }
-
-        if (session.getAttribute("children") == null) {
-            session.setAttribute("children", Integer.parseInt(request.getParameter("selectChildren")));
-        }
-        if (session.getAttribute("capation") == null) {
-            session.setAttribute("capation", Integer.parseInt(request.getParameter("selectAdult")) + Integer.parseInt(request.getParameter("selectChildren")));
-        }
-//     String inDate=   request.getParameter("start");
-//     String outDate= request.getParameter("end");
-//    int location=Integer.parseInt(request.getParameter("selectLocation"));
-//    int adult=Integer.parseInt(request.getParameter("selectAdult"));
-//    int children=Integer.parseInt(request.getParameter("selectChildren"));
-        String check = "false";
-
-//    request.setAttribute("inDate", inDate);
-//    request.setAttribute("outDate", outDate);
-//    request.setAttribute("location", location);
-//    request.setAttribute("adult", adult);
-//    request.setAttribute("children", children);
-//    request.setAttribute("capation", adult+children);
-        if (!request.getParameter("start").isEmpty() || !request.getParameter("end").isEmpty()) {
-            check = "true";
-        }
+        String check="false";
         request.setAttribute("check", check);
-
-        request.getRequestDispatcher("Booking/booking.jsp").forward(request, response);
-
+    
+    
+    request.getRequestDispatcher("Booking/booking.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

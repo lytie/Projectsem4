@@ -31,11 +31,9 @@ public class Booking_ConfirmInfo extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-       String name= request.getParameter("name");
-       String price=request.getParameter("price");
+       
        int id=Integer.valueOf(request.getParameter("id"));
-       request.setAttribute("name", name);
-       request.setAttribute("price", price);
+      
        request.setAttribute("id", id);
        
        request.getRequestDispatcher("Booking/confirm_infomation.jsp").forward(request, response);

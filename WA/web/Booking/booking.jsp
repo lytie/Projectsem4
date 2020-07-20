@@ -111,7 +111,7 @@
                                     <div class="boking-datepicker" >
 
                                         <i class="gj-icon" role="right-icon" >event</i>
-                                        <input id="datepicker1"  name="start" value="${inDate}"/>
+                                        <input id="datepicker1"  name="start" value="${sessionScope.inDate}"/>
                                     </div>
                                 </div>
                                 <!-- Single Select Box -->
@@ -122,7 +122,7 @@
                                     </div>
                                     <div class="boking-datepicker">
                                         <i class="gj-icon" role="right-icon">event</i>
-                                        <input id="datepicker2"  name="end" value="${outDate}" />
+                                        <input id="datepicker2"  name="end" value="${sessionScope.outDate}" />
                                     </div>
                                 </div>
 
@@ -137,7 +137,7 @@
 
                                                 <select name="selectLocation" id="select3">
                                                     <c:forEach items="${booking_bookMB.listLocation()}" var="ll">
-                                                        <option value="${ll.locationId}" <c:if test="${ll.locationId ==location}">selected</c:if>>${ll.locationName}</option>
+                                                        <option value="${ll.locationId}" <c:if test="${ll.locationId ==sessionScope.location}">selected</c:if>>${ll.locationName}</option>
                                                     </c:forEach>
                                                 </select>
                                             </div>
@@ -153,11 +153,11 @@
                                         
                                             <div class="select-itms">
                                                 <select name="selectAdult" id="select1">
-                                                    <option value="0" <c:if test="${adult==2}">selected</c:if>>0</option>
-                                                    <option value="2" <c:if test="${adult==2}">selected</c:if>>1</option>
-                                                    <option value="4" <c:if test="${adult==4}">selected</c:if>>2</option>
-                                                    <option value="6" <c:if test="${adult==6}">selected</c:if>>3</option>
-                                                    <option value="8" <c:if test="${adult==8}">selected</c:if>>4</option>
+                                                    <option value="0" <c:if test="${sessionScope.adult==0}">selected</c:if>>0</option>
+                                                    <option value="2" <c:if test="${sessionScope.adult==2}">selected</c:if>>1</option>
+                                                    <option value="4" <c:if test="${sessionScope.adult==4}">selected</c:if>>2</option>
+                                                    <option value="6" <c:if test="${sessionScope.adult==6}">selected</c:if>>3</option>
+                                                    <option value="8" <c:if test="${sessionScope.adult==8}">selected</c:if>>4</option>
                                                 </select>
                                             </div>
                                         
@@ -172,11 +172,11 @@
                                         
                                             <div class="select-itms">
                                                 <select name="selectChildren" id="select2">
-                                                    <option value="0" <c:if test="${children==1}">selected</c:if>>0</option>
-                                                    <option value="1" <c:if test="${children==1}">selected</c:if>>1</option>
-                                                    <option value="2" <c:if test="${children==2}">selected</c:if>>2</option>
-                                                    <option value="3" <c:if test="${children==3}">selected</c:if>>3</option>
-                                                    <option value="4" <c:if test="${children==4}">selected</c:if>>4</option>
+                                                    <option value="0" <c:if test="${sessionScope.children==0}">selected</c:if>>0</option>
+                                                    <option value="1" <c:if test="${sessionScope.children==1}">selected</c:if>>1</option>
+                                                    <option value="2" <c:if test="${sessionScope.children==2}">selected</c:if>>2</option>
+                                                    <option value="3" <c:if test="${sessionScope.children==3}">selected</c:if>>3</option>
+                                                    <option value="4" <c:if test="${sessionScope.children==4}">selected</c:if>>4</option>
                                                 </select>
                                             </div>
                                        
@@ -203,9 +203,14 @@
         <!-- Make Room Start-->
         <div class="view">
             <section class="grids">
-
+                <%
+                    
+                    
+                    if(request.getAttribute("check")=="true")
+                    {
+                %>
                 <!--                get room-->
-                <c:forEach items="${booking_bookMB.listRoomBook(inDate, outDate, location, capation)}" var="rb">
+                <c:forEach items="${booking_bookMB.listRoomBook(sessionScope.inDate, sessionScope.outDate, sessionScope.location, sessionScope.capation)}" var="rb">
 
                     <section class="make-customer-area customar-padding fix">
                         <div class="container-fluid p-0">
@@ -259,7 +264,7 @@
                                         </div>
 
                                         <div class="header-btn">
-                                            <a href="Booking_ConfirmInfo?name=${rb.roomTypeName} - ${booking_bookMB.location(rb.roomId).locationName} ${booking_bookMB.room(rb.roomId).roomId}&price=${rb.price}&id=${rb.roomId}" class="btn  ">Booking</a>
+                                            <a href="Booking_ConfirmInfo?id=${rb.roomId}" class="btn  ">Booking</a>
                                         </div>
 
                                     </div>
@@ -353,7 +358,12 @@
                                                     
                                                     
                 </c:forEach>
-
+                <%}else{
+%>
+<div>Not found</div>
+<%
+}
+                    %>
             </section>
         </div>
         <!-- product compare wrapper -->
@@ -363,11 +373,7 @@
         <!-- Make customer End-->
                                                    
     
-                                                    ${booking_bookMB.inDate=inDate}   
-                                                    ${booking_bookMB.outDate=outDate}
-                                                    ${booking_bookMB.adult=adult}
-                                                    ${booking_bookMB.children=children}
-                                                    ${booking_bookMB.location=location}
+                                                   
                                                     
 
         <!-- Footer Start-->

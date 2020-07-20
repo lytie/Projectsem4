@@ -82,9 +82,9 @@
                   
 
 <div class="mb-65">
-    <a class="ml-35" href="#"></a>
+    <a class="ml-35" href=""></a>
     <div class="hero-caption">
-                                <span><a href="#" style="color: Black">Back to Booking</a></span>
+                                <span><a href="http://localhost:8080/WA/Booking_bookServlet" style="color: Black">Back to Booking</a></span>
                                 
                             </div>
 </div>
@@ -106,33 +106,33 @@
                                                 </li>
                                                 <li>
                                                    <a href="" class="d-flex">
-                                                      <p>CheckIn Date: ${booking_bookMB.inDate} </p>
-                                                      <p>CheckOut Date: ${booking_bookMB.outDate}</p>
+                                                      <p>CheckIn Date: ${inDate} </p>
+                                                      <p>CheckOut Date: ${outDate}</p>
                                                    </a>
                                                 </li>
                                                 <li>
                                                    <a href="" class="d-flex">
-                                                       <p>${booking_bookMB.adult} Adults  ${booking_bookMB.children}  Children</p>
+                                                       <p>${adult} Adults  ${children}  Children</p>
                                                        
                                                        <p>  </p>
                                                    </a>
                                                 </li>
                                                 <li>
                                                    <a href="" class="d-flex">
-                                                      <p>${name}</p>
+                                                       <p>${booking_bookMB.room(id).roomTypeId.roomTypeName} - ${booking_bookMB.room(id).locationId.locationName} ${id}</p>
                                                       <p></p>
                                                    </a>
                                                 </li>
                                                 <li>
                                                    <a href="" class="">
                                                       <p>Price: </p>
-                                                      <p>${price}$</p>
+                                                      <p>${booking_bookMB.room(id).price}$</p>
                                                    </a>
                                                 </li>
                                                 <li>
                                                    <a href="" class="">
                                                       <p>Deposit (10%)</p>
-                                                    <h3>${price/10}$</h3>
+                                                    <h3>${(booking_bookMB.room(id).price)/10}$</h3>
                                                       <p></p>
                                                    </a>
                                                 </li>

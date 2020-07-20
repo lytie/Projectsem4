@@ -30,7 +30,7 @@
                                 <nav>
                                     <ul id="navigation">
                                         <li><a href="http://localhost:8080/WA/Booking/index.jsp">Home</a></li>
-                                        <li><a href="http://localhost:8080/WA/Booking/booking.jsp">Booking</a></li>
+                                        <li><a href="http://localhost:8080/WA/Booking_bookingServlet">Booking</a></li>
                                         <li><a href="http://localhost:8080/WA/Booking/history.jsp">History</a></li>
 <!--                                        <li><a href="blog.html">History</a>
                                             

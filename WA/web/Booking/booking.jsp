@@ -5,6 +5,7 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="h" uri="http://java.sun.com/jsf/html" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="bean.common" %>
 <!DOCTYPE html>
@@ -152,6 +153,7 @@
                                         
                                             <div class="select-itms">
                                                 <select name="selectAdult" id="select1">
+                                                    <option value="0" <c:if test="${adult==2}">selected</c:if>>0</option>
                                                     <option value="2" <c:if test="${adult==2}">selected</c:if>>1</option>
                                                     <option value="4" <c:if test="${adult==4}">selected</c:if>>2</option>
                                                     <option value="6" <c:if test="${adult==6}">selected</c:if>>3</option>
@@ -170,6 +172,7 @@
                                         
                                             <div class="select-itms">
                                                 <select name="selectChildren" id="select2">
+                                                    <option value="0" <c:if test="${children==1}">selected</c:if>>0</option>
                                                     <option value="1" <c:if test="${children==1}">selected</c:if>>1</option>
                                                     <option value="2" <c:if test="${children==2}">selected</c:if>>2</option>
                                                     <option value="3" <c:if test="${children==3}">selected</c:if>>3</option>
@@ -216,9 +219,11 @@
                                 <div class=" col-xl-7 col-lg-6">
                                     <div class="customer-caption">
 
-                                        <h2>${rb.roomTypeName} - ${booking_bookMB.room(rb.roomId).roomId}</h2>
+                                        <h2 name="name">${rb.roomTypeName} - ${booking_bookMB.location(rb.roomId).locationName} ${booking_bookMB.room(rb.roomId).roomId}</h2>
+                                        <input type="hidden" name="nameRoom" value=""/>
                                         <div class="caption-details">
                                             <p class="pera-dtails">Price: ${rb.price}$ </p>
+                                            
                                             <div style="display: grid;grid-template-columns: auto auto auto;">
                                                 <p>VIEW: <sqan>${rb.view}</sqan></p>
                                                 <p>BED OPTIONS: <sqan>${rb.bedOptions}</sqan></p>
@@ -254,7 +259,7 @@
                                         </div>
 
                                         <div class="header-btn">
-                                            <a href="#" class="btn  ">Booking</a>
+                                            <a href="Booking_ConfirmInfo?name=${rb.roomTypeName} - ${booking_bookMB.location(rb.roomId).locationName} ${booking_bookMB.room(rb.roomId).roomId}&price=${rb.price}&id=${rb.roomId}" class="btn  ">Booking</a>
                                         </div>
 
                                     </div>
@@ -345,7 +350,8 @@
                             </div>
                         </div>
                     </div>
-
+                                                    
+                                                    
                 </c:forEach>
 
             </section>
@@ -355,9 +361,14 @@
             <button class="action action--close"><i class="fa fa-remove"></i><span class="action__text action__text--invisible">Close comparison overlay</span></button>
         </section>
         <!-- Make customer End-->
-
-
-
+                                                   
+    
+                                                    ${booking_bookMB.inDate=inDate}   
+                                                    ${booking_bookMB.outDate=outDate}
+                                                    ${booking_bookMB.adult=adult}
+                                                    ${booking_bookMB.children=children}
+                                                    ${booking_bookMB.location=location}
+                                                    
 
         <!-- Footer Start-->
         <%@include file="footer.html" %>
@@ -425,11 +436,11 @@
 
             const elem1 = document.querySelector('input[name="start"]');
             const datepicker1 = new Datepicker(elem1, {
-                buttonClass: 'btn',
+                buttonClass: 'btn'
             });
             const elem2 = document.getElementById('inline');
             const datepicker2 = new Datepicker(elem2, {
-                buttonClass: 'btn',
+                buttonClass: 'btn'
             });
             const elem3 = document.getElementById('range');
             const datepicker3 = new DateRangePicker(elem3, {

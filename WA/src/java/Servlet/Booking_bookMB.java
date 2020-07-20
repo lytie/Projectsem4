@@ -22,7 +22,97 @@ import wsc.*;
 public class Booking_bookMB implements Serializable {
 
     
-   
+  private int location;
+  private String inDate;
+  private String outDate;
+  private int adult;
+  private int children;
+  private float price;
+  private float deposit;
+  private String fullName;
+  private String email;
+  private String phone;
+
+    public int getLocation() {
+        return location;
+    }
+
+    public void setLocation(int location) {
+        this.location = location;
+    }
+
+    public String getInDate() {
+        return inDate;
+    }
+
+    public void setInDate(String inDate) {
+        this.inDate = inDate;
+    }
+
+    public String getOutDate() {
+        return outDate;
+    }
+
+    public void setOutDate(String outDate) {
+        this.outDate = outDate;
+    }
+
+    public int getAdult() {
+        return adult;
+    }
+
+    public void setAdult(int adult) {
+        this.adult = adult;
+    }
+
+    public int getChildren() {
+        return children;
+    }
+
+    public void setChildren(int children) {
+        this.children = children;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public float getDeposit() {
+        return deposit;
+    }
+
+    public void setDeposit(float deposit) {
+        this.deposit = deposit;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+  
     
     
     
@@ -54,6 +144,17 @@ public class Booking_bookMB implements Serializable {
         RoomClient rc=new RoomClient();
         GenericType<Room> gr=new GenericType<Room>(){};
         return rc.find_JSON(gr, id);
+    }
+    
+    //location
+    public Location location(int id){
+       
+        return room(id).getLocationId();
+    }
+     public Location locationt(){
+       LocationClient lc=new LocationClient();
+       GenericType<Location> glc=new GenericType<Location>(){};
+        return lc.find_JSON(glc, location);
     }
     
     //list image room

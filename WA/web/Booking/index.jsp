@@ -82,7 +82,7 @@
                     <div class="row ">
                         <div class="col-12">
                             
-                            <form action="../Booking_bookServlet">
+                            <form action="../Booking_bookServlet" method="Post">
                                 <div class="booking-wrap d-flex justify-content-between align-items-center" id="range">
 
                                     <!-- select in date -->

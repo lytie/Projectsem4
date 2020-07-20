@@ -88,9 +88,9 @@ public class RoombookingFacadeREST extends AbstractFacade<Roombooking> {
 "                where RoomId not in(select qrcode.RoomId from qrcode " +
 "                where (CheckInDate  between ? and ?) " +
 "                or (CheckOutDate between ? and ?)" +
-"                 or (? between CheckInDate and CheckOutDate)" +
+"                 or (? between CheckInDate and CheckOutDate))" +
 "                 and  LocationId= ?" +
-"                 and capacity>= ? ))";
+"                 and capacity>= ? )";
 
        
         return em.createNativeQuery(query, Roombooking.class)

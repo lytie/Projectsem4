@@ -53,6 +53,14 @@
         <servlet-name>ExecutePaymentServlet</servlet-name>
         <servlet-class>Paypal.ExecutePaymentServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Booking_bookServlet</servlet-name>
+        <servlet-class>Servlet.Booking_bookServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Booking_ConfirmInfo</servlet-name>
+        <servlet-class>Servlet.Booking_ConfirmInfo</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CustomerPageMenuServlet</servlet-name>
         <url-pattern>/CustomerPageMenuServlet</url-pattern>
@@ -100,6 +108,14 @@
     <servlet-mapping>
         <servlet-name>ExecutePaymentServlet</servlet-name>
         <url-pattern>/ExecutePaymentServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Booking_bookServlet</servlet-name>
+        <url-pattern>/Booking_bookServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Booking_ConfirmInfo</servlet-name>
+        <url-pattern>/Booking_ConfirmInfo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

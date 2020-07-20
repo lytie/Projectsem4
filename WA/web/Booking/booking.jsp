@@ -5,6 +5,7 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="h" uri="http://java.sun.com/jsf/html" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="bean.common" %>
 <!DOCTYPE html>
@@ -62,7 +63,7 @@
             <button class="action action--button action--compare"><i class="fa fa-check"></i><span class="action__text">Compare</span></button>
         </div>
         <!-- Header Start -->
-        <%@include file="header.html" %>
+        <%@include file="header.jsp" %>
 
         <!-- body content-->
         <!-- slider Area Start-->
@@ -98,7 +99,7 @@
             <div class="container">
                 <div class="row ">
                     <div class="col-12">
-                        <form action="">
+                        <form action="Booking_bookServlet">
                             <div class="booking-wrap d-flex justify-content-between align-items-center" id="range">
 
                                 <!-- select in date -->
@@ -110,7 +111,7 @@
                                     <div class="boking-datepicker" >
 
                                         <i class="gj-icon" role="right-icon" >event</i>
-                                        <input id="datepicker1"  name="start" />
+                                        <input id="datepicker1"  name="start" value="${inDate}"/>
                                     </div>
                                 </div>
                                 <!-- Single Select Box -->
@@ -121,7 +122,7 @@
                                     </div>
                                     <div class="boking-datepicker">
                                         <i class="gj-icon" role="right-icon">event</i>
-                                        <input id="datepicker2"  name="end" />
+                                        <input id="datepicker2"  name="end" value="${outDate}" />
                                     </div>
                                 </div>
 
@@ -131,16 +132,16 @@
                                         <span>Locations:</span>
                                     </div>
                                     <div class="select-this">
-                                        <form action="#">
+                                        
                                             <div class="select-itms">
 
-                                                <select name="select" id="select3">
+                                                <select name="selectLocation" id="select3">
                                                     <c:forEach items="${booking_bookMB.listLocation()}" var="ll">
-                                                        <option value="${ll.locationId}">${ll.locationName}</option>
+                                                        <option value="${ll.locationId}" <c:if test="${ll.locationId ==location}">selected</c:if>>${ll.locationName}</option>
                                                     </c:forEach>
                                                 </select>
                                             </div>
-                                        </form>
+                                        
                                     </div>
                                 </div>
                                 <!-- Single Select Box -->
@@ -149,16 +150,17 @@
                                         <span>Adults:</span>
                                     </div>
                                     <div class="select-this">
-                                        <form action="#">
+                                        
                                             <div class="select-itms">
-                                                <select name="select" id="select1">
-                                                    <option value="2">1</option>
-                                                    <option value="4">2</option>
-                                                    <option value="6">3</option>
-                                                    <option value="8">4</option>
+                                                <select name="selectAdult" id="select1">
+                                                    <option value="0" <c:if test="${adult==2}">selected</c:if>>0</option>
+                                                    <option value="2" <c:if test="${adult==2}">selected</c:if>>1</option>
+                                                    <option value="4" <c:if test="${adult==4}">selected</c:if>>2</option>
+                                                    <option value="6" <c:if test="${adult==6}">selected</c:if>>3</option>
+                                                    <option value="8" <c:if test="${adult==8}">selected</c:if>>4</option>
                                                 </select>
                                             </div>
-                                        </form>
+                                        
                                     </div>
                                 </div>
                                 <!-- Single Select Box -->
@@ -167,16 +169,17 @@
                                         <span>Children:</span>
                                     </div>
                                     <div class="select-this">
-                                        <form action="#">
+                                        
                                             <div class="select-itms">
-                                                <select name="select" id="select2">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
+                                                <select name="selectChildren" id="select2">
+                                                    <option value="0" <c:if test="${children==1}">selected</c:if>>0</option>
+                                                    <option value="1" <c:if test="${children==1}">selected</c:if>>1</option>
+                                                    <option value="2" <c:if test="${children==2}">selected</c:if>>2</option>
+                                                    <option value="3" <c:if test="${children==3}">selected</c:if>>3</option>
+                                                    <option value="4" <c:if test="${children==4}">selected</c:if>>4</option>
                                                 </select>
                                             </div>
-                                        </form>
+                                       
                                     </div>
                                 </div>
 
@@ -201,8 +204,8 @@
         <div class="view">
             <section class="grids">
 
-                <!-- get room-->
-                <c:forEach items="${booking_bookMB.listRoomBook()}" var="rb">
+                <!--                get room-->
+                <c:forEach items="${booking_bookMB.listRoomBook(inDate, outDate, location, capation)}" var="rb">
 
                     <section class="make-customer-area customar-padding fix">
                         <div class="container-fluid p-0">
@@ -216,9 +219,11 @@
                                 <div class=" col-xl-7 col-lg-6">
                                     <div class="customer-caption">
 
-                                        <h2>${rb.roomTypeName}</h2>
+                                        <h2 name="name">${rb.roomTypeName} - ${booking_bookMB.location(rb.roomId).locationName} ${booking_bookMB.room(rb.roomId).roomId}</h2>
+                                        <input type="hidden" name="nameRoom" value=""/>
                                         <div class="caption-details">
                                             <p class="pera-dtails">Price: ${rb.price}$ </p>
+                                            
                                             <div style="display: grid;grid-template-columns: auto auto auto;">
                                                 <p>VIEW: <sqan>${rb.view}</sqan></p>
                                                 <p>BED OPTIONS: <sqan>${rb.bedOptions}</sqan></p>
@@ -254,7 +259,7 @@
                                         </div>
 
                                         <div class="header-btn">
-                                            <a href="#" class="btn  ">Booking</a>
+                                            <a href="Booking_ConfirmInfo?name=${rb.roomTypeName} - ${booking_bookMB.location(rb.roomId).locationName} ${booking_bookMB.room(rb.roomId).roomId}&price=${rb.price}&id=${rb.roomId}" class="btn  ">Booking</a>
                                         </div>
 
                                     </div>
@@ -334,7 +339,7 @@
                                     </section>
 
                                     <p>
-                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
+                                        ${booking_bookMB.room(rb.roomId).description}</p>
                                 </div>
 
                                 <!-- Modal footer -->
@@ -345,7 +350,8 @@
                             </div>
                         </div>
                     </div>
-
+                                                    
+                                                    
                 </c:forEach>
 
             </section>
@@ -355,9 +361,14 @@
             <button class="action action--close"><i class="fa fa-remove"></i><span class="action__text action__text--invisible">Close comparison overlay</span></button>
         </section>
         <!-- Make customer End-->
-
-
-
+                                                   
+    
+                                                    ${booking_bookMB.inDate=inDate}   
+                                                    ${booking_bookMB.outDate=outDate}
+                                                    ${booking_bookMB.adult=adult}
+                                                    ${booking_bookMB.children=children}
+                                                    ${booking_bookMB.location=location}
+                                                    
 
         <!-- Footer Start-->
         <%@include file="footer.html" %>
@@ -425,16 +436,17 @@
 
             const elem1 = document.querySelector('input[name="start"]');
             const datepicker1 = new Datepicker(elem1, {
-                buttonClass: 'btn',
+                buttonClass: 'btn'
             });
             const elem2 = document.getElementById('inline');
             const datepicker2 = new Datepicker(elem2, {
-                buttonClass: 'btn',
+                buttonClass: 'btn'
             });
             const elem3 = document.getElementById('range');
             const datepicker3 = new DateRangePicker(elem3, {
                 minDate: new Date(),
                 buttonClass: 'btn',
+                format: 'yyyy-mm-dd'
             });
 
 

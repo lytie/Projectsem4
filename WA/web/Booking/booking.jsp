@@ -101,7 +101,7 @@
             <div class="container">
                 <div class="row ">
                     <div class="col-12">
-                        <form action="Booking_bookServlet">
+                        <form action="Booking_bookServlet" method="post">
                             <div class="booking-wrap d-flex justify-content-between align-items-center" id="range">
 
                                 <!-- select in date -->
@@ -113,26 +113,7 @@
                                     <div class="boking-datepicker" >
 
                                         <i class="gj-icon" role="right-icon" >event</i>
-                                        <%/*
-                                            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");  
-                                            Date date = new Date();  
-                                            String inDate = formatter.format(date);
-                                            String outDate = formatter.format(date) ;
-                                            int selectLocation = 1;
-                                            int selectAdult = 0 ;
-                                            int selectChildren = 0 ;
-                                            if(session.getAttribute("inDate")!=null){
-                                                inDate = (String)session.getAttribute("inDate");
-                                            }if(session.getAttribute("outDate")!=null){
-                                                outDate = (String)session.getAttribute("outDate");
-                                            }if(session.getAttribute("location")!=null){
-                                                selectLocation = Integer.valueOf(String.valueOf(session.getAttribute("location")));
-                                            }if(session.getAttribute("adult")!=null){
-                                                selectChildren = Integer.valueOf(String.valueOf(session.getAttribute("adult")));
-                                            }if(session.getAttribute("children")!=null){
-                                                selectChildren = Integer.valueOf(String.valueOf(session.getAttribute("children")));
-                                            }*/
-                                        %>
+                                       
                                         <input id="datepicker1"  name="start" value="${inDate}"/>
                                     </div>
                                 </div>
@@ -175,11 +156,11 @@
 
                                         <div class="select-itms">
                                             <select name="selectAdult" id="select1">
-                                                <option value="0" <c:if test="${adult==2}">selected</c:if>>0</option>
-                                                <option value="2" <c:if test="${adult==2}">selected</c:if>>1</option>
-                                                <option value="4" <c:if test="${adult==4}">selected</c:if>>2</option>
-                                                <option value="6" <c:if test="${adult==6}">selected</c:if>>3</option>
-                                                <option value="8" <c:if test="${adult==8}">selected</c:if>>4</option>
+                                                <option value="0" <c:if test="${adult==0}">selected</c:if>>0</option>
+                                                <option value="1" <c:if test="${adult==1}">selected</c:if>>1</option>
+                                                <option value="2" <c:if test="${adult==2}">selected</c:if>>2</option>
+                                                <option value="3" <c:if test="${adult==3}">selected</c:if>>3</option>
+                                                <option value="4" <c:if test="${adult==4}">selected</c:if>>4</option>
                                                 </select>
                                             </div>
 
@@ -194,7 +175,7 @@
 
                                             <div class="select-itms">
                                                 <select name="selectChildren" id="select2">
-                                                    <option value="0" <c:if test="${children==1}">selected</c:if>>0</option>
+                                                    <option value="0" <c:if test="${children==0}">selected</c:if>>0</option>
                                                 <option value="1" <c:if test="${children==1}">selected</c:if>>1</option>
                                                 <option value="2" <c:if test="${children==2}">selected</c:if>>2</option>
                                                 <option value="3" <c:if test="${children==3}">selected</c:if>>3</option>
@@ -271,7 +252,7 @@
                                                 </label>
                                             </span>
                                             <div class="product__info">
-                                                <img class="product__image extra" src="<%=common.urlImg%>/img/customar1.png" alt="Product 1" />
+                                                <img class="product__image extra" src="<%=common.urlImg%>/img/${booking_bookMB.listRoomImg(id)}" alt="Product 1" />
                                                 <h3 class="extra">${rb.roomTypeName}</h3>
                                                 <span class="extra">$ ${rb.price}</span>
                                                 <span class="extra">${rb.view}</span>
@@ -377,7 +358,10 @@
 
 
                 </c:forEach>
+                    
 <%
+    
+       
 }else{
 %>
 <div>Not found</div>
@@ -393,11 +377,6 @@
         <!-- Make customer End-->
 
 
-        ${booking_bookMB.inDate=inDate}   
-        ${booking_bookMB.outDate=outDate}
-        ${booking_bookMB.adult=adult}
-        ${booking_bookMB.children=children}
-        ${booking_bookMB.location=location}
 
 
         <!-- Footer Start-->

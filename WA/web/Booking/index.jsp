@@ -135,10 +135,10 @@
 
                                             <div class="select-itms">
                                                 <select name="selectAdult" id="select1">
-                                                    <option value="2">1</option>
-                                                    <option value="4">2</option>
-                                                    <option value="6">3</option>
-                                                    <option value="8">4</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
                                                 </select>
                                             </div>
 

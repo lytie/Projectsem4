@@ -8,6 +8,10 @@
         <servlet-name>QrcodeGenServlet</servlet-name>
         <servlet-class>newpackage.QrcodeGenServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SendMailServlet</servlet-name>
+        <servlet-class>newpackage.SendMailServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AuthorizePaymentServlet</servlet-name>
         <url-pattern>/AuthorizePaymentServlet</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>QrcodeGenServlet</servlet-name>
         <url-pattern>/QrcodeGenServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendMailServlet</servlet-name>
+        <url-pattern>/SendMailServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

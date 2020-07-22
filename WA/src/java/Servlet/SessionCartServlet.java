@@ -99,7 +99,7 @@ public class SessionCartServlet extends HttpServlet {
         response.sendRedirect("CustomerPageCartServlet?id=" + (String) session.getAttribute("qrcodeid"));
     }
     
-    protected void doGet_Checkout(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet_Confirm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         //response.sendRedirect("CustomerPageCartServlet?id=" + (String) session.getAttribute("qrcodeid"));
@@ -126,8 +126,8 @@ public class SessionCartServlet extends HttpServlet {
                 doGet_Remove(request, response);
             } else if (action.equalsIgnoreCase("update")) {
                 doGet_Update(request, response);
-            } else if (action.equalsIgnoreCase("addorder")) {
-                doGet_Checkout(request, response);
+            } else if (action.equalsIgnoreCase("confirm")) {
+                doGet_Confirm(request, response);
             }
         }
     }

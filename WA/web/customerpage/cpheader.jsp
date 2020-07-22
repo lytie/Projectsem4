@@ -119,6 +119,7 @@
 
                             %>
                             <tr>
+                        <input type="hidden" value="<%=item.getService().getServiceId()%>"/>
                                 <td class="product-thumbnail">
                                     <img src="./images/customerpageimg/<%= item.getService().getServiceurl()%>" alt="Image" class="img-fluid">
                                 </td>

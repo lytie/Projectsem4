@@ -34,11 +34,11 @@ public class QrcodeGen {
     // Write to file image
     File file = new File("");
     
-        ClassLoader loader = SessionCartServlet.class.getClassLoader();
-        String url =loader.getResource("Servlet/SessionCartServlet.class").getFile();
+        ClassLoader loader = QrcodeGen.class.getClassLoader();
+        String url =loader.getResource("Generator/").getFile();
         System.out.println(url);
         System.out.println(url.lastIndexOf("WA"));
-    String outputFile =loader.getResource("Servlet/SessionCartServlet.class").getFile().replaceAll("%20", " ").substring(1,url.lastIndexOf("WA")+2)+"/web/images/ticket/"+imgname+"."+filetype;
+    String outputFile =url.replaceAll("%20", " ").substring(1,url.lastIndexOf("WA")+2)+"/web/images/ticket/"+imgname+"."+filetype;
     Path path = FileSystems.getDefault().getPath(outputFile);
     MatrixToImageWriter.writeToPath(matrix, "PNG", path);
         System.out.println(path.toAbsolutePath());

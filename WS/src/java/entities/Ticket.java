@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -32,6 +34,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Ticket.findByTicketName", query = "SELECT t FROM Ticket t WHERE t.ticketName = :ticketName"),
     @NamedQuery(name = "Ticket.findByTicketUrl", query = "SELECT t FROM Ticket t WHERE t.ticketUrl = :ticketUrl")})
 public class Ticket implements Serializable {
+    @JoinColumn(name = "BuyerID", referencedColumnName = "QrCodeId")
+    @ManyToOne
+    private Qrcode buyerID;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -110,6 +115,14 @@ public class Ticket implements Serializable {
     @Override
     public String toString() {
         return "entities.Ticket[ ticketId=" + ticketId + " ]";
+    }
+
+    public Qrcode getBuyerID() {
+        return buyerID;
+    }
+
+    public void setBuyerID(Qrcode buyerID) {
+        this.buyerID = buyerID;
     }
     
 }

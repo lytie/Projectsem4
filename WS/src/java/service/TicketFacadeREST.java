@@ -76,6 +76,14 @@ public class TicketFacadeREST extends AbstractFacade<Ticket> {
     }
 
     @GET
+    @Path("findTicketByQR/{qrcodeId}")
+    @Produces({"application/xml", "application/json"})
+    public List<Ticket> findTicketByQR(@PathParam("qrcodeId") String qrcodeId) {
+        String query = "Select * from ticket where BuyerID = ?";
+        return em.createNativeQuery(query,Ticket.class).setParameter(1, qrcodeId).getResultList();
+    }
+    
+    @GET
     @Path("count")
     @Produces("text/plain")
     public String countREST() {

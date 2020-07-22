@@ -5,12 +5,18 @@
  */
 package Servlet;
 
+import Generator.QrcodeGen;
+import Generator.StringGenerator;
+import com.google.zxing.WriterException;
 import entities.Item;
 import entities.Service;
+import entities.Ticket;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.GenericType;
 import wsc.ServiceClient;
+import wsc.TicketClient;
 
 /**
  *
@@ -100,8 +107,28 @@ public class SessionCartServlet extends HttpServlet {
     }
     
     protected void doGet_Confirm(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, WriterException {
         HttpSession session = request.getSession();
+        TicketClient ticketClient = new TicketClient();
+        StringGenerator stringGenerator = new StringGenerator();
+        QrcodeGen qrcodeGen = new QrcodeGen();
+        if (session.getAttribute("cart") != null) {
+            List<Item> cart = (List<Item>) session.getAttribute("cart");
+            for (Item item : cart) {
+                if (item.getService().getSerivceTypeId().getServiceTypeId()==3) {
+                    Ticket ticket = new Ticket();
+                    ticket.setQuantity(Integer.valueOf(request.getParameter("quantity"+cart.indexOf(item))));
+                    ticket.setTicketName(item.getService().getServiceName());
+                    ticket.setTicketId(stringGenerator.generate(200));
+                    qrcodeGen.createQr(ticket.getTicketId(),"ticket"+String.valueOf(Integer.valueOf(ticketClient.countREST())+1), "png");
+                    ticket.setTicketUrl("ticket"+String.valueOf(Integer.valueOf(ticketClient.countREST())+1));
+                    ticketClient.create_JSON(ticket);
+                }
+            }
+            session.removeAttribute("cart");
+            String referer = request.getHeader("Referer");
+            response.sendRedirect(referer);
+        }
         //response.sendRedirect("CustomerPageCartServlet?id=" + (String) session.getAttribute("qrcodeid"));
     }
 
@@ -127,7 +154,11 @@ public class SessionCartServlet extends HttpServlet {
             } else if (action.equalsIgnoreCase("update")) {
                 doGet_Update(request, response);
             } else if (action.equalsIgnoreCase("confirm")) {
-                doGet_Confirm(request, response);
+                try {
+                    doGet_Confirm(request, response);
+                } catch (WriterException ex) {
+                    Logger.getLogger(SessionCartServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
     }

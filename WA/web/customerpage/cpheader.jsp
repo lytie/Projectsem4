@@ -197,7 +197,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <button class="btn btn-warning btn-lg btn-block" style="color: white;"
-                                            type="submit" name="action" value="addorder">Buy</button>
+                                            type="submit" name="action" value="confirm">Buy</button>
                                 </div>
                                 <div class="col-md-6">
                                     <button type="submit" name="action" value="update" class="btn btn-warning btn-sm btn-block" style="color: white;">Update Cart</button>

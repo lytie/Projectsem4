@@ -42,6 +42,7 @@ public class ApplicationConfig extends Application {
         resources.add(service.RoomtypeFacadeREST.class);
         resources.add(service.ServiceFacadeREST.class);
         resources.add(service.ServicetypeFacadeREST.class);
+        resources.add(service.TicketFacadeREST.class);
         resources.add(service.VConvenientroomFacadeREST.class);
     }
     

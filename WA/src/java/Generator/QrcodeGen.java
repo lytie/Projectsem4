@@ -12,6 +12,7 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
@@ -29,10 +30,11 @@ public class QrcodeGen {
     BitMatrix matrix = qrCodeWriter.encode(data, BarcodeFormat.QR_CODE, 200, 200);
 
     // Write to file image
-    String outputFile = "./"+imgname+"."+filetype;
+    
+    String outputFile ="./ticket/"+imgname+"."+filetype;
     Path path = FileSystems.getDefault().getPath(outputFile);
     MatrixToImageWriter.writeToPath(matrix, "PNG", path);
-        System.out.println(path.getFileSystem().toString());
+        System.out.println(path.toAbsolutePath());
     // Write to byte array
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     MatrixToImageWriter.writeToStream(matrix, "PNG", outputStream);

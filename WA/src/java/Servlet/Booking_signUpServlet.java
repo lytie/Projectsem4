@@ -5,6 +5,7 @@
  */
 package Servlet;
 
+import Generator.StringGenerator;
 import bean.encrypt;
 import entities.Accountcustomer;
 import java.io.IOException;
@@ -45,10 +46,8 @@ public class Booking_signUpServlet extends HttpServlet {
      String passConfirm=request.getParameter("passconfirm");
      
      
-     Booking_signUpMB signup=new Booking_signUpMB();
-     signup.setName(name);
-     signup.setEmail(email);
-     signup.setPhone(phone);
+     
+    
     
       AccountcustomerClient accC=new AccountcustomerClient();
       Accountcustomer accCus=new Accountcustomer();
@@ -114,13 +113,14 @@ public class Booking_signUpServlet extends HttpServlet {
          }
         
         encrypt en=new encrypt();
-        
+        StringGenerator gen=new StringGenerator();
          
          if(errName==null&&errEmail==null&&errPass==null&&errPhone==null&&errConfirmPass==null){
              accCus.setEmail(email);
             accCus.setFullName(name);
             accCus.setPassword(en.changed(pass));
             accCus.setPhone(phone);
+            accCus.setToken(gen.generate(pass.length()*2));
             accC.create_JSON(accCus);
             request.getRequestDispatcher("Booking/index.jsp").forward(request, response);
          }else{
@@ -131,7 +131,7 @@ public class Booking_signUpServlet extends HttpServlet {
              request.setAttribute("errPhone", errPhone);
              request.setAttribute("errConfirmPass", errConfirmPass);
              request.setAttribute("name", name);
-           request.setAttribute("email", email);
+             request.setAttribute("email", email);
              request.setAttribute("phone", phone);
              request.getRequestDispatcher("Booking/signup.jsp").forward(request, response);
          }

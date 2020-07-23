@@ -29,7 +29,7 @@
                             <div class="main-menu f-right d-none d-lg-block">
                                 <nav>
                                     <ul id="navigation">
-                                        <li><a href="http://localhost:8080/WA/Booking/index.jsp">Home</a></li>
+                                        <li><a href="http://localhost:8080/WA/Haven">Home</a></li>
                                         <li><a href="http://localhost:8080/WA/Booking">Booking</a></li>
                                         <li><a href="http://localhost:8080/WA/Booking/history.jsp">History</a></li>
 <!--                                        <li><a href="blog.html">History</a>
@@ -44,7 +44,7 @@
                         <div class="col-xl-2 col-lg-2">
                             <!-- header-btn -->
                             <div class="header-btn">
-                                <a href="login.jsp" class="btn btn1 d-none d-lg-block ">Login</a>
+                                <a href="http://localhost:8080/WA/Login" class="btn btn1 d-none d-lg-block ">Login</a>
                             </div>
                         </div>
                         <!-- Mobile Menu -->

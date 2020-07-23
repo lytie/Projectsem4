@@ -101,7 +101,7 @@
             <div class="container">
                 <div class="row ">
                     <div class="col-12">
-                        <form action="Booking_bookServlet" method="post">
+                        <form action="Booking_bookServlet" >
                             <div class="booking-wrap d-flex justify-content-between align-items-center" id="range">
 
                                 <!-- select in date -->
@@ -252,7 +252,7 @@
                                                 </label>
                                             </span>
                                             <div class="product__info">
-                                                <img class="product__image extra" src="<%=common.urlImg%>/img/${booking_bookMB.listRoomImg(id)}" alt="Product 1" />
+                                                <img class="product__image extra" src="<%=common.urlImg%>/img/${rb.url}" alt="Product 1" />
                                                 <h3 class="extra">${rb.roomTypeName}</h3>
                                                 <span class="extra">$ ${rb.price}</span>
                                                 <span class="extra">${rb.view}</span>

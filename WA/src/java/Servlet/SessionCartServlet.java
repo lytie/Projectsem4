@@ -9,11 +9,15 @@ import Generator.QrcodeGen;
 import Generator.StringGenerator;
 import com.google.zxing.WriterException;
 import entities.Item;
+import entities.Qrcode;
+import entities.Receipt;
+import entities.Receiptcomponent;
 import entities.Service;
 import entities.Ticket;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,6 +27,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.GenericType;
+import wsc.QrcodeClient;
+import wsc.ReceiptClient;
+import wsc.ReceiptcomponentClient;
 import wsc.ServiceClient;
 import wsc.TicketClient;
 
@@ -110,10 +117,20 @@ public class SessionCartServlet extends HttpServlet {
             throws ServletException, IOException, WriterException {
         HttpSession session = request.getSession();
         TicketClient ticketClient = new TicketClient();
+        ReceiptcomponentClient receiptcomponentClient = new ReceiptcomponentClient();
+        GenericType<Receiptcomponent> genericReceiptcomponent = new GenericType<Receiptcomponent>() {};
+        ReceiptClient receiptClient = new ReceiptClient();
+        GenericType<Receipt> genericReceipt = new GenericType<Receipt>() {};
+        QrcodeClient qrcodeClient = new QrcodeClient();
+        GenericType<Qrcode> genericQrcode = new GenericType<Qrcode>() {};
+        Qrcode qrcode = qrcodeClient.find_JSON(genericQrcode, String.valueOf(session.getAttribute("qrcodeid")));
+        Receipt receipt = qrcode.getReceiptId();
         StringGenerator stringGenerator = new StringGenerator();
         QrcodeGen qrcodeGen = new QrcodeGen();
+        Date date = new Date();
         if (session.getAttribute("cart") != null) {
             List<Item> cart = (List<Item>) session.getAttribute("cart");
+            float subtotal = 0;
             for (Item item : cart) {
                 if (item.getService().getSerivceTypeId().getServiceTypeId()==3) {
                     Ticket ticket = new Ticket();
@@ -122,8 +139,25 @@ public class SessionCartServlet extends HttpServlet {
                     ticket.setTicketId(stringGenerator.generate(200));
                     qrcodeGen.createQr(ticket.getTicketId(),"ticket"+String.valueOf(Integer.valueOf(ticketClient.countREST())+1), "png");
                     ticket.setTicketUrl("ticket"+String.valueOf(Integer.valueOf(ticketClient.countREST())+1));
+                    ticket.setBuyerID(qrcode);
                     ticketClient.create_JSON(ticket);
                 }
+                subtotal += item.getService().getServicePrice()*item.getQuantity();
+                Receiptcomponent receiptcomponent = new Receiptcomponent();
+                receiptcomponent.setReceiptId(receipt);
+                receiptcomponent.setComponentName(item.getService().getServiceName());
+                receiptcomponent.setPrice(item.getService().getServicePrice());
+                receiptcomponent.setQuantity(Integer.valueOf(request.getParameter("quantity"+cart.indexOf(item))));
+                receiptcomponent.setSubtotal(subtotal);
+                receiptcomponent.setUrl(item.getService().getServiceurl());
+                receiptcomponent.setOrderDate(date);
+                receiptcomponent.setOrdererName(qrcode.getCustomerName());
+                receiptcomponentClient.create_JSON(receiptcomponent);
+                
+                receipt.setSubtotal(receipt.getSubtotal()+subtotal);
+                receipt.setTax(receipt.getSubtotal()*10/100);
+                receipt.setTotal(receipt.getSubtotal()+receipt.getTax()-qrcode.getDeposits());
+                receiptClient.edit_JSON(receipt, String.valueOf(qrcode.getReceiptId().getReceiptId()));
             }
             session.removeAttribute("cart");
             String referer = request.getHeader("Referer");

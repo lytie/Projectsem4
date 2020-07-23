@@ -33,6 +33,18 @@ public class TicketClient {
         webTarget = client.target(BASE_URI).path("entities.ticket");
     }
 
+    public <T> T findTicketByQR_XML(javax.ws.rs.core.GenericType<T> responseType, String qrcodeId) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("findTicketByQR/{0}", new Object[]{qrcodeId}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
+    }
+
+    public <T> T findTicketByQR_JSON(javax.ws.rs.core.GenericType<T> responseType, String qrcodeId) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("findTicketByQR/{0}", new Object[]{qrcodeId}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+
     public String countREST() throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path("count");

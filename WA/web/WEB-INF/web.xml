@@ -73,6 +73,10 @@
         <servlet-name>Booking</servlet-name>
         <servlet-class>Servlet.Booking</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CustomerPageTicketServlet</servlet-name>
+        <servlet-class>Servlet.CustomerPageTicketServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CustomerPageMenuServlet</servlet-name>
         <url-pattern>/CustomerPageMenuServlet</url-pattern>
@@ -140,6 +144,10 @@
     <servlet-mapping>
         <servlet-name>Booking</servlet-name>
         <url-pattern>/Booking</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerPageTicketServlet</servlet-name>
+        <url-pattern>/CustomerPageTicketServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

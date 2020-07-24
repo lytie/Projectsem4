@@ -1,9 +1,8 @@
-package Servlet;
+package Controller;
 
 import entities.Qrcode;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +15,7 @@ import wsc.QrcodeClient;
  *
  * @author Admin
  */
-public class CustomerPageIndexServlet extends HttpServlet {
+public class CustomerPageAboutServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,16 +42,14 @@ public class CustomerPageIndexServlet extends HttpServlet {
                     qrcode = qrcodeClient.find_JSON(genericType, request.getParameter("id"));
                     if (qrcode != null) {
                         session.setAttribute("qrcodeid", qrcode.getQrCodeId());
-                        request.getRequestDispatcher("/CustomerPageIndexServlet").forward(request, response);
+                        request.getRequestDispatcher("/CustomerPageAboutServlet").forward(request, response);
                     } else {
                         out.print("Not found qrcode");
                     }
                 }
             } else {
-                request.getRequestDispatcher("/customerpage/index.jsp").forward(request, response);
-            }
-
-            /* TODO output your page here. You may use following sample code. */
+                request.getRequestDispatcher("/customerpage/about.jsp").forward(request, response);
+            }     
         }
     }
 
@@ -68,7 +65,6 @@ public class CustomerPageIndexServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         processRequest(request, response);
     }
 
@@ -83,6 +79,18 @@ public class CustomerPageIndexServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String qrcodeid = request.getParameter("id");
+            QrcodeClient qrcodeClient = new QrcodeClient();
+            GenericType<Qrcode> genericType = new GenericType<Qrcode>(){};
+            Qrcode qrcode = new Qrcode();
+            qrcode = qrcodeClient.find_JSON(genericType, qrcodeid);
+            if (qrcode != null) {
+                HttpSession session = request.getSession();
+                session.setAttribute("qrcodeid", qrcodeid);
+                //request.getRequestDispatcher("/customerpage/index.jsp").forward(request, response);
+            }else{
+                //out.print("false");
+            }
         processRequest(request, response);
     }
 

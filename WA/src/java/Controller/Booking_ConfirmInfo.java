@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Servlet;
+package Controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author longly
  */
-public class Haven extends HttpServlet {
+public class Booking_ConfirmInfo extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,7 +31,15 @@ public class Haven extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        request.getRequestDispatcher("Booking/index.jsp").forward(request, response);
+       
+       int id=Integer.valueOf(request.getParameter("id"));
+      
+       request.setAttribute("id", id);
+       
+       request.getRequestDispatcher("Booking/confirm_infomation.jsp").forward(request, response);
+        
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

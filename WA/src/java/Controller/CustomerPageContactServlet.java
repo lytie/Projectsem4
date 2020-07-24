@@ -1,11 +1,8 @@
-package Servlet;
+package Controller;
 
 import entities.Qrcode;
-import entities.Service;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,13 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.GenericType;
 import wsc.QrcodeClient;
-import wsc.ServiceClient;
 
 /**
  *
  * @author Admin
  */
-public class CustomerPageMenuServlet extends HttpServlet {
+public class CustomerPageContactServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,37 +29,26 @@ public class CustomerPageMenuServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("utf-8");
-
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
             QrcodeClient qrcodeClient = new QrcodeClient();
             GenericType<Qrcode> genericType = new GenericType<Qrcode>() {
             };
             Qrcode qrcode = new Qrcode();
-            if (session.getAttribute("qrcodeid") == null ) {
+            if (session.getAttribute("qrcodeid") == null) {
                 if (request.getParameter("id") == null) {
                     out.print("Error");
                 } else {
                     qrcode = qrcodeClient.find_JSON(genericType, request.getParameter("id"));
                     if (qrcode != null) {
                         session.setAttribute("qrcodeid", qrcode.getQrCodeId());
-                        request.getRequestDispatcher("/CustomerPageMenuServlet").forward(request, response);
+                        request.getRequestDispatcher("/CustomerPageContactServlet").forward(request, response);
                     } else {
                         out.print("Not found qrcode");
                     }
                 }
             } else {
-                ServiceClient serviceClient = new ServiceClient();
-                GenericType<List<Service>> genericListService = new GenericType<List<Service>>() {
-                };
-                List<Service> listfood = new ArrayList<Service>();
-                List<Service> listdrink = new ArrayList<Service>();
-                listfood = serviceClient.listfood_JSON(genericListService);
-                listdrink = serviceClient.listdrink_JSON(genericListService);
-                request.setAttribute("listfood", listfood);
-                request.setAttribute("listdrink", listdrink);
-                request.getRequestDispatcher("/customerpage/menu.jsp").forward(request, response);
+                request.getRequestDispatcher("/customerpage/contact.jsp").forward(request, response);
             }
         }
     }
@@ -80,7 +65,6 @@ public class CustomerPageMenuServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         processRequest(request, response);
     }
 
@@ -95,7 +79,6 @@ public class CustomerPageMenuServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         processRequest(request, response);
     }
 

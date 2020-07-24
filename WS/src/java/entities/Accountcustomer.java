@@ -35,6 +35,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Accountcustomer.findByPhone", query = "SELECT a FROM Accountcustomer a WHERE a.phone = :phone"),
     @NamedQuery(name = "Accountcustomer.findByToken", query = "SELECT a FROM Accountcustomer a WHERE a.token = :token")})
 public class Accountcustomer implements Serializable {
+
+    @Column(name = "active")
+    private Boolean active;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -137,6 +140,14 @@ public class Accountcustomer implements Serializable {
     @Override
     public String toString() {
         return "entities.Accountcustomer[ accountCustomerId=" + accountCustomerId + " ]";
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
     
 }

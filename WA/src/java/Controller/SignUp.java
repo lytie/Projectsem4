@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Servlet;
+package Controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -30,6 +30,7 @@ public class SignUp extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
         request.getRequestDispatcher("Booking/signup.jsp").forward(request, response);
     }
 

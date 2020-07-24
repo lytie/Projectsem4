@@ -1,22 +1,25 @@
-package Servlet;
+package Controller;
 
 import entities.Qrcode;
+import entities.Service;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.GenericType;
 import wsc.QrcodeClient;
+import wsc.ServiceClient;
 
 /**
  *
  * @author Admin
  */
-public class CustomerPageInformationServlet extends HttpServlet {
+public class CustomerPageServicesMenuServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,17 +46,20 @@ public class CustomerPageInformationServlet extends HttpServlet {
                     qrcode = qrcodeClient.find_JSON(genericType, request.getParameter("id"));
                     if (qrcode != null) {
                         session.setAttribute("qrcodeid", qrcode.getQrCodeId());
-                        request.getRequestDispatcher("/CustomerPageInformationServlet").forward(request, response);
+                        request.getRequestDispatcher("/CustomerPageServicesMenuServlet").forward(request, response);
                     } else {
                         out.print("Not found qrcode");
                     }
                 }
             } else {
-                qrcode = qrcodeClient.find_JSON(genericType, session.getAttribute("qrcodeid").toString());
-                request.setAttribute("qrcode", qrcode);
-                request.getRequestDispatcher("/customerpage/information.jsp").forward(request, response);
+                ServiceClient serviceClient = new ServiceClient();
+                GenericType<List<Service>> genericListService = new GenericType<List<Service>>() {
+                };
+                List<Service> list = new ArrayList<Service>();
+                list = serviceClient.listticket_JSON(genericListService);
+                request.setAttribute("list", list);
+                request.getRequestDispatcher("/customerpage/servicesmenu.jsp").forward(request, response);
             }
-            /* TODO output your page here. You may use following sample code. */
         }
     }
 
@@ -69,6 +75,18 @@ public class CustomerPageInformationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String qrcodeid = request.getParameter("id");
+            QrcodeClient qrcodeClient = new QrcodeClient();
+            GenericType<Qrcode> genericType = new GenericType<Qrcode>(){};
+            Qrcode qrcode = new Qrcode();
+            qrcode = qrcodeClient.find_JSON(genericType, qrcodeid);
+            if (qrcode != null) {
+                HttpSession session = request.getSession();
+                session.setAttribute("qrcodeid", qrcodeid);
+                //request.getRequestDispatcher("/customerpage/index.jsp").forward(request, response);
+            }else{
+                //out.print("false");
+            }
         processRequest(request, response);
     }
 

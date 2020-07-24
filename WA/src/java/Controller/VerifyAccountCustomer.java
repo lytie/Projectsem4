@@ -3,20 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Servlet;
+package Controller;
 
+import entities.Accountcustomer;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.GenericType;
+import wsc.AccountcustomerClient;
 
 /**
  *
  * @author longly
  */
-public class Booking_ConfirmInfo extends HttpServlet {
+public class VerifyAccountCustomer extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,14 +35,23 @@ public class Booking_ConfirmInfo extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
+      String token=  request.getParameter("token");
+     
+        
+        AccountcustomerClient accCusClient=new AccountcustomerClient();
        
-       int id=Integer.valueOf(request.getParameter("id"));
+        GenericType<List<Accountcustomer>> gAccCus = new GenericType<List<Accountcustomer>>() {
+        };
+        List<Accountcustomer> listAccCus = accCusClient.findAll_JSON(gAccCus);
+        
+        for (Accountcustomer AccCustomer : listAccCus) {
+            if(token.equals(AccCustomer.getToken())){
+                AccCustomer.setActive(true);
+                accCusClient.edit_JSON(AccCustomer, AccCustomer.getAccountCustomerId().toString());
+            }
+        }
       
-       request.setAttribute("id", id);
-       
-       request.getRequestDispatcher("Booking/confirm_infomation.jsp").forward(request, response);
-        
-        
+request.getRequestDispatcher("Booking/login.jsp").forward(request, response);     
         
     }
 

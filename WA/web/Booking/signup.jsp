@@ -93,11 +93,11 @@
 					
 				</form>
                                         <div class="flex-col-c p-t-100 p-b-40">
-						<a href="#" class="txt1 p-b-9">
+						<a href="http://localhost:8080/WA/Login" class="txt1 p-b-9">
 							Have an account? <span class="txt3">Sign In</span>
 						</a>
 
-						<a href="#" class="txt3">
+						<a href="http://localhost:8080/WA/Haven" class="txt3">
 							Back Home
 						</a>
 					</div>

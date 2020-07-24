@@ -6,7 +6,7 @@
 
 package Generator;
 
-import Servlet.SessionCartServlet;
+import Controller.SessionCartServlet;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;

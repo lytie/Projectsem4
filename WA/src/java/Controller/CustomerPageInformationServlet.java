@@ -1,25 +1,22 @@
-package Servlet;
+package Controller;
 
 import entities.Qrcode;
-import entities.Receiptcomponent;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.GenericType;
 import wsc.QrcodeClient;
-import wsc.ReceiptcomponentClient;
 
 /**
  *
  * @author Admin
  */
-public class CustomerPageCartServlet extends HttpServlet {
+public class CustomerPageInformationServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,22 +43,16 @@ public class CustomerPageCartServlet extends HttpServlet {
                     qrcode = qrcodeClient.find_JSON(genericType, request.getParameter("id"));
                     if (qrcode != null) {
                         session.setAttribute("qrcodeid", qrcode.getQrCodeId());
-                        request.getRequestDispatcher("/CustomerPageCartServlet").forward(request, response);
+                        request.getRequestDispatcher("/CustomerPageInformationServlet").forward(request, response);
                     } else {
                         out.print("Not found qrcode");
                     }
                 }
             } else {
-                ReceiptcomponentClient receiptcomponentClient = new ReceiptcomponentClient();
-                GenericType<List<Receiptcomponent>> genType = new GenericType<List<Receiptcomponent>>() {};
-                List<Receiptcomponent> list = new ArrayList<Receiptcomponent>();
                 qrcode = qrcodeClient.find_JSON(genericType, session.getAttribute("qrcodeid").toString());
-                list = receiptcomponentClient.findbyReceiptID_JSON(genType, String.valueOf(qrcode.getReceiptId().getReceiptId()));
-                request.setAttribute("list", list);
                 request.setAttribute("qrcode", qrcode);
-                request.getRequestDispatcher("/customerpage/cart.jsp").forward(request, response);
+                request.getRequestDispatcher("/customerpage/information.jsp").forward(request, response);
             }
-            
             /* TODO output your page here. You may use following sample code. */
         }
     }

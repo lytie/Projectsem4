@@ -6,7 +6,7 @@
     </context-param>
     <servlet>
         <servlet-name>CustomerPageMenuServlet</servlet-name>
-        <servlet-class>Servlet.CustomerPageMenuServlet</servlet-class>
+        <servlet-class>Controller.CustomerPageMenuServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
@@ -15,31 +15,31 @@
     </servlet>
     <servlet>
         <servlet-name>CustomerPageAboutServlet</servlet-name>
-        <servlet-class>Servlet.CustomerPageAboutServlet</servlet-class>
+        <servlet-class>Controller.CustomerPageAboutServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CustomerPageCartServlet</servlet-name>
-        <servlet-class>Servlet.CustomerPageCartServlet</servlet-class>
+        <servlet-class>Controller.CustomerPageCartServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CustomerPageContactServlet</servlet-name>
-        <servlet-class>Servlet.CustomerPageContactServlet</servlet-class>
+        <servlet-class>Controller.CustomerPageContactServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CustomerPageIndexServlet</servlet-name>
-        <servlet-class>Servlet.CustomerPageIndexServlet</servlet-class>
+        <servlet-class>Controller.CustomerPageIndexServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CustomerPageInformationServlet</servlet-name>
-        <servlet-class>Servlet.CustomerPageInformationServlet</servlet-class>
+        <servlet-class>Controller.CustomerPageInformationServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CustomerPageServicesMenuServlet</servlet-name>
-        <servlet-class>Servlet.CustomerPageServicesMenuServlet</servlet-class>
+        <servlet-class>Controller.CustomerPageServicesMenuServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SessionCartServlet</servlet-name>
-        <servlet-class>Servlet.SessionCartServlet</servlet-class>
+        <servlet-class>Controller.SessionCartServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AuthorizePaymentServlet</servlet-name>
@@ -55,39 +55,43 @@
     </servlet>
     <servlet>
         <servlet-name>Booking_bookServlet</servlet-name>
-        <servlet-class>Servlet.Booking_bookServlet</servlet-class>
+        <servlet-class>Controller.Booking_bookServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Booking_ConfirmInfo</servlet-name>
-        <servlet-class>Servlet.Booking_ConfirmInfo</servlet-class>
+        <servlet-class>Controller.Booking_ConfirmInfo</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Booking_signUpServlet</servlet-name>
-        <servlet-class>Servlet.Booking_signUpServlet</servlet-class>
+        <servlet-class>Controller.Booking_signUpServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SignUp</servlet-name>
-        <servlet-class>Servlet.SignUp</servlet-class>
+        <servlet-class>Controller.SignUp</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Booking</servlet-name>
-        <servlet-class>Servlet.Booking</servlet-class>
+        <servlet-class>Controller.Booking</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CustomerPageTicketServlet</servlet-name>
-        <servlet-class>Servlet.CustomerPageTicketServlet</servlet-class>
+        <servlet-class>Controller.CustomerPageTicketServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Booking_LoginServlet</servlet-name>
-        <servlet-class>Servlet.Booking_LoginServlet</servlet-class>
+        <servlet-class>Controller.Booking_LoginServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Login</servlet-name>
-        <servlet-class>Servlet.Login</servlet-class>
+        <servlet-class>Controller.Login</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Haven</servlet-name>
-        <servlet-class>Servlet.Haven</servlet-class>
+        <servlet-class>Controller.Haven</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>VerifyAccountCustomer</servlet-name>
+        <servlet-class>Controller.VerifyAccountCustomer</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>CustomerPageMenuServlet</servlet-name>
@@ -172,6 +176,10 @@
     <servlet-mapping>
         <servlet-name>Haven</servlet-name>
         <url-pattern>/Haven</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VerifyAccountCustomer</servlet-name>
+        <url-pattern>/VerifyAccountCustomer</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

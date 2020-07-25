@@ -54,10 +54,8 @@
                             <span class="focus-input100"></span>
                         </div>
 
-                        <%
-                            request.setAttribute("token", request.getParameter("token").toString());
-                        %>
-
+                        
+                        <input type="hidden" value="<%=request.getParameter("token").toString() %>" name="token"/>
 
                         <div class="container-login100-form-btn">
                             <button class="login100-form-btn">

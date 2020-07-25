@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package Servlet;
+package Controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -33,7 +33,7 @@ public class Admin_AddConvenient extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-             request.getRequestDispatcher("AdminTemplate/addconvenient.jsp").forward(request, response);
+            request.getRequestDispatcher("AdminTemplate/addconvenient.jsp").forward(request, response);
         }
     }
 

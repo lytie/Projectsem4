@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package Servlet;
+package Controller;
 
 import entities.Accountcustomer;
 import java.io.IOException;

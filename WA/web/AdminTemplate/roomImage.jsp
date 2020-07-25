@@ -68,7 +68,7 @@
                                         <table id="example1" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th>Room Name</th>
+                                                    <th>Room Number</th>
                                                     <th>Image</th>
                                                     <th>Action</th>
 
@@ -77,7 +77,7 @@
                                             <tbody>
                                                 <c:forEach items="${listimg}" var="t">
                                                 <tr>
-                                                    <td>Trident</td>
+                                                    <td>${t.getRoomId().getRoomId()}</td>
                                                     <td width="400"><img src="images/images/${t.getUrl()}" width="300" height="110" /></td>
                                                     <td>
                                                         <a class="btn btn-info btn-sm" href="Admin_UpdateImage">

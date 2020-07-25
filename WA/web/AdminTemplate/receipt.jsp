@@ -52,8 +52,9 @@
                                         <div class="card-body">
                                             <table id="example1" class="table table-bordered table-striped">
                                                 <thead>
-                                                    
+
                                                     <tr>
+                                                        <th>Receipt Id :</th>
                                                         <th>Pay Date :</th>
                                                         <th>Subtotal :</th>
                                                         <th>Tax :</th>
@@ -67,28 +68,48 @@
                                                     <%
                                                         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
                                                         List<Receipt> listrc = (List<Receipt>) request.getAttribute("listrc");
+                                                        String paydate,paystatus;
                                                         for (Receipt receipt : listrc) {
+                                                            if(receipt.getPayDate()==null){
+                                                                paydate = "--------";
+                                                                paystatus ="UnPaid";
+                                                        
                                                     %>
                                                     <tr>
+                                                        <td ><%=receipt.getReceiptId()%></td>
+                                                        <td ><%=paydate%></td>
+                                                        <td ><%=receipt.getSubtotal()%></td>
+                                                        <td ><%=receipt.getTax()%></td>
+                                                        <td ><%=receipt.getTotal()%></td>
+                                                        <td ><%=paystatus%></td>
+                                                        <td>
+                                                            <a class="btn btn-info btn-sm" href="Admin_UpdateReceipt">
+                                                                <i class="fas fa-info">
+                                                                </i> See Details
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    <%
+                                                            }else{
+                                                                paystatus ="Paid";
+                                                    %>
+                                                    <tr>
+                                                        <td ><%=receipt.getReceiptId()%></td>
                                                         <td ><%=receipt.getPayDate()%></td>
                                                         <td ><%=receipt.getSubtotal()%></td>
                                                         <td ><%=receipt.getTax()%></td>
                                                         <td ><%=receipt.getTotal()%></td>
-                                                        <td ><%=receipt.getPayStatus()%></td>
+                                                        <td ><%=paystatus%></td>
                                                         <td>
                                                             <a class="btn btn-info btn-sm" href="Admin_UpdateReceipt">
-                                                                <i class="fas fa-pencil-alt">
-                                                                </i> Edit
+                                                                <i class="fas fa-info">
+                                                                </i> See Details
                                                             </a>
-                                                            <a class="btn btn-danger btn-sm" href="#">
-                                                                    <i class="fas fa-trash">
-                                                                    </i>
-                                                                    Delete
-                                                                </a>
                                                         </td>
                                                     </tr>
                                                     <%
                                                         }
+                                                    }
                                                     %>
 
                                                 </tbody>

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package Servlet;
+package Controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author ADMIN
+ * @author Admin
  */
 public class Admin_AddEmployee extends HttpServlet {
 

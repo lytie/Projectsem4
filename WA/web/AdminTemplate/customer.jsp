@@ -75,11 +75,11 @@
                   <tbody>
                       <c:forEach items="${listAccC}" var="c">
                   <tr>
-                      <td width="15%"><c:out value="${c.getFullName}"/></td>
+                      <td width="15%"><c:out value="${c.getFullName()}"/></td>
                       <td width="15%"><c:out value="${c.getEmail()}"/></td>
                        <td><c:out value="${c.getPhone()}"/></td>
-                       <td width="20%"><c:out value="${c.getToken}"/></td>
-                    <td><c:out value="${c.getActive}"/></td>
+                       <td width="20%"><c:out value="${c.getToken()}"/></td>
+                    <td><c:out value="${c.getActive()}"/></td>
                     
                     <td>
                          

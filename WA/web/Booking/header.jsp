@@ -4,6 +4,7 @@
     Author     : longly
 --%>
 
+<%@page import="bean.common"%>
 <%@page import="entities.Accountcustomer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -11,6 +12,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     </head>
     <body>
         <header>
@@ -56,7 +60,11 @@
                                         Accountcustomer accountcustomer = (Accountcustomer) session.getAttribute("user");
 
                                     %>
-                                    <a href="http://localhost:8080/WA/Booking/infor.jsp" class="btn btn1 d-none d-lg-block "><%=accountcustomer.getFullName()%></a>
+                                    <a href="" type="button" data-toggle="dropdown" class="btn btn1 d-none d-lg-block "><%=accountcustomer.getFullName()%></a>
+                                    <div class="dropdown-menu" >
+                                        <a class="dropdown-item" href="#">Link 1</a>
+                                        <a class="dropdown-item" href="Booking_Logout">Log out</a>
+                                    </div>
                                     <% }%>
                                 </div>
                             </div>

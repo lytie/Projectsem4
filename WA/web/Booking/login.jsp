@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Haven</title>
+        <title>Haven - login</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--===============================================================================================-->	
@@ -46,12 +46,12 @@
                             Sign In
                         </span>
 
-                        <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
+                        <div class="wrap-input100 validate-input m-b-16" >
                             <input class="input100" type="email" name="email" placeholder="Email" required="">
                             <span class="focus-input100"></span>
                         </div>
 
-                        <div class="wrap-input100 validate-input" data-validate = "Please enter password">
+                        <div class="wrap-input100 validate-input" >
                             <input class="input100" type="password" name="pass" placeholder="Password" required="">
                             <span class="focus-input100"></span>
                         </div>
@@ -61,7 +61,7 @@
                                 Forgot
                             </span>
 
-                            <a href="#" class="txt2">
+                            <a href="ForgotPassword" class="txt2">
                                 Password?
                             </a>
                         </div>
@@ -119,6 +119,21 @@
         <script type="text/javascript">
             $('.active').each(function () {
                 swal("Please check your email to verify your account", "", "warning");
+            });
+        </script>
+        <script type="text/javascript">
+            $('.reset').each(function () {
+                swal("Please check your email to reset password of your account", "Email sended to: ${e}", "success");
+            });
+        </script>
+        <script type="text/javascript">
+            $('.noEmail').each(function () {
+                swal("Email hasn't been registered", "", "error");
+            });
+        </script>
+        <script type="text/javascript">
+            $('.pass').each(function () {
+                swal("Reset Password Success", "", "success");
             });
         </script>
     </body>

@@ -103,7 +103,7 @@ try (PrintWriter out = response.getWriter()) {
         if (passConfirm.isEmpty()) {
             errConfirmPass = "Please enter Confirm Password";
         } else if (!passConfirm.equals(pass)) {
-            errConfirmPass = "Password does not match Confirm Password";
+            errConfirmPass = "Confirm Password does not match Password";
         } else {
             errConfirmPass = null;
         }
@@ -114,6 +114,7 @@ try (PrintWriter out = response.getWriter()) {
             String token;
             boolean c = false;
             do {
+                c = false;
                 token = gen.generate(pass.length() * 3);
                 for (Accountcustomer acc : listAccCus) {
                     if (token.equals(acc.getToken())) {

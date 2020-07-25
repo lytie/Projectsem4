@@ -114,6 +114,7 @@ try (PrintWriter out = response.getWriter()) {
             String token;
             boolean c = false;
             do {
+                c = false;
                 token = gen.generate(pass.length() * 3);
                 for (Accountcustomer acc : listAccCus) {
                     if (token.equals(acc.getToken())) {

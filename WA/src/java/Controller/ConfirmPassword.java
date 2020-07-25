@@ -32,7 +32,8 @@ public class ConfirmPassword extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         String token=request.getParameter("token");
-        request.getRequestDispatcher("Booking/confirm_Password?token="+token).forward(request, response);
+//        request.setAttribute("token", token);
+        request.getRequestDispatcher("Booking/confirm_Password.jsp?token="+token).forward(request, response);
         
     }
 

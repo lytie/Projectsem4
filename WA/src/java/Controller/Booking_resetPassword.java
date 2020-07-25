@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import Generator.StringGenerator;
 import bean.encrypt;
 import entities.Accountcustomer;
 import java.io.IOException;
@@ -44,22 +45,39 @@ public class Booking_resetPassword extends HttpServlet {
 
             if (pass.equals(Confirm)) {
                 AccountcustomerClient accCusClient = new AccountcustomerClient();
-                 encrypt en=new encrypt();
+                encrypt en = new encrypt();
+                StringGenerator gen = new StringGenerator();
                 GenericType<List<Accountcustomer>> gAccCus = new GenericType<List<Accountcustomer>>() {
                 };
                 List<Accountcustomer> listAccCus = accCusClient.findAll_JSON(gAccCus);
-
+                
                 for (Accountcustomer AccCustomer : listAccCus) {
-                    if (token.equals(AccCustomer.getToken())) {
-                             AccCustomer.setPassword(en.changed(pass));
-                accCusClient.edit_JSON(AccCustomer, AccCustomer.getAccountCustomerId().toString());
+                    if (AccCustomer.getToken().equals(token)) {
+                        AccCustomer.setPassword(en.changed(pass));
+                        String t = token;
+                        boolean c = false;
+                        do {
+                             c = false;
+                            t = gen.generate(pass.length() * 3);
+                            for (Accountcustomer acc : listAccCus) {
+                                if (t.equals(acc.getToken())) {
+
+                                    c = true;
+                                }
+                            }
+
+                        } while (c == true);
+
+                        AccCustomer.setToken(t);
+                        accCusClient.edit_JSON(AccCustomer,AccCustomer.getAccountCustomerId().toString());
+                        out.println("<div class=\"pass\"></div>");
+                request.getRequestDispatcher("Booking/login.jsp").include(request, response);
                     }
                 }
-                  out.println("<div class=\"pass\"></div>");
-                request.getRequestDispatcher("Booking/login.jsp").forward(request, response);
-            }else{
+                 request.getRequestDispatcher("Booking/index.jsp").forward(request, response);
+            } else {
                 request.setAttribute("err", "Confirm Password does not match  Password");
-                 request.getRequestDispatcher("Booking/confirm_Password?token="+token).forward(request, response);
+                request.getRequestDispatcher("Booking/confirm_Password.jsp?token=" + token).forward(request, response);
             }
 
         }

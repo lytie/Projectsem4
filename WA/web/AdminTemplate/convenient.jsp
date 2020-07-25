@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -16,21 +16,12 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>AdminLTE 3 | DataTables</title>
+        <title>AdminLTE 3 | Convenient</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- Font Awesome -->
-        <link rel="stylesheet" href="./plugins/fontawesome-free/css/all.min.css">
-        <!-- Ionicons -->
-        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-        <!-- DataTables -->
-        <link rel="stylesheet" href="./plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-        <link rel="stylesheet" href="./plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-        <!-- Theme style -->
-        <link rel="stylesheet" href="./dist/css/adminlte.min.css">
-        <!-- Google Font: Source Sans Pro -->
-        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+        <%@include file="css.jsp" %>
     </head>
 
     <body class="hold-transition sidebar-mini">
@@ -71,126 +62,33 @@
                                             <table id="example1" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr>
-                                                        <th>Conenient Name :</th>
+                                                        <th>Convenient Name :</th>
                                                         <th>Image :</th>
                                                         <th>Action</th>
 
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>Trident</td>
-                                                        <td>Internet Explorer 4.0</td>
-                                                        <td>
-                                                            <a class="btn btn-info btn-sm" href="#">
-                                                                <i class="fas fa-pencil-alt">
-                                                                </i> Edit
-                                                            </a>
-                                                            <a class="btn btn-danger btn-sm" href="#">
-                                                                <i class="fas fa-trash">
-                                                                </i> Delete
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Trident</td>
-                                                        <td>Internet Explorer 5.0</td>
+                                                    
+                                                   <c:forEach items="${listcon}" var="c">
+                                                <tr>
+                                                    <td width="35%"><c:out value="${c.getConvenientName()}"/></td>
+                                                    
+                                                    <td width="200"><img src="images/icon/${c.url}" width="150" height="100" /></td>
+                                                    
+                                                    <td width="20%">
 
-                                                        <td>
-
-                                                            <a class="btn btn-info btn-sm" href="#">
-                                                                <i class="fas fa-pencil-alt">
-                                                                </i> Edit
-                                                            </a>
-                                                            <a class="btn btn-danger btn-sm" href="#">
-                                                                <i class="fas fa-trash">
-                                                                </i> Delete
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Trident</td>
-                                                        <td>Internet Explorer 5.5
-                                                        </td>
-
-                                                        <td>
-
-                                                            <a class="btn btn-info btn-sm" href="#">
-                                                                <i class="fas fa-pencil-alt">
-                                                                </i> Edit
-                                                            </a>
-                                                            <a class="btn btn-danger btn-sm" href="#">
-                                                                <i class="fas fa-trash">
-                                                                </i> Delete
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Trident</td>
-                                                        <td>Internet Explorer 6
-                                                        </td>
-
-                                                        <td>
-
-                                                            <a class="btn btn-info btn-sm" href="#">
-                                                                <i class="fas fa-pencil-alt">
-                                                                </i> Edit
-                                                            </a>
-                                                            <a class="btn btn-danger btn-sm" href="#">
-                                                                <i class="fas fa-trash">
-                                                                </i> Delete
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Trident</td>
-                                                        <td>Internet Explorer 7</td>
-
-                                                        <td>
-
-                                                            <a class="btn btn-info btn-sm" href="#">
-                                                                <i class="fas fa-pencil-alt">
-                                                                </i> Edit
-                                                            </a>
-                                                            <a class="btn btn-danger btn-sm" href="#">
-                                                                <i class="fas fa-trash">
-                                                                </i> Delete
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Trident</td>
-                                                        <td>AOL browser (AOL desktop)</td>
-
-                                                        <td>
-
-                                                            <a class="btn btn-info btn-sm" href="#">
-                                                                <i class="fas fa-pencil-alt">
-                                                                </i> Edit
-                                                            </a>
-                                                            <a class="btn btn-danger btn-sm" href="#">
-                                                                <i class="fas fa-trash">
-                                                                </i> Delete
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Gecko</td>
-                                                        <td>Firefox 1.0</td>
-
-                                                        <td>
-
-                                                            <a class="btn btn-info btn-sm" href="#">
-                                                                <i class="fas fa-pencil-alt">
-                                                                </i> Edit
-                                                            </a>
-                                                            <a class="btn btn-danger btn-sm" href="#">
-                                                                <i class="fas fa-trash">
-                                                                </i> Delete
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-
+                                                        <a class="btn btn-info btn-sm" href="Admin_UpdateConvenient">
+                                                            <i class="fas fa-pencil-alt">
+                              </i> Edit
+                                                        </a>
+                                                        <a class="btn btn-danger btn-sm" href="#">
+                                                            <i class="fas fa-trash">
+                              </i> Delete
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                </c:forEach>
                                                 </tbody>
 
                                             </table>
@@ -224,36 +122,7 @@
         <!-- ./wrapper -->
 
         <!-- jQuery -->
-        <script src="./plugins/jquery/jquery.min.js"></script>
-        <!-- Bootstrap 4 -->
-        <script src="./plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <!-- DataTables -->
-        <script src="./plugins/datatables/jquery.dataTables.min.js"></script>
-        <script src="./plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-        <script src="./plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-        <script src="./plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-        <!-- AdminLTE App -->
-        <script src="./dist/js/adminlte.min.js"></script>
-        <!-- AdminLTE for demo purposes -->
-        <script src="./dist/js/demo.js"></script>
-        <!-- page script -->
-        <script>
-            $(function() {
-                $("#example1").DataTable({
-                    "responsive": true,
-                    "autoWidth": false,
-                });
-                $('#example2').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": false,
-                    "ordering": true,
-                    "info": true,
-                    "autoWidth": false,
-                    "responsive": true,
-                });
-            });
-        </script>
+        <%@include file="jslink.jsp" %>
     </body>
 
 </html>

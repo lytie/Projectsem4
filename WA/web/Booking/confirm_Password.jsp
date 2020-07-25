@@ -55,8 +55,9 @@
                         </div>
 
                         
-                        <input type="hidden" value="<%=request.getParameter("token").toString() %>" name="token"/>
+                        <input type="hidden" value="<%=request.getParameter("token") %>" name="token"/>
 
+                        
                         <div class="container-login100-form-btn">
                             <button class="login100-form-btn">
                                 Submit

@@ -40,7 +40,7 @@
         <%@include file="Preloader.html" %>
 
         <!-- Header Start -->
-        <%@include file="header.html" %>
+        <%@include file="header.jsp" %>
 
         <!-- body content-->
     <main>
@@ -83,8 +83,9 @@
                                 <h5>Change password</h5>
                             </div>
                              <ul>
-                                <li>Password<input type="text" class="form-control"/></li>
-                                <li>Password-confirm<input type="text" class="form-control"/></li>
+                                <li>Password old:<input type="password" class="form-control"/></li>
+                                <li>Password new<input type="password" class="form-control"/></li>
+                                <li>Password new -confirm<input type="password" class="form-control"/></li>
                                 <li><button class="btn btn-warning mt-10">Submit</button></li>
                             </ul>
                         </div>

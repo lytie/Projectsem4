@@ -62,7 +62,7 @@
                                     %>
                                     <a href="" type="button" data-toggle="dropdown" class="btn btn1 d-none d-lg-block "><%=accountcustomer.getFullName()%></a>
                                     <div class="dropdown-menu" >
-                                        <a class="dropdown-item" href="#">Link 1</a>
+                                        <a class="dropdown-item" href="Profile">Profile</a>
                                         <a class="dropdown-item" href="Booking_Logout">Log out</a>
                                     </div>
                                     <% }%>

@@ -134,7 +134,9 @@
           <%@include file="footer.html" %>
           
           <!-- JS here -->
-    
+     <script src="<%=common.url%>/vendor/jquery/jquery-3.2.1.min.js"></script>
+        <script src="<%=common.url%>/vendor/bootstrap/js/popper.js"></script>
+        <script src="<%=common.url%>/vendor/bootstrap/js/bootstrap.min.js"></script>
         <!-- All JS Custom Plugins Link Here here -->
         <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
         

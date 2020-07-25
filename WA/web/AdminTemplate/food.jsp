@@ -1,10 +1,12 @@
 <%-- 
-    Document   : food
-    Created on : Jul 13, 2020, 4:10:18 PM
+    Document   : service
+    Created on : Jul 13, 2020, 4:13:41 PM
     Author     : ADMIN
 --%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="entities.Service"%>
+<%@page import="java.util.List"%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -20,21 +22,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="./plugins/fontawesome-free/css/all.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- DataTables -->
-    <link rel="stylesheet" href="./plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="./plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="./dist/css/adminlte.min.css">
-    <!-- Google Font: Source Sans Pro -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <%@include file="css.jsp" %>
 </head>
 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
-        <%@include file="navbar.jsp" %>
+        
+       <%@include file="navbar.jsp" %>
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -43,14 +37,12 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-
-                            <h4><a class="btn btn-info btn-sm" href="#">
-                                 <i class=" fa fa-plus">
-                                </i> Add Food
-                             </a></h4>
-                        </div>
-
-                    </div>
+                            
+                            <h4><a class="btn btn-info btn-sm" href="Admin_AddService">
+                     <i class=" fa fa-plus">
+                              </i> Add new Entertainment
+                    </a></h4>
+                        
                 </div>
                 <!-- /.container-fluid -->
             </section>
@@ -67,49 +59,33 @@
 
                                 <div class="card">
                                     <div class="card-header">
-                                        <h3 class="card-title"><b>List Foods</b></h3>
+                                        <h3 class="card-title">List Entertainment</h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body">
                                         <table id="example1" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th>FoodType Name</th>
-                                                    <th>Food Name</th>
+                                                    <th>Service Name</th>
                                                     <th>Price</th>
                                                     <th>Description</th>
-                                                    <th>Image</th>
+                                                    <th>URL</th>
+                                                    
                                                     <th>Action</th>
 
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <c:forEach items="${listfood}" var="s">
                                                 <tr>
-                                                    <td>Trident</td>
-                                                    <td>Internet Explorer 4.0</td>
-                                                    <td>Internet Explorer 4.0</td>
-                                                    <td>Internet Explorer 4.0</td>
-                                                    <td>Internet Explorer 4.0</td>
-                                                    <td>
-                                                        <a class="btn btn-info btn-sm" href="#">
-                                                            <i class="fas fa-pencil-alt">
-                                                          </i> Edit
-                                                        </a>
-                                                        <a class="btn btn-danger btn-sm" href="#">
-                                                            <i class="fas fa-trash">
-                                                          </i> Delete
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Trident</td>
-                                                    <td>Internet Explorer 5.0</td>
-                                                    <td>Internet Explorer 4.0</td>
-                                                    <td>Internet Explorer 4.0</td>
-                                                    <td>Internet Explorer 4.0</td>
+                                                    <td><c:out value="${s.getServiceName()}"/></td>
+                                                    <td><c:out value="${s.getServicePrice()}"/></td>
+                                                    <td><c:out value="${s.getServiceDescription()}"/></td>
+                                                    <td width="100"><img src="images/customerpageimg/${s.getServiceurl()}" width="80" height="70" /></td>
+                                                    
                                                     <td>
 
-                                                        <a class="btn btn-info btn-sm" href="#">
+                                                        <a class="btn btn-info btn-sm" href="Admin_UpdateService">
                                                             <i class="fas fa-pencil-alt">
                               </i> Edit
                                                         </a>
@@ -119,98 +95,8 @@
                                                         </a>
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <td>Trident</td>
-                                                    <td>Internet Explorer 5.5
-                                                    </td>
-                                                    <td>Internet Explorer 4.0</td>
-                                                    <td>Internet Explorer 4.0</td>
-                                                    <td>Internet Explorer 4.0</td>
-                                                    <td>
-
-                                                        <a class="btn btn-info btn-sm" href="#">
-                                                            <i class="fas fa-pencil-alt">
-                              </i> Edit
-                                                        </a>
-                                                        <a class="btn btn-danger btn-sm" href="#">
-                                                            <i class="fas fa-trash">
-                              </i> Delete
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Trident</td>
-                                                    <td>Internet Explorer 6
-                                                    </td>
-                                                    <td>Internet Explorer 4.0</td>
-                                                    <td>Internet Explorer 4.0</td>
-                                                    <td>Internet Explorer 4.0</td>
-                                                    <td>
-
-                                                        <a class="btn btn-info btn-sm" href="#">
-                                                            <i class="fas fa-pencil-alt">
-                              </i> Edit
-                                                        </a>
-                                                        <a class="btn btn-danger btn-sm" href="#">
-                                                            <i class="fas fa-trash">
-                              </i> Delete
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Trident</td>
-                                                    <td>Internet Explorer 7</td>
-                                                    <td>Internet Explorer 4.0</td>
-                                                    <td>Internet Explorer 4.0</td>
-                                                    <td>Internet Explorer 4.0</td>
-                                                    <td>
-
-                                                        <a class="btn btn-info btn-sm" href="#">
-                                                            <i class="fas fa-pencil-alt">
-                              </i> Edit
-                                                        </a>
-                                                        <a class="btn btn-danger btn-sm" href="#">
-                                                            <i class="fas fa-trash">
-                              </i> Delete
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Trident</td>
-                                                    <td>AOL browser (AOL desktop)</td>
-                                                    <td>Internet Explorer 4.0</td>
-                                                    <td>Internet Explorer 4.0</td>
-                                                    <td>Internet Explorer 4.0</td>
-                                                    <td>
-
-                                                        <a class="btn btn-info btn-sm" href="#">
-                                                            <i class="fas fa-pencil-alt">
-                              </i> Edit
-                                                        </a>
-                                                        <a class="btn btn-danger btn-sm" href="#">
-                                                            <i class="fas fa-trash">
-                              </i> Delete
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gecko</td>
-                                                    <td>Firefox 1.0</td>
-                                                    <td>Internet Explorer 4.0</td>
-                                                    <td>Internet Explorer 4.0</td>
-                                                    <td>Internet Explorer 4.0</td>
-                                                    <td>
-
-                                                        <a class="btn btn-info btn-sm" href="#">
-                                                            <i class="fas fa-pencil-alt">
-                              </i> Edit
-                                                        </a>
-                                                        <a class="btn btn-danger btn-sm" href="#">
-                                                            <i class="fas fa-trash">
-                              </i> Delete
-                                                        </a>
-                                                    </td>
-                                                </tr>
+                                                </c:forEach>
+                                                
 
                                             </tbody>
 
@@ -245,36 +131,7 @@
         <!-- ./wrapper -->
 
         <!-- jQuery -->
-        <script src="./plugins/jquery/jquery.min.js"></script>
-        <!-- Bootstrap 4 -->
-        <script src="./plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <!-- DataTables -->
-        <script src="./plugins/datatables/jquery.dataTables.min.js"></script>
-        <script src="./plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-        <script src="./plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-        <script src="./plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-        <!-- AdminLTE App -->
-        <script src="./dist/js/adminlte.min.js"></script>
-        <!-- AdminLTE for demo purposes -->
-        <script src="./dist/js/demo.js"></script>
-        <!-- page script -->
-        <script>
-            $(function() {
-                $("#example1").DataTable({
-                    "responsive": true,
-                    "autoWidth": false,
-                });
-                $('#example2').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": false,
-                    "ordering": true,
-                    "info": true,
-                    "autoWidth": false,
-                    "responsive": true,
-                });
-            });
-        </script>
+        <%@include file="jslink.jsp" %>
 </body>
 
 </html>

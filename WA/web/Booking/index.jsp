@@ -135,7 +135,8 @@
 
                                             <div class="select-itms">
                                                 <select name="selectAdult" id="select1">
-                                                    <option value="1">1</option>
+                                                    <option value="0">0</option>
+                                                    <option value="1" selected="">1</option>
                                                     <option value="2">2</option>
                                                     <option value="3">3</option>
                                                     <option value="4">4</option>
@@ -153,7 +154,8 @@
 
                                             <div class="select-itms">
                                                 <select name="selectChildren" id="select2">
-                                                    <option value="1">1</option>
+                                                    <option value="0">0</option>
+                                                    <option value="1" selected="">1</option>
                                                     <option value="2">2</option>
                                                     <option value="3">3</option>
                                                     <option value="4">4</option>

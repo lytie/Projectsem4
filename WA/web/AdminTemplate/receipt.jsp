@@ -4,6 +4,11 @@
     Author     : ADMIN
 --%>
 
+<%@page import="entities.Receipt"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.List"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -12,184 +17,95 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 3 | DataTables</title>
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>AdminLTE 3 | Receipt</title>
+        <!-- Tell the browser to be responsive to screen width -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="./plugins/fontawesome-free/css/all.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- DataTables -->
-    <link rel="stylesheet" href="./plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="./plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="./dist/css/adminlte.min.css">
-    <!-- Google Font: Source Sans Pro -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-</head>
+        <!-- Font Awesome -->
+        <%@include file="css.jsp" %>
+    </head>
 
-<body class="hold-transition sidebar-mini">
-    <div class="wrapper">
-        
-        <%@include file="navbar.jsp" %>
+    <body class="hold-transition sidebar-mini">
+        <div class="wrapper">
 
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            
+            <%@include file="navbar.jsp" %>
 
-            <!-- Main content -->
-            <section class="content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+
+
+                <!-- Main content -->
+                <section class="content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
                                 <div class="card">
-                                    <div class="card-header">
-                                        <h3 class="card-title">Invoice List</h3>
-                                    </div>
-                                    <!-- /.card-header -->
-                                    <div class="card-body">
-                                        <table id="example1" class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>PayDate :</th>
-                                                    <th>Subtotal :</th>
-                                                    <th>Tax :</th>
-                                                    <th>Total :</th>
-                                                    <th>Pay Status :</th>
-                                                    <th>Action</th>
-
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Trident</td>
-                                                    <td>Trident</td>
-                                                    <td>Trident</td>
-                                                    <td>Trident</td>
-                                                    <td>Internet Explorer 4.0</td>
-                                                    <td>
-                                                        <a class="btn btn-info btn-sm" href="#">
-                                                            <i class="fas fa-pencil-alt">
-                                                          </i> Edit
-                                                        </a>
-                                                        
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Trident</td>
-                                                    <td>Trident</td>
-                                                    <td>Trident</td>
-                                                    <td>Trident</td>
-                                                    <td>Internet Explorer 5.0</td>
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Receipt List</h3>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <div class="card-body">
+                                            <table id="example1" class="table table-bordered table-striped">
+                                                <thead>
                                                     
-                                                    <td>
+                                                    <tr>
+                                                        <th>Pay Date :</th>
+                                                        <th>Subtotal :</th>
+                                                        <th>Tax :</th>
+                                                        <th>Total :</th>
+                                                        <th>Pay Status :</th>
+                                                        <th>Action</th>
 
-                                                        <a class="btn btn-info btn-sm" href="#">
-                                                            <i class="fas fa-pencil-alt">
-                              </i> Edit
-                                                        </a>
-                                                        
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Trident</td>
-                                                    <td>Internet Explorer 5.5
-                                                    </td>
-                                                    <td>Trident</td>
-                                                    <td>Trident</td>
-                                                    <td>Trident</td>
-                                                    <td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <%
+                                                        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+                                                        List<Receipt> listrc = (List<Receipt>) request.getAttribute("listrc");
+                                                        for (Receipt receipt : listrc) {
+                                                    %>
+                                                    <tr>
+                                                        <td ><%=receipt.getPayDate()%></td>
+                                                        <td ><%=receipt.getSubtotal()%></td>
+                                                        <td ><%=receipt.getTax()%></td>
+                                                        <td ><%=receipt.getTotal()%></td>
+                                                        <td ><%=receipt.getPayStatus()%></td>
+                                                        <td>
+                                                            <a class="btn btn-info btn-sm" href="Admin_UpdateReceipt">
+                                                                <i class="fas fa-pencil-alt">
+                                                                </i> Edit
+                                                            </a>
+                                                            <a class="btn btn-danger btn-sm" href="#">
+                                                                    <i class="fas fa-trash">
+                                                                    </i>
+                                                                    Delete
+                                                                </a>
+                                                        </td>
+                                                    </tr>
+                                                    <%
+                                                        }
+                                                    %>
 
-                                                        <a class="btn btn-info btn-sm" href="#">
-                                                            <i class="fas fa-pencil-alt">
-                              </i> Edit
-                                                        </a>
-                                                        
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Trident</td>
-                                                    <td>Internet Explorer 6
-                                                    </td>
-                                                    <td>Trident</td>
-                                                    <td>Trident</td>
-                                                    <td>Trident</td>
-                                                    <td>
+                                                </tbody>
 
-                                                        <a class="btn btn-info btn-sm" href="#">
-                                                            <i class="fas fa-pencil-alt">
-                              </i> Edit
-                                                        </a>
-                                                        
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Trident</td>
-                                                    <td>Internet Explorer 7</td>
-                                                    <td>Trident</td>
-                                                    <td>Trident</td>
-                                                    <td>Trident</td>
-                                                    <td>
-
-                                                        <a class="btn btn-info btn-sm" href="#">
-                                                            <i class="fas fa-pencil-alt">
-                              </i> Edit
-                                                        </a>
-                                                       
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Trident</td>
-                                                    <td>AOL browser (AOL desktop)</td>
-                                                    <td>Trident</td>
-                                                    <td>Trident</td>
-                                                    <td>Trident</td>
-                                                    <td>
-
-                                                        <a class="btn btn-info btn-sm" href="#">
-                                                            <i class="fas fa-pencil-alt">
-                              </i> Edit
-                                                        </a>
-                                                        
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gecko</td>
-                                                    <td>Firefox 1.0</td>
-                                                    <td>Trident</td>
-                                                    <td>Trident</td>
-                                                    <td>Trident</td>
-                                                    <td>
-
-                                                        <a class="btn btn-info btn-sm" href="#">
-                                                            <i class="fas fa-pencil-alt">
-                              </i> Edit
-                                                        </a>
-                                                        
-                                                    </td>
-                                                </tr>
-
-                                            </tbody>
-
-                                        </table>
+                                            </table>
+                                        </div>
+                                        <!-- /.card-body -->
                                     </div>
-                                    <!-- /.card-body -->
+                                    <!-- /.card -->
                                 </div>
-                                <!-- /.card -->
+                                <!-- /.col -->
                             </div>
-                            <!-- /.col -->
+                            <!-- /.row -->
                         </div>
-                        <!-- /.row -->
-                    </div>
-                    <!-- /.container-fluid -->
-            </section>
-            <!-- /.content -->
+                        <!-- /.container-fluid -->
+                </section>
+                <!-- /.content -->
             </div>
             <!-- /.content-wrapper -->
             <footer class="main-footer">
@@ -208,36 +124,7 @@
         <!-- ./wrapper -->
 
         <!-- jQuery -->
-        <script src="./plugins/jquery/jquery.min.js"></script>
-        <!-- Bootstrap 4 -->
-        <script src="./plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <!-- DataTables -->
-        <script src="./plugins/datatables/jquery.dataTables.min.js"></script>
-        <script src="./plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-        <script src="./plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-        <script src="./plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-        <!-- AdminLTE App -->
-        <script src="./dist/js/adminlte.min.js"></script>
-        <!-- AdminLTE for demo purposes -->
-        <script src="./dist/js/demo.js"></script>
-        <!-- page script -->
-        <script>
-            $(function() {
-                $("#example1").DataTable({
-                    "responsive": true,
-                    "autoWidth": false,
-                });
-                $('#example2').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": false,
-                    "ordering": true,
-                    "info": true,
-                    "autoWidth": false,
-                    "responsive": true,
-                });
-            });
-        </script>
-</body>
+        <%@include file="jslink.jsp" %>
+    </body>
 
 </html>

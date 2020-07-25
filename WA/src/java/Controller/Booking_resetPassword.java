@@ -70,11 +70,11 @@ public class Booking_resetPassword extends HttpServlet {
 
                         AccCustomer.setToken(t);
                         accCusClient.edit_JSON(AccCustomer,AccCustomer.getAccountCustomerId().toString());
-                        out.println("<div class=\"pass\"></div>");
-                request.getRequestDispatcher("Booking/login.jsp").include(request, response);
+                        
                     }
                 }
-                 request.getRequestDispatcher("Booking/index.jsp").forward(request, response);
+                out.println("<div class=\"pass\"></div>");
+                request.getRequestDispatcher("Booking/login.jsp").include(request, response);
             } else {
                 request.setAttribute("err", "Confirm Password does not match  Password");
                 request.getRequestDispatcher("Booking/confirm_Password.jsp?token=" + token).forward(request, response);

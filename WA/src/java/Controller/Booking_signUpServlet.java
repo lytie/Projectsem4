@@ -94,8 +94,8 @@ try (PrintWriter out = response.getWriter()) {
 
         if (pass.isEmpty()) {
             errPass = "Please enter Password";
-        } else if (pass.length() < 6) {
-            errPass = "Password length must be at least 6 characters";
+        } else if (pass.length() < 8) {
+            errPass = "Password length must be at least 8 characters";
         } else {
             errPass = null;
         }

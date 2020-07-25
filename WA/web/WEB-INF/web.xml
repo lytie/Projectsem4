@@ -113,6 +113,14 @@
         <servlet-name>ForgotPassword</servlet-name>
         <servlet-class>Controller.ForgotPassword</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Profile</servlet-name>
+        <servlet-class>Controller.Profile</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Booking_ChangePass</servlet-name>
+        <servlet-class>Controller.Booking_ChangePass</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CustomerPageMenuServlet</servlet-name>
         <url-pattern>/CustomerPageMenuServlet</url-pattern>
@@ -220,6 +228,14 @@
     <servlet-mapping>
         <servlet-name>ForgotPassword</servlet-name>
         <url-pattern>/ForgotPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Profile</servlet-name>
+        <url-pattern>/Profile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Booking_ChangePass</servlet-name>
+        <url-pattern>/Booking_ChangePass</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

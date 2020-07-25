@@ -93,6 +93,26 @@
         <servlet-name>VerifyAccountCustomer</servlet-name>
         <servlet-class>Controller.VerifyAccountCustomer</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Booking_Logout</servlet-name>
+        <servlet-class>Controller.Booking_Logout</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Booking_ForgotPassword</servlet-name>
+        <servlet-class>Controller.Booking_ForgotPassword</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Booking_resetPassword</servlet-name>
+        <servlet-class>Controller.Booking_resetPassword</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ConfirmPassword</servlet-name>
+        <servlet-class>Controller.ConfirmPassword</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ForgotPassword</servlet-name>
+        <servlet-class>Controller.ForgotPassword</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CustomerPageMenuServlet</servlet-name>
         <url-pattern>/CustomerPageMenuServlet</url-pattern>
@@ -180,6 +200,26 @@
     <servlet-mapping>
         <servlet-name>VerifyAccountCustomer</servlet-name>
         <url-pattern>/VerifyAccountCustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Booking_Logout</servlet-name>
+        <url-pattern>/Booking_Logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Booking_ForgotPassword</servlet-name>
+        <url-pattern>/Booking_ForgotPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Booking_resetPassword</servlet-name>
+        <url-pattern>/Booking_resetPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConfirmPassword</servlet-name>
+        <url-pattern>/ConfirmPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ForgotPassword</servlet-name>
+        <url-pattern>/ForgotPassword</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

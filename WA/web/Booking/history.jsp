@@ -40,7 +40,7 @@
         <%@include file="Preloader.html" %>
         
          <!-- Header Start -->
-         <%@include file="header.html" %>
+         <%@include file="header.jsp" %>
            
          <!-- body content-->
           <main>
@@ -61,7 +61,11 @@
             </div>
         </div>
         <!-- slider Area End-->
+        <%
+            if(session.getAttribute("user")!=null){
 
+            %>
+            
         <!-- History Start-->
         <div class="container-fluid mb-105">
              <section class="profile-section spad">
@@ -119,6 +123,13 @@
 
     </main>
          
+            <% 
+            }else{
+            %>
+            <div class="mt-90 mb-95" style="text-align: center">Login to view history </div>
+            
+            <% }%>
+            
          <!-- Footer Start-->
           <%@include file="footer.html" %>
           

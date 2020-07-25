@@ -103,7 +103,7 @@ try (PrintWriter out = response.getWriter()) {
         if (passConfirm.isEmpty()) {
             errConfirmPass = "Please enter Confirm Password";
         } else if (!passConfirm.equals(pass)) {
-            errConfirmPass = "Password does not match Confirm Password";
+            errConfirmPass = "Confirm Password does not match Password";
         } else {
             errConfirmPass = null;
         }

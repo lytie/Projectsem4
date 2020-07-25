@@ -14,18 +14,12 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 3 | Validation Form</title>
+    <title>AdminLTE 3 | Add Room</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="./plugins/fontawesome-free/css/all.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="./dist/css/adminlte.min.css">
-    <!-- Google Font: Source Sans Pro -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <%@include file="css.jsp" %>
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -52,34 +46,36 @@
                                 <!-- form start -->
                                 <form role="form" id="quickForm">
                                     <div class="card-body">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">LocationID</label>
-                                        </br>
-                                         <select name="dropdown" class="form-group">
-                                            <option value="Java" selected>abc</option>
-                                            <option value="Ruby">xyz</option>
-                                        </select>
-                                        </div>
+                                        <div class="form-group col-md-6">
+                                                <label for="inputState">Location ID</label>
+                                                <select id="inputState" class="form-control">
+                                                    <option selected>--Select Option--</option>
+                                                    <option>Da Nang</option>
+                                                    <option>Hoi An </option>
+                                                    <option>..</option>
+                                                </select>
+                                            </div>
 
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">RoomTypeID</label>
-                                             </br>
-                                         <select name="dropdown" class="form-group">
-                                            <option value="Java" selected>abc</option>
-                                            <option value="Ruby">xyz</option>
-                                        </select>
-                                        </div>
-                                        <div class="form-group">
+                                        <div class="form-group col-md-6">
+                                                <label for="inputState">Room Type ID</label>
+                                                <select id="inputState" class="form-control">
+                                                    <option selected>--Select Option--</option>
+                                                    <option>..</option>
+                                                    <option>..</option>
+                                                    <option>..</option>
+                                                </select>
+                                            </div>
+                                        <div class="form-group col-md-8">
                                             <label for="exampleInputPassword1">Price :</label>
                                             <input type="number" name="number" class="form-control" id="exampleInputFullName" placeholder="Enter Price">
                                         </div>
 
-                                        <div class="form-group">
+                                        <div class="form-group col-md-8">
                                             <label for="exampleInputPassword1">Adult Opacity</label>
                                             <input type="number" name="" class="form-control" id="e" placeholder="Enter Aduilt Opacity">
                                         </div>
 
-                                        <div class="form-group">
+                                        <div class="form-group col-md-8">
                                             <label for="exampleInputPassword1">Children Opacity</label>
                                             <input type="number" name="" class="form-control" id="e" placeholder="Enter Children Opacity">
                                         </div>
@@ -123,62 +119,7 @@
     <!-- ./wrapper -->
 
     <!-- jQuery -->
-    <script src="./plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="./plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- jquery-validation -->
-    <script src="./plugins/jquery-validation/jquery.validate.min.js"></script>
-    <script src="./plugins/jquery-validation/additional-methods.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src=./dist/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="./dist/js/demo.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $.validator.setDefaults({
-                submitHandler: function() {
-                    alert("Form successful submitted!");
-                }
-            });
-            $('#quickForm').validate({
-                rules: {
-                    email: {
-                        required: true,
-                        email: true,
-                    },
-                    password: {
-                        required: true,
-                        minlength: 5
-                    },
-                    terms: {
-                        required: true
-                    },
-                },
-                messages: {
-                    email: {
-                        required: "Please enter a email address",
-                        email: "Please enter a vaild email address"
-                    },
-                    password: {
-                        required: "Please provide a password",
-                        minlength: "Your password must be at least 5 characters long"
-                    },
-                    terms: "Please accept our terms"
-                },
-                errorElement: 'span',
-                errorPlacement: function(error, element) {
-                    error.addClass('invalid-feedback');
-                    element.closest('.form-group').append(error);
-                },
-                highlight: function(element, errorClass, validClass) {
-                    $(element).addClass('is-invalid');
-                },
-                unhighlight: function(element, errorClass, validClass) {
-                    $(element).removeClass('is-invalid');
-                }
-            });
-        });
-    </script>
+    <%@include file="jslink.jsp" %>
 </body>
 
 </html>

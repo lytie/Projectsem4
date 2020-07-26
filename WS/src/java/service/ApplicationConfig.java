@@ -26,6 +26,7 @@ public class ApplicationConfig extends Application {
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(service.AccountcustomerFacadeREST.class);
         resources.add(service.AccountemployeeFacadeREST.class);
+        resources.add(service.AdminIndexFacadeREST.class);
         resources.add(service.ConvenientFacadeREST.class);
         resources.add(service.FeedbackFacadeREST.class);
         resources.add(service.HistoryFacadeREST.class);

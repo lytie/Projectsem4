@@ -7,6 +7,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +17,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -35,6 +38,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Accountcustomer.findByPhone", query = "SELECT a FROM Accountcustomer a WHERE a.phone = :phone"),
     @NamedQuery(name = "Accountcustomer.findByToken", query = "SELECT a FROM Accountcustomer a WHERE a.token = :token")})
 public class Accountcustomer implements Serializable {
+    @Column(name = "CreateDate")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createDate;
 
     @Column(name = "active")
     private Boolean active;
@@ -148,6 +154,14 @@ public class Accountcustomer implements Serializable {
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
     
 }

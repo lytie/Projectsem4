@@ -7,6 +7,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -34,6 +37,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Ticket.findByTicketName", query = "SELECT t FROM Ticket t WHERE t.ticketName = :ticketName"),
     @NamedQuery(name = "Ticket.findByTicketUrl", query = "SELECT t FROM Ticket t WHERE t.ticketUrl = :ticketUrl")})
 public class Ticket implements Serializable {
+    @Column(name = "BuyDate")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date buyDate;
     @JoinColumn(name = "BuyerID", referencedColumnName = "QrCodeId")
     @ManyToOne
     private Qrcode buyerID;
@@ -123,6 +129,14 @@ public class Ticket implements Serializable {
 
     public void setBuyerID(Qrcode buyerID) {
         this.buyerID = buyerID;
+    }
+
+    public Date getBuyDate() {
+        return buyDate;
+    }
+
+    public void setBuyDate(Date buyDate) {
+        this.buyDate = buyDate;
     }
     
 }

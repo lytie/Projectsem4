@@ -5,10 +5,17 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@page import="entities.*"%>
+<%@page import="java.util.List"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
-
+<%
+    List<Receiptcomponent> listReceiptcomponents =(List<Receiptcomponent>) request.getAttribute("listReceiptcomponents");
+    List<Qrcode> listQrcodes =(List<Qrcode>) request.getAttribute("listQrcodes");
+    List<Feedback> listFeedbacks =(List<Feedback>) request.getAttribute("listFeedbacks");
+    List<Ticket> listTickets =(List<Ticket>) request.getAttribute("listTickets");
+    List<Accountcustomer> listAccountcustomers =(List<Accountcustomer>) request.getAttribute("listAccountcustomers");
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -107,9 +114,9 @@
                                 <!-- small box -->
                                 <div class="small-box bg-info">
                                     <div class="inner">
-                                        <h3>150</h3>
+                                        <h3><%=listReceiptcomponents.size()%></h3>
 
-                                        <p>New Orders</p>
+                                        <p>New Food and Drinks Orders</p>
                                     </div>
                                     <div class="icon">
                                         <i class="ion ion-bag"></i>
@@ -122,7 +129,7 @@
                                 <!-- small box -->
                                 <div class="small-box bg-success">
                                     <div class="inner">
-                                        <h3>53<sup style="font-size: 20px"></sup></h3>
+                                        <h3><%=listQrcodes.size()%><sup style="font-size: 20px"></sup></h3>
 
                                         <p>New Room Booked</p>
                                     </div>
@@ -134,10 +141,11 @@
                             </div>
                             <!-- ./col -->
                             <div class="col-lg-4 col-6">
+
                                 <!-- small box -->
                                 <div class="small-box bg-warning">
                                     <div class="inner">
-                                        <h3>44</h3>
+                                        <h3><%=listAccountcustomers.size()%></h3>
 
                                         <p>User Registrations</p>
                                     </div>
@@ -152,7 +160,7 @@
                                 <!-- small box -->
                                 <div class="small-box bg-gradient-danger">
                                     <div class="inner">
-                                        <h3>44</h3>
+                                        <h3><%=listFeedbacks.size()%></h3>
 
                                         <p>New feedbacks</p>
                                     </div>
@@ -167,7 +175,7 @@
                                 <!-- small box -->
                                 <div class="small-box bg-gradient-teal">
                                     <div class="inner">
-                                        <h3>50</h3>
+                                        <h3><%=listTickets.size()%></h3>
 
                                         <p>Ticket sold</p>
                                     </div>

@@ -7,6 +7,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,6 +19,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -33,6 +36,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Feedback.findByFeedBackId", query = "SELECT f FROM Feedback f WHERE f.feedBackId = :feedBackId"),
     @NamedQuery(name = "Feedback.findByFeedBackMessage", query = "SELECT f FROM Feedback f WHERE f.feedBackMessage = :feedBackMessage")})
 public class Feedback implements Serializable {
+    @Column(name = "FeedBackTime")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date feedBackTime;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -100,6 +106,14 @@ public class Feedback implements Serializable {
     @Override
     public String toString() {
         return "entities.Feedback[ feedBackId=" + feedBackId + " ]";
+    }
+
+    public Date getFeedBackTime() {
+        return feedBackTime;
+    }
+
+    public void setFeedBackTime(Date feedBackTime) {
+        this.feedBackTime = feedBackTime;
     }
     
 }

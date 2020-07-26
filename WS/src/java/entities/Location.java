@@ -35,6 +35,13 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Location.findByLocationName", query = "SELECT l FROM Location l WHERE l.locationName = :locationName"),
     @NamedQuery(name = "Location.findByLocationUrl", query = "SELECT l FROM Location l WHERE l.locationUrl = :locationUrl")})
 public class Location implements Serializable {
+
+    @Size(max = 2005)
+    @Column(name = "Introduce", length = 2005)
+    private String introduce;
+    @Size(max = 255)
+    @Column(name = "Address", length = 255)
+    private String address;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -113,6 +120,22 @@ public class Location implements Serializable {
     @Override
     public String toString() {
         return "entities.Location[ locationId=" + locationId + " ]";
+    }
+
+    public String getIntroduce() {
+        return introduce;
+    }
+
+    public void setIntroduce(String introduce) {
+        this.introduce = introduce;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
     
 }

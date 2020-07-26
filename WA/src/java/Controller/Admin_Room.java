@@ -6,15 +6,18 @@
 
 package Controller;
 
+import entities.Location;
 import entities.Room;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.GenericType;
+import wsc.LocationClient;
 import wsc.RoomClient;
 
 /**
@@ -41,7 +44,30 @@ public class Admin_Room extends HttpServlet {
             GenericType<List<Room>> typ = new GenericType<List<Room>>() {
             };
             List<Room> listroom = roomClient.findAll_JSON(typ);
-            request.setAttribute("listroom", listroom);
+            
+            List<Room> list=new ArrayList<>();
+            
+            int loca=1;
+            
+            if(request.getParameter("location")!=null){
+                loca=Integer.valueOf(request.getParameter("location"));
+            }
+            
+            
+            for (Room room : listroom) {
+                if(room.getLocationId().getLocationId()==loca){
+                    list.add(room);
+                }
+            }
+            
+            request.setAttribute("listroom", list);
+           
+            
+            LocationClient locationCli=new LocationClient();
+            GenericType<Location> gLocation=new GenericType<Location>(){};
+            Location oneLocation= locationCli.find_JSON(gLocation, loca);
+            
+            request.setAttribute("locationOne", oneLocation);
 
              request.getRequestDispatcher("AdminTemplate/room.jsp").forward(request, response);
         }

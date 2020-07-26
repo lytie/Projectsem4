@@ -197,7 +197,7 @@
                                     <div class="location">
                                         <img src="<%=common.urlImg%>/img/${topl.locationUrl}" alt="" width="100%" height="140">
                                         <div class="location_title text-center">
-                                            <div><a href="">${topl.locationName}<div>+</div></a></div>
+                                            <div><a href="Booking_Location#L${topl.locationId}">${topl.locationName}<div>+</div></a></div>
                                         </div>
                                     </div>
                                 </c:forEach>

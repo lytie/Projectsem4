@@ -225,6 +225,10 @@
         <servlet-name>Admin_UpdateService</servlet-name>
         <servlet-class>Controller.Admin_UpdateService</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Booking_Location</servlet-name>
+        <servlet-class>Controller.Booking_Location</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CustomerPageMenuServlet</servlet-name>
         <url-pattern>/CustomerPageMenuServlet</url-pattern>
@@ -444,6 +448,10 @@
     <servlet-mapping>
         <servlet-name>Admin_UpdateService</servlet-name>
         <url-pattern>/Admin_UpdateService</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Booking_Location</servlet-name>
+        <url-pattern>/Booking_Location</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

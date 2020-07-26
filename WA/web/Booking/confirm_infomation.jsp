@@ -60,7 +60,7 @@
 
         <!-- slider Area Start-->
         <div class="slider-area">
-            <div class="single-slider hero-overly slider-height2 d-flex align-items-center" data-background="assets/img/hero/servicespage_hero.jpg" >
+            <div class="single-slider hero-overly slider-height2 d-flex align-items-center" data-background="<%=common.urlImg%>/img/confirmpage.jpg" >
                 <div class="container">
                     <div class="row ">
                         <div class="col-md-11 offset-xl-1 offset-lg-1 offset-md-1">
@@ -109,9 +109,9 @@
                                 <h4 class="widget_title">YOUR RESERVATION</h4>
                                 <ul class="list cat-list">
                                     <li>
-                                        <a href="" class="d-flex">
-                                            <p></p>
+                                        <a href="" class="">
                                             <p>${booking_bookMB.location(id).locationName}</p>
+                                            <p>${booking_bookMB.location(id).address}</p>
                                         </a>
                                     </li>
                                     <li>
@@ -121,10 +121,10 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="" class="d-flex">
-                                            <p>${adult} Adults  ${children}  Children</p>
+                                        <a href="" class="">
+                                            <p>${adult} Adults  </p>
 
-                                            <p>  </p>
+                                            <p>${children} Children</p>
                                         </a>
                                     </li>
                                     <li>

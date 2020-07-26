@@ -34,14 +34,10 @@
                                 <div class="main-menu f-right d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a href="http://localhost:8080/WA/Haven">Home</a></li>
-                                            <li><a href="http://localhost:8080/WA/Booking">Booking</a></li>
-                                            <li><a href="http://localhost:8080/WA/Booking/history.jsp">History</a></li>
-                                            <!--                                        <li><a href="blog.html">History</a>
-                                                                                        
-                                                                                    </li>
-                                                                                    
-                                                                                    <li><a href="contact.html">Contact</a></li>-->
+                                            <li><a href="Haven">Home</a></li>
+                                            <li><a href="Booking">Booking</a></li>
+                                            <li><a href="Booking_Location">Location</a></li>
+                                                                                   
                                         </ul>
                                     </nav>
                                 </div>
@@ -54,7 +50,7 @@
 
 
                                     %>
-                                    <a href="http://localhost:8080/WA/Login" class="btn btn1 d-none d-lg-block ">Login</a>
+                                    <a href="Login" class="btn btn1 d-none d-lg-block ">Login</a>
                                     <% } else {
 
                                         Accountcustomer accountcustomer = (Accountcustomer) session.getAttribute("user");
@@ -63,6 +59,8 @@
                                     <a href="" type="button" data-toggle="dropdown" class="btn btn1 d-none d-lg-block "><%=accountcustomer.getFullName()%></a>
                                     <div class="dropdown-menu" >
                                         <a class="dropdown-item" href="Profile">Profile</a>
+                                        <a class="dropdown-item" href="http://localhost:8080/WA/Booking/history.jsp">History</a>
+                                        <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="Booking_Logout">Log out</a>
                                     </div>
                                     <% }%>

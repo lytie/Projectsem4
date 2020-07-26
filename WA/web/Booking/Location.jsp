@@ -1,4 +1,6 @@
 
+<%@page import="entities.Location"%>
+<%@page import="java.util.List"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@page  import="bean.common"%>
@@ -52,13 +54,13 @@
             
             <!-- slider Area Start-->
         <div class="slider-area">
-            <div class="single-slider hero-overly slider-height2 d-flex align-items-center" data-background="assets/img/hero/servicespage_hero.jpg" >
+            <div class="single-slider hero-overly slider-height2 d-flex align-items-center" data-background="<%=common.urlImg%>/img/locationpage.jpg" >
                 <div class="container">
                     <div class="row ">
                         <div class="col-md-11 offset-xl-1 offset-lg-1 offset-md-1">
                             <div class="hero-caption">
-                                <span>Services</span>
-                                <h2>Services</h2>
+                                <span>Location</span>
+                                <h2>Location</h2>
                             </div>
                         </div>
                     </div>
@@ -69,37 +71,57 @@
         
         <!-- Dining Start -->
         <div class="dining-area dining-padding-top">
+            
+            
+            <%
+                List<Location> list=(List<Location>)request.getAttribute("location");
+                
+                    for (Location l : list) {
+                            
+                        if(l.getLocationId()%2!=0){
+                        
+                %>
             <!-- Single Left img -->
-            <div class="single-dining-area left-img">
+            <div class="single-dining-area" id="L<%=l.getLocationId() %>">
                 <div class="container">
                     <div class="row justify-content-end">
+                        <div class="col-lg-4 col-md-4">
+                            <img src="<%=common.urlImg%>/img/<%=l.getLocationUrl() %>" alt="img"/>
+                        </div>
                         <div class="col-lg-8 col-md-8">
                             <div class="dining-caption">
                                 
-                                <h3>Dining & Drinks</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.
-                                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
-                                <span>Our resturent</span>
+                               <h3><%=l.getLocationName() %></h3>
+                                <p><%=l.getIntroduce() %></p>
+                                <span>Address: <%=l.getAddress() %></span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div> 
+            <%}else{
+                %>
             <!-- single Right img -->
-            <div class="single-dining-area right-img">
+            <div class="single-dining-area " L<%=l.getLocationId() %>>
                 <div class="container">
                     <div class="row justify-content-start">
                         <div class="col-lg-8 col-md-8">
                             <div class="dining-caption text-right">
-                                <span>Our Pool</span>
-                                <h3>Swimming Pool</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod<br> tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim <br>veniam, quis nostrud.</p>
-                                <a href="#" class="btn border-btn">Learn More  <i class="ti-angle-right"></i></a>
+                                <h3><%=l.getLocationName() %></h3>
+                                <p><%=l.getIntroduce() %></p>
+                                <span>Address: <%=l.getAddress() %></span>
                             </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <img src="<%=common.urlImg%>/img/<%=l.getLocationUrl() %>" alt="img"/>
+
                         </div>
                     </div>
                 </div>
             </div> 
+            <% }
+}
+                %>
         </div>
         <!-- Dining End -->
         </main>

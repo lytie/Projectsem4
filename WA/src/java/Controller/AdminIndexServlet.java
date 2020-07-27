@@ -8,6 +8,7 @@ package Controller;
 import entities.Accountcustomer;
 import entities.Feedback;
 import entities.Qrcode;
+import entities.Receipt;
 import entities.Receiptcomponent;
 import entities.Room;
 import entities.Ticket;
@@ -28,6 +29,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.GenericType;
 import wsc.AccountcustomerClient;
 import wsc.AdminIndexClient;
+import wsc.QrcodeClient;
+import wsc.ReceiptClient;
 
 /**
  *
@@ -50,6 +53,8 @@ public class AdminIndexServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             AdminIndexClient adminIndexClient = new AdminIndexClient();
+            QrcodeClient qrcodeClient = new QrcodeClient();
+            ReceiptClient receiptClient = new ReceiptClient();
             GenericType<List<Receiptcomponent>> genListReceiptcomponent = new GenericType<List<Receiptcomponent>>() {
             };
             GenericType<List<Qrcode>> genListQrcode = new GenericType<List<Qrcode>>() {
@@ -60,24 +65,63 @@ public class AdminIndexServlet extends HttpServlet {
             };
             GenericType<List<Accountcustomer>> genListAccountcustomer = new GenericType<List<Accountcustomer>>() {
             };
+            GenericType<List<Receipt>> genListReceipt = new GenericType<List<Receipt>>() {
+            };
             //List<Accountcustomer> listAccountcustomers = accountcustomerClient.findAll_JSON(typ);
             Date date = new Date();
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Calendar cal = Calendar.getInstance();
             cal.setTime(dateFormat.parse(dateFormat.format(date)));
             cal.add(Calendar.DATE, 1);
+            Calendar calyesterday = Calendar.getInstance();
+            calyesterday.add(Calendar.DATE, -1);
+            
             String today = dateFormat.format(date);
             String nextday = dateFormat.format(cal.getTime());
+            String yesterday = dateFormat.format(calyesterday.getTime());
+            
             List<Receiptcomponent> listReceiptcomponents = adminIndexClient.getnewFoodandDrinkOrders(genListReceiptcomponent, today, nextday);
             List<Qrcode> listQrcodes = adminIndexClient.getnewRoomBooked(genListQrcode, today, nextday);
             List<Feedback> listFeedbacks = adminIndexClient.getnewFeedBack(genListFeedback, today, nextday);
             List<Ticket> listTickets = adminIndexClient.getnewTicketSold(genListTicket, today, nextday);
             List<Accountcustomer> listAccountcustomers = adminIndexClient.getnewUserRegistrations(genListAccountcustomer, today, nextday);
+            List<Receipt> listReceipts = adminIndexClient.getnewPaidReceipt(genListReceipt, today, nextday);
+            
+            float yesterdayrevenue = 0;
+            float allrevenue = 0;
+            float allbookingdepositsrevenue =0;
+            float allpaidbillrevenue = 0;
+            List<Qrcode> listyesterdayQrcodes = adminIndexClient.getnewRoomBooked(genListQrcode, yesterday, today);
+            List<Receipt> listyesterdayReceipts = adminIndexClient.getnewPaidReceipt(genListReceipt, yesterday, today);
+            for (Receipt receipt : listyesterdayReceipts) {
+                yesterdayrevenue += receipt.getTotal();
+            }
+            for (Qrcode qrcode : listyesterdayQrcodes) {
+                yesterdayrevenue += qrcode.getDeposits();
+            }
+            List<Qrcode> listAllQrcodes = qrcodeClient.findAll_JSON(genListQrcode);
+            List<Receipt> listAllReceipts = receiptClient.findAll_JSON(genListReceipt);
+            for (Receipt receipt : listAllReceipts) {
+                if(receipt.getTotal()!=null){
+                    allpaidbillrevenue += receipt.getTotal();
+                }
+            }
+            for (Qrcode qrcode : listAllQrcodes) {
+                if (qrcode.getDeposits()!=null) {
+                  allbookingdepositsrevenue += qrcode.getDeposits();  
+                }
+            }
+            allrevenue = allpaidbillrevenue +allbookingdepositsrevenue;
             request.setAttribute("listReceiptcomponents", listReceiptcomponents);
             request.setAttribute("listQrcodes", listQrcodes);
             request.setAttribute("listFeedbacks", listFeedbacks);
             request.setAttribute("listTickets", listTickets);
             request.setAttribute("listAccountcustomers", listAccountcustomers);
+            request.setAttribute("listReceipts", listReceipts);
+            request.setAttribute("yesterdayrevenue", yesterdayrevenue);
+            request.setAttribute("allpaidbillrevenue", allpaidbillrevenue);
+            request.setAttribute("allbookingdepositsrevenue", allbookingdepositsrevenue);
+            request.setAttribute("allrevenue", allrevenue);
             request.getRequestDispatcher("AdminTemplate/index.jsp").forward(request, response);
         } catch (ParseException ex) {
             Logger.getLogger(AdminIndexServlet.class.getName()).log(Level.SEVERE, null, ex);

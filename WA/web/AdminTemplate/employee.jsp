@@ -78,7 +78,7 @@
                                             </thead>
                                             <tbody>
                                                     <%
-                                                        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+                                                        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
                                                         List<Accountemployee> listAccE = (List<Accountemployee>) request.getAttribute("listAccE");
                                                         for(Accountemployee accountemployee:listAccE){
                                                     %>
@@ -88,7 +88,7 @@
                                                             <td width="15%"><%=accountemployee.getEmail()%></td>
                                                             <td width="15%"><%=accountemployee.getPhone() %></td>
                                                             <td width="20%"><%=format.format(accountemployee.getDateOfBirth()) %></td>
-                                                            <td width="10%"><%=accountemployee.getRoleId() %></td>
+                                                            <td width="10%"><%=accountemployee.getRoleId().getRoleName() %></td>
                                                             
                                                             >
                                                             <td>

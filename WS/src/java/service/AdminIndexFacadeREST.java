@@ -9,6 +9,7 @@ package service;
 import entities.Accountcustomer;
 import entities.Feedback;
 import entities.Qrcode;
+import entities.Receipt;
 import entities.Receiptcomponent;
 import entities.Ticket;
 import java.text.ParseException;
@@ -118,5 +119,17 @@ public class AdminIndexFacadeREST {
                 .setParameter(2, nextday)
                 .getResultList();
         return listTicket;
+    }
+    
+    @GET
+    @Path("getnewpaidreceipt/{today}/{nextday}")
+    @Produces("application/json")
+    public List<Receipt> getnewPaidReceipt(@PathParam("today")String today,@PathParam("nextday")String nextday){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-mm-dd");
+        String query = "SELECT * FROM receipt WHERE PayDate >= ? and PayDate < ?";
+        List<Receipt> listReceipt = (List<Receipt>) em.createNativeQuery(query,Receipt.class).setParameter(1,today)
+                .setParameter(2, nextday)
+                .getResultList();
+        return listReceipt;
     }
 }

@@ -33,6 +33,12 @@ public class AdminIndexClient {
         webTarget = client.target(BASE_URI).path("adminindex");
     }
 
+    public <T> T getnewPaidReceipt(javax.ws.rs.core.GenericType<T> responseType, String today, String nextday) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("getnewpaidreceipt/{0}/{1}", new Object[]{today, nextday}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+
     public <T> T getnewRoomBooked(javax.ws.rs.core.GenericType<T> responseType, String today, String nextday) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path(java.text.MessageFormat.format("getnewroombooked/{0}/{1}", new Object[]{today, nextday}));

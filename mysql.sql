@@ -60,6 +60,7 @@ CREATE TABLE `accountemployee` (
   `Phone` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `DateOfBirth` datetime DEFAULT NULL,
   `RoleId` int DEFAULT NULL,
+  `Status` bit(1) DEFAULT b'0',
   PRIMARY KEY (`accountId`),
   KEY `FK_accountemployee_role` (`RoleId`),
   CONSTRAINT `FK_accountemployee_role` FOREIGN KEY (`RoleId`) REFERENCES `role` (`RoleId`)
@@ -72,7 +73,7 @@ CREATE TABLE `accountemployee` (
 
 LOCK TABLES `accountemployee` WRITE;
 /*!40000 ALTER TABLE `accountemployee` DISABLE KEYS */;
-INSERT INTO `accountemployee` VALUES (1,'bao@gmail.com','123456','Trịnh Thiêm Bảo','0940223412','2000-10-10 00:00:00',1),(2,'thai@gmail.com','123456','Nguyễn Quốc Thái','0903441287','2000-12-06 00:00:00',1);
+INSERT INTO `accountemployee` VALUES (1,'bao@gmail.com','123456','Trịnh Thiêm Bảo','0940223412','2000-10-10 00:00:00',1,_binary '\0'),(2,'thai@gmail.com','123456','Nguyễn Quốc Thái','0903441287','2000-12-06 00:00:00',1,_binary '\0');
 /*!40000 ALTER TABLE `accountemployee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -627,4 +628,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-27  0:48:16
+-- Dump completed on 2020-07-27 16:45:49

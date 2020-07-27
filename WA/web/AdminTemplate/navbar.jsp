@@ -69,7 +69,7 @@
             <!-- Main Sidebar Container -->
             <aside class="main-sidebar sidebar-dark-primary elevation-4">
                 <!-- Brand Logo -->
-                <a href="index.jsp" class="brand-link">
+                <a href="AdminIndexServlet" class="brand-link">
                     <img src="images/admintemplate/logo.png" alt="AdminLTE Logo" class="brand-image img-square "
                          style="opacity: .8">
                     <span class="brand-text font-weight-light">Haven Deluxe</span>
@@ -79,11 +79,8 @@
                 <div class="sidebar">
                     <!-- Sidebar user (optional) -->
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                        <div class="image">
-                            <img src="images/admintemplate/user2-160x160.jpg" class="img-square elevation-2" alt="User Image">
-                        </div>
-                        <div class="info">
-                            <a href="index.jsp" class="d-block">HOME PAGE</a>
+                        <div class="info col-12">
+                            <a href="AdminIndexServlet" class="d-block">HOME PAGE/<span style="color: #c59636">Trinh Thiem Bao</span></a>
                         </div>
                     </div>
 
@@ -94,7 +91,7 @@
                    with font-awesome or any other icon font library -->
 
                             <li class="nav-item has-treeview">
-                                <a href="employee.jsp" class="nav-link">
+                                <a href="Admin_Employee" class="nav-link">
                                     <i class="nav-icon fa fa-user"></i>
                                     <p>
                                         Employee
@@ -115,7 +112,7 @@
 
 
                                     <li class="nav-item">
-                                        <a href="customers.jsp" class="nav-link">
+                                        <a href="Admin_Customer" class="nav-link">
                                             <i class="fa fa-sort-down nav-icon"></i>
                                             <p>Information</p>
                                         </a>
@@ -217,7 +214,15 @@
                                 </a>
 
                             </li>
-                            
+                            <li class="nav-item has-treeview">
+                                <a href="Admin_QrCode" class="nav-link">
+                                    <i class="nav-icon fa fa-qrcode"></i>
+                                    <p>
+                                        Qrcode
+                                    </p>
+                                </a>
+
+                            </li>
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon far fa-envelope"></i>

@@ -11,10 +11,33 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 <%
     List<Receiptcomponent> listReceiptcomponents =(List<Receiptcomponent>) request.getAttribute("listReceiptcomponents");
+    float bookingdeposits = 0;
+    float paidbillrevenue = 0;
     List<Qrcode> listQrcodes =(List<Qrcode>) request.getAttribute("listQrcodes");
+    for(Qrcode qrcode : listQrcodes){
+        bookingdeposits += qrcode.getDeposits();
+    }
     List<Feedback> listFeedbacks =(List<Feedback>) request.getAttribute("listFeedbacks");
     List<Ticket> listTickets =(List<Ticket>) request.getAttribute("listTickets");
     List<Accountcustomer> listAccountcustomers =(List<Accountcustomer>) request.getAttribute("listAccountcustomers");
+    List<Receipt> listReceipts =(List<Receipt>) request.getAttribute("listReceipts");
+    for(Receipt receipt : listReceipts){
+        paidbillrevenue += receipt.getTotal();
+    }
+    float todayrevenue = bookingdeposits + paidbillrevenue;
+    float yesterdayrevenue = (Float)request.getAttribute("yesterdayrevenue");
+    float allpaidbillrevenue = (Float)request.getAttribute("allpaidbillrevenue");
+    float allbookingdepositsrevenue = (Float)request.getAttribute("allbookingdepositsrevenue");
+    float allrevenue = (Float)request.getAttribute("allrevenue");
+    float distance2day = todayrevenue - yesterdayrevenue;
+    float growthvalue = distance2day/yesterdayrevenue*100;
+    System.out.println(growthvalue);
+    if(Float.isInfinite(growthvalue)){
+        growthvalue = todayrevenue;
+    }
+    if(Float.isNaN(growthvalue)){
+        growthvalue = 0;
+    }
 %>
 <!DOCTYPE html>
 <html>
@@ -74,33 +97,41 @@
                                         <div class="chart tab-pane active" id="revenue-chart" style="position: relative;">                                                 
                                             <div class="row">
                                                 <div class="col-md-6 text-uppercase">From Booking Deposits:</div>
-                                                <div class="col-md-6 text-right">$400</div>
+                                                <div class="col-md-6 text-right">$<%=bookingdeposits%></div>
                                             </div>   
                                             <div class="row">
                                                 <div class="col-md-6 text-uppercase">from Paid bill:</div>
-                                                <div class="col-md-6 text-right">$600</div>
+                                                <div class="col-md-6 text-right">$<%=paidbillrevenue%></div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6 text-uppercase">Total:</div>
-                                                <div class="col-md-6 text-right">$1000</div>
+                                                <div class="col-md-6 text-right">$<%=todayrevenue%></div>
                                             </div> 
                                             <div class="row " style="border-top:1px solid;padding-top: 10px" >
                                                 <div class="col-md-6 text-uppercase">Yesterday revenue:</div>
-                                                <div class="col-md-6 text-right"><span style="color: green;padding-right: 10px">11,11%<i class="fa fa-arrow-up" aria-hidden="true"></i></span>$900</div>
+                                                <div class="col-md-6 text-right">
+                                                    <%
+                                                        if(growthvalue<0){
+                                                    %>
+                                                    <span style="color: red;padding-right: 10px"><%=growthvalue%>%<i class="fa fa-arrow-down" aria-hidden="true"></i></span>$<%=yesterdayrevenue%>
+                                                        <%}else{%>
+                                                    <span style="color: green;padding-right: 10px"><%=growthvalue%>%<i class="fa fa-arrow-up" aria-hidden="true"></i></span>$<%=yesterdayrevenue%>
+                                                        <%}%>
+                                                </div>
                                             </div> 
                                         </div>
                                         <div class="chart tab-pane" id="sales-chart" style="position: relative;">                    
                                             <div class="row">
                                                 <div class="col-md-6 text-uppercase">From Booking Deposits:</div>
-                                                <div class="col-md-6 text-right">$400</div>
+                                                <div class="col-md-6 text-right">$<%=allbookingdepositsrevenue%></div>
                                             </div>   
                                             <div class="row">
                                                 <div class="col-md-6 text-uppercase">from Paid bill:</div>
-                                                <div class="col-md-6 text-right">$600</div>
+                                                <div class="col-md-6 text-right">$<%=allpaidbillrevenue%></div>
                                             </div>
                                             <div class="row " style="border-top:1px solid;padding-top: 10px" >
                                                 <div class="col-md-6 text-uppercase">Total revenue:</div>
-                                                <div class="col-md-6  text-right">$1000</div>
+                                                <div class="col-md-6  text-right">$<%=allrevenue%></div>
                                             </div> 
                                         </div>  
                                     </div>
@@ -221,10 +252,7 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-<footer class="main-footer">
-    <strong>Copyright &copy; 2014-2019 <span class="text-warning">Haven deluxe</span>.</strong>
-    All rights reserved.
-</footer>
+<%@include file="footer.jsp" %>
 
 <!-- Control Sidebar -->
 <aside class="control-sidebar control-sidebar-dark">
@@ -236,6 +264,43 @@
 
 <!-- jQuery -->
 <%@include file="jslink.jsp" %>
+<script type="text/javascript">
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Today revenue', 'Deposits', 'PaidReceipt', 'Other'],
+            datasets: [{
+                    
+                    label: 'Today revenue <%=todayrevenue%>$',
+                    data: [<%=todayrevenue%>, <%=bookingdeposits%>,<%=paidbillrevenue%>,0],
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',                     
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+            }
+        }
+    });
+</script>
+
 </body>
 </html>
 

@@ -83,7 +83,7 @@
                                                         <td ><%=receipt.getTotal()%></td>
                                                         <td ><%=paystatus%></td>
                                                         <td>
-                                                            <a class="btn btn-info btn-sm" href="Admin_UpdateReceipt">
+                                                            <a class="btn btn-info btn-sm" href="Admin_ReceiptInfo?receiptid=<%=receipt.getReceiptId()%>">
                                                                 <i class="fas fa-info">
                                                                 </i> See Details
                                                             </a>

@@ -56,8 +56,6 @@
                             <div class="card">
 
                                 <!-- /.card-header -->
-
-
                                 <div class="card">
                                     <div class="card-header">
                                         <h3 class="card-title">List Employee</h3>
@@ -73,7 +71,6 @@
                                                     <th>Date Of Birth</th>
                                                     <th>Role</th>
                                                     <th>Action</th>
-
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -89,8 +86,7 @@
                                                             <td width="15%"><%=accountemployee.getPhone() %></td>
                                                             <td width="20%"><%=format.format(accountemployee.getDateOfBirth()) %></td>
                                                             <td width="10%"><%=accountemployee.getRoleId().getRoleName() %></td>
-                                                            
-                                                            >
+
                                                             <td>
 
                                                                 <a class="btn btn-info btn-sm" href="Admin_UpdateEmployee">

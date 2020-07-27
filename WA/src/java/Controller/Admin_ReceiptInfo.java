@@ -6,7 +6,8 @@
 
 package Controller;
 
-import entities.Qrcode;
+import entities.Receipt;
+import entities.Receiptcomponent;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -15,13 +16,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.GenericType;
-import wsc.QrcodeClient;
+import wsc.ReceiptClient;
+import wsc.ReceiptcomponentClient;
 
 /**
  *
  * @author Admin
  */
-public class Admin_QrCode extends HttpServlet {
+public class Admin_ReceiptInfo extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,12 +38,17 @@ public class Admin_QrCode extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            QrcodeClient qrcodeClient = new QrcodeClient();
-            GenericType<List<Qrcode>> genericType = new GenericType<List<Qrcode>>() {
-            };
-            List<Qrcode> listQrcode = qrcodeClient.findAll_JSON(genericType);
-            request.setAttribute("listQrcode", listQrcode);
-            request.getRequestDispatcher("AdminTemplate/qrcode.jsp").forward(request, response);
+            /* TODO output your page here. You may use following sample code. */
+            String receiptid = request.getParameter("receiptid");
+            ReceiptcomponentClient receiptcomponentClient = new ReceiptcomponentClient();
+            ReceiptClient receiptClient = new ReceiptClient();
+            GenericType<List<Receiptcomponent>> genListReceiptcomponent = new GenericType<List<Receiptcomponent>>(){};
+            GenericType<Receipt> genReceipt = new GenericType<Receipt>(){};
+            List<Receiptcomponent> listReceiptcomponent = receiptcomponentClient.findbyReceiptID_JSON(genListReceiptcomponent, receiptid);
+            Receipt receipt = receiptClient.find_JSON(genReceipt, receiptid);
+            request.setAttribute("listReceiptcomponent", listReceiptcomponent);
+            request.setAttribute("receipt", receipt);
+            request.getRequestDispatcher("AdminTemplate/receiptinfo.jsp").forward(request, response);
         }
     }
 

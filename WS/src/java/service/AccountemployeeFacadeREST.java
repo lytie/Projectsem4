@@ -68,6 +68,35 @@ public class AccountemployeeFacadeREST extends AbstractFacade<Accountemployee> {
     public List<Accountemployee> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
+    
+    @GET
+    @Path("login/{email}/{password}")
+    @Produces({"application/xml", "application/json"})
+    public Accountemployee login(@PathParam("email") String email, @PathParam("password") String password) {
+        String query = "SELECT * FROM accountemployee WHERE Email = ? AND Password = ?";
+        try {
+            return (Accountemployee) em.createNativeQuery(query,Accountemployee.class)
+                    .setParameter(1, email)
+                    .setParameter(2, password)
+                    .getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    @GET
+    @Path("findbyEmail/{email}")
+    @Produces({"application/xml", "application/json"})
+    public Accountemployee findbyEmail(@PathParam("email") String email) {
+        String query = "SELECT * FROM accountemployee WHERE Email = ? ";
+        try {
+            return (Accountemployee) em.createNativeQuery(query,Accountemployee.class)
+                    .setParameter(1, email)
+                    .getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
     @GET
     @Path("count")

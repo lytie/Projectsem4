@@ -241,6 +241,18 @@
         <servlet-name>Admin_ReceiptInfo</servlet-name>
         <servlet-class>Controller.Admin_ReceiptInfo</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Admin_Login</servlet-name>
+        <servlet-class>Controller.Admin_Login</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Admin_ForgetPassword</servlet-name>
+        <servlet-class>Controller.Admin_ForgetPassword</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Admin_RecoverPassword</servlet-name>
+        <servlet-class>Controller.Admin_RecoverPassword</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CustomerPageMenuServlet</servlet-name>
         <url-pattern>/CustomerPageMenuServlet</url-pattern>
@@ -476,6 +488,18 @@
     <servlet-mapping>
         <servlet-name>Admin_ReceiptInfo</servlet-name>
         <url-pattern>/Admin_ReceiptInfo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Admin_Login</servlet-name>
+        <url-pattern>/Admin_Login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Admin_ForgetPassword</servlet-name>
+        <url-pattern>/Admin_ForgetPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Admin_RecoverPassword</servlet-name>
+        <url-pattern>/Admin_RecoverPassword</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

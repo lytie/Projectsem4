@@ -40,6 +40,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Accountemployee.findByPhone", query = "SELECT a FROM Accountemployee a WHERE a.phone = :phone"),
     @NamedQuery(name = "Accountemployee.findByDateOfBirth", query = "SELECT a FROM Accountemployee a WHERE a.dateOfBirth = :dateOfBirth")})
 public class Accountemployee implements Serializable {
+    @Size(max = 255)
+    @Column(name = "Token", length = 255)
+    private String token;
     @Column(name = "Status")
     private Boolean status;
     private static final long serialVersionUID = 1L;
@@ -163,6 +166,14 @@ public class Accountemployee implements Serializable {
 
     public void setStatus(Boolean status) {
         this.status = status;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
     
 }

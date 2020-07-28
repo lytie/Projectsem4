@@ -33,7 +33,13 @@ public class Admin_UpdateRoom extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-             request.getRequestDispatcher("AdminTemplate/updateroom.jsp").forward(request, response);
+            
+            
+            int id=Integer.parseInt(request.getParameter("IdRoom"));
+            
+            
+            
+            
         }
     }
 

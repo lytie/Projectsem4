@@ -3,6 +3,7 @@
     Created on : Jul 13, 2020, 4:12:44 PM
     Author     : ADMIN
 --%>
+<%@page import="bean.common"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="entities.Room"%>
@@ -20,6 +21,8 @@
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="AdminTemplate/plugins/select2/css/select2.min.css">
+        <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+
         <!-- Font Awesome -->
         <%@include file="css.jsp" %>
         <style>
@@ -66,8 +69,8 @@
                                     <label>Location</label>
                                     <select class="select" data-placeholder="Select a State" name="location" style="width: 60%">
 
-                                        <c:forEach items="${booking_bookMB.listLocation()}" var="l">
-                                            <option value="${l.locationId}" <c:if test="${locationOne.locationId==l.locationId}">selected</c:if>>${l.locationName}</option>
+                                        <c:forEach items="${booking_bookMB.listLocation()}" var="lo">
+                                            <option value="${lo.locationId}" <c:if test="${locationOne.locationId==lo.locationId}">selected</c:if>>${lo.locationName}</option>
                                         </c:forEach>
                                     </select>
 
@@ -119,8 +122,9 @@
 
                                                     <form action="" method="post">
                                                         <div class="grid-container">
-                                                            <div class="Price">
-                                                                Price:<input value="${l.Price}" type="text" name="price" />
+                                                            <div class="Price" style="font-size: 25px;">
+                                                                Price:
+                                                                <div><input value="${l.price}" type="text" name="price" /></div>
                                                             </div>
                                                             <div class="Type">
                                                                 Type:${l.roomTypeId.roomTypeName}
@@ -132,23 +136,78 @@
                                                                 Status:  <select class="select" name="status" >
                                                                     <option value="true" <c:if test="${l.status==true}">selected</c:if> >active</option>
                                                                     <option value="false" <c:if test="${l.status==false}">selected</c:if> >inactive</option>
-                                                                </select>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="Description">
+                                                                    <textarea cols="100" rows="5">${l.description}</textarea>
+
                                                             </div>
-                                                            <div class="Description">
-                                                                <p>
-                                                                    ${l.Price}
-                                                                </p>
+                                                            <div>Bed Option:${l.bedOption}</div>
+                                                            <div>Size: ${l.size}<sup>2</sup></div>
+                                                            <div>View: ${l.view}</div>
+                                                            <div>Capacity: 
+                                                                <span><c:if test="${l.capacity%2!=0}">${(l.capacity-1)/2}</c:if><c:if test="${l.capacity%2==0}">${(l.capacity)/2}</c:if> Adults</span>
+                                                                <span>${l.capacity%2} Children</span>
                                                             </div>
-                                                            <div>Bed Option:${l.Price}</div>
-                                                            <div>Size: ${l.Price}<sup>2</sup></div>
-                                                            <div>View: ${l.Price}</div>
-                                                            <div>Capacity: ${l.Price}</div>
                                                         </div>
-                                                        <div class="d-flex">
+                                                        <div style="margin-top: 20px;">
+                                                            <div class="d-flex justify-content-around">
+                                                                <c:forEach items="${booking_bookMB.listRoomImg(l.roomId)}" var="img">
+                                                                    <div style="width: 15%;">
+                                                                        <img src="<%=common.urlImg%>/images/${img.url}" alt="Img Room" style="width: 100%;"/>
+                                                                        <p>Remove <input type="checkbox" value="${img.roomImageId}" name="ImgR${img.roomImageId}"/></p>
+
+                                                                    </div>
+
+                                                                </c:forEach>
+
+
+                                                            </div>
+                                                        </div>
+                                                        <div style="margin-top: 20px; ">
+                                                            <div>
+                                                                <p id="plus${l.roomId}" style="cursor: pointer;">Add Image <i class='fas fa-plus' ></i></p> 
+                                                            </div>
+                                                            <script>
+                                                                $(document).ready(function () {
+                                                                var count = 0;
+                                                                $("#plus${l.roomId}").click(function () {
+                                                                $("#proper${l.roomId}").append("<div style='margin-left: 15px;padding:5px'>\n\
+                                                             <p><input type='file'  accept='image/*' name='image" + count + "' id='file" + count + "'  onchange='loadFile" + count + "(event)' style='display:none;'></p>\n\
+                                                             <p><label for='file" + count + "' style='cursor: pointer;color: #009900'>Upload Image</label></p>\n\
+                                                             <p><img id='output" + count + "' width='200' />\n\
+                                                                </p> <input type='text'  value='" + count + "'/>\n\
+                                                             <div id='detele' style='cursor: pointer;color:#CC0000 '>Remove Image</div>\n\
+                                                                 <script>\n\
+                                                                     var loadFile" + count + " = function(event) {\n\
+                                                                                 var image = document.getElementById('output" + count + "');\n\
+                                                                                 image.src = URL.createObjectURL(event.target.files[0]);\n\
+                                                                     };\n\
+                                                                 <\/script>\n\
+                                                        </div>");
+                                                                    count++;
+                                                                });
+                                                                
+                                                                $('#proper${l.roomId}').on('click', '#detele', function (e) {
+                                                                e.preventDefault();
+                                                                $(this).parent().remove();
+                                                                });
+                                                                document.getElementById("demo").value=count;
+                                                                });
+                                                            </script>
+                                                                <div class="" id="proper${l.roomId}" style="width: 100%;display: grid;grid-gap: 50px;grid-template-columns: auto auto auto auto; ">
+
+
+
+                                                            </div>
                                                             
-                                                        </div>
+                                                        </div> 
+                                                                <input type="hidden" id="demo" name="countImg"/>
+                                                                <div style="padding: 10px 45%">
+                                                                    <input type="submit" value="Save" class="btn btn-outline-primary"/>
+                                                                </div>
                                                     </form>
-                                                    
+
                                                 </div>
 
                                                 <!-- Modal footer -->
@@ -198,13 +257,13 @@
     </body>
     <script src="AdminTemplate/plugins/select2/js/select2.full.min.js"></script>
     <script>
-        $(function () {
-            //Initialize Select2 Elements
-            $('.select').select2()
+                                                                   $(function () {
+                                                                   //Initialize Select2 Elements
+                                                                   $('.select').select2()
 
 
 
-        });
+                                                                   });
     </script>
 </html>
 

@@ -9,7 +9,6 @@ package Controller;
 import entities.Qrcode;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +20,7 @@ import wsc.QrcodeClient;
  *
  * @author Admin
  */
-public class Admin_QrCode extends HttpServlet {
+public class Admin_QrCodeInfo extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,12 +35,16 @@ public class Admin_QrCode extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            String id = request.getParameter("id");
+            if (id==null ||id.isEmpty()) {
+                String referer = request.getHeader("Referer");
+                response.sendRedirect(referer);
+            }
             QrcodeClient qrcodeClient = new QrcodeClient();
-            GenericType<List<Qrcode>> genericType = new GenericType<List<Qrcode>>() {
-            };
-            List<Qrcode> listQrcode = qrcodeClient.findAll_JSON(genericType);
-            request.setAttribute("listQrcode", listQrcode);
-            request.getRequestDispatcher("AdminTemplate/qrcode.jsp").forward(request, response);
+            GenericType<Qrcode> genQrcode = new GenericType<Qrcode>(){};
+            Qrcode qrcode = qrcodeClient.find_JSON(genQrcode, id);
+            request.setAttribute("qrcode", qrcode);
+            request.getRequestDispatcher("AdminTemplate/qrcodeinfo.jsp").forward(request, response);
         }
     }
 

@@ -233,6 +233,14 @@
         <servlet-name>Admin_QrCode</servlet-name>
         <servlet-class>Controller.Admin_QrCode</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Admin_QrCodeInfo</servlet-name>
+        <servlet-class>Controller.Admin_QrCodeInfo</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Admin_ReceiptInfo</servlet-name>
+        <servlet-class>Controller.Admin_ReceiptInfo</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CustomerPageMenuServlet</servlet-name>
         <url-pattern>/CustomerPageMenuServlet</url-pattern>
@@ -460,6 +468,14 @@
     <servlet-mapping>
         <servlet-name>Admin_QrCode</servlet-name>
         <url-pattern>/Admin_QrCode</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Admin_QrCodeInfo</servlet-name>
+        <url-pattern>/Admin_QrCodeInfo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Admin_ReceiptInfo</servlet-name>
+        <url-pattern>/Admin_ReceiptInfo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

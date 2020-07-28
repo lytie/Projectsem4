@@ -3,10 +3,12 @@
     Created on : Jul 13, 2020, 4:13:41 PM
     Author     : ADMIN
 --%>
+
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="entities.Accountemployee"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -74,18 +76,13 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                    <%
-                                                        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-                                                        List<Accountemployee> listAccE = (List<Accountemployee>) request.getAttribute("listAccE");
-                                                        for(Accountemployee accountemployee:listAccE){
-                                                    %>
-                                                    
-                                                        <tr>
-                                                            <td width="15%"><%=accountemployee.getFullName()%></td>
-                                                            <td width="15%"><%=accountemployee.getEmail()%></td>
-                                                            <td width="15%"><%=accountemployee.getPhone() %></td>
-                                                            <td width="20%"><%=format.format(accountemployee.getDateOfBirth()) %></td>
-                                                            <td width="10%"><%=accountemployee.getRoleId().getRoleName() %></td>
+                                                <c:forEach items="${listAccE}" var="s">
+                                                    <tr>
+                                                            <td width="15%">${s.getFullName()}</td>
+                                                            <td width="15%">${s.getEmail()}</td>
+                                                            <td width="15%">${s.getPhone()}</td>
+                                                            <td width="20%"><fmt:formatDate value="${s.getDateOfBirth()}" pattern="dd/MM/yyyy"/></td>
+                                                            <td width="10%">${s.getRoleId().getRoleName()}</td>
 
                                                             <td>
 
@@ -101,10 +98,7 @@
                                                                 </a>
                                                             </td>
                                                         </tr>
-                                                        <%
-                                                        }
-                                                        %>
-
+                                                </c:forEach>
                                             </tbody>
 
                                         </table>
@@ -122,12 +116,7 @@
             <!-- /.content -->
             </div>
             <!-- /.content-wrapper -->
-            <footer class="main-footer">
-                <div class="float-right d-none d-sm-block">
-                    <b>Version</b> 3.0.5
-                </div>
-                <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-            </footer>
+            <%@include file="footer.jsp" %>
 
             <!-- Control Sidebar -->
             <aside class="control-sidebar control-sidebar-dark">

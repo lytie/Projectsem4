@@ -6,7 +6,7 @@
     </context-param>
     <servlet>
         <servlet-name>CustomerPageMenuServlet</servlet-name>
-        <servlet-class>Controller.CustomerPageMenuServlet</servlet-class>
+        <servlet-class>CustomerController.CustomerPageMenuServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
@@ -15,31 +15,31 @@
     </servlet>
     <servlet>
         <servlet-name>CustomerPageAboutServlet</servlet-name>
-        <servlet-class>Controller.CustomerPageAboutServlet</servlet-class>
+        <servlet-class>CustomerController.CustomerPageAboutServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CustomerPageCartServlet</servlet-name>
-        <servlet-class>Controller.CustomerPageCartServlet</servlet-class>
+        <servlet-class>CustomerController.CustomerPageCartServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CustomerPageContactServlet</servlet-name>
-        <servlet-class>Controller.CustomerPageContactServlet</servlet-class>
+        <servlet-class>CustomerController.CustomerPageContactServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CustomerPageIndexServlet</servlet-name>
-        <servlet-class>Controller.CustomerPageIndexServlet</servlet-class>
+        <servlet-class>CustomerController.CustomerPageIndexServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CustomerPageInformationServlet</servlet-name>
-        <servlet-class>Controller.CustomerPageInformationServlet</servlet-class>
+        <servlet-class>CustomerController.CustomerPageInformationServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CustomerPageServicesMenuServlet</servlet-name>
-        <servlet-class>Controller.CustomerPageServicesMenuServlet</servlet-class>
+        <servlet-class>CustomerController.CustomerPageServicesMenuServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SessionCartServlet</servlet-name>
-        <servlet-class>Controller.SessionCartServlet</servlet-class>
+        <servlet-class>CustomerController.SessionCartServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AuthorizePaymentServlet</servlet-name>
@@ -55,203 +55,203 @@
     </servlet>
     <servlet>
         <servlet-name>Booking_bookServlet</servlet-name>
-        <servlet-class>Controller.Booking_bookServlet</servlet-class>
+        <servlet-class>BookingController.Booking_bookServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Booking_ConfirmInfo</servlet-name>
-        <servlet-class>Controller.Booking_ConfirmInfo</servlet-class>
+        <servlet-class>BookingController.Booking_ConfirmInfo</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Booking_signUpServlet</servlet-name>
-        <servlet-class>Controller.Booking_signUpServlet</servlet-class>
+        <servlet-class>BookingController.Booking_signUpServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SignUp</servlet-name>
-        <servlet-class>Controller.SignUp</servlet-class>
+        <servlet-class>BookingController.SignUp</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Booking</servlet-name>
-        <servlet-class>Controller.Booking</servlet-class>
+        <servlet-class>BookingController.Booking</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CustomerPageTicketServlet</servlet-name>
-        <servlet-class>Controller.CustomerPageTicketServlet</servlet-class>
+        <servlet-class>CustomerController.CustomerPageTicketServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Booking_LoginServlet</servlet-name>
-        <servlet-class>Controller.Booking_LoginServlet</servlet-class>
+        <servlet-class>BookingController.Booking_LoginServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Login</servlet-name>
-        <servlet-class>Controller.Login</servlet-class>
+        <servlet-class>BookingController.Login</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Haven</servlet-name>
-        <servlet-class>Controller.Haven</servlet-class>
+        <servlet-class>BookingController.Haven</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>VerifyAccountCustomer</servlet-name>
-        <servlet-class>Controller.VerifyAccountCustomer</servlet-class>
+        <servlet-class>BookingController.VerifyAccountCustomer</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Booking_Logout</servlet-name>
-        <servlet-class>Controller.Booking_Logout</servlet-class>
+        <servlet-class>BookingController.Booking_Logout</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Booking_ForgotPassword</servlet-name>
-        <servlet-class>Controller.Booking_ForgotPassword</servlet-class>
+        <servlet-class>BookingController.Booking_ForgotPassword</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Booking_resetPassword</servlet-name>
-        <servlet-class>Controller.Booking_resetPassword</servlet-class>
+        <servlet-class>BookingController.Booking_resetPassword</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ConfirmPassword</servlet-name>
-        <servlet-class>Controller.ConfirmPassword</servlet-class>
+        <servlet-class>BookingController.ConfirmPassword</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ForgotPassword</servlet-name>
-        <servlet-class>Controller.ForgotPassword</servlet-class>
+        <servlet-class>BookingController.ForgotPassword</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Profile</servlet-name>
-        <servlet-class>Controller.Profile</servlet-class>
+        <servlet-class>BookingController.Profile</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Booking_ChangePass</servlet-name>
-        <servlet-class>Controller.Booking_ChangePass</servlet-class>
+        <servlet-class>BookingController.Booking_ChangePass</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AdminIndexServlet</servlet-name>
-        <servlet-class>Controller.AdminIndexServlet</servlet-class>
+        <servlet-class>AdminController.AdminIndexServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Admin_AddConvenient</servlet-name>
-        <servlet-class>Controller.Admin_AddConvenient</servlet-class>
+        <servlet-class>AdminController.Admin_AddConvenient</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Admin_AddEmployee</servlet-name>
-        <servlet-class>Controller.Admin_AddEmployee</servlet-class>
+        <servlet-class>AdminController.Admin_AddEmployee</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Admin_AddLocation</servlet-name>
-        <servlet-class>Controller.Admin_AddLocation</servlet-class>
+        <servlet-class>AdminController.Admin_AddLocation</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Admin_AddRoom</servlet-name>
-        <servlet-class>Controller.Admin_AddRoom</servlet-class>
+        <servlet-class>AdminController.Admin_AddRoom</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Admin_AddRoomImage</servlet-name>
-        <servlet-class>Controller.Admin_AddRoomImage</servlet-class>
+        <servlet-class>AdminController.Admin_AddRoomImage</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Admin_AddRoomType</servlet-name>
-        <servlet-class>Controller.Admin_AddRoomType</servlet-class>
+        <servlet-class>AdminController.Admin_AddRoomType</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Admin_AddService</servlet-name>
-        <servlet-class>Controller.Admin_AddService</servlet-class>
+        <servlet-class>AdminController.Admin_AddService</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Admin_Convenient</servlet-name>
-        <servlet-class>Controller.Admin_Convenient</servlet-class>
+        <servlet-class>AdminController.Admin_Convenient</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Admin_Customer</servlet-name>
-        <servlet-class>Controller.Admin_Customer</servlet-class>
+        <servlet-class>AdminController.Admin_Customer</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Admin_Employee</servlet-name>
-        <servlet-class>Controller.Admin_Employee</servlet-class>
+        <servlet-class>AdminController.Admin_Employee</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Admin_Location</servlet-name>
-        <servlet-class>Controller.Admin_Location</servlet-class>
+        <servlet-class>AdminController.Admin_Location</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Admin_Receipt</servlet-name>
-        <servlet-class>Controller.Admin_Receipt</servlet-class>
+        <servlet-class>AdminController.Admin_Receipt</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Admin_ReceiptComponent</servlet-name>
-        <servlet-class>Controller.Admin_ReceiptComponent</servlet-class>
+        <servlet-class>AdminController.Admin_ReceiptComponent</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Admin_Room</servlet-name>
-        <servlet-class>Controller.Admin_Room</servlet-class>
+        <servlet-class>AdminController.Admin_Room</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Admin_RoomImage</servlet-name>
-        <servlet-class>Controller.Admin_RoomImage</servlet-class>
+        <servlet-class>AdminController.Admin_RoomImage</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Admin_RoomType</servlet-name>
-        <servlet-class>Controller.Admin_RoomType</servlet-class>
+        <servlet-class>AdminController.Admin_RoomType</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Admin_Services</servlet-name>
-        <servlet-class>Controller.Admin_Services</servlet-class>
+        <servlet-class>AdminController.Admin_Services</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Admin_UpdateConvenient</servlet-name>
-        <servlet-class>Controller.Admin_UpdateConvenient</servlet-class>
+        <servlet-class>AdminController.Admin_UpdateConvenient</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Admin_UpdateEmployee</servlet-name>
-        <servlet-class>Controller.Admin_UpdateEmployee</servlet-class>
+        <servlet-class>AdminController.Admin_UpdateEmployee</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Admin_UpdateLocation</servlet-name>
-        <servlet-class>Controller.Admin_UpdateLocation</servlet-class>
+        <servlet-class>AdminController.Admin_UpdateLocation</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Admin_UpdateReceipt</servlet-name>
-        <servlet-class>Controller.Admin_UpdateReceipt</servlet-class>
+        <servlet-class>AdminController.Admin_UpdateReceipt</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Admin_UpdateRoom</servlet-name>
-        <servlet-class>Controller.Admin_UpdateRoom</servlet-class>
+        <servlet-class>AdminController.Admin_UpdateRoom</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Admin_UpdateRoomImage</servlet-name>
-        <servlet-class>Controller.Admin_UpdateRoomImage</servlet-class>
+        <servlet-class>AdminController.Admin_UpdateRoomImage</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Admin_UpdateRoomType</servlet-name>
-        <servlet-class>Controller.Admin_UpdateRoomType</servlet-class>
+        <servlet-class>AdminController.Admin_UpdateRoomType</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Admin_UpdateService</servlet-name>
-        <servlet-class>Controller.Admin_UpdateService</servlet-class>
+        <servlet-class>AdminController.Admin_UpdateService</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Booking_Location</servlet-name>
-        <servlet-class>Controller.Booking_Location</servlet-class>
+        <servlet-class>BookingController.Booking_Location</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Admin_QrCode</servlet-name>
-        <servlet-class>Controller.Admin_QrCode</servlet-class>
+        <servlet-class>AdminController.Admin_QrCode</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Admin_QrCodeInfo</servlet-name>
-        <servlet-class>Controller.Admin_QrCodeInfo</servlet-class>
+        <servlet-class>AdminController.Admin_QrCodeInfo</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Admin_ReceiptInfo</servlet-name>
-        <servlet-class>Controller.Admin_ReceiptInfo</servlet-class>
+        <servlet-class>AdminController.Admin_ReceiptInfo</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Admin_Login</servlet-name>
-        <servlet-class>Controller.Admin_Login</servlet-class>
+        <servlet-class>AdminController.Admin_Login</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Admin_ForgetPassword</servlet-name>
-        <servlet-class>Controller.Admin_ForgetPassword</servlet-class>
+        <servlet-class>AdminController.Admin_ForgetPassword</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Admin_RecoverPassword</servlet-name>
-        <servlet-class>Controller.Admin_RecoverPassword</servlet-class>
+        <servlet-class>AdminController.Admin_RecoverPassword</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>CustomerPageMenuServlet</servlet-name>

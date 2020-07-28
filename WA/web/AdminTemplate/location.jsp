@@ -69,26 +69,26 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    
-                                                   <c:forEach items="${listlc}" var="lc">
-                                                <tr>
-                                                    <td width="35%"><c:out value="${lc.getLocationName()}"/></td>
-                                                    
-                                                    <td width="200"><img src="images/img/${lc.getLocationUrl()}" width="300" height="130" /></td>
-                                                    
-                                                    <td width="20%">
 
-                                                        <a class="btn btn-info btn-sm" href="Admin_UpdateLocation">
-                                                            <i class="fas fa-pencil-alt">
-                              </i> Edit
-                                                        </a>
-                                                        <a class="btn btn-danger btn-sm" href="#">
-                                                            <i class="fas fa-trash">
-                              </i> Delete
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                </c:forEach>
+                                                    <c:forEach items="${listlc}" var="lc">
+                                                        <tr>
+                                                            <td width="35%"><c:out value="${lc.getLocationName()}"/></td>
+
+                                                            <td width="200"><img src="images/img/${lc.getLocationUrl()}" width="300" height="130" /></td>
+
+                                                            <td width="20%">
+
+                                                                <a class="btn btn-info btn-sm" href="Admin_UpdateLocation">
+                                                                    <i class="fas fa-pencil-alt">
+                                                                    </i> Edit
+                                                                </a>
+                                                                <a class="btn btn-danger btn-sm" href="#">
+                                                                    <i class="fas fa-trash">
+                                                                    </i> Delete
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
                                                 </tbody>
 
                                             </table>
@@ -106,12 +106,7 @@
                 <!-- /.content -->
             </div>
             <!-- /.content-wrapper -->
-            <footer class="main-footer">
-                <div class="float-right d-none d-sm-block">
-                    <b>Version</b> 3.0.5
-                </div>
-                <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-            </footer>
+            <%@include file="footer.jsp" %>
 
             <!-- Control Sidebar -->
             <aside class="control-sidebar control-sidebar-dark">

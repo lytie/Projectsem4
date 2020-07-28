@@ -66,62 +66,57 @@
                                                 <label for="inputAddress">Phone</label>
                                                 <input type="text" class="form-control" id="inputAddress" placeholder="Phone">
                                             </div>
-                                                <div class="form-row">
-                                                    <div class="form-group col-md-6">
-                                                        <label for="inputPhone">Date Of Birth</label>
-                                                        <input type="datetime" class="form-control" id="inputCity"  required="true">
-                                                    </div>
-                                                    <div class="form-group col-md-4">
-                                                        <label for="inputState">Role</label>
-                                                        <select id="inputState" class="form-control">
-                                                            <option selected>--Role--</option>
-                                                            <option>Admin</option>
-                                                            <option>Reception</option>
-                                                            <option>Ticket Collector</option>
-                                                        </select>
-                                                    </div>
-
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="inputPhone">Date Of Birth</label>
+                                                    <input type="datetime" class="form-control" id="inputCity"  required="true">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="inputState">Role</label>
+                                                    <select id="inputState" class="form-control">
+                                                        <option selected>--Role--</option>
+                                                        <option>Admin</option>
+                                                        <option>Reception</option>
+                                                        <option>Ticket Collector</option>
+                                                    </select>
                                                 </div>
 
-                                                <!-- /.card-body -->
-                                                <div >
-                                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                                </div>
-                                                </form>
                                             </div>
-                                            <!-- /.card -->
-                                        </div>
-                                        <!--/.col (left) -->
-                                        <!-- right column -->
-                                        <div class="col-md-6">
 
-                                        </div>
-                                        <!--/.col (right) -->
+                                            <!-- /.card-body -->
+                                            <div >
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                            </div>
+                                    </form>
                                 </div>
-                                <!-- /.row -->
+                                <!-- /.card -->
                             </div>
-                            <!-- /.container-fluid -->
-                            </section>
-                            <!-- /.content -->
+                            <!--/.col (left) -->
+                            <!-- right column -->
+                            <div class="col-md-6">
+
+                            </div>
+                            <!--/.col (right) -->
                         </div>
-                        <!-- /.content-wrapper -->
-                        <footer class="main-footer">
-                            <div class="float-right d-none d-sm-block">
-                                <b>Version</b> 3.0.5
-                            </div>
-                            <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-                        </footer>
-
-                        <!-- Control Sidebar -->
-                        <aside class="control-sidebar control-sidebar-dark">
-                            <!-- Control sidebar content goes here -->
-                        </aside>
-                        <!-- /.control-sidebar -->
+                        <!-- /.row -->
                     </div>
-                    <!-- ./wrapper -->
+                    <!-- /.container-fluid -->
+                </section>
+                <!-- /.content -->
+            </div>
+            <!-- /.content-wrapper -->
+             <%@include file="footer.jsp" %>
 
-                    <!-- jQuery -->
-                    <%@include file="jslink.jsp" %>
-                    </body>
+            <!-- Control Sidebar -->
+            <aside class="control-sidebar control-sidebar-dark">
+                <!-- Control sidebar content goes here -->
+            </aside>
+            <!-- /.control-sidebar -->
+        </div>
+        <!-- ./wrapper -->
 
-                    </html>
+        <!-- jQuery -->
+        <%@include file="jslink.jsp" %>
+    </body>
+
+</html>

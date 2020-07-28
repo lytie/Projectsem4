@@ -10,6 +10,8 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -65,53 +67,41 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <%
-                                                        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-                                                        List<Receipt> listrc = (List<Receipt>) request.getAttribute("listrc");
-                                                        String paydate,paystatus;
-                                                        for (Receipt receipt : listrc) {
-                                                            if(receipt.getPayDate()==null){
-                                                                paydate = "--------";
-                                                                paystatus ="UnPaid";
-                                                        
-                                                    %>
-                                                    <tr>
-                                                        <td ><%=receipt.getReceiptId()%></td>
-                                                        <td ><%=paydate%></td>
-                                                        <td ><%=receipt.getSubtotal()%></td>
-                                                        <td ><%=receipt.getTax()%></td>
-                                                        <td ><%=receipt.getTotal()%></td>
-                                                        <td ><%=paystatus%></td>
+                                                    <c:forEach items="${listrc}" var="lc">
+                                                        <tr>
+                                                        <td>${lc.getReceiptId()}</td>
                                                         <td>
-                                                            <a class="btn btn-info btn-sm" href="Admin_ReceiptInfo?receiptid=<%=receipt.getReceiptId()%>">
+                                                            <c:choose>
+                                                                <c:when test="${lc.getPayDate()==null}">
+                                                                    ---------
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <fmt:formatDate value="${lc.getPayDate()}" pattern="dd/MM/yyyy HH:mm"/>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </td>
+                                                        <td>${lc.getSubtotal()}</td>
+                                                        <td >${lc.getTax()}</td>
+                                                        <td >${lc.getTotal()}</td>
+                                                        <td >
+                                                            <c:choose>
+                                                                <c:when test="${lc.getPayDate()==null}">
+                                                                    UnPaid
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    Paid
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </td>
+                                                        <td>
+                                                            <a class="btn btn-info btn-sm" href="Admin_ReceiptInfo?receiptid=${lc.getReceiptId()}">
                                                                 <i class="fas fa-info">
                                                                 </i> See Details
                                                             </a>
                                                         </td>
                                                     </tr>
-                                                    <%
-                                                            }else{
-                                                                paystatus ="Paid";
-                                                    %>
-                                                    <tr>
-                                                        <td ><%=receipt.getReceiptId()%></td>
-                                                        <td ><%=receipt.getPayDate()%></td>
-                                                        <td ><%=receipt.getSubtotal()%></td>
-                                                        <td ><%=receipt.getTax()%></td>
-                                                        <td ><%=receipt.getTotal()%></td>
-                                                        <td ><%=paystatus%></td>
-                                                        <td>
-                                                            <a class="btn btn-info btn-sm" href="Admin_UpdateReceipt">
-                                                                <i class="fas fa-info">
-                                                                </i> See Details
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                    <%
-                                                        }
-                                                    }
-                                                    %>
-
+                                                    </c:forEach>
+                                                  
                                                 </tbody>
 
                                             </table>
@@ -129,12 +119,7 @@
                 <!-- /.content -->
             </div>
             <!-- /.content-wrapper -->
-            <footer class="main-footer">
-                <div class="float-right d-none d-sm-block">
-                    <b>Version</b> 3.0.5
-                </div>
-                <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-            </footer>
+             <%@include file="footer.jsp" %>
 
             <!-- Control Sidebar -->
             <aside class="control-sidebar control-sidebar-dark">

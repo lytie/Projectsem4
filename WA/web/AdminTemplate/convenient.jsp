@@ -69,26 +69,26 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    
-                                                   <c:forEach items="${listcon}" var="c">
-                                                <tr>
-                                                    <td width="35%"><c:out value="${c.getConvenientName()}"/></td>
-                                                    
-                                                    <td width="200"><img src="images/icon/${c.url}" width="150" height="100" /></td>
-                                                    
-                                                    <td width="20%">
 
-                                                        <a class="btn btn-info btn-sm" href="Admin_UpdateConvenient">
-                                                            <i class="fas fa-pencil-alt">
-                              </i> Edit
-                                                        </a>
-                                                        <a class="btn btn-danger btn-sm" href="#">
-                                                            <i class="fas fa-trash">
-                              </i> Delete
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                </c:forEach>
+                                                    <c:forEach items="${listcon}" var="c">
+                                                        <tr>
+                                                            <td width="35%"><c:out value="${c.getConvenientName()}"/></td>
+
+                                                            <td width="200"><img src="images/icon/${c.url}" width="150" height="100" /></td>
+
+                                                            <td width="20%">
+
+                                                                <a class="btn btn-info btn-sm" href="Admin_UpdateConvenient">
+                                                                    <i class="fas fa-pencil-alt">
+                                                                    </i> Edit
+                                                                </a>
+                                                                <a class="btn btn-danger btn-sm" href="#">
+                                                                    <i class="fas fa-trash">
+                                                                    </i> Delete
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
                                                 </tbody>
 
                                             </table>

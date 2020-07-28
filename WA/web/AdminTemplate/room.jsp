@@ -33,7 +33,7 @@
 
 
 
-            .Price {
+            .price {
                 grid-row-start: 1;
                 grid-row-end: 3;
             }
@@ -119,8 +119,8 @@
 
                                                     <form action="" method="post">
                                                         <div class="grid-container">
-                                                            <div class="Price">
-                                                                Price:<input value="${l.Price}" type="text" name="price" />
+                                                            <div class="price">
+                                                                price:<input value="${l.price}" type="text" name="price" />
                                                             </div>
                                                             <div class="Type">
                                                                 Type:${l.roomTypeId.roomTypeName}
@@ -136,13 +136,13 @@
                                                             </div>
                                                             <div class="Description">
                                                                 <p>
-                                                                    ${l.Price}
+                                                                    ${l.price}
                                                                 </p>
                                                             </div>
-                                                            <div>Bed Option:${l.Price}</div>
-                                                            <div>Size: ${l.Price}<sup>2</sup></div>
-                                                            <div>View: ${l.Price}</div>
-                                                            <div>Capacity: ${l.Price}</div>
+                                                            <div>Bed Option:${l.price}</div>
+                                                            <div>Size: ${l.price}<sup>2</sup></div>
+                                                            <div>View: ${l.price}</div>
+                                                            <div>Capacity: ${l.price}</div>
                                                         </div>
                                                         <div class="d-flex">
                                                             

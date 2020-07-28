@@ -48,7 +48,7 @@
                 </section>
 
                 <!-- Main content -->
-                <section class="content" id="myCanvas">
+                <section class="content" id="myCanvas" >
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-12">

@@ -61,10 +61,12 @@ CREATE TABLE `accountemployee` (
   `DateOfBirth` datetime DEFAULT NULL,
   `RoleId` int DEFAULT NULL,
   `Status` bit(1) DEFAULT b'0',
+  `Token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`accountId`),
+  UNIQUE KEY `index3` (`Email`),
   KEY `FK_accountemployee_role` (`RoleId`),
   CONSTRAINT `FK_accountemployee_role` FOREIGN KEY (`RoleId`) REFERENCES `role` (`RoleId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,7 +75,7 @@ CREATE TABLE `accountemployee` (
 
 LOCK TABLES `accountemployee` WRITE;
 /*!40000 ALTER TABLE `accountemployee` DISABLE KEYS */;
-INSERT INTO `accountemployee` VALUES (1,'bao@gmail.com','123456','Trịnh Thiêm Bảo','0940223412','2000-10-10 00:00:00',1,_binary '\0'),(2,'thai@gmail.com','123456','Nguyễn Quốc Thái','0903441287','2000-12-06 00:00:00',1,_binary '\0');
+INSERT INTO `accountemployee` VALUES (1,'bao@gmail.com','123456','Trịnh Thiêm Bảo','0940223412','2000-10-10 00:00:00',1,_binary '\0','34894hn98nfj0934'),(2,'thai@gmail.com','123456','Nguyễn Quốc Thái','0903441287','2000-12-06 00:00:00',1,_binary '\0',NULL),(5,'Bhcjkgfhjg@gmail.com','123456',NULL,NULL,NULL,NULL,_binary '\0','wPpfANQRinI0RkjuHcy1bjCvwFTlQB');
 /*!40000 ALTER TABLE `accountemployee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -628,4 +630,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-27 16:45:49
+-- Dump completed on 2020-07-28 18:25:44

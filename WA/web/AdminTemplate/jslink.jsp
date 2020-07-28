@@ -51,4 +51,6 @@
 <script src="AdminTemplate/dist/js/pages/dashboard.js"></script>
 <!-- ChartJS -->
 <script src="AdminTemplate/plugins/chart.js/Chart.min.js"></script>
+<script src='https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.min.js'></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 

@@ -9,6 +9,7 @@
 
   <!-- Font Awesome -->
   <%@include file="css.jsp" %>
+  
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
@@ -40,7 +41,7 @@
 
       <p class="mt-3 mb-1">
           <a href="Admin_Login">Login</a>
-      <div style="color:red">${error}${success}</div>
+      
       </p>
     </div>
     <!-- /.login-card-body -->
@@ -50,6 +51,6 @@
 
 <!-- jQuery -->
 <%@include file="jslink.jsp" %>
-
+${error}
 </body>
 </html>

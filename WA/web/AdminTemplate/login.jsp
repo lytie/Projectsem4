@@ -10,6 +10,7 @@
 
     <!-- Font Awesome -->
     <%@include file="css.jsp" %>
+        
 </head>
 
 <body class="hold-transition login-page">
@@ -66,7 +67,7 @@
 
     <!-- jQuery -->
     <%@include file="jslink.jsp" %>
-
+    ${success}
 </body>
 
 </html>

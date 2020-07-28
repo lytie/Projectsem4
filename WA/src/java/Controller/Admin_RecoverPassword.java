@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Controller;
 
 import entities.Accountemployee;
@@ -36,7 +35,7 @@ public class Admin_RecoverPassword extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            request.getRequestDispatcher("AdminTemplate/recover-password.jsp").forward(request, response);
+            //request.getRequestDispatcher("AdminTemplate/recover-password.jsp").forward(request, response);
         }
     }
 
@@ -55,9 +54,10 @@ public class Admin_RecoverPassword extends HttpServlet {
         String email = request.getParameter("email");
         String token = request.getParameter("token");
         AccountemployeeClient accountemployeeClient = new AccountemployeeClient();
-        GenericType<Accountemployee> genAccountemployee = new GenericType<Accountemployee>(){};
+        GenericType<Accountemployee> genAccountemployee = new GenericType<Accountemployee>() {
+        };
         Accountemployee accountemployee = accountemployeeClient.findbyEmail_JSON(genAccountemployee, email);
-        if (accountemployee==null) {
+        if (accountemployee == null) {
             request.getRequestDispatcher("Admin_Login").forward(request, response);
         }
         if (accountemployee.getToken().equals(token)) {
@@ -65,7 +65,7 @@ public class Admin_RecoverPassword extends HttpServlet {
             request.setAttribute("email", email);
             request.setAttribute("token", token);
             request.getRequestDispatcher("AdminTemplate/recover-password.jsp").forward(request, response);
-        }else{
+        } else {
             System.out.println("false");
             request.getRequestDispatcher("AdminTemplate/login.jsp").forward(request, response);
         }
@@ -88,15 +88,24 @@ public class Admin_RecoverPassword extends HttpServlet {
         if (!password.equals(confirmpassword)) {
             request.setAttribute("error", "Password and Confirm Password not match");
             request.getRequestDispatcher("AdminTemplate/recover-password.jsp").forward(request, response);
-        }else{
+        } else {
             String email = request.getParameter("email");
             String token = request.getParameter("token");
             AccountemployeeClient accountemployeeClient = new AccountemployeeClient();
-            GenericType<Accountemployee> genAccountemployee = new GenericType<Accountemployee>(){};
+            GenericType<Accountemployee> genAccountemployee = new GenericType<Accountemployee>() {
+            };
             Accountemployee accountemployee = accountemployeeClient.findbyEmail_JSON(genAccountemployee, email);
             if (accountemployee.getToken().equals(token)) {
+                accountemployee.setToken(new Generator.StringGenerator().generate(password.length() * 5));
                 accountemployee.setPassword(password);
                 accountemployeeClient.edit_JSON(accountemployee, accountemployee.getAccountId().toString());
+                request.setAttribute("success", "<div class='success'></div>"
+                        + "         <script type=\"text/javascript\">\n"
+                        + "            $('.success').each(function () {\n"
+                        + "                swal(\"Change password successfully!!!\", \"\", \"success\");\n"
+                        + "            });\n"
+                        + "        </script>");
+                request.getRequestDispatcher("AdminTemplate/login.jsp").forward(request, response);
             }
         }
         processRequest(request, response);

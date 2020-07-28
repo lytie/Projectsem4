@@ -51,6 +51,7 @@
 
                 <p class="mt-3 mb-1">
                     <a href="Admin_Login">Login</a>
+                    <div style="color:red">${error}</div>
                 </p>
             </div>
             <!-- /.login-card-body -->

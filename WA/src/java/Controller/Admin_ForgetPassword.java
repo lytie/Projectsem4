@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Controller;
 
 import Generator.SendMail;
@@ -36,7 +35,7 @@ public class Admin_ForgetPassword extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
+
             request.getRequestDispatcher("AdminTemplate/forgot-password.jsp").forward(request, response);
         }
     }
@@ -53,7 +52,7 @@ public class Admin_ForgetPassword extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         processRequest(request, response);
     }
 
@@ -70,16 +69,29 @@ public class Admin_ForgetPassword extends HttpServlet {
             throws ServletException, IOException {
         String email = request.getParameter("email");
         AccountemployeeClient accountemployeeClient = new AccountemployeeClient();
-        GenericType<Accountemployee> genAccountemployee = new GenericType<Accountemployee>(){};
+        GenericType<Accountemployee> genAccountemployee = new GenericType<Accountemployee>() {
+        };
         Accountemployee accountemployee = accountemployeeClient.findbyEmail_JSON(genAccountemployee, email);
         if (accountemployee == null) {
-            request.setAttribute("error", "Your email did not exists");
+            request.setAttribute("error", "<div class='error'></div>"
+                    + "         <script type=\"text/javascript\">\n"
+                    + "            $('.error').each(function () {\n"
+                    + "                swal(\"Your email did not exists!!!\", \"\", \"error\");\n"
+                    + "            });\n"
+                    + "        </script>");
+            request.getRequestDispatcher("AdminTemplate/forgot-password.jsp").forward(request, response);
             System.out.println("false");
-        }else{
-            request.setAttribute("error", "We have sent a verification link to your email");
+        } else {
+            request.setAttribute("error", "<div class='error'></div>"
+                    + "         <script type=\"text/javascript\">\n"
+                    + "            $('.error').each(function () {\n"
+                    + "                swal(\"We have sent a verification link to your email!!!\", \"\", \"success\");\n"
+                    + "            });\n"
+                    + "        </script>");
             SendMail sendMail = new SendMail();
-            sendMail.sendToken(email, " Haven Deluxe Password changing verification", "Click on the link below to change your password \n http://localhost:8080/WA/Admin_RecoverPassword?token="+accountemployee.getToken()+"&email="+accountemployee.getEmail());
+            sendMail.sendToken(email, " Haven Deluxe Password changing verification", "Click on the link below to change your password \n http://localhost:8080/WA/Admin_RecoverPassword?token=" + accountemployee.getToken() + "&email=" + accountemployee.getEmail());
             System.out.println("true");
+            request.getRequestDispatcher("AdminTemplate/forgot-password.jsp").forward(request, response);
         }
         processRequest(request, response);
     }

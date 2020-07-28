@@ -38,7 +38,7 @@ public class Admin_Login extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
             if (session.getAttribute("accountemployeeid")!=null) {
-                out.println("U already login");
+                response.sendRedirect("Haven");
             }else{
                 request.getRequestDispatcher("AdminTemplate/login.jsp").forward(request, response);
             }
@@ -80,7 +80,8 @@ public class Admin_Login extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("accountemployeeid", accountemployee.getAccountId());
             if (accountemployee.getRoleId().getRoleId() == 1) {
-                request.getRequestDispatcher("AdminIndexServlet").forward(request, response);
+                response.sendRedirect("AdminIndexServlet");
+                //request.getRequestDispatcher("AdminIndexServlet").forward(request, response);
             }else{
                 
             }

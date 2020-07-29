@@ -253,6 +253,10 @@
         <servlet-name>Booking_Process</servlet-name>
         <servlet-class>BookingController.Booking_Process</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Booking_payment</servlet-name>
+        <servlet-class>BookingController.Booking_payment</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CustomerPageMenuServlet</servlet-name>
         <url-pattern>/CustomerPageMenuServlet</url-pattern>
@@ -500,6 +504,10 @@
     <servlet-mapping>
         <servlet-name>Booking_Process</servlet-name>
         <url-pattern>/Booking_Process</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Booking_payment</servlet-name>
+        <url-pattern>/Booking_payment</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -155,21 +155,21 @@
                                 <h2 class="contact-title">CONFIRM YOUR STAY</h2>
                             </div>
                             <div class="">
-                                <form class="form-contact contact_form"  id="contactForm" action="Booking_ConfirmInfo" method="post">
+                                <form class="form-contact contact_form"   action="Booking_Process" method="post" >
 
                                     <div class="">
                                         <div class="form-group">
-                                            <input class="form-control valid" name="name" id="name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'" placeholder="Enter your name" required=""/>
+                                            <input class="form-control " name="name"  type="text" placeholder="Enter your name" required=""/>
                                         </div>
                                     </div>
                                     <div class="">
                                         <div class="form-group">
-                                            <input class="form-control valid" name="email" id="email" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" placeholder="Email"required=""/>
+                                            <input class="form-control " name="email"  type="email"  placeholder="Email"required=""/>
                                         </div>
                                     </div>
                                     <div class="">
                                         <div class="form-group">
-                                            <input class="form-control" name="phone" id="phone" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Phone'" placeholder="Enter Phone"required=""/>
+                                            <input class="form-control" name="phone"  type="text" placeholder="Enter Phone"required=""/>
                                         </div>
                                     </div>
                                     <input type="hidden" name="start" value="<%=start%>"/>

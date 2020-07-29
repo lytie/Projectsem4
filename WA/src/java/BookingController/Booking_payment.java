@@ -5,21 +5,23 @@
  */
 package BookingController;
 
-import Generator.SendMail;
-import entities.Accountcustomer;
+import Paypal.PaymentServices;
+import com.paypal.api.payments.Payment;
+import com.paypal.base.rest.PayPalRESTException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author longly
  */
-public class Booking_ConfirmInfo extends HttpServlet {
+public class Booking_payment extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,14 +35,21 @@ public class Booking_ConfirmInfo extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        int idRoom = Integer.valueOf(request.getParameter("id"));
-
-        request.setAttribute("id", idRoom);
-        
-
-        request.getRequestDispatcher("Booking/confirm_infomation.jsp").forward(request, response);
-
+        try (PrintWriter out = response.getWriter()) {
+            String paymentId=request.getParameter("paymentId");
+            String payerId=request.getParameter("PayerID");
+            
+            PaymentServices paymentServices=new PaymentServices();
+            Payment payment=paymentServices.executePayment(paymentId, payerId);
+            
+            
+            
+            
+            
+            
+        } catch (PayPalRESTException ex) {
+            Logger.getLogger(Booking_payment.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -69,9 +78,7 @@ public class Booking_ConfirmInfo extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-    
-        //processRequest(request, response);
+        processRequest(request, response);
     }
 
     /**

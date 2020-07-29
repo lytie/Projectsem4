@@ -5,12 +5,22 @@
  */
 package BookingController;
 
+import Generator.SendMail;
+import Paypal.PaymentServices;
+import com.paypal.base.rest.PayPalRESTException;
+import entities.Accountcustomer;
+import entities.Room;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.ws.rs.core.GenericType;
+import wsc.RoomClient;
 
 /**
  *
@@ -42,8 +52,31 @@ public class Booking_Process extends HttpServlet {
         String idRoom = request.getParameter("idRoom");
         String deposit = request.getParameter("deposit");
         
+        
+        
+            
+        
+            RoomClient client=new RoomClient();
+            GenericType<Room> gt=new GenericType<Room>(){};
+            
+           Room room= client.find_JSON(gt, Integer.parseInt(idRoom));
+            String idName=room.getRoomTypeId().getRoomTypeName()+"-"+room.getLocationId().getLocationName()+idRoom;
+        
+        
+            PaymentServices paymentServices=new PaymentServices();
             
             
+          if(request.getParameter("idCus")!=null){
+            String idCus = request.getParameter("idCus");
+            response.sendRedirect(paymentServices.authorizePayment(deposit, idName,name,email,"http://localhost:8080/WA/Booking_payment?name="+name+"&email="+email+"&phone="+phone+"&inDate="+inDate+"&outDate="+outDate+"&adult="+adult+"&children="+children+"&idRoom="+idRoom+"&deposit="+deposit+"&idCus="+idCus));
+
+        }else{
+                          response.sendRedirect(paymentServices.authorizePayment(deposit, idName,name,email,"http://localhost:8080/WA/Booking_payment?name="+name+"&email="+email+"&phone="+phone+"&inDate="+inDate+"&outDate="+outDate+"&adult="+adult+"&children="+children+"&idRoom="+idRoom+"&deposit="+deposit));
+          }  
+            
+            
+        } catch (PayPalRESTException ex) {
+            Logger.getLogger(Booking_Process.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -73,7 +106,35 @@ public class Booking_Process extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+            String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String phone = request.getParameter("phone");
+        String inDate = request.getParameter("start");
+        String outDate = request.getParameter("end");
+        String adult = request.getParameter("selectAdult");
+        String children = request.getParameter("selectChildren");
+        String idRoom = request.getParameter("idRoom");
+        String deposit = request.getParameter("deposit");
+        SendMail send = new SendMail();
+        
+       
+        HttpSession session =request.getSession();
+        if(session.getAttribute("user")!=null){
+             Accountcustomer accountcustomer = (Accountcustomer) session.getAttribute("user");
+             send.sendToken(email, "Account Verification ", "Please click on the link below to verify your email\n "
+                + "http://localhost:8080/WA/Booking_Process?status=true&name="+name+"&email="+email+"&phone="+phone+"&inDate="+inDate+"&outDate="+outDate+"&adult="+adult+"&children="+children+"&idRoom="+idRoom+"&deposit="+deposit+"&idCus="+accountcustomer.getAccountCustomerId());
+
+             
+        }else{
+            send.sendToken(email, "Account Verification ", "Please click on the link below to verify your email\n "
+                + "http://localhost:8080/WA/Booking_Process?status=true&name="+name+"&email="+email+"&phone="+phone+"&inDate="+inDate+"&outDate="+outDate+"&adult="+adult+"&children="+children+"&idRoom="+idRoom+"&deposit="+deposit);
+
+        }
+        
+        
+        
+         request.setAttribute("id", idRoom);
+        request.getRequestDispatcher("Booking/confirm_infomation.jsp").forward(request, response);
     }
 
     /**

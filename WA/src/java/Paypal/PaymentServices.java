@@ -55,6 +55,28 @@ public class PaymentServices {
         return getApprovalLink(approvedPayment);
 
     }
+    public String authorizePayment(String deposit,String nameRoom,String name,String email,String url)
+            throws PayPalRESTException {
+
+         Payer payer = getPayerInformation(name, email);
+        RedirectUrls redirectUrls = getRedirectURLsBooking(url);
+        List<Transaction> listTransaction =getTransactionInformation(deposit, nameRoom);
+
+        Payment requestPayment = new Payment();
+        requestPayment.setTransactions(listTransaction);
+        requestPayment.setRedirectUrls(redirectUrls);
+        requestPayment.setPayer(payer);
+        requestPayment.setIntent("authorize");
+        APIContext apiContext = new APIContext(CLIENT_ID, CLIENT_SECRET, MODE);
+
+        Payment approvedPayment = requestPayment.create(apiContext);
+
+        System.out.println("=== CREATED PAYMENT: ====");
+        System.out.println(approvedPayment);
+
+        return getApprovalLink(approvedPayment);
+
+    }
 
     private Payer getPayerInformation(Qrcode qrcode) {
         Payer payer = new Payer();
@@ -68,11 +90,30 @@ public class PaymentServices {
 
         return payer;
     }
+     private Payer getPayerInformation(String name,String email) {
+        Payer payer = new Payer();
+        payer.setPaymentMethod("paypal");
+
+        PayerInfo payerInfo = new PayerInfo();
+        payerInfo.setLastName(name)
+                .setEmail(email);
+
+        payer.setPayerInfo(payerInfo);
+
+        return payer;
+    }
 
     private RedirectUrls getRedirectURLs() {
         RedirectUrls redirectUrls = new RedirectUrls();
         redirectUrls.setCancelUrl("http://localhost:8080/WA/cancel.jsp");
         redirectUrls.setReturnUrl("http://localhost:8080/WA/ReviewPaymentServlet");
+
+        return redirectUrls;
+    }
+    private RedirectUrls getRedirectURLsBooking(String url) {
+        RedirectUrls redirectUrls = new RedirectUrls();
+        redirectUrls.setCancelUrl("http://localhost:8080/WA/Haven");
+        redirectUrls.setReturnUrl(url);
 
         return redirectUrls;
     }
@@ -127,6 +168,46 @@ public class PaymentServices {
         return listTransaction;
     }
 
+    
+    
+     private List<Transaction> getTransactionInformation(String deposit,String nameRoom) {
+        
+ Details details = new Details();
+        details.setSubtotal(deposit);
+        details.setTax("0");
+         
+        Amount amount = new Amount();
+        amount.setCurrency("USD");
+        amount.setTotal(deposit);
+       
+      
+        Transaction transaction = new Transaction();
+        transaction.setAmount(amount);
+        
+        ItemList itemList = new ItemList();
+        List<Item> items = new ArrayList<>();
+      
+        Item item=new Item();
+        item.setCurrency("USD");
+        item.setName(nameRoom+"10%");
+        item.setPrice(deposit);
+        item.setQuantity("1");
+        items.add(item);
+        
+        
+        itemList.setItems(items);
+        transaction.setItemList(itemList);
+        
+
+        List<Transaction> listTransaction = new ArrayList<>();
+        listTransaction.add(transaction);
+
+        return listTransaction;
+    }
+
+    
+    
+    
     private String getApprovalLink(Payment approvedPayment) {
         List<Links> links = approvedPayment.getLinks();
         String approvalLink = null;

@@ -271,7 +271,7 @@ CREATE TABLE `receipt` (
 
 LOCK TABLES `receipt` WRITE;
 /*!40000 ALTER TABLE `receipt` DISABLE KEYS */;
-INSERT INTO `receipt` VALUES (1,NULL,1040,104,1140,_binary '\0'),(2,NULL,NULL,NULL,NULL,NULL),(3,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `receipt` VALUES (1,NULL,1200,120,1316,_binary '\0'),(2,NULL,NULL,NULL,NULL,NULL),(3,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `receipt` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -304,7 +304,7 @@ CREATE TABLE `receiptcomponent` (
 
 LOCK TABLES `receiptcomponent` WRITE;
 /*!40000 ALTER TABLE `receiptcomponent` DISABLE KEYS */;
-INSERT INTO `receiptcomponent` VALUES (1,1,'Room-Bungalow',40,1,40,'Typeroom_Bungalow.jpg','2020-07-15 00:00:00','Bảo Trịnh Thiêm'),(2,1,'Wine Castle',200,2,400,'experience3.jpg','2020-07-16 00:00:00','Bảo Trịnh Thiêm'),(3,1,'Costolette di agnello',100,1,100,'our-menu-02.jpg','2020-07-16 00:00:00','Bảo Trịnh Thiêm'),(4,1,'Costolette di agnello',100,1,100,'our-menu-02.jpg','2020-07-22 18:44:45','BÃ¡ÂºÂ£o TrÃ¡Â»â€¹nh ThiÃƒÂªm'),(5,1,'Strawberry Cheese Cake',40,1,40,'our-menu-19.jpg','2020-07-22 18:51:17','BÃ¡ÂºÂ£o TrÃ¡Â»â€¹nh ThiÃƒÂªm'),(6,1,'Strawberry Cheese Cake',40,1,40,'our-menu-19.jpg','2020-07-22 18:54:39','BÃ¡ÂºÂ£o TrÃ¡Â»â€¹nh ThiÃƒÂªm'),(7,1,' Miele di pollo alla griglia',80,1,120,'our-menu-04.jpg','2020-07-22 18:54:39','BÃ¡ÂºÂ£o TrÃ¡Â»â€¹nh ThiÃƒÂªm'),(8,1,'Wine Castle',200,2,200,'experience3.jpg','2020-07-22 19:41:14','BÃ¡ÂºÂ£o TrÃ¡Â»â€¹nh ThiÃƒÂªm');
+INSERT INTO `receiptcomponent` VALUES (1,1,'Room-Bungalow',40,1,40,'Typeroom_Bungalow.jpg','2020-07-15 00:00:00','Bảo Trịnh Thiêm'),(2,1,'Wine Castle',200,2,400,'experience3.jpg','2020-07-16 00:00:00','Bảo Trịnh Thiêm'),(3,1,'Costolette di agnello',100,1,100,'our-menu-02.jpg','2020-07-16 00:00:00','Bảo Trịnh Thiêm'),(4,1,'Costolette di agnello',100,1,100,'our-menu-02.jpg','2020-07-22 18:44:45','BÃ¡ÂºÂ£o TrÃ¡Â»â€¹nh ThiÃƒÂªm'),(5,1,'Strawberry Cheese Cake',40,1,40,'our-menu-19.jpg','2020-07-22 18:51:17','BÃ¡ÂºÂ£o TrÃ¡Â»â€¹nh ThiÃƒÂªm'),(6,1,'Strawberry Cheese Cake',40,1,40,'our-menu-19.jpg','2020-07-22 18:54:39','BÃ¡ÂºÂ£o TrÃ¡Â»â€¹nh ThiÃƒÂªm'),(7,1,' Miele di pollo alla griglia',80,1,80,'our-menu-04.jpg','2020-07-22 18:54:39','BÃ¡ÂºÂ£o TrÃ¡Â»â€¹nh ThiÃƒÂªm'),(8,1,'Wine Castle',200,2,400,'experience3.jpg','2020-07-22 19:41:14','BÃ¡ÂºÂ£o TrÃ¡Â»â€¹nh ThiÃƒÂªm');
 /*!40000 ALTER TABLE `receiptcomponent` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -630,4 +630,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-28 18:25:44
+-- Dump completed on 2020-07-29 16:06:10

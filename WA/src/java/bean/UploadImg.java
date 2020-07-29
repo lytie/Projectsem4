@@ -21,9 +21,9 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
  * @author longly
  */
 public class UploadImg  extends HttpServlet{
-    private final String UPLOAD_DIRECTORY = "/Users/longly/Desktop/demoProject/project4/web/img";
+    private final String UPLOAD_DIRECTORY = "http://localhost:8080/WA/images/";
 
-    public List<String> Upload(HttpServletRequest request) {
+    public List<String> Upload(HttpServletRequest request,String url) {
         List<String> listImg=new ArrayList<>();
         
         try {
@@ -35,7 +35,7 @@ public class UploadImg  extends HttpServlet{
                     String name = new File(item.getName()).getName();
                     
                         listImg.add(name);
-                    item.write(new File(UPLOAD_DIRECTORY + File.separator + name));
+                    item.write(new File(UPLOAD_DIRECTORY+url + File.separator + name));
 
                 }
             }

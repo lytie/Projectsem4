@@ -102,7 +102,7 @@
             <%}else{
                 %>
             <!-- single Right img -->
-            <div class="single-dining-area " L<%=l.getLocationId() %>>
+            <div class="single-dining-area " id="L<%=l.getLocationId() %>">
                 <div class="container">
                     <div class="row justify-content-start">
                         <div class="col-lg-8 col-md-8">

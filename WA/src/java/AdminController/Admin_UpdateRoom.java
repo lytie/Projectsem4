@@ -6,12 +6,17 @@
 
 package AdminController;
 
+import entities.ImgHero;
+import entities.Room;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.GenericType;
+import wsc.ImgHeroClient;
+import wsc.RoomClient;
 
 /**
  *
@@ -35,11 +40,31 @@ public class Admin_UpdateRoom extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             
             
-            int id=Integer.parseInt(request.getParameter("IdRoom"));
-            
-            
-            
-            
+//            int id=Integer.parseInt(request.getParameter("IdRoom"));
+//            float price=Float.valueOf(request.getParameter("priceUp"));
+            RoomClient roomClient=new RoomClient();
+            GenericType<Room> gtRoom=new GenericType<Room>(){};
+            Room room=roomClient.find_JSON(gtRoom, 2);
+//            out.println(room.getPrice());
+            room.setPrice(60.0f);
+//            out.println(room.getPrice());
+            roomClient.edit_JSON(room, room.getRoomId().toString());
+//            
+//            out.println(room.getPrice());
+//            
+             Room room1=roomClient.find_JSON(gtRoom, 2);
+             out.println(room1.getPrice());
+
+
+//                ImgHeroClient client=new ImgHeroClient();
+//                GenericType<ImgHero> gtHero=new GenericType<ImgHero>(){};
+//                ImgHero img=client.find_JSON(gtHero, 1);
+//                img.setTextTitle("maybe");
+//                client.edit_JSON(img, img.getIdHero().toString());
+//                
+//                ImgHero img1=client.find_JSON(gtHero, 1);
+//               
+//                out.print(img.getTextTitle());
         }
     }
 

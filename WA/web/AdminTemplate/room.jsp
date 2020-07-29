@@ -120,36 +120,57 @@
                                                 <!-- Modal body -->
                                                 <div class="modal-body">
 
-                                                    <form action="" method="post">
-                                                        <div class="grid-container">
-                                                                <div class="Price" style="font-size: 25px;">
-                                                                    Price:
-                                                                    <div><input value="${l.price}" type="text" name="price" /></div>
-                                                                </div>
-                                                                    <div class="Type">
+                                                    <form action="Admin_UpdateRoom" >
+
+                                                        <table style="width: 100%;" >
+                                                            <tr>
+                                                                <td rowspan="2">
+                                                                    <div style="font-size: 25px;">
+                                                                        Price:
+                                                                        <div><input value="${l.price}" type="text" name="priceUp" /></div>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <div>
                                                                         Type:${l.roomTypeId.roomTypeName}
                                                                     </div>
-                                                                    <div class="Location">
+                                                                </td>
+                                                                <td>
+                                                                    <div>
                                                                         Location: ${l.locationId.locationName}
-                                                                    </div>  
-                                                                    <div class="status">
-                                                                Status:  <select class="select" name="status" >
+                                                                    </div> 
+                                                                </td>
+                                                                <td>
+                                                                    <div>
+                                                                        Status:  <select class="select" name="statusUp" >
                                                                             <option value="true" <c:if test="${l.status==true}">selected</c:if> >active</option>
                                                                             <option value="false" <c:if test="${l.status==false}">selected</c:if> >inactive</option>
                                                                             </select>
                                                                         </div>
-                                                                    <div class="Description">
-                                                                        <textarea cols="100" rows="5">${l.description}</textarea>
-                                                                
-                                                            </div>  
-                                                            <div>Bed Option:${l.bedOption}</div>
-                                                            <div>Size: ${l.size}<sup>2</sup></div>
-                                                            <div>View: ${l.view}</div>
-                                                            <div>Capacity: 
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="3">
+                                                                        <div>
+                                                                            <textarea cols="100" rows="5" name="desUp">${l.description}</textarea>
+
+                                                                    </div> 
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td> <div>Bed Option:${l.bedOption}</div></td>
+                                                                <td><div>Size: ${l.size}<sup>2</sup></div></td>
+                                                                <td><div>View: ${l.view}</div></td>
+                                                                <td>
+                                                                    <div>Capacity: 
                                                                 <span><c:if test="${l.capacity%2!=0}">${(l.capacity-1)/2}</c:if><c:if test="${l.capacity%2==0}">${(l.capacity)/2}</c:if> Adults</span>
                                                                 <span>${l.capacity%2} Children</span>
                                                             </div>
-                                                        </div>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+
+                                                       
                                                         <div style="margin-top: 20px;">
                                                             <div class="d-flex justify-content-around">
                                                                 <c:forEach items="${booking_bookMB.listRoomImg(l.roomId)}" var="img">
@@ -170,9 +191,9 @@
                                                             </div>
                                                             <script>
                                                                 $(document).ready(function() {
-                                                                    var count = 0;
-                                                                    $("#plus${l.roomId}").click(function() {
-                                                                        $("#proper${l.roomId}").append("<div style='margin-left: 15px;padding:5px'>\n\
+                                                                var count = 0;
+                                                                $("#plus${l.roomId}").click(function() {
+                                                                $("#proper${l.roomId}").append("<div style='margin-left: 15px;padding:5px'>\n\
                                                              <p><input type='file'  accept='image/*' name='image" + count + "' id='file" + count + "'  onchange='loadFile" + count + "(event)' style='display:none;'></p>\n\
                                                              <p><label for='file" + count + "' style='cursor: pointer;color: #009900'>Upload Image</label></p>\n\
                                                              <p><img id='output" + count + "' width='200' />\n\
@@ -185,14 +206,13 @@
                                                                      };\n\
                                                                  <\/script>\n\
                                                         </div>");
-                                                                        count++;
-                                                                    });
-
-                                                                    $('#proper${l.roomId}').on('click', '#detele', function(e) {
-                                                                        e.preventDefault();
-                                                                        $(this).parent().remove();
-                                                                    });
-                                                                    document.getElementById("demo").value = count;
+                                                                count++;
+                                                                });
+                                                                $('#proper${l.roomId}').on('click', '#detele', function(e) {
+                                                                e.preventDefault();
+                                                                $(this).parent().remove();
+                                                                });
+                                                                document.getElementById("demo").value = count;
                                                                 });
                                                             </script>
                                                             <div class="" id="proper${l.roomId}" style="width: 100%;display: grid;grid-gap: 50px;grid-template-columns: auto auto auto auto; ">
@@ -203,6 +223,7 @@
 
                                                         </div> 
                                                         <input type="hidden" id="demo" name="countImg"/>
+                                                        <input type="hidden" name="IdRoom" value="${l.roomId}"/>
                                                         <div style="padding: 10px 45%">
                                                             <input type="submit" value="Save" class="btn btn-outline-primary"/>
                                                         </div>
@@ -258,8 +279,8 @@
     <script src="AdminTemplate/plugins/select2/js/select2.full.min.js"></script>
     <script>
                                                                 $(function() {
-                                                                    //Initialize Select2 Elements
-                                                                    $('.select').select2()
+                                                                //Initialize Select2 Elements
+                                                                $('.select').select2()
 
 
 

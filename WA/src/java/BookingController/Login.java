@@ -5,12 +5,18 @@
  */
 package BookingController;
 
+import bean.encrypt;
+import entities.Accountcustomer;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.ws.rs.core.GenericType;
+import wsc.AccountcustomerClient;
 
 /**
  *
@@ -62,7 +68,56 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+           try (PrintWriter out = response.getWriter()) {   
+       String email= request.getParameter("email");
+       String pass= request.getParameter("pass");
+        
+        AccountcustomerClient accC=new AccountcustomerClient();
+        GenericType<List<Accountcustomer>> gAcc=new GenericType<List<Accountcustomer>>(){};
+     List<Accountcustomer> listAccCus=accC.findAll_JSON(gAcc);
+        
+     boolean check=false;
+     boolean active=false;
+     encrypt en=new encrypt();
+     Accountcustomer accsession = new Accountcustomer();
+     for (Accountcustomer acc : listAccCus) {
+            if (acc.getEmail().equals(email)) {
+                if(acc.getPassword().equals(en.changed(pass))){
+                     
+                    check=true;
+                    if(acc.getActive()){
+                        active=true;
+                        accsession.setAccountCustomerId(acc.getAccountCustomerId());
+                        accsession.setEmail(acc.getEmail());
+                        accsession.setFullName(acc.getFullName());
+                        accsession.setPhone(acc.getPhone());
+                        
+                    }
+                }
+            }
+        }
+     
+     
+     
+        if (check) {
+            if(!active){
+                out.println("<div class=\"active\"></div>");
+                request.getRequestDispatcher("Booking/login.jsp").include(request, response);
+            }else{
+                HttpSession session=request.getSession();
+                if(session.getAttribute("user")==null){
+                    session.setAttribute("user", accsession);
+                }
+                
+            request.getRequestDispatcher("Booking/index.jsp").forward(request, response);
+            }
+        } else {
+            request.setAttribute("err", "Username or password incorrect");
+            request.getRequestDispatcher("Booking/login.jsp").forward(request, response);
+        }
+     
+     }
     }
 
     /**

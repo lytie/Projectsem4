@@ -118,10 +118,6 @@
         <servlet-class>BookingController.Profile</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Booking_ChangePass</servlet-name>
-        <servlet-class>BookingController.Booking_ChangePass</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>AdminIndexServlet</servlet-name>
         <servlet-class>AdminController.AdminIndexServlet</servlet-class>
     </servlet>
@@ -253,6 +249,10 @@
         <servlet-name>Admin_RecoverPassword</servlet-name>
         <servlet-class>AdminController.Admin_RecoverPassword</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Booking_Process</servlet-name>
+        <servlet-class>BookingController.Booking_Process</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CustomerPageMenuServlet</servlet-name>
         <url-pattern>/CustomerPageMenuServlet</url-pattern>
@@ -364,10 +364,6 @@
     <servlet-mapping>
         <servlet-name>Profile</servlet-name>
         <url-pattern>/Profile</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Booking_ChangePass</servlet-name>
-        <url-pattern>/Booking_ChangePass</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AdminIndexServlet</servlet-name>
@@ -500,6 +496,10 @@
     <servlet-mapping>
         <servlet-name>Admin_RecoverPassword</servlet-name>
         <url-pattern>/Admin_RecoverPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Booking_Process</servlet-name>
+        <url-pattern>/Booking_Process</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

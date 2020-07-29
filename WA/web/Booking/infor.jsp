@@ -87,11 +87,11 @@
                                         <div class="pi-text">
                                             <h5>Change password</h5>
                                         </div>
-                                        <form action="Booking_ChangePass">
+                                        <form action="Profile" method="post">
                                             <ul>
                                                 <li>Old Password:<input type="password" class="form-control" name="old" required=""/></li>
-                                                <li>New Password: <input type="password" class="form-control" name="new" required=""/></li>
-                                                <li>Confirm New Password:  <input type="password" class="form-control" name="confirm" required=""/></li>
+                                                <li>New Password: <input type="password" class="form-control" id="new" name="new" required=""/></li>
+                                                <li>Confirm New Password:  <input type="password" class="form-control" id="confirm" name="confirm" required=""/></li>
                                                 <li><button class="btn btn-warning mt-10">Submit</button></li>
                                             </ul>
 
@@ -167,5 +167,6 @@
                 swal("Change password successfully!!!", "", "success");
             });
         </script>
+      
     </body>
 </html>

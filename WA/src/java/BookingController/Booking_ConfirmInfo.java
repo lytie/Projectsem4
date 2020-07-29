@@ -5,12 +5,15 @@
  */
 package BookingController;
 
+import Generator.SendMail;
+import entities.Accountcustomer;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -30,16 +33,14 @@ public class Booking_ConfirmInfo extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
+        int idRoom = Integer.valueOf(request.getParameter("id"));
+
+        request.setAttribute("id", idRoom);
         
-       
-       int id=Integer.valueOf(request.getParameter("id"));
-      
-       request.setAttribute("id", id);
-       
-       request.getRequestDispatcher("Booking/confirm_infomation.jsp").forward(request, response);
-        
-        
-        
+
+        request.getRequestDispatcher("Booking/confirm_infomation.jsp").forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -68,7 +69,28 @@ public class Booking_ConfirmInfo extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String phone = request.getParameter("phone");
+        String inDate = request.getParameter("start");
+        String outDate = request.getParameter("end");
+        String adult = request.getParameter("selectAdult");
+        String children = request.getParameter("selectChildren");
+        String idRoom = request.getParameter("idRoom");
+        String deposit = request.getParameter("deposit");
+        
+        HttpSession session =request.getSession();
+        if(session.getAttribute("user")!=null){
+             Accountcustomer accountcustomer = (Accountcustomer) session.getAttribute("user");
+             
+        }
+        
+        SendMail send = new SendMail();
+        send.sendToken(email, "Account Verification ", "Please click on the link below to verify your email\n "
+                + "http://localhost:8080/WA/Booking_Process?status=true&name="+name+"&email="+email+"&phone="+phone+"&inDate="+inDate+"&outDate="+outDate+"&adult="+adult+"&children="+children+"&idRoom="+idRoom+"&deposit="+deposit);
+
+        
     }
 
     /**

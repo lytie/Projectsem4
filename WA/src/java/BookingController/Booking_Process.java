@@ -5,24 +5,18 @@
  */
 package BookingController;
 
-import Generator.StringGenerator;
-import bean.encrypt;
-import entities.Accountcustomer;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.ws.rs.core.GenericType;
-import wsc.AccountcustomerClient;
 
 /**
  *
  * @author longly
  */
-public class Booking_ChangePass extends HttpServlet {
+public class Booking_Process extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,42 +31,17 @@ public class Booking_ChangePass extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
            
-            HttpSession session =request.getSession();
-            
-            Accountcustomer accountcustomer = (Accountcustomer) session.getAttribute("user");
-            
-            String oldPass=request.getParameter("old");
-            String newPass=request.getParameter("new");
-            String confirm=request.getParameter("confirm");
-            
-            
-            
-            AccountcustomerClient accClient=new AccountcustomerClient();
-            GenericType<Accountcustomer> gAcc=new GenericType<Accountcustomer>(){};
-         Accountcustomer acc=  accClient.find_JSON(gAcc, accountcustomer.getAccountCustomerId().toString());
-            
-            StringGenerator gen=new StringGenerator();
-            encrypt en=new encrypt();
-         
-            
-            if(newPass.length()<8){
-                request.setAttribute("err", "New Password length must be at least 8 characters");
-                request.getRequestDispatcher("Booking/infor.jsp").forward(request, response);
-            }else  if(!newPass.equals(confirm)){
-                request.setAttribute("err", "Confirm password doesn't match New Password ");
-                request.getRequestDispatcher("Booking/infor.jsp").forward(request, response);
-            }else if(!acc.getPassword().equals(en.changed(oldPass))){
-                request.setAttribute("err", "Old Password incorrect");
-                request.getRequestDispatcher("Booking/infor.jsp").forward(request, response);
-            }else{
-                acc.setPassword(en.changed(newPass));
-                acc.setToken(gen.generate(newPass.length()));
-                accClient.edit_JSON(acc, acc.getAccountCustomerId().toString());
-                out.println("<div class='success'></div>");
-                request.getRequestDispatcher("Booking/infor.jsp").include(request, response);
-            }
+            String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String phone = request.getParameter("phone");
+        String inDate = request.getParameter("inDate");
+        String outDate = request.getParameter("outDate");
+        String adult = request.getParameter("adult");
+        String children = request.getParameter("children");
+        String idRoom = request.getParameter("idRoom");
+        String deposit = request.getParameter("deposit");
+        
             
             
         }

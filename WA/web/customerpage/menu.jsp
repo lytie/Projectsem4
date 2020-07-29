@@ -53,58 +53,52 @@
     <!-- Lunch -->
     <section class="section-lunch bgwhite">
         <div class="container">
-            <div class="row p-t-108 p-b-70">	
-                <%
-                    List<Service> listfood = (List<Service>) request.getAttribute("listfood");
-                    List<Service> listdrink = (List<Service>) request.getAttribute("listdrink");
-                    for (Service service : listfood) {
-                %>
-                <!-- Block3 -->
+            <div class="row p-t-108 p-b-70">
+                <c:forEach items="${listfood}" var="f">
+                    <!-- Block3 -->
                 <div class="col-md-6 blo3 flex-w flex-col-l-sm m-b-30">
                     <div class="pic-blo3 size20 bo-rad-10 hov-img-zoom m-r-28">
-                        <a href="#"><img src="./images/customerpageimg/<%=service.getServiceurl()%>" alt="IMG-MENU"></a>
+                        <a href="#"><img src="./images/customerpageimg/${f.getServiceurl()}" alt="IMG-MENU"></a>
                     </div>
 
                     <div class="text-blo3 size21 flex-col-l-m">
                         <a href="#" class="txt21 m-b-3">
-                            <%=service.getServiceName()%>
+                            ${f.getServiceName()}
                         </a>
 
                         <span class="txt23">
-                            <%=service.getServiceDescription()%>
+                            ${f.getServiceDescription()}
                         </span>
 
                         <span class="txt22 m-t-20">
-                            $<%=service.getServicePrice()%> <a href="SessionCartServlet?action=add&serviceid=<%=service.getServiceId()%>" class="btn btn-outline-warning "  >Add to orders</a>
+                            $${f.getServicePrice()}<a href="SessionCartServlet?action=add&serviceid=${f.getServiceId()}" class="btn btn-outline-warning "  >Add to orders</a>
                         </span>
                     </div>
                 </div>
-                <%
-                    }
-                    for (Service service : listdrink) {
-                %>   
+                </c:forEach>
+                <c:forEach items="${listdrink}" var="d">
+                    <!-- Block3 -->
                 <div class="col-md-6 blo3 flex-w flex-col-l-sm m-b-30">
                     <div class="pic-blo3 size20 bo-rad-10 hov-img-zoom m-r-28">
-                        <a href="#"><img src="./images/customerpageimg/<%=service.getServiceurl()%>" alt="IMG-MENU"></a>
+                        <a href="#"><img src="./images/customerpageimg/${d.getServiceurl()}" alt="IMG-MENU"></a>
                     </div>
 
                     <div class="text-blo3 size21 flex-col-l-m">
                         <a href="#" class="txt21 m-b-3">
-                            <%=service.getServiceName()%>
+                            ${d.getServiceName()}
                         </a>
 
                         <span class="txt23">
-                            <%=service.getServiceDescription()%>
+                            ${d.getServiceDescription()}
                         </span>
 
                         <span class="txt22 m-t-20">
-                            $<%=service.getServicePrice()%> <a href="SessionCartServlet?action=add&serviceid=<%=service.getServiceId()%>" class="btn btn-outline-warning "  >Add to orders</a>
+                            $${d.getServicePrice()}<a href="SessionCartServlet?action=add&serviceid=${d.getServiceId()}" class="btn btn-outline-warning "  >Add to orders</a>
                         </span>
                     </div>
                 </div>
-                <%
-                }
-                %>
+                </c:forEach>
+               
             </div>
         </div>
     </section>

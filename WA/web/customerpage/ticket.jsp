@@ -53,21 +53,17 @@
 
         <div class="wrap-gallery isotope-grid flex-w p-l-25 p-r-25">
             <!-- - -->
-            <%
-                    List<Ticket> list = (List<Ticket>) request.getAttribute("list");
-                    for (Ticket ticket : list) {
-            %>
-            <div class="item-gallery isotope-item bo-rad-10 hov-img-zoom">
-                <h2 class="t-center m-b-20"><%=ticket.getTicketName()%>-Left:<%=ticket.getQuantity()%></h2>
-                <img src="./images/ticket/<%=ticket.getTicketUrl()%>" alt="IMG-GALLERY">
+            <c:forEach items="${list}" var="l">
+                <div class="item-gallery isotope-item bo-rad-10 hov-img-zoom">
+                <h2 class="t-center m-b-20">${l.getTicketName()}-Left:${l.getQuantity()}</h2>
+                <img src="./images/ticket/${l.getTicketUrl()}" alt="IMG-GALLERY">
 
                 <div class="overlay-item-gallery trans-0-4 flex-c-m">
-                    <a class="btn-show-gallery flex-c-m fa fa-search" href="./images/ticket/<%=ticket.getTicketUrl()%>" data-lightbox="gallery"></a>
+                    <a class="btn-show-gallery flex-c-m fa fa-search" href="./images/ticket/${l.getTicketUrl()}" data-lightbox="gallery"></a>
                 </div>
             </div>
-            <%
-            }
-            %>
+            </c:forEach>
+
         </div>
     </div>
 

@@ -67,11 +67,11 @@
                             data-appear="zoomIn"
                             >
                             <!-- Button1 -->
-                            <a href="menu.html" class="btn1 size1 txt3 trans-0-4" style="font-size:16px;font-family: Poppins;padding:20px;border-radius: 20px;margin-right: 20px;">
+                            <a href="CustomerPageMenuServlet" class="btn1 size1 txt3 trans-0-4" style="font-size:16px;font-family: Poppins;padding:20px;border-radius: 20px;margin-right: 20px;">
                                 Restaurant menu
                             </a>
 
-                            <a href="servicesmenu.html" class="btn1 size1 txt3 trans-0-4" style="font-size:16px;font-family: Poppins;padding:20px;border-radius: 20px;margin-right: 20px;">
+                            <a href="CustomerPageServicesMenuServlet" class="btn1 size1 txt3 trans-0-4" style="font-size:16px;font-family: Poppins;padding:20px;border-radius: 20px;margin-right: 20px;">
                                 Entertainment services
                             </a>
                         </div>

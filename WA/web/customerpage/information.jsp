@@ -9,7 +9,8 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="entities.Qrcode"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -44,16 +45,9 @@
 	<!-- Title Page -->
 	<section class="bg-title-page flex-c-m p-t-160 p-b-80 p-l-15 p-r-15" style="background-image: url(./images/customerpageimg/bg-title-page-02.jpg);">
 		<h2 class="tit6 t-center">
-			Informations
+                    Informations ${sessionScope.qrcodeid}
 		</h2>
 	</section>
-        <%
-                                Qrcode qrcode = (Qrcode) request.getAttribute("qrcode");
-                                SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-                                String qrid= (String) session.getAttribute("qrcodeid");
-                            %>
-
-
 	<!-- Gallery -->
 	<div class="section-gallery p-t-118 p-b-100">
 
@@ -64,22 +58,23 @@
                 </div>
                 <div class="col-md-8">
                     <div style="background-color: #dddddd40;height: 100%;" class=" p-md-4">
-                        <h2 class="mb-3"><%=qrcode.getCustomerName()%></h2>
+                        <h2 class="mb-3">${qrcode.getCustomerName()}</h2>
                         <div class="row">
                             <div class="p-3 col-md-6">
-                                <p>CodeId: <span class="p-l-20"><%=qrcode.getQrCodeId()%></span></p>
-                                <p>Email: <span class="p-l-20"><%=qrcode.getEmailSendedTo()%></span></p>
-                                <p>Check-in Date: <span class="p-l-20"><%= format.format(qrcode.getCheckInDate())%></span></p>
-                                <p>Check-out Date: <span class="p-l-20"><%= format.format(qrcode.getCheckOutDate())%></span></p>
+                                <p>CodeId: <span class="p-l-20">${qrcode.getQrCodeId()}</span></p>
+                                <p>Email: <span class="p-l-20">${qrcode.getEmailSendedTo()}</span></p>
+                                <fmt:setLocale value="en_US"/>
+                                <p>Check-in Date: <span class="p-l-20"><fmt:formatDate value="${qrcode.getCheckInDate()}" pattern="dd-MMMM-YYYY"/></span></p>
+                                <p>Check-out Date: <span class="p-l-20"><fmt:formatDate value="${qrcode.getCheckOutDate()}" pattern="dd-MMMM-YYYY"/></span></p>
                             </div>
                             <div class="p-3 col-md-6">
-                                <p>Room number: <span class="p-l-20"><%=qrcode.getRoomId().getRoomId()%></span></p>
-                                <p>Number of adults: <span class="p-l-20"><%=qrcode.getAdultsNum()%></span></p>
-                                <p>Number of children: <span class="p-l-20"><%=qrcode.getChildrenNum()%></span></p>
-                                <p>Deposits: <span class="p-l-20">$ <%=qrcode.getDeposits()%></span></p>
+                                <p>Room number: <span class="p-l-20">${qrcode.getRoomId().getRoomId()}</span></p>
+                                <p>Number of adults: <span class="p-l-20">${qrcode.getAdultsNum()}</span></p>
+                                <p>Number of children: <span class="p-l-20">${qrcode.getChildrenNum()}</span></p>
+                                <p>Deposits: <span class="p-l-20">${qrcode.getDeposits()}$</span></p>
                             </div>
                         </div>        
-                        <button class="btn" style="background-color: #dca73a;color: #fff; border-color:#dca73a ;"><a style="color: white;" href="CustomerPageCartServlet?id=<%= qrid%>">Click to see your bills</a></button>        
+                        <button class="btn" style="background-color: #dca73a;color: #fff; border-color:#dca73a ;"><a style="color: white;" href="CustomerPageCartServlet">Click to see your bills</a></button>        
                     </div>  
                 </div>
             </div>

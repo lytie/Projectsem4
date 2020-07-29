@@ -62,19 +62,19 @@
     <!-- jQuery -->
     <%@include file="jslink.jsp" %>
     <script>
-var password = document.getElementById('pwd'),
-  confirm_password = document.getElementById('cpwd');
+        var password = document.getElementById('pwd'),
+          confirm_password = document.getElementById('cpwd');
 
-function validatePassword() {
-  if (password.value !== confirm_password.value) {
-    confirm_password.setCustomValidity("Passwords Don't Match");
-  } else {
-    confirm_password.setCustomValidity('');
-  }
-}
-password.oninput = validatePassword;
-confirm_password.oninput = validatePassword;
-</script>
+        function validatePassword() {
+          if (password.value !== confirm_password.value) {
+            confirm_password.setCustomValidity("Passwords Don't Match");
+          } else {
+            confirm_password.setCustomValidity('');
+          }
+        }
+        password.oninput = validatePassword;
+        confirm_password.oninput = validatePassword;
+    </script>
 </body>
 
 </html>

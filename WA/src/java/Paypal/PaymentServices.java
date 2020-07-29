@@ -86,10 +86,12 @@ public class PaymentServices {
         amount.setCurrency("USD");
         amount.setTotal(String.valueOf(receipt.getTotal()));
         amount.setDetails(details);
-
+        System.out.println("SubTotal: "+details.getSubtotal());
+        System.out.println("Tax: "+details.getTax());
+        System.out.println("Total: "+amount.getTotal());
         Transaction transaction = new Transaction();
         transaction.setAmount(amount);
-
+        float itemtotal = 0;
         ItemList itemList = new ItemList();
         List<Item> items = new ArrayList<>();
         for (Receiptcomponent receiptcomponent : listReceiptcomponents) {
@@ -101,6 +103,7 @@ public class PaymentServices {
                 item.setTax(String.valueOf(receiptcomponent.getPrice()*10/100));
                 item.setQuantity(String.valueOf(receiptcomponent.getQuantity()));
                 items.add(item);
+                itemtotal += Float.parseFloat(item.getPrice());
             }else{
                 Item item = new Item();
                 item.setCurrency("USD");
@@ -109,9 +112,11 @@ public class PaymentServices {
                 item.setTax(String.valueOf(receiptcomponent.getPrice()*10/100));
                 item.setQuantity(String.valueOf(receiptcomponent.getQuantity()));
                 items.add(item);
+                itemtotal += Float.parseFloat(item.getPrice());
             }
             
         }
+        System.out.println("itemtotal :" +itemtotal);
         itemList.setItems(items);
         transaction.setItemList(itemList);
         transaction.setDescription("Deposits:$ "+qrcode.getDeposits());

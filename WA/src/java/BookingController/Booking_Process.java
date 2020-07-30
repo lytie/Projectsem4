@@ -50,7 +50,7 @@ public class Booking_Process extends HttpServlet {
         String adult = request.getParameter("adult");
         String children = request.getParameter("children");
         String idRoom = request.getParameter("idRoom");
-        String deposit = request.getParameter("deposit");
+        String price = request.getParameter("price");
         
         
         
@@ -68,10 +68,10 @@ public class Booking_Process extends HttpServlet {
             
           if(request.getParameter("idCus")!=null){
             String idCus = request.getParameter("idCus");
-            response.sendRedirect(paymentServices.authorizePayment(deposit, idName,name,email,"http://localhost:8080/WA/Booking_payment?name="+name+"&email="+email+"&phone="+phone+"&inDate="+inDate+"&outDate="+outDate+"&adult="+adult+"&children="+children+"&idRoom="+idRoom+"&deposit="+deposit+"&idCus="+idCus));
+            response.sendRedirect(paymentServices.authorizePayment(String.valueOf((Float.valueOf(price)/10)), idName,name,email,"http://localhost:8080/WA/Booking_payment?name="+name+"&email="+email+"&phone="+phone+"&inDate="+inDate+"&outDate="+outDate+"&adult="+adult+"&children="+children+"&idRoom="+idRoom+"&price="+price+"&idCus="+idCus));
 
         }else{
-                          response.sendRedirect(paymentServices.authorizePayment(deposit, idName,name,email,"http://localhost:8080/WA/Booking_payment?name="+name+"&email="+email+"&phone="+phone+"&inDate="+inDate+"&outDate="+outDate+"&adult="+adult+"&children="+children+"&idRoom="+idRoom+"&deposit="+deposit));
+                          response.sendRedirect(paymentServices.authorizePayment(String.valueOf((Float.valueOf(price)/10)), idName,name,email,"http://localhost:8080/WA/Booking_payment?name="+name+"&email="+email+"&phone="+phone+"&inDate="+inDate+"&outDate="+outDate+"&adult="+adult+"&children="+children+"&idRoom="+idRoom+"&price="+price));
           }  
             
             
@@ -114,7 +114,7 @@ public class Booking_Process extends HttpServlet {
         String adult = request.getParameter("selectAdult");
         String children = request.getParameter("selectChildren");
         String idRoom = request.getParameter("idRoom");
-        String deposit = request.getParameter("deposit");
+        String price = request.getParameter("price");
         SendMail send = new SendMail();
         
        
@@ -122,17 +122,18 @@ public class Booking_Process extends HttpServlet {
         if(session.getAttribute("user")!=null){
              Accountcustomer accountcustomer = (Accountcustomer) session.getAttribute("user");
              send.sendToken(email, "Account Verification ", "Please click on the link below to verify your email\n "
-                + "http://localhost:8080/WA/Booking_Process?status=true&name="+name+"&email="+email+"&phone="+phone+"&inDate="+inDate+"&outDate="+outDate+"&adult="+adult+"&children="+children+"&idRoom="+idRoom+"&deposit="+deposit+"&idCus="+accountcustomer.getAccountCustomerId());
+                + "http://localhost:8080/WA/Booking_Process?status=true&name="+name+"&email="+email+"&phone="+phone+"&inDate="+inDate+"&outDate="+outDate+"&adult="+adult+"&children="+children+"&idRoom="+idRoom+"&price="+price+"&idCus="+accountcustomer.getAccountCustomerId());
 
              
         }else{
             send.sendToken(email, "Account Verification ", "Please click on the link below to verify your email\n "
-                + "http://localhost:8080/WA/Booking_Process?status=true&name="+name+"&email="+email+"&phone="+phone+"&inDate="+inDate+"&outDate="+outDate+"&adult="+adult+"&children="+children+"&idRoom="+idRoom+"&deposit="+deposit);
+                + "http://localhost:8080/WA/Booking_Process?status=true&name="+name+"&email="+email+"&phone="+phone+"&inDate="+inDate+"&outDate="+outDate+"&adult="+adult+"&children="+children+"&idRoom="+idRoom+"&price="+price);
 
         }
         
         
-        
+        request.setAttribute("success", "success");
+        request.setAttribute("e", email);
          request.setAttribute("id", idRoom);
         request.getRequestDispatcher("Booking/confirm_infomation.jsp").forward(request, response);
     }

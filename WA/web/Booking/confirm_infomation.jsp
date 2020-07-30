@@ -177,7 +177,7 @@
                                     <input type="hidden" name="selectAdult" value="<%=selectAdult%>"/>
                                     <input type="hidden" name="selectChildren" value="<%=selectChildren%>"/>
                                     <input type="hidden" name="idRoom" value="${id}"/>
-                                    <input type="hidden" name="deposit" value="${(booking_bookMB.room(id).price)/10}"/>
+                                    <input type="hidden" name="price" value="${(booking_bookMB.room(id).price)}"/>
                                     
                                     <div class="form-group mt-3">
                                         <button type="submit" class="button button-contactForm boxed-btn">Booking</button>
@@ -189,7 +189,7 @@
                 </div>
             </section>
         </main>
-
+                                    <div class="${success}"></div>
         <!-- Footer Start-->
         <%@include file="footer.html" %>
         <!-- JS here -->
@@ -229,5 +229,10 @@
         <!-- Jquery Plugins, main Jquery -->	
         <script src="<%=common.url%>/assets/js/plugins.js"></script>
         <script src="<%=common.url%>/assets/js/main.js"></script>
+        <script type="text/javascript">
+            $('.success').each(function () {
+                swal("Please check your email to pay by paypal", "Email sended to: ${e}", "success");
+            });
+        </script>
     </body>
 </html>

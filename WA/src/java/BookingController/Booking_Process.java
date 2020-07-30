@@ -59,7 +59,7 @@ public class Booking_Process extends HttpServlet {
             RoomClient client=new RoomClient();
             GenericType<Room> gt=new GenericType<Room>(){};
             
-           Room room= client.find_JSON(gt, Integer.parseInt(idRoom));
+           Room room= client.find_JSON(gt, idRoom);
             String idName=room.getRoomTypeId().getRoomTypeName()+"-"+room.getLocationId().getLocationName()+idRoom;
         
         

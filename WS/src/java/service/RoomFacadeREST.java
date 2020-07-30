@@ -81,6 +81,19 @@ public class RoomFacadeREST extends AbstractFacade<Room> {
     public String countREST() {
         return String.valueOf(super.count());
     }
+     @PUT
+    @Path("update/{id}/{price}/{description}/{status}")
+    @Consumes({"application/xml", "application/json"})
+    public void update(@PathParam("id") Integer id,@PathParam("price") Float price,@PathParam("description") String description,@PathParam("status") Boolean status) {
+        
+        String query="UPDATE room SET Price = ?, Status = ?, Description = ? WHERE RoomId = ?";
+        em.createNativeQuery(query).setParameter(1, price)
+                .setParameter(2, status)
+                .setParameter(3, description)
+                .setParameter(4, id).executeUpdate();
+        
+        
+    }
 
     @Override
     protected EntityManager getEntityManager() {

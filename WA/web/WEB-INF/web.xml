@@ -269,6 +269,14 @@
         <servlet-name>Employee_Room</servlet-name>
         <servlet-class>AdminController.Employee_Room</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Employee_RoomInfo</servlet-name>
+        <servlet-class>AdminController.Employee_RoomInfo</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Employee_Checkin</servlet-name>
+        <servlet-class>AdminController.Employee_Checkin</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CustomerPageMenuServlet</servlet-name>
         <url-pattern>/CustomerPageMenuServlet</url-pattern>
@@ -532,6 +540,14 @@
     <servlet-mapping>
         <servlet-name>Employee_Room</servlet-name>
         <url-pattern>/Employee_Room</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Employee_RoomInfo</servlet-name>
+        <url-pattern>/Employee_RoomInfo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Employee_Checkin</servlet-name>
+        <url-pattern>/Employee_Checkin</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

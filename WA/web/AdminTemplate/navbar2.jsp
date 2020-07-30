@@ -70,7 +70,7 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="AdminIndexServlet" class="brand-link">
+    <a href="EmployeeIndexServlet" class="brand-link">
         <img src="images/admintemplate/logo.png" alt="AdminLTE Logo" class="brand-image img-square "
              style="opacity: .8">
         <span class="brand-text font-weight-light">Haven Deluxe</span>
@@ -81,7 +81,7 @@
         <!-- Sidebar user (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="info col-12">
-                <a href="AdminIndexServlet" class="d-block">Reception/<span style="color: #c59636">Trinh Thiem Bao</span></a>
+                <a href="EmployeeIndexServlet" class="d-block">Reception/<span style="color: #c59636">Trinh Thiem Bao</span></a>
             </div>
         </div>
 
@@ -129,7 +129,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="mailbox.jsp" class="nav-link">
+                            <a href="Employee_Checkin" class="nav-link">
                                 <i class="fa fa-sort-down nav-icon"></i>
                                 <p>Check-in</p>
                             </a>

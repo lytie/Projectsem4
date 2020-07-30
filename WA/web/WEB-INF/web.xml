@@ -257,6 +257,18 @@
         <servlet-name>Booking_payment</servlet-name>
         <servlet-class>BookingController.Booking_payment</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EmployeeIndexServlet</servlet-name>
+        <servlet-class>AdminController.EmployeeIndexServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Employee_Information</servlet-name>
+        <servlet-class>AdminController.Employee_Information</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Employee_Room</servlet-name>
+        <servlet-class>AdminController.Employee_Room</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CustomerPageMenuServlet</servlet-name>
         <url-pattern>/CustomerPageMenuServlet</url-pattern>
@@ -508,6 +520,18 @@
     <servlet-mapping>
         <servlet-name>Booking_payment</servlet-name>
         <url-pattern>/Booking_payment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmployeeIndexServlet</servlet-name>
+        <url-pattern>/EmployeeIndexServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Employee_Information</servlet-name>
+        <url-pattern>/Employee_Information</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Employee_Room</servlet-name>
+        <url-pattern>/Employee_Room</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

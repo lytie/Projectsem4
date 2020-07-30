@@ -3,25 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package AdminController;
 
-import entities.Accountemployee;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.ws.rs.core.GenericType;
-import wsc.AccountemployeeClient;
 
 /**
  *
  * @author Admin
  */
-public class Admin_Login extends HttpServlet {
+public class Employee_Room extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,12 +31,7 @@ public class Admin_Login extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            HttpSession session = request.getSession();
-            if (session.getAttribute("accountemployeeid")!=null) {
-                response.sendRedirect("Haven");
-            }else{
-                request.getRequestDispatcher("AdminTemplate/login.jsp").forward(request, response);
-            }
+            request.getRequestDispatcher("AdminTemplate/employeeroom.jsp").forward(request, response);
         }
     }
 
@@ -71,26 +61,7 @@ public class Admin_Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        AccountemployeeClient accountemployeeClient = new AccountemployeeClient();
-        GenericType<Accountemployee> genAccountemployee = new GenericType<Accountemployee>(){};
-        Accountemployee accountemployee = accountemployeeClient.login_JSON(genAccountemployee, email, password);
-        if (accountemployee !=null) {
-            HttpSession session = request.getSession();
-            session.setAttribute("accountemployeeid", accountemployee.getAccountId());
-            if (accountemployee.getRoleId().getRoleId() == 1) {
-                response.sendRedirect("AdminIndexServlet");
-                //request.getRequestDispatcher("AdminIndexServlet").forward(request, response);
-            }else{
-                response.sendRedirect("EmployeeIndexServlet");
-            }
-            System.out.println("true");
-        }else{
-            request.setAttribute("error", "Email or password wrong");
-            System.out.println("false");
-            request.getRequestDispatcher("AdminTemplate/login.jsp").forward(request, response);
-        } 
+        processRequest(request, response);
     }
 
     /**

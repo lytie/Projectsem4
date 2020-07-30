@@ -137,7 +137,7 @@ public class SessionCartServlet extends HttpServlet {
                     ticket.setQuantity(Integer.valueOf(request.getParameter("quantity"+cart.indexOf(item))));
                     ticket.setTicketName(item.getService().getServiceName());
                     ticket.setTicketId(stringGenerator.generate(200));
-                    qrcodeGen.createQr(ticket.getTicketId(),"ticket"+String.valueOf(Integer.valueOf(ticketClient.countREST())+1), "png");
+                    qrcodeGen.createQr(ticket.getTicketId(),"ticket","ticket"+String.valueOf(Integer.valueOf(ticketClient.countREST())+1), "png");
                     ticket.setTicketUrl("ticket"+String.valueOf(Integer.valueOf(ticketClient.countREST())+1));
                     ticket.setBuyerID(qrcode);
                     ticketClient.create_JSON(ticket);

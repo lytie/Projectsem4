@@ -41,40 +41,34 @@ public class Booking_Process extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-           
-            String name = request.getParameter("name");
-        String email = request.getParameter("email");
-        String phone = request.getParameter("phone");
-        String inDate = request.getParameter("inDate");
-        String outDate = request.getParameter("outDate");
-        String adult = request.getParameter("adult");
-        String children = request.getParameter("children");
-        String idRoom = request.getParameter("idRoom");
-        String price = request.getParameter("price");
-        
-        
-        
-            
-        
-            RoomClient client=new RoomClient();
-            GenericType<Room> gt=new GenericType<Room>(){};
-            
-           Room room= client.find_JSON(gt, idRoom);
-            String idName=room.getRoomTypeId().getRoomTypeName()+"-"+room.getLocationId().getLocationName()+idRoom;
-        
-        
-            PaymentServices paymentServices=new PaymentServices();
-            
-            
-          if(request.getParameter("idCus")!=null){
-            String idCus = request.getParameter("idCus");
-            response.sendRedirect(paymentServices.authorizePayment(String.valueOf((Float.valueOf(price)/10)), idName,name,email,"http://localhost:8080/WA/Booking_payment?name="+name+"&email="+email+"&phone="+phone+"&inDate="+inDate+"&outDate="+outDate+"&adult="+adult+"&children="+children+"&idRoom="+idRoom+"&price="+price+"&idCus="+idCus));
 
-        }else{
-                          response.sendRedirect(paymentServices.authorizePayment(String.valueOf((Float.valueOf(price)/10)), idName,name,email,"http://localhost:8080/WA/Booking_payment?name="+name+"&email="+email+"&phone="+phone+"&inDate="+inDate+"&outDate="+outDate+"&adult="+adult+"&children="+children+"&idRoom="+idRoom+"&price="+price));
-          }  
-            
-            
+            String name = request.getParameter("name");
+            String email = request.getParameter("email");
+            String phone = request.getParameter("phone");
+            String inDate = request.getParameter("inDate");
+            String outDate = request.getParameter("outDate");
+            String adult = request.getParameter("adult");
+            String children = request.getParameter("children");
+            String idRoom = request.getParameter("idRoom");
+            String price = request.getParameter("price");
+
+            RoomClient client = new RoomClient();
+            GenericType<Room> gt = new GenericType<Room>() {
+            };
+
+            Room room = client.find_JSON(gt, idRoom);
+            String idName = room.getRoomTypeId().getRoomTypeName() + "-" + room.getLocationId().getLocationName() + idRoom;
+
+            PaymentServices paymentServices = new PaymentServices();
+
+            if (request.getParameter("idCus") != null) {
+                String idCus = request.getParameter("idCus");
+                response.sendRedirect(paymentServices.authorizePayment(String.valueOf((Float.valueOf(price) / 10)), idName, name, email, "http://localhost:8080/WA/Booking_payment?name=" + name + "&email=" + email + "&phone=" + phone + "&inDate=" + inDate + "&outDate=" + outDate + "&adult=" + adult + "&children=" + children + "&idRoom=" + idRoom + "&price=" + price + "&idCus=" + idCus));
+
+            } else {
+                response.sendRedirect(paymentServices.authorizePayment(String.valueOf((Float.valueOf(price) / 10)), idName, name, email, "http://localhost:8080/WA/Booking_payment?name=" + name + "&email=" + email + "&phone=" + phone + "&inDate=" + inDate + "&outDate=" + outDate + "&adult=" + adult + "&children=" + children + "&idRoom=" + idRoom + "&price=" + price));
+            }
+
         } catch (PayPalRESTException ex) {
             Logger.getLogger(Booking_Process.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -106,7 +100,7 @@ public class Booking_Process extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            String name = request.getParameter("name");
+        String name = request.getParameter("name");
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
         String inDate = request.getParameter("start");
@@ -116,25 +110,22 @@ public class Booking_Process extends HttpServlet {
         String idRoom = request.getParameter("idRoom");
         String price = request.getParameter("price");
         SendMail send = new SendMail();
-        
-       
-        HttpSession session =request.getSession();
-        if(session.getAttribute("user")!=null){
-             Accountcustomer accountcustomer = (Accountcustomer) session.getAttribute("user");
-             send.sendToken(email, "Account Verification ", "Please click on the link below to verify your email\n "
-                + "http://localhost:8080/WA/Booking_Process?status=true&name="+name+"&email="+email+"&phone="+phone+"&inDate="+inDate+"&outDate="+outDate+"&adult="+adult+"&children="+children+"&idRoom="+idRoom+"&price="+price+"&idCus="+accountcustomer.getAccountCustomerId());
 
-             
-        }else{
+        HttpSession session = request.getSession();
+        if (session.getAttribute("user") != null) {
+            Accountcustomer accountcustomer = (Accountcustomer) session.getAttribute("user");
             send.sendToken(email, "Account Verification ", "Please click on the link below to verify your email\n "
-                + "http://localhost:8080/WA/Booking_Process?status=true&name="+name+"&email="+email+"&phone="+phone+"&inDate="+inDate+"&outDate="+outDate+"&adult="+adult+"&children="+children+"&idRoom="+idRoom+"&price="+price);
+                    + "http://localhost:8080/WA/Booking_Process?status=true&name=" + name + "&email=" + email + "&phone=" + phone + "&inDate=" + inDate + "&outDate=" + outDate + "&adult=" + adult + "&children=" + children + "&idRoom=" + idRoom + "&price=" + price + "&idCus=" + accountcustomer.getAccountCustomerId());
+
+        } else {
+            send.sendToken(email, "Account Verification ", "Please click on the link below to verify your email\n "
+                    + "http://localhost:8080/WA/Booking_Process?status=true&name=" + name + "&email=" + email + "&phone=" + phone + "&inDate=" + inDate + "&outDate=" + outDate + "&adult=" + adult + "&children=" + children + "&idRoom=" + idRoom + "&price=" + price);
 
         }
-        
-        
+
         request.setAttribute("success", "success");
         request.setAttribute("e", email);
-         request.setAttribute("id", idRoom);
+        request.setAttribute("id", idRoom);
         request.getRequestDispatcher("Booking/confirm_infomation.jsp").forward(request, response);
     }
 

@@ -125,7 +125,7 @@ public class Booking_payment extends HttpServlet {
             } while (check);
 
             //format date
-            DateFormat df = new SimpleDateFormat("YYYY/MM/dd");
+            DateFormat df = new SimpleDateFormat("YYYY-MM-dd");
             Date dateIn = df.parse(inDate);
             Date dateOut = df.parse(outDate);
 
@@ -135,7 +135,7 @@ public class Booking_payment extends HttpServlet {
             do {
                 qrcodeImg = generator.generate(10);
                 for (Qrcode qr : listQr) {
-                    if (qr.getUrl().equals(qrcodeImg)) {
+                    if (qrcodeImg.equals(qr.getUrl())) {
                         checked = true;
                     }
                 }
@@ -154,7 +154,7 @@ public class Booking_payment extends HttpServlet {
             qrcode.setCheckInDate(dateIn);
             qrcode.setCheckOutDate(dateOut);
             qrcode.setReceiptId(receipt);
-            qrcode.setUrl(qrcodeImg);
+            qrcode.setUrl(qrcodeImg + ".png");
             qrcode.setCreateDate(datenow);
 
             if (request.getParameter("idCus") != null) {
@@ -163,16 +163,10 @@ public class Booking_payment extends HttpServlet {
             }
 
             qrcodeClient.create_JSON(qrcode);
-            
-            
-            
-            SendMail sendMail=new SendMail();
-            sendMail.sendQR(email,"QRcode And Service","The link goes to our service page : http://localhost:8080/WA/CustomerPageIndexServlet?id="+qrcodeid,"qrcode/"+qrcodeImg);
-            
-            
-            
-            
-            
+
+            SendMail sendMail = new SendMail();
+            sendMail.sendQR(email, "QRcode And Service", "The link goes to our service page : http://localhost:8080/WA/CustomerPageIndexServlet?id=" + qrcodeid, "qrcode/" + qrcodeImg + ".png");
+
             out.println("<div class='success'></div>"
                     + "<script type=\"text/javascript\">\n"
                     + "            $('.success').each(function () {\n"

@@ -74,6 +74,20 @@ public class ReceiptFacadeREST extends AbstractFacade<Receipt> {
     public List<Receipt> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
+    
+    
+     @GET
+    @Path("getLast")
+    @Produces({"application/xml", "application/json"})
+    public Receipt getLast() {
+       
+        
+        String query="select * from receipt order by ReceiptId desc limit 1";
+      return (Receipt)em.createNativeQuery(query,Receipt.class).getSingleResult();
+        
+        
+        
+    }
 
     @GET
     @Path("count")

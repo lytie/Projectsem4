@@ -44,16 +44,16 @@ public class Admin_UpdateRoom extends HttpServlet {
 //            float price=Float.valueOf(request.getParameter("priceUp"));
             RoomClient roomClient=new RoomClient();
             GenericType<Room> gtRoom=new GenericType<Room>(){};
-            Room room=roomClient.find_JSON(gtRoom, 2);
+//            Room room=roomClient.find_JSON(gtRoom, 2);
 //            out.println(room.getPrice());
-            room.setPrice(60.0f);
+//            room.setPrice(60.0f);
 //            out.println(room.getPrice());
-            roomClient.edit_JSON(room, room.getRoomId().toString());
+//            roomClient.edit_JSON(room, room.getRoomId().toString());
 //            
 //            out.println(room.getPrice());
 //            
-             Room room1=roomClient.find_JSON(gtRoom, 2);
-             out.println(room1.getPrice());
+//             Room room1=roomClient.find_JSON(gtRoom, 2);
+//             out.println(room1.getPrice());
 
 
 //                ImgHeroClient client=new ImgHeroClient();

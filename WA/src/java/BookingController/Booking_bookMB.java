@@ -141,7 +141,7 @@ public class Booking_bookMB implements Serializable {
         RoomClient rc = new RoomClient();
         GenericType<Room> gr = new GenericType<Room>() {
         };
-        return rc.find_JSON(gr, id);
+        return rc.find_JSON(gr, String.valueOf(id));
     }
 
     //location

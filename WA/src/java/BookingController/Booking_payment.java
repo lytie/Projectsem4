@@ -16,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import wsc.QrcodeClient;
 
 /**
  *
@@ -43,7 +44,24 @@ public class Booking_payment extends HttpServlet {
             Payment payment=paymentServices.executePayment(paymentId, payerId);
             
             
+            QrcodeClient qrcodeClient=new QrcodeClient();
             
+            
+             String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String phone = request.getParameter("phone");
+        String inDate = request.getParameter("inDate");
+        String outDate = request.getParameter("outDate");
+        String adult = request.getParameter("adult");
+        String children = request.getParameter("children");
+        String idRoom = request.getParameter("idRoom");
+        String deposit = request.getParameter("deposit");
+        
+         if(request.getParameter("idCus")!=null){
+         String idCus=request.getParameter("idCus");
+         }else{
+             
+         }
             
             
             

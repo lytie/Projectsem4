@@ -45,7 +45,7 @@
                                     </div>
                                     <!-- /.card-header -->
                                     <!-- form start -->
-                                    <form role="form" id="quickForm">
+                                    <form role="form" id="quickForm" action="Admin_UpdateService" method="post" enctype="multipart/form-data">
                                         <div class="card-body">
                                             <div class="form-group col-md-6">
                                                 <label for="inputState">Service Type ID</label>
@@ -71,10 +71,13 @@
                                             </div>
 
                                             <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="customFile">
+                                                <input type="file" name="file" class="custom-file-input" id="customFile">
                                                 <label class="custom-file-label" for="customFile">Choose file Image</label>
                                             </div>
-
+                                            <div class="custom-file">
+                                                <input type="file" name="file" class="custom-file-input" id="customFile">
+                                                <label class="custom-file-label" for="customFile">Choose file Image</label>
+                                            </div>
                                         </div>
                                         <!-- /.card-body -->
                                         <div class="card-footer">

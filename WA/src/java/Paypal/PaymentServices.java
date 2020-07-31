@@ -33,12 +33,12 @@ public class PaymentServices {
     private static final String CLIENT_SECRET = "EFEOIrjGDlFNuPnT9ZpiswxoFPhqq9LB9wWC5i3MXeQOPQlHT8R5zws8CKMeau2ImU-C7xKyQs3xtb98";
     private static final String MODE = "sandbox";
 
-    public String authorizePayment(Receipt receipt,List<Receiptcomponent> listReceiptcomponents,Qrcode qrcode)
+    public String authorizePayment(Receipt receipt, List<Receiptcomponent> listReceiptcomponents, Qrcode qrcode)
             throws PayPalRESTException {
 
         Payer payer = getPayerInformation(qrcode);
         RedirectUrls redirectUrls = getRedirectURLs();
-        List<Transaction> listTransaction = getTransactionInformation(receipt,listReceiptcomponents,qrcode);
+        List<Transaction> listTransaction = getTransactionInformation(receipt, listReceiptcomponents, qrcode);
 
         Payment requestPayment = new Payment();
         requestPayment.setTransactions(listTransaction);
@@ -55,12 +55,13 @@ public class PaymentServices {
         return getApprovalLink(approvedPayment);
 
     }
-    public String authorizePayment(String deposit,String nameRoom,String name,String email,String url)
+
+    public String authorizePayment(String deposit, String nameRoom, String name, String email, String url)
             throws PayPalRESTException {
 
-         Payer payer = getPayerInformation(name, email);
+        Payer payer = getPayerInformation(name, email);
         RedirectUrls redirectUrls = getRedirectURLsBooking(url);
-        List<Transaction> listTransaction =getTransactionInformation(deposit, nameRoom);
+        List<Transaction> listTransaction = getTransactionInformation(deposit, nameRoom);
 
         Payment requestPayment = new Payment();
         requestPayment.setTransactions(listTransaction);
@@ -90,7 +91,8 @@ public class PaymentServices {
 
         return payer;
     }
-     private Payer getPayerInformation(String name,String email) {
+
+    private Payer getPayerInformation(String name, String email) {
         Payer payer = new Payer();
         payer.setPaymentMethod("paypal");
 
@@ -110,6 +112,7 @@ public class PaymentServices {
 
         return redirectUrls;
     }
+
     private RedirectUrls getRedirectURLsBooking(String url) {
         RedirectUrls redirectUrls = new RedirectUrls();
         redirectUrls.setCancelUrl("http://localhost:8080/WA/Haven");
@@ -118,18 +121,18 @@ public class PaymentServices {
         return redirectUrls;
     }
 
-    private List<Transaction> getTransactionInformation(Receipt receipt,List<Receiptcomponent> listReceiptcomponents,Qrcode qrcode) {
+    private List<Transaction> getTransactionInformation(Receipt receipt, List<Receiptcomponent> listReceiptcomponents, Qrcode qrcode) {
         Details details = new Details();
-        details.setSubtotal(String.valueOf(receipt.getSubtotal()-qrcode.getDeposits()));
+        details.setSubtotal(String.valueOf(receipt.getSubtotal() - qrcode.getDeposits()));
         details.setTax(String.valueOf(receipt.getTax()));
 
         Amount amount = new Amount();
         amount.setCurrency("USD");
         amount.setTotal(String.valueOf(receipt.getTotal()));
         amount.setDetails(details);
-        System.out.println("SubTotal: "+details.getSubtotal());
-        System.out.println("Tax: "+details.getTax());
-        System.out.println("Total: "+amount.getTotal());
+        System.out.println("SubTotal: " + details.getSubtotal());
+        System.out.println("Tax: " + details.getTax());
+        System.out.println("Total: " + amount.getTotal());
         Transaction transaction = new Transaction();
         transaction.setAmount(amount);
         float itemtotal = 0;
@@ -140,27 +143,27 @@ public class PaymentServices {
                 Item item = new Item();
                 item.setCurrency("USD");
                 item.setName(receiptcomponent.getComponentName());
-                item.setPrice(String.valueOf(receiptcomponent.getPrice()-qrcode.getDeposits()));
-                item.setTax(String.valueOf(receiptcomponent.getPrice()*10/100));
+                item.setPrice(String.valueOf(receiptcomponent.getPrice() - qrcode.getDeposits()));
+                item.setTax(String.valueOf(receiptcomponent.getPrice() * 10 / 100));
                 item.setQuantity(String.valueOf(receiptcomponent.getQuantity()));
                 items.add(item);
                 itemtotal += Float.parseFloat(item.getPrice());
-            }else{
+            } else {
                 Item item = new Item();
                 item.setCurrency("USD");
                 item.setName(receiptcomponent.getComponentName());
                 item.setPrice(String.valueOf(receiptcomponent.getPrice()));
-                item.setTax(String.valueOf(receiptcomponent.getPrice()*10/100));
+                item.setTax(String.valueOf(receiptcomponent.getPrice() * 10 / 100));
                 item.setQuantity(String.valueOf(receiptcomponent.getQuantity()));
                 items.add(item);
                 itemtotal += Float.parseFloat(item.getPrice());
             }
-            
+
         }
-        System.out.println("itemtotal :" +itemtotal);
+        System.out.println("itemtotal :" + itemtotal);
         itemList.setItems(items);
         transaction.setItemList(itemList);
-        transaction.setDescription("Deposits:$ "+qrcode.getDeposits());
+        transaction.setDescription("Deposits:$ " + qrcode.getDeposits());
 
         List<Transaction> listTransaction = new ArrayList<>();
         listTransaction.add(transaction);
@@ -168,36 +171,31 @@ public class PaymentServices {
         return listTransaction;
     }
 
-    
-    
-     private List<Transaction> getTransactionInformation(String deposit,String nameRoom) {
-        
- Details details = new Details();
+    private List<Transaction> getTransactionInformation(String deposit, String nameRoom) {
+
+        Details details = new Details();
         details.setSubtotal(deposit);
         details.setTax("0");
-         
+
         Amount amount = new Amount();
         amount.setCurrency("USD");
         amount.setTotal(deposit);
-       
-      
+
         Transaction transaction = new Transaction();
         transaction.setAmount(amount);
-        
+
         ItemList itemList = new ItemList();
         List<Item> items = new ArrayList<>();
-      
-        Item item=new Item();
+
+        Item item = new Item();
         item.setCurrency("USD");
-        item.setName(nameRoom+"10%");
+        item.setName(nameRoom + "10%");
         item.setPrice(deposit);
         item.setQuantity("1");
         items.add(item);
-        
-        
+
         itemList.setItems(items);
         transaction.setItemList(itemList);
-        
 
         List<Transaction> listTransaction = new ArrayList<>();
         listTransaction.add(transaction);
@@ -205,9 +203,6 @@ public class PaymentServices {
         return listTransaction;
     }
 
-    
-    
-    
     private String getApprovalLink(Payment approvedPayment) {
         List<Links> links = approvedPayment.getLinks();
         String approvalLink = null;
@@ -230,6 +225,16 @@ public class PaymentServices {
 
         APIContext apiContext = new APIContext(CLIENT_ID, CLIENT_SECRET, MODE);
 
+        try {
+            Payment createdPayment = payment.execute(apiContext, paymentExecution);
+            System.out.println("---Start print createdpayment-----");
+            System.out.println(createdPayment);
+            return createdPayment;
+            
+        } catch (PayPalRESTException e) {
+            System.out.println("---start print exception---");
+            System.err.println(e.getDetails());
+        }
         return payment.execute(apiContext, paymentExecution);
     }
 

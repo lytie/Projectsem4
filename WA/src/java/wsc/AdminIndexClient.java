@@ -63,6 +63,18 @@ public class AdminIndexClient {
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
+    public <T> T getQrcodeInUse(javax.ws.rs.core.GenericType<T> responseType, String from, String to) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("getqrcodeinuse/{0}/{1}", new Object[]{from, to}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+
+    public <T> T getRoomNotInUse(javax.ws.rs.core.GenericType<T> responseType, String from, String to) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("getroomnotinuse/{0}/{1}", new Object[]{from, to}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+
     public <T> T getnewFoodandDrinkOrders(javax.ws.rs.core.GenericType<T> responseType, String today, String nextday) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path(java.text.MessageFormat.format("getnewfndorders/{0}/{1}", new Object[]{today, nextday}));

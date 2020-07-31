@@ -142,7 +142,7 @@ public class SessionCartServlet extends HttpServlet {
                     ticket.setBuyerID(qrcode);
                     ticketClient.create_JSON(ticket);
                 }
-                subtotal += item.getService().getServicePrice()*item.getQuantity();
+                subtotal = subtotal + (item.getService().getServicePrice()* Float.valueOf(request.getParameter("quantity"+cart.indexOf(item))));
                 Receiptcomponent receiptcomponent = new Receiptcomponent();
                 receiptcomponent.setReceiptId(receipt);
                 receiptcomponent.setComponentName(item.getService().getServiceName());

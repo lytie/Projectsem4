@@ -101,7 +101,7 @@ public class Booking_payment extends HttpServlet {
 
             // Receiptcomponent
             Receiptcomponent receiptcomponent = new Receiptcomponent();
-            receiptcomponent.setComponentName("Room -" + room.getRoomTypeId().getRoomTypeName() + "-" + room.getLocationId().getAddress() + idRoom);
+            receiptcomponent.setComponentName("Room -" + room.getRoomTypeId().getRoomTypeName() + "-" + room.getLocationId().getLocationName() + idRoom);
             receiptcomponent.setOrdererName(name);
             receiptcomponent.setPrice(priceSub);
             receiptcomponent.setQuantity(1);
@@ -167,12 +167,14 @@ public class Booking_payment extends HttpServlet {
             SendMail sendMail = new SendMail();
             sendMail.sendQR(email, "QRcode And Service", "The link goes to our service page : http://localhost:8080/WA/CustomerPageIndexServlet?id=" + qrcodeid, "qrcode/" + qrcodeImg + ".png");
 
-            out.println("<div class='success'></div>"
+            request.setAttribute("success", "<div class='success'></div>"
                     + "<script type=\"text/javascript\">\n"
                     + "            $('.success').each(function () {\n"
                     + "                swal(\"Booking Room Success\", \"Please check your email for the QR code and the link to our service page\", \"success\");\n"
                     + "            });\n"
                     + "        </script>");
+            
+           
             request.getRequestDispatcher("Haven").include(request, response);
 
         } catch (PayPalRESTException | ParseException | WriterException ex) {

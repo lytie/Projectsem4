@@ -39,7 +39,9 @@
         <link rel="stylesheet" href="<%=common.url%>/assets/css/responsive.css"/>
         <link rel="stylesheet" href="<%=common.url%>/assets/css/style.css"/>
         <link href="<%=common.url%>/dist/css/datepicker-foundation.min.css" rel="stylesheet"/>
-
+ <link rel='stylesheet' href='https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.css'>
+        <script src='https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.min.js'></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     </head>
     <body>
         <!-- Preloader Start -->
@@ -309,6 +311,8 @@
             <!-- Gallery img End-->
         </main>
 
+                                
+                                ${success}
         <!-- Footer Start-->
         <%@include file="footer.html" %>
         <!-- JS here -->

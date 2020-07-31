@@ -123,10 +123,14 @@ public class Booking_Process extends HttpServlet {
 
         }
 
-        request.setAttribute("success", "success");
-        request.setAttribute("e", email);
+        request.setAttribute("success", "<div class=\"success\"></div><script type=\"text/javascript\">\n" +
+"            $('.success').each(function () {\n" +
+"                swal(\"Please check your email to pay by paypal\", \"Email sended to: "+email+"\", \"success\");\n" +
+"            });\n" +
+"        </script>");
+        
         request.setAttribute("id", idRoom);
-        request.getRequestDispatcher("Booking/confirm_infomation.jsp").forward(request, response);
+        request.getRequestDispatcher("Booking/index.jsp").forward(request, response);
     }
 
     /**

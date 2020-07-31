@@ -189,7 +189,7 @@
                 </div>
             </section>
         </main>
-                                    <div class="${success}"></div>
+                                    
         <!-- Footer Start-->
         <%@include file="footer.html" %>
         <!-- JS here -->
@@ -229,10 +229,6 @@
         <!-- Jquery Plugins, main Jquery -->	
         <script src="<%=common.url%>/assets/js/plugins.js"></script>
         <script src="<%=common.url%>/assets/js/main.js"></script>
-        <script type="text/javascript">
-            $('.success').each(function () {
-                swal("Please check your email to pay by paypal", "Email sended to: ${e}", "success");
-            });
-        </script>
+        
     </body>
 </html>

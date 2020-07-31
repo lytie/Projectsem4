@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@page  import="bean.common"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -18,7 +18,7 @@
         <title>AdminLTE 3 | Add new Employee</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <link href="<%=common.url%>/dist/css/datepicker-foundation.min.css" rel="stylesheet"/>
         <!-- Font Awesome -->
         <%@include file="css.jsp" %>
     </head>
@@ -45,39 +45,39 @@
                                     </div>
                                     <!-- /.card-header -->
                                     <!-- form start -->
-                                    <form role="form" id="quickForm">
+                                    <form  action="Admin_AddEmployee" id="quickForm" method="post">
                                         <div class="card-body">
 
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
                                                     <label for="inputEmail4">Email</label>
-                                                    <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+                                                    <input type="email" class="form-control" name="email" placeholder="Email" required="true">
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label for="inputPassword4">Password</label>
-                                                    <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+                                                    <input type="password" class="form-control" name="password" placeholder="Password" required="true">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputAddress">Full Name</label>
-                                                <input type="text" class="form-control" id="inputAddress" placeholder="Full Name">
+                                                <input type="text" class="form-control" name="name" placeholder="Full Name" required="true">
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputAddress">Phone</label>
-                                                <input type="text" class="form-control" id="inputAddress" placeholder="Phone">
+                                                <input type="number" class="form-control" name="phone" placeholder="Phone" required="true">
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
                                                     <label for="inputPhone">Date Of Birth</label>
-                                                    <input type="datetime" class="form-control" id="inputCity"  required="true">
+                                                    <input name="datepicker" class="form-control" id="inputCity"  required="true">
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label for="inputState">Role</label>
-                                                    <select id="inputState" class="form-control">
-                                                        <option selected>--Role--</option>
-                                                        <option>Admin</option>
-                                                        <option>Reception</option>
-                                                        <option>Ticket Collector</option>
+                                                    <select id="inputState" class="form-control" name="role">
+                                                        
+                                                        <c:forEach items="${list}" var="r">
+                                                            <option value="${r.roleId}">${r.roleName}</option>
+                                                        </c:forEach>
                                                     </select>
                                                 </div>
 
@@ -87,6 +87,8 @@
                                             <div >
                                                 <button type="submit" class="btn btn-primary">Submit</button>
                                             </div>
+                                            
+                                            
                                     </form>
                                 </div>
                                 <!-- /.card -->
@@ -104,8 +106,9 @@
                 </section>
                 <!-- /.content -->
             </div>
+            
             <!-- /.content-wrapper -->
-             <%@include file="footer.jsp" %>
+            <%@include file="footer.jsp" %>
 
             <!-- Control Sidebar -->
             <aside class="control-sidebar control-sidebar-dark">
@@ -118,5 +121,24 @@
         <!-- jQuery -->
         <%@include file="jslink.jsp" %>
     </body>
+    <script src="<%=common.url%>/dist/js/datepicker-full.js">
+    </script>
+    <script>
 
+
+
+        const elem = document.querySelector('input[name="datepicker"]');
+        const datepicker = new Datepicker(elem, {
+             
+            buttonClass: 'btn',
+            format: 'yyyy-mm-dd'
+        });
+        
+      </script>
+    <script src="dist/js/datepicker.min.js">
+    </script>
+    <script src="dist/js/locales/fr.min.js">
+    </script>
+    <script src="dist/js/datepicker-full.min.js">
+    </script>
 </html>

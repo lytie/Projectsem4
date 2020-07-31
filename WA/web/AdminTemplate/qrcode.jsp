@@ -66,39 +66,52 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    
-                                                   <c:forEach items="${listQrcode}" var="c">
-                                                <tr>
-                                                    <td ><c:out value="${c.getQrCodeId()}"/></td>
-                                                    <td><c:out value="${c.getEmailSendedTo()}"/></td>
-                                                    
-                                                    <td><fmt:formatDate value="${c.getCreateDate()}" pattern="dd/MM/yyyy"/></td>
-                                                    <td>
-                                                        <c:choose>
-                                                            <c:when test="${c.getStatus()== true}">Active</c:when>
-                                                            <c:otherwise>Not Active</c:otherwise>
-                                                        </c:choose>
-                                                    </td>
-                                                    <td>
 
-                                                        <a class="btn btn-info btn-sm" href="Admin_QrCodeInfo?id=<c:out value="${c.getQrCodeId()}"/>">
-                                                           <i class="fas fa-info"></i> See Details
-                                                        </a>
-                                                           <c:choose>
-                                                            <c:when test="${c.getStatus()== true}">
-                                                                <a class="btn btn-danger btn-sm" href="#">
-                                                            <i class="fas fa-times"></i> DeActive                          
-                                                        </a> 
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <a class="btn btn-success btn-sm" href="#">
-                                                            <i class="fas fa-check"></i> Active                          
-                                                        </a> 
-                                                            </c:otherwise>
-                                                        </c:choose>                                   
-                                                    </td>
-                                                </tr>
-                                                </c:forEach>
+                                                    <c:forEach items="${listQrcode}" var="c">
+                                                        <tr>
+                                                            <td > 
+                                                                <a class="" href="Admin_QrCodeInfo?id=<c:out value="${c.getQrCodeId()}"/>">
+                                                                    <c:out value="${c.getQrCodeId()}"/>
+                                                                </a>
+                                                            </td>
+                                                            <td>
+                                                                <c:out value="${c.getEmailSendedTo()}"/>
+                                                            </td>
+
+                                                            <td>
+                                                                <fmt:formatDate value="${c.getCreateDate()}" pattern="dd/MM/yyyy"/>
+                                                            </td>
+                                                            <td>
+                                                                <c:choose>
+                                                                    <c:when test="${c.getStatus()== true}">Active</c:when>
+                                                                    <c:otherwise>Not Active</c:otherwise>
+                                                                </c:choose>
+                                                            </td>
+                                                            <td>
+
+                                                                <c:if test="${date.before(c.checkOutDate)||date==c.checkOutDate}">
+
+                                                                    <c:choose>
+                                                                        <c:when test="${c.getStatus()== true}">
+                                                                            <a class="btn btn-danger btn-sm" href="Admin_StatusQrcode?status=deactivate&id=<c:out value="${c.getQrCodeId()}"/>">
+                                                                                <i class="fas fa-times"></i> Deactivate                          
+                                                                            </a> 
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <c:if test="${c.checkInDate==date||c.checkInDate.after(date)}">
+                                                                                <a class="btn btn-success btn-sm" href="Admin_StatusQrcode?status=active&id=<c:out value="${c.getQrCodeId()}"/>">
+                                                                                    <i class="fas fa-check"></i> Active                          
+                                                                                </a> 
+                                                                            </c:if>
+                                                                            <a class="btn btn-dark btn-sm" href="Admin_StatusQrcode?status=cancel&id=<c:out value="${c.getQrCodeId()}"/>">
+                                                                                <i class="fas fa-ban"></i> Cancel                          
+                                                                            </a> 
+                                                                        </c:otherwise>
+                                                                    </c:choose>   
+                                                                </c:if>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
                                                 </tbody>
 
                                             </table>

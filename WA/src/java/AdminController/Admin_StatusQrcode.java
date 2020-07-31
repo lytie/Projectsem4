@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package AdminController;
 
 import entities.Qrcode;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -20,9 +20,9 @@ import wsc.QrcodeClient;
 
 /**
  *
- * @author Admin
+ * @author longly
  */
-public class Admin_QrCode extends HttpServlet {
+public class Admin_StatusQrcode extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,22 +37,38 @@ public class Admin_QrCode extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            
+            
+            
+            String status=request.getParameter("status");
+            String id=request.getParameter("id");
+            
             QrcodeClient qrcodeClient = new QrcodeClient();
-            GenericType<List<Qrcode>> genericType = new GenericType<List<Qrcode>>() {
+            GenericType<Qrcode> genericType = new GenericType<Qrcode>() {
             };
-            List<Qrcode> listQrcode = qrcodeClient.findAll_JSON(genericType);
-            Date datenow=new Date();
-            for (Qrcode qrcode : listQrcode) {
-                if (qrcode.getCheckOutDate().before(datenow)) {
-                    qrcode.setStatus(Boolean.FALSE);
-                    qrcodeClient.edit_JSON(qrcode, qrcode.getQrCodeId());
-                }
+            Qrcode qrcode = qrcodeClient.find_JSON(genericType, id);
+            
+            
+            Date date=new Date();
+                   
+
+            
+            
+            if(status.equals("deactivate")){
+                qrcode.setStatus(Boolean.FALSE);
+                
+                
+            }else if(status.equals("active")){
+                qrcode.setStatus(Boolean.TRUE);
+                
+            }else if(status.equals("cancel")){
+                qrcode.setStatus(Boolean.FALSE);
+                qrcode.setCheckInDate(date);
+                qrcode.setCheckOutDate(date);
             }
+            qrcodeClient.edit_JSON(qrcode,id);
+            request.getRequestDispatcher("Admin_QrCode").forward(request, response);
             
-            
-            request.setAttribute("date", datenow);
-            request.setAttribute("listQrcode", listQrcode);
-            request.getRequestDispatcher("AdminTemplate/qrcode.jsp").forward(request, response);
         }
     }
 

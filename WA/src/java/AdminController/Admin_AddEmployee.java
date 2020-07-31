@@ -6,12 +6,25 @@
 
 package AdminController;
 
+import Generator.StringGenerator;
+import bean.encrypt;
+import entities.Accountemployee;
+import entities.Role;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.GenericType;
+import wsc.AccountemployeeClient;
+import wsc.RoleClient;
 
 /**
  *
@@ -33,6 +46,13 @@ public class Admin_AddEmployee extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            
+            RoleClient roleClient=new RoleClient();
+            GenericType<List<Role>> roleType=new GenericType<List<Role>>(){};
+            List<Role> list=roleClient.findAll_JSON(roleType);
+            
+            request.setAttribute("list", list);
+            
             request.getRequestDispatcher("AdminTemplate/addemployee.jsp").forward(request, response);
         }
     }
@@ -63,7 +83,63 @@ public class Admin_AddEmployee extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        try {
+            String email=request.getParameter("email");
+            String name=request.getParameter("name");
+            String phone=request.getParameter("phone");
+            String password=request.getParameter("password");
+            String datepicker=request.getParameter("datepicker");
+            String role=request.getParameter("role");
+            
+            RoleClient client=new RoleClient();
+            GenericType<Role> rType=new GenericType<Role>(){};
+            Role role1=client.find_JSON(rType, role);
+            
+            SimpleDateFormat format=new SimpleDateFormat("YYYY-MM-dd");
+            Date dob=format.parse(datepicker);
+            
+            AccountemployeeClient clientAcc=new AccountemployeeClient();
+            GenericType<List<Accountemployee>> accType=new GenericType<List<Accountemployee>>(){};
+            List<Accountemployee> listAcc=clientAcc.findAll_JSON(accType);
+            StringGenerator gen=new StringGenerator();
+            encrypt en=new encrypt();
+            String pass=en.changed(password);
+            String token=null;
+            boolean check=false;
+            do {       
+               token= gen.generate(password.length());
+                for (Accountemployee acc : listAcc) {
+                    if(token.equals(acc.getToken())){
+                        check=true;
+                    }
+                }
+                
+            } while (check);
+            
+            
+            Accountemployee accountemployee=new Accountemployee();
+            accountemployee.setDateOfBirth(dob);
+            accountemployee.setEmail(email);
+            accountemployee.setFullName(name);
+            accountemployee.setPassword(password);
+            accountemployee.setPhone(phone);
+            accountemployee.setRoleId(role1);
+            accountemployee.setStatus(Boolean.TRUE);
+            accountemployee.setToken(token);
+            
+            clientAcc.create_JSON(accountemployee);
+            
+            
+        } catch (ParseException ex) {
+            Logger.getLogger(Admin_AddEmployee.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        request.setAttribute("success", " ");
+        request.getRequestDispatcher("Admin_Employee").forward(request, response);
+        
+        
+                
     }
 
     /**

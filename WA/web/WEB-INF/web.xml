@@ -277,6 +277,10 @@
         <servlet-name>Employee_Checkin</servlet-name>
         <servlet-class>AdminController.Employee_Checkin</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Admin_StatusQrcode</servlet-name>
+        <servlet-class>AdminController.Admin_StatusQrcode</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CustomerPageMenuServlet</servlet-name>
         <url-pattern>/CustomerPageMenuServlet</url-pattern>
@@ -548,6 +552,10 @@
     <servlet-mapping>
         <servlet-name>Employee_Checkin</servlet-name>
         <url-pattern>/Employee_Checkin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Admin_StatusQrcode</servlet-name>
+        <url-pattern>/Admin_StatusQrcode</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

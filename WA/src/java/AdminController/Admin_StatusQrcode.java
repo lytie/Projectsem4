@@ -8,6 +8,8 @@ package AdminController;
 import entities.Qrcode;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -51,11 +53,16 @@ public class Admin_StatusQrcode extends HttpServlet {
             
             Date date=new Date();
                    
-
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            cal.add(Calendar.DATE, -1);
+           
+            
             
             
             if(status.equals("deactivate")){
                 qrcode.setStatus(Boolean.FALSE);
+                qrcode.setCheckOutDate(cal.getTime());
                 
                 
             }else if(status.equals("active")){
@@ -63,8 +70,8 @@ public class Admin_StatusQrcode extends HttpServlet {
                 
             }else if(status.equals("cancel")){
                 qrcode.setStatus(Boolean.FALSE);
-                qrcode.setCheckInDate(date);
-                qrcode.setCheckOutDate(date);
+                qrcode.setCheckInDate(cal.getTime());
+                qrcode.setCheckOutDate(cal.getTime());
             }
             qrcodeClient.edit_JSON(qrcode,id);
             request.getRequestDispatcher("Admin_QrCode").forward(request, response);

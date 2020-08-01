@@ -45,21 +45,28 @@
                                     </div>
                                     <!-- /.card-header -->
                                     <!-- form start -->
-                                    <form role="form" id="quickForm">
+                                    <form role="form" id="quickForm" action="Admin_AddLocation" method="post" enctype="multipart/form-data">
                                         <div class="card-body">
                                             
-                                            <div class="form-group col-md-4">
+                                            <div class="form-group ">
                                                 <label >Location Name :</label>
-                                                <input type="text" name="text" class="form-control" id="" placeholder="Location Name">
+                                                <input type="text" name="name" class="form-control" id="" placeholder="Location Name">
                                             </div>
-                                          
+                                          <div class="form-group ">
+                                                <label >Address :</label>
+                                                <input type="text" name="address" class="form-control" id="" placeholder="Address">
+                                            </div>
+                                             <div class="form-group">
+                                                <label >Introduce :</label>
+                                                <textarea cols="100" rows="4" class="form-control" name="introduce"></textarea>
+                                            </div>
                                                 
-                                            <div class="form-group">
+                                            <div class="form-group col-md-4">
                                             <label for="exampleInputPassword1">Img Path :</label>
-                                            <input type="file" name="fileupload" class="form-control" id="fileupload" >
+                                            <input type="file" name="file" class="form-control" id="fileupload" >
                                         </div>
 
-                                                
+                                            <div style="color: red;font-size: 18px"> ${error}</div>
                                         </div>
                                         <!-- /.card-body -->
                                         <div class="card-footer">

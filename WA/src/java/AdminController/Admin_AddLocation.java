@@ -6,12 +6,16 @@
 
 package AdminController;
 
+import bean.UploadImg;
+import entities.Location;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import wsc.LocationClient;
 
 /**
  *
@@ -63,7 +67,35 @@ public class Admin_AddLocation extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+            UploadImg uploadImg=new UploadImg();
+            
+           LocationClient locationClient=new LocationClient();
+           Location location=new Location();
+            try {
+                      List<String> listImg = uploadImg.Upload(request, "img");
+                        String name=request.getParameter("name");
+           String address=request.getParameter("address");
+           String introduce=request.getParameter("introduce");
+           
+                System.out.println(listImg.size());
+            
+            
+            location.setAddress(address);
+            location.setIntroduce(introduce);
+            location.setLocationName(name);
+            location.setLocationUrl(listImg.get(0));
+            
+            
+           
+           
+
+        } catch (Exception e) {
+            request.setAttribute("error", e.getMessage());
+            request.getRequestDispatcher("AdminTemplate/addlocation.jsp").forward(request, response);
+        }
+           
+            locationClient.create_JSON(location);
+            request.getRequestDispatcher("Admin_Location").forward(request, response);
     }
 
     /**

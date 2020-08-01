@@ -48,7 +48,7 @@ public class Admin_QrCode extends HttpServlet {
                     qrcodeClient.edit_JSON(qrcode, qrcode.getQrCodeId());
                 }
             }
-            
+            System.out.println(datenow);
             
             request.setAttribute("date", datenow);
             request.setAttribute("listQrcode", listQrcode);

@@ -98,7 +98,7 @@
                                                                             </a> 
                                                                         </c:when>
                                                                         <c:otherwise>
-                                                                            <c:if test="${c.checkInDate==date||c.checkInDate.after(date)}">
+                                                                            <c:if test="${c.checkInDate==date||c.checkInDate.before(date)}">
                                                                                 <a class="btn btn-success btn-sm" href="Admin_StatusQrcode?status=active&id=<c:out value="${c.getQrCodeId()}"/>">
                                                                                     <i class="fas fa-check"></i> Active                          
                                                                                 </a> 

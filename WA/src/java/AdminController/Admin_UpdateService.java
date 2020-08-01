@@ -7,6 +7,7 @@
 package AdminController;
 
 import bean.UploadImg;
+import bean.UploadServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -66,7 +67,9 @@ public class Admin_UpdateService extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         UploadImg uploadImg = new UploadImg();
-        uploadImg.Upload(request, "qrcode");
+        //uploadImg.Upload(request, "qrcode");
+        UploadServlet uploadServlet = new UploadServlet();
+        uploadServlet.Upload(request, "ticket");
         processRequest(request, response);
     }
 

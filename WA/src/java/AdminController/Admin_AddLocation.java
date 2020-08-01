@@ -3,18 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package AdminController;
 
 import bean.UploadImg;
+import bean.UploadServlet;
 import entities.Location;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.io.FilenameUtils;
 import wsc.LocationClient;
 
 /**
@@ -37,7 +48,7 @@ public class Admin_AddLocation extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-           request.getRequestDispatcher("AdminTemplate/addlocation.jsp").forward(request, response);
+            request.getRequestDispatcher("AdminTemplate/addlocation.jsp").forward(request, response);
         }
     }
 
@@ -67,35 +78,48 @@ public class Admin_AddLocation extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            UploadImg uploadImg=new UploadImg();
-            
-           LocationClient locationClient=new LocationClient();
-           Location location=new Location();
-            try {
-                      List<String> listImg = uploadImg.Upload(request, "img");
-                        String name=request.getParameter("name");
-           String address=request.getParameter("address");
-           String introduce=request.getParameter("introduce");
-           
-                System.out.println(listImg.size());
-            
-            
+        try (PrintWriter out = response.getWriter()){
+            UploadServlet uploadServlet = new UploadServlet();
+
+            LocationClient locationClient = new LocationClient();
+            Location location = new Location();
+            String name = null;
+            String address = null;
+            String introduce = null;
+            String file = null;
+            Map<String,Object> listrequest = uploadServlet.Upload(request, "img");
+            for (Map.Entry<String, Object> entry : listrequest.entrySet()) {
+                if (entry.getKey().equals("name")) {
+                    name = (String) entry.getValue();
+                }
+                if (entry.getKey().equals("address")) {
+                    address = (String) entry.getValue();
+                }
+                if (entry.getKey().equals("introduce")) {
+                    introduce = (String) entry.getValue();
+                }
+                if (entry.getKey().equals("file")) {
+                    file = (String) entry.getValue();
+                }
+            }
+            System.out.println("name:"+name);
+            System.out.println("address:"+address);
+            System.out.println("introduce:"+introduce);
+            System.out.println("file:"+file);
+            System.out.println(listrequest);
+
             location.setAddress(address);
             location.setIntroduce(introduce);
             location.setLocationName(name);
-            location.setLocationUrl(listImg.get(0));
-            
-            
-           
-           
+            location.setLocationUrl(file);
 
-        } catch (Exception e) {
-            request.setAttribute("error", e.getMessage());
-            request.getRequestDispatcher("AdminTemplate/addlocation.jsp").forward(request, response);
-        }
-           
+
             locationClient.create_JSON(location);
             request.getRequestDispatcher("Admin_Location").forward(request, response);
+        } catch (Exception ex) {
+            request.setAttribute("error", ex.getMessage());
+            request.getRequestDispatcher("AdminTemplate/addlocation.jsp").forward(request, response);
+        }
     }
 
     /**

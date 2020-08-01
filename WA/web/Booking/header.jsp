@@ -59,7 +59,7 @@
                                     <a href="" type="button" data-toggle="dropdown" class="btn btn1 d-none d-lg-block "><%=accountcustomer.getFullName()%></a>
                                     <div class="dropdown-menu" >
                                         <a class="dropdown-item" href="Profile">Profile</a>
-                                        <a class="dropdown-item" href="http://localhost:8080/WA/Booking/history.jsp">History</a>
+                                        <a class="dropdown-item" href="HistoryCustomer">History</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="Booking_Logout">Log out</a>
                                     </div>

@@ -205,6 +205,23 @@ public class Booking_bookMB implements Serializable {
         };
         return rtc.topType_JSON(gRtc);
     }
+    
+    
+    //service history
+    public List<Receiptcomponent> listReceiptcomponents(int id){
+        ReceiptcomponentClient client=new ReceiptcomponentClient();
+        GenericType<List<Receiptcomponent>> type=new GenericType<List<Receiptcomponent>>(){};
+        List<Receiptcomponent> listReceipt=client.findAll_JSON(type);
+        List<Receiptcomponent> list=new ArrayList<>();
+        for (Receiptcomponent receiptcomponent : listReceipt) {
+            if(receiptcomponent.getReceiptId().getReceiptId()==id){
+                list.add(receiptcomponent);
+            }
+        }
+        return list;
+    }
+    
+    
 
     public Booking_bookMB() {
     }

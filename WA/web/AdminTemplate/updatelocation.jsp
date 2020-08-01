@@ -45,25 +45,41 @@
                                     </div>
                                     <!-- /.card-header -->
                                     <!-- form start -->
-                                    <form role="form" id="quickForm">
+                                    <form role="form" id="quickForm" action="Admin_UpdateLocation" method="post" enctype="multipart/form-data">
                                         <div class="card-body">
-                                            
-                                            <div class="form-group col-md-4">
-                                                <label >Location Name :</label>
-                                                <input type="text" name="text" class="form-control" id="" placeholder="Location Name">
-                                            </div>
-                                          
-                                                
-                                            <div class="form-group">
-                                            <label for="exampleInputPassword1">Img Path :</label>
-                                            <input type="file" name="fileupload" class="form-control" id="fileupload" >
-                                        </div>
+                                            <input type="hidden" name="id" value="${location.locationId}" >
 
-                                                
+                                            <div class="form-group ">
+                                                <label >Location Name :</label>
+                                                <input type="text" name="name" value="${location.locationName}" class="form-control" id="" placeholder="Location Name" required="">
+                                            </div>
+                                            <div class="form-group ">
+                                                <label >Address :</label>
+                                                <input type="text" name="address" value="${location.address}" class="form-control" id="" placeholder="Address" required="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label >Introduce :</label>
+                                                <textarea cols="100" rows="4"  class="form-control" name="introduce" required="">${location.introduce}</textarea>
+                                            </div>
+
+                                            <div class="form-group col-md-6">
+                                                                                          
+                                                <img id='output' width='200' src="images/img/${location.locationUrl}"/>	
+
+                                                <input type='file' class="form-control"  accept='image/*' name='file' id='file'  onchange='loadFile(event)' >
+                                                <script>
+                                                    var loadFile = function (event) {
+                                                        var image = document.getElementById('output');
+                                                        image.src = URL.createObjectURL(event.target.files[0]);
+                                                    };
+                                                </script>
+                                            </div>
+
+                                            <div style="color: red;font-size: 18px"> ${error}</div>
                                         </div>
                                         <!-- /.card-body -->
                                         <div class="card-footer">
-                                            <button type="submit" class="btn btn-primary">Updatet</button>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
                                         </div>
                                     </form>
                                 </div>
@@ -99,7 +115,7 @@
         <!-- ./wrapper -->
 
         <!-- jQuery -->
-          <%@include file="jslink.jsp" %>
+        <%@include file="jslink.jsp" %>
     </body>
 
 </html>

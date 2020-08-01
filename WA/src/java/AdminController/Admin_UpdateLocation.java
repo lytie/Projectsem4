@@ -6,12 +6,17 @@
 
 package AdminController;
 
+import bean.UploadServlet;
+import entities.Location;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.GenericType;
+import wsc.LocationClient;
 
 /**
  *
@@ -33,6 +38,14 @@ public class Admin_UpdateLocation extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            
+            String id=request.getParameter("id");
+            LocationClient client=new LocationClient();
+            GenericType<Location> type=new GenericType<Location>(){};
+            Location location=client.find_JSON(type, Integer.parseInt(id));
+            
+            request.setAttribute("location", location);
+            
              request.getRequestDispatcher("AdminTemplate/updatelocation.jsp").forward(request, response);
         }
     }
@@ -63,7 +76,61 @@ public class Admin_UpdateLocation extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String id=request.getParameter("id");
+       try (PrintWriter out = response.getWriter()){
+            UploadServlet uploadServlet = new UploadServlet();
+
+            LocationClient locationClient = new LocationClient();
+            GenericType<Location> type=new GenericType<Location>(){};
+             String ids = null;
+            String name = null;
+            String address = null;
+            String introduce = null;
+            String file = null;
+            Map<String,Object> listrequest = uploadServlet.Upload(request, "img");
+            for (Map.Entry<String, Object> entry : listrequest.entrySet()) {
+                if (entry.getKey().equals("id")) {
+                    ids = (String) entry.getValue();
+                }
+                if (entry.getKey().equals("name")) {
+                    name = (String) entry.getValue();
+                }
+                if (entry.getKey().equals("address")) {
+                    address = (String) entry.getValue();
+                }
+                if (entry.getKey().equals("introduce")) {
+                    introduce = (String) entry.getValue();
+                }
+                if (entry.getKey().equals("file")) {
+                    file = (String) entry.getValue();
+                }
+            }
+             System.out.println("id:"+ids);
+            System.out.println("name:"+name);
+            System.out.println("address:"+address);
+            System.out.println("introduce:"+introduce);
+            System.out.println("file:"+file);
+            System.out.println(listrequest);
+            Location location = locationClient.find_JSON(type, Integer.parseInt(ids));
+
+            location.setAddress(address);
+            location.setIntroduce(introduce);
+            location.setLocationName(name);
+            if(file!=null){
+            location.setLocationUrl(file);
+            }
+
+            locationClient.edit_JSON(location, ids);
+            request.getRequestDispatcher("Admin_Location").forward(request, response);
+        } catch (Exception ex) {
+             LocationClient client=new LocationClient();
+            GenericType<Location> type=new GenericType<Location>(){};
+            Location location=client.find_JSON(type, Integer.parseInt(id));
+            
+            request.setAttribute("location", location);
+            request.setAttribute("error", ex.getMessage());
+            request.getRequestDispatcher("AdminTemplate/addlocation.jsp").forward(request, response);
+        }
     }
 
     /**

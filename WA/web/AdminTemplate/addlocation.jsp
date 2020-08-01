@@ -61,10 +61,18 @@
                                                 <textarea cols="100" rows="4" class="form-control" name="introduce" required=""></textarea>
                                             </div>
                                                 
-                                            <div class="form-group col-md-4">
-                                            <label for="exampleInputPassword1">Img Path :</label>
-                                            <input type="file" name="file" class="form-control" id="fileupload" >
-                                        </div>
+                                            <div class="form-group col-md-6">
+                                                                                          
+                                                <img id='output' width='200' />	
+
+                                                <input type='file' class="form-control"  accept='image/*' name='file' id='file'  onchange='loadFile(event)' >
+                                                <script>
+                                                    var loadFile = function (event) {
+                                                        var image = document.getElementById('output');
+                                                        image.src = URL.createObjectURL(event.target.files[0]);
+                                                    };
+                                                </script>
+                                            </div>
 
                                             <div style="color: red;font-size: 18px"> ${error}</div>
                                         </div>

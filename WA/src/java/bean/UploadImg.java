@@ -46,6 +46,7 @@ public class UploadImg extends HttpServlet {
                     listImg.add(name);
                     //item.write(new File(UPLOAD_DIRECTORY+url + File.separator + name));
                     item.write(new File(outputFile+url+"/"+name));
+                    System.out.println("Write file:"+outputFile+url+"/"+name);
                 }
             }
 

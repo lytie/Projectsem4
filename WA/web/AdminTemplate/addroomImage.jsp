@@ -46,7 +46,7 @@
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <form role="form" id="quickForm">
+                                <form role="form" id="quickForm" action="Admin_AddRoomImage" method="post" enctype="multipart/form-data">
                                     <div class="card-body">
                                         
                                         <div class="form-group col-md-6">

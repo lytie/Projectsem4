@@ -6,6 +6,7 @@
 
 package AdminController;
 
+import bean.UploadImg;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -63,6 +64,8 @@ public class Admin_AddRoomImage extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        UploadImg uploadImg = new UploadImg();
+        uploadImg.Upload(request, "img");
         processRequest(request, response);
     }
 

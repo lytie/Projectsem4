@@ -50,15 +50,15 @@
                                             
                                             <div class="form-group ">
                                                 <label >Location Name :</label>
-                                                <input type="text" name="name" class="form-control" id="" placeholder="Location Name">
+                                                <input type="text" name="name" class="form-control" id="" placeholder="Location Name" required="">
                                             </div>
                                           <div class="form-group ">
                                                 <label >Address :</label>
-                                                <input type="text" name="address" class="form-control" id="" placeholder="Address">
+                                                <input type="text" name="address" class="form-control" id="" placeholder="Address" required="">
                                             </div>
                                              <div class="form-group">
                                                 <label >Introduce :</label>
-                                                <textarea cols="100" rows="4" class="form-control" name="introduce"></textarea>
+                                                <textarea cols="100" rows="4" class="form-control" name="introduce" required=""></textarea>
                                             </div>
                                                 
                                             <div class="form-group col-md-4">

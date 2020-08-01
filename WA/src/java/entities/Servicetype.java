@@ -34,6 +34,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Servicetype.findByServiceTypeId", query = "SELECT s FROM Servicetype s WHERE s.serviceTypeId = :serviceTypeId"),
     @NamedQuery(name = "Servicetype.findByTypeName", query = "SELECT s FROM Servicetype s WHERE s.typeName = :typeName")})
 public class Servicetype implements Serializable {
+    @OneToMany(mappedBy = "serviceTypeId")
+    private List<Receiptcomponent> receiptcomponentList;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -101,6 +103,15 @@ public class Servicetype implements Serializable {
     @Override
     public String toString() {
         return "entities.Servicetype[ serviceTypeId=" + serviceTypeId + " ]";
+    }
+
+    @XmlTransient
+    public List<Receiptcomponent> getReceiptcomponentList() {
+        return receiptcomponentList;
+    }
+
+    public void setReceiptcomponentList(List<Receiptcomponent> receiptcomponentList) {
+        this.receiptcomponentList = receiptcomponentList;
     }
     
 }

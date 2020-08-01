@@ -42,6 +42,11 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Receiptcomponent.findByOrderDate", query = "SELECT r FROM Receiptcomponent r WHERE r.orderDate = :orderDate"),
     @NamedQuery(name = "Receiptcomponent.findByOrdererName", query = "SELECT r FROM Receiptcomponent r WHERE r.ordererName = :ordererName")})
 public class Receiptcomponent implements Serializable {
+    @Column(name = "Status")
+    private Boolean status;
+    @JoinColumn(name = "ServiceTypeId", referencedColumnName = "ServiceTypeId")
+    @ManyToOne
+    private Servicetype serviceTypeId;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -173,6 +178,22 @@ public class Receiptcomponent implements Serializable {
     @Override
     public String toString() {
         return "entities.Receiptcomponent[ receiptComponentId=" + receiptComponentId + " ]";
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+
+    public Servicetype getServiceTypeId() {
+        return serviceTypeId;
+    }
+
+    public void setServiceTypeId(Servicetype serviceTypeId) {
+        this.serviceTypeId = serviceTypeId;
     }
     
 }

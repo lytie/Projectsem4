@@ -155,6 +155,7 @@ public class Booking_payment extends HttpServlet {
             qrcode.setCheckOutDate(dateOut);
             qrcode.setReceiptId(receipt);
             qrcode.setUrl(qrcodeImg + ".png");
+            qrcode.setRoomId(room);
             qrcode.setCreateDate(datenow);
 
             if (request.getParameter("idCus") != null) {

@@ -4,14 +4,16 @@
     Author     : ADMIN
 --%>
 
+<?xml version="1.0" encoding="UTF-8"?>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-
+<%@page  import="bean.common"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,6 +24,8 @@
         <!-- Font Awesome Icons -->
         <%@include file="css.jsp" %>
         <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+
+        <link href="<%=common.url%>/dist/css/datepicker-foundation.min.css" rel="stylesheet"/>
     </head>
     <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed" >
         <div class="wrapper">
@@ -33,136 +37,137 @@
                 <!-- Content Header (Page header) -->
                 <div class="content-header">
                     <div class="container-fluid">
-                        <div class="row mb-2">
-                            <div class="col-sm-12" style="margin-bottom: 20px">
-                                <h1 class="m-0 text-dark text-center">List Room <button class="btn btn-warning" style="float: left"><i class="fa fa-search"></i>Filter</button></h1>
-                            </div>
-                            <div class="col-sm-6">         
-                                <div class="row">
-                                    <div class="col-4">
-                                        Location:
-                                        <select class="select form-control" data-placeholder="Select a State" name="location">
-                                            <option value="1" selected>danang</option>
-                                            <option value="1" selected>danang</option>
-                                            <option value="1" selected>danang</option>
-                                            <option value="1" selected>danang</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-4">
-                                        Location:
-                                        <select class="select form-control" data-placeholder="Select a State" name="location">
-                                            <option value="1" selected>danang</option>
-                                            <option value="1" selected>danang</option>
-                                            <option value="1" selected>danang</option>
-                                            <option value="1" selected>danang</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-4">
-                                        Location:
-                                        <select class="select form-control" data-placeholder="Select a State" name="location">
-                                            <option value="1" selected>danang</option>
-                                            <option value="1" selected>danang</option>
-                                            <option value="1" selected>danang</option>
-                                            <option value="1" selected>danang</option>
-                                        </select>
-                                    </div>
-                                    
-                                        
-                                    
+                        <form action="Employee_Room" method="post">
+                            <div class="row mb-2">
+                                <div class="col-sm-12" style="margin-bottom: 20px">
+                                    <h1 class="m-0 text-dark text-center">List Room </h1>
                                 </div>
-                            </div>
-                            <div class="col-sm-6" >
-                                <div class="row">
-                                    <div class="col-12" style="float: right">
-                                        <div style="width: 20px;height: 20px;background-color: #28a745;float: right"></div>
-                                        <div style="float: right;margin-right: 10px">In-use</div> 
+                                <div class="col-sm-6">
+                                    <div class="row" id="range">
+                                        <div class="col-4">
+                                            Location:
+                                            <select class="select form-control" data-placeholder="Select a State" id="locationid" name="locationid" >
+                                                <option value="findall" selected>All</option>
+                                                <c:forEach items="${listLocation}" var="l">
+                                                    <option value="${l.getLocationId()}">${l.getLocationName()}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>                               
+                                        <div class="col-4">
+                                            From:
+                                            <input type="text" required id="datepicker1" name="start" class="form-control" />
+                                        </div>
+                                        <div class="col-4">
+                                            To:
+                                            <input type="text" required id="datepicker2" name="end" class="form-control" />
+                                        </div>                            
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-12" style="float: right">
-                                        <div style="width: 20px;height: 20px;background-color: #dc3545;float: right"></div>
-                                        <div style="float: right;margin-right: 10px">Clear</div> 
+                                <div class="col-sm-6" >
+                                    <div class="row">
+                                        <div class="col-12" style="float: right">
+                                            <div style="width: 20px;height: 20px;background-color: #28a745;float: right"></div>
+                                            <div style="float: right;margin-right: 10px">In-use</div> 
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12" style="float: right">
+                                            <div style="width: 20px;height: 20px;background-color: #dc3545;float: right"></div>
+                                            <div style="float: right;margin-right: 10px">Clear</div> 
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12" style="float: right">
+                                            <div style="width: 20px;height: 20px;background-color: #007bff;float: right"></div>
+                                            <div style="float: right;margin-right: 10px">Reserved</div> 
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12" style="float: right">
+                                            <div style="width: 20px;height: 20px;background-color: #6d1bf3;float: right"></div>
+                                            <div style="float: right;margin-right: 10px">Prepare to checkout</div> 
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-12" style="float: right">
-                                        <div style="width: 20px;height: 20px;background-color: #007bff;float: right"></div>
-                                        <div style="float: right;margin-right: 10px">Reserved</div> 
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12" style="float: right">
-                                        <div style="width: 20px;height: 20px;background-color: #474d52;float: right"></div>
-                                        <div style="float: right;margin-right: 10px">Prepare to checkout</div> 
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!-- /.row -->
+                            </div><!-- /.row -->
+                        </form>
                     </div><!-- /.container-fluid -->
                 </div>
                 <!-- /.content-header -->
 
                 <!-- Main content -->
                 <section class="content">
-                    <div class="container-fluid">
+                    <div class="container-fluid" id="result">
                         <div class="row">
-                            <div class="col-lg-3 col-6">
-                                <!-- small box -->
-                                <div class="small-box bg-success">
-                                    <div class="inner">
-                                        <h3 style="font-size: 20px">Room number</h3>
+                            <data>
+                                <div class="row">
+                                    <c:forEach items="${listInUse}" var="lIU">
+                                        <div class="col-lg-3 col-6">
+                                            <!-- small box -->
+                                            <div class="small-box bg-success">
+                                                <div class="inner">
+                                                    <h3 style="font-size: 20px">${lIU.roomId.roomId}</h3>
 
-                                        <p>Room type</p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="fa fa-hotel"></i>
-                                    </div>
-                                    <a href="Employee_RoomInfo" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                                    <p>${lIU.customerName}</p>
+                                                </div>
+                                                <div class="icon">
+                                                    <i class="fa fa-hotel"></i>
+                                                </div>
+                                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                            </div>
+                                        </div>
+                                    </c:forEach>
+                                    <c:forEach items="${listClear}" var="lC">
+                                        <div class="col-lg-3 col-6">
+                                            <!-- small box -->
+                                            <div class="small-box bg-danger">
+                                                <div class="inner">
+                                                    <h3 style="font-size: 20px">${lC.roomId}</h3>
+
+                                                    <p>No customer yet</p>
+                                                </div>
+                                                <div class="icon">
+                                                    <i class="fa fa-hotel"></i>
+                                                </div>
+                                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                            </div>
+                                        </div>
+                                    </c:forEach>
+                                    <c:forEach items="${listReserved}" var="lR">
+                                        <div class="col-lg-3 col-6">
+                                            <!-- small box -->
+                                            <div class="small-box bg-blue">
+                                                <div class="inner">
+                                                    <h3 style="font-size: 20px">${lR.roomId.roomId}</h3>
+
+                                                    <p>${lR.customerName}</p>
+                                                </div>
+                                                <div class="icon">
+                                                    <i class="fa fa-hotel"></i>
+                                                </div>
+                                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                            </div>
+                                        </div>
+                                    </c:forEach>
+                                    <c:forEach items="${listPrepareToCheckout}" var="lPTC">
+                                        <div class="col-lg-3 col-6">
+                                            <!-- small box -->
+                                            <div class="small-box bg-gradient-gray-dark">
+                                                <div class="inner">
+                                                    <h3 style="font-size: 20px">${lPTC.roomId.roomId}</h3>
+
+                                                    <p>${lPTC.customerName}</p>
+                                                </div>
+                                                <div class="icon">
+                                                    <i class="fa fa-hotel"></i>
+                                                </div>
+                                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                            </div>
+                                        </div>
+                                    </c:forEach>
                                 </div>
-                            </div>
+                            </data>
                             <!-- ./col -->
-                            <div class="col-lg-3 col-6">
-                                <!-- small box -->
-                                <div class="small-box bg-danger">
-                                    <div class="inner">
-                                        <h3 style="font-size: 20px">Room number</h3>
-
-                                        <p>Room type</p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="fa fa-hotel"></i>
-                                    </div>
-                                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-6">
-                                <!-- small box -->
-                                <div class="small-box bg-blue">
-                                    <div class="inner">
-                                        <h3 style="font-size: 20px">Room number</h3>
-
-                                        <p>Room type</p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="fa fa-hotel"></i>
-                                    </div>
-                                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-6">
-                                <!-- small box -->
-                                <div class="small-box bg-gradient-gray-dark">
-                                    <div class="inner">
-                                        <h3 style="font-size: 20px">Room number</h3>
-
-                                        <p>Room type</p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="fa fa-hotel"></i>
-                                    </div>
-                                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
                         </div>
 
                     </div><!--/. container-fluid -->
@@ -185,6 +190,21 @@
         <!-- REQUIRED SCRIPTS -->
         <!-- jQuery -->
         <%@include file="jslink.jsp" %>
-
+        <script src="<%=common.url%>/dist/js/datepicker-full.js">
+        </script>
+        <script>
+            const elem3 = document.getElementById('range');
+                    const datepicker3 = new DateRangePicker(elem3, {
+                    minDate: "2019-01-01",
+                            buttonClass: 'btn',
+                            format: 'yyyy-mm-dd'
+                    });</script>            
+        <script type="text/javascript">
+                    $(document).on("change", "#locationid", function() {             // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
+                $.get('Employee_Room?locationid=' + $('#locationid').val() + '&start=' + $('#datepicker1').val() + '&end=' + $('#datepicker2').val(), function(responseXml) {                // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response XML...
+                    $("#result").html($(responseXml).find("data").html()); // Parse XML, find <data> element and append its HTML to HTML DOM element with ID "somediv".
+                });
+            });
+        </script>
     </body>
 </html>

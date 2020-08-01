@@ -64,6 +64,7 @@
                                                     <tr>
                                                         <th>Location Name :</th>
                                                         <th>Image of Location :</th>
+                                                        <th>Address</th>
                                                         <th>Action</th>
 
                                                     </tr>
@@ -72,13 +73,13 @@
 
                                                     <c:forEach items="${listlc}" var="lc">
                                                         <tr>
-                                                            <td width="35%"><c:out value="${lc.getLocationName()}"/></td>
+                                                            <td width=""><c:out value="${lc.getLocationName()}"/></td>
 
                                                             <td width="200"><img src="images/img/${lc.getLocationUrl()}" width="300" height="130" /></td>
+                                                            <td width=""><c:out value="${lc.address}"/></td>
+                                                            <td width="">
 
-                                                            <td width="20%">
-
-                                                                <a class="btn btn-info btn-sm" href="Admin_UpdateLocation">
+                                                                <a class="btn btn-info btn-sm" href="Admin_UpdateLocation?id=${lc.locationId}">
                                                                     <i class="fas fa-pencil-alt">
                                                                     </i> Edit
                                                                 </a>

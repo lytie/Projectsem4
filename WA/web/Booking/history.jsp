@@ -108,6 +108,10 @@
                                 <li>Total: <span>215$</span></li>
                                  
                             </ul>
+                            <div style="padding: 35%">
+                                <i class='far fa-check-circle' style='font-size:60px;color:#00AA00'></i>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>

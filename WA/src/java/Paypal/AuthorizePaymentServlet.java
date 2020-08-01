@@ -58,12 +58,17 @@ public class AuthorizePaymentServlet extends HttpServlet {
                 };
                 GenericType<Receipt> receiptgenericType = new GenericType<Receipt>() {
                 };
-                List<Receiptcomponent> list = new ArrayList<Receiptcomponent>();
                 Receipt receipt = receiptClient.find_JSON(receiptgenericType, String.valueOf(qrcode.getReceiptId().getReceiptId()));
-                list = receiptcomponentClient.findbyReceiptID_JSON(genType, String.valueOf(qrcode.getReceiptId().getReceiptId()));
+                List<Receiptcomponent> listReceiptcomponent = receiptcomponentClient.findbyReceiptID_JSON(genType, String.valueOf(qrcode.getReceiptId().getReceiptId()));
+                List<Receiptcomponent> list = new ArrayList<Receiptcomponent>();
+                for (Receiptcomponent receiptcomponent : listReceiptcomponent) {
+                    if (!receiptcomponent.getStatus()) {
+                        list.add(receiptcomponent);
+                    }
+                } 
                 try {
                     PaymentServices paymentServices = new PaymentServices();
-                    String approvalLink = paymentServices.authorizePayment(receipt, list,qrcode);
+                    String approvalLink = paymentServices.authorizePayment(list, qrcode);
                     response.sendRedirect(approvalLink);
 
                 } catch (PayPalRESTException ex) {

@@ -3,19 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Paypal;
 
 import com.paypal.api.payments.PayerInfo;
 import com.paypal.api.payments.Payment;
 import com.paypal.api.payments.Transaction;
 import com.paypal.base.rest.PayPalRESTException;
+import entities.Qrcode;
+import entities.Receiptcomponent;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.ws.rs.core.GenericType;
+import wsc.QrcodeClient;
+import wsc.ReceiptcomponentClient;
 
 /**
  *
@@ -40,7 +47,7 @@ public class ExecutePaymentServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ExecutePaymentServlet</title>");            
+            out.println("<title>Servlet ExecutePaymentServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ExecutePaymentServlet at " + request.getContextPath() + "</h1>");
@@ -76,25 +83,53 @@ public class ExecutePaymentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String paymentId = request.getParameter("paymentId");
-		String payerId = request.getParameter("PayerID");
+        String payerId = request.getParameter("PayerID");
+        HttpSession session = request.getSession();
+        QrcodeClient qrcodeClient = new QrcodeClient();
+        ReceiptcomponentClient receiptcomponentClient = new ReceiptcomponentClient();
+        GenericType<Qrcode> genericType = new GenericType<Qrcode>() {
+        };
+        GenericType<List<Receiptcomponent>> genType = new GenericType<List<Receiptcomponent>>() {};
+        Qrcode qrcode = new Qrcode();
+        if (session.getAttribute("qrcodeid") == null) {
+            if (request.getParameter("id") == null) {
+                System.out.print("Error");
+            } else {
+                qrcode = qrcodeClient.find_JSON(genericType, request.getParameter("id"));
+                if (qrcode != null) {
+                    session.setAttribute("qrcodeid", qrcode.getQrCodeId());
+                    request.getRequestDispatcher("/CustomerPageCartServlet").forward(request, response);
+                } else {
+                    System.out.print("Not found qrcode");
+                }
+            }
+        } else {
+            try {
+                
+                
+                qrcode = qrcodeClient.find_JSON(genericType, session.getAttribute("qrcodeid").toString());
+                List<Receiptcomponent> list = receiptcomponentClient.findbyReceiptID_JSON(genType, String.valueOf(qrcode.getReceiptId().getReceiptId()));
+                PaymentServices paymentServices = new PaymentServices();
+                Payment payment = paymentServices.executePayment(paymentId, payerId);
+                for (Receiptcomponent receiptcomponent : list) {
+                    receiptcomponent.setStatus(Boolean.TRUE);
+                    receiptcomponentClient.edit_JSON(receiptcomponent, receiptcomponent.getReceiptComponentId().toString());
+                }
+                
+                PayerInfo payerInfo = payment.getPayer().getPayerInfo();
+                Transaction transaction = payment.getTransactions().get(0);
 
-		try {
-			PaymentServices paymentServices = new PaymentServices();
-			Payment payment = paymentServices.executePayment(paymentId, payerId);
-			
-			PayerInfo payerInfo = payment.getPayer().getPayerInfo();
-			Transaction transaction = payment.getTransactions().get(0);
-			
-			request.setAttribute("payer", payerInfo);
-			request.setAttribute("transaction", transaction);			
+                request.setAttribute("payer", payerInfo);
+                request.setAttribute("transaction", transaction);
 
-			request.getRequestDispatcher("/customerpage/receipt.jsp").forward(request, response);
-			
-		} catch (PayPalRESTException ex) {
-			request.setAttribute("errorMessage", ex.getMessage());
-			ex.printStackTrace();
-			request.getRequestDispatcher("/customerpage/error.jsp").forward(request, response);
-		}
+                request.getRequestDispatcher("/customerpage/receipt.jsp").forward(request, response);
+
+            } catch (PayPalRESTException ex) {
+                request.setAttribute("errorMessage", ex.getMessage());
+                ex.printStackTrace();
+                request.getRequestDispatcher("/customerpage/error.jsp").forward(request, response);
+            }
+        }
     }
 
     /**

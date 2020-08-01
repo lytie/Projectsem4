@@ -48,11 +48,34 @@
             Your Order
         </h2>
     </section>
+    <%                                        float subtotal = 0;
+        float tax = 0;
+        float total = 0;
+        int count = 0;
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        Qrcode qrcode = (Qrcode) request.getAttribute("qrcode");
+        List<Receiptcomponent> list = (List<Receiptcomponent>) request.getAttribute("list");
+        for (Receiptcomponent receiptcomponent : list) {
+            if (!receiptcomponent.getStatus()) {
+                count++;
+                subtotal += receiptcomponent.getSubtotal();
+                tax = subtotal * 10 / 100;
+                total = subtotal + tax;
+            }
+        }
+
+    %>
 
 
     <!-- Reservation -->
     <section class="section-reservation bg1-pattern p-t-100 p-b-113">
         <div class="site-section">
+            <%                if (count == 0) {
+            %>
+            <h1 class="text-center">You have pay all the bill</h1>
+            <%
+            } else {
+            %>
             <div class="container">
                 <div class="row mb-5">
                     <form class="col-md-12" method="post">
@@ -60,6 +83,7 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
+                                        <th></th>
                                         <th class="product-thumbnail">Order Date</th>
                                         <th class="product-name">Product</th>
                                         <th class="product-price">Price</th>
@@ -68,19 +92,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <%                                        
-                                        float subtotal = 0;
-                                        float tax = 0;
-                                        float total = 0;
-                                        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-                                        Qrcode qrcode = (Qrcode) request.getAttribute("qrcode");
-                                        List<Receiptcomponent> list = (List<Receiptcomponent>) request.getAttribute("list");
+
+
+                                    <%
                                         for (Receiptcomponent receiptcomponent : list) {
-                                            subtotal += receiptcomponent.getSubtotal();
-                                            tax = subtotal * 10 / 100;
-                                            total = subtotal + tax;
+
                                     %>
-                                    <tr class="product">
+                                    <tr class="product" style="<%if (receiptcomponent.getStatus()) {
+                                            out.print("display:none");
+                                        }%>">
+                                        <td><%=receiptcomponent.getStatus()%></td>
                                         <td class="product-thumbnail cart-row">
                                             <%=format.format(receiptcomponent.getOrderDate())%>
                                         </td>
@@ -145,7 +166,7 @@
                                         <span class="text-black">Total</span>
                                     </div>
                                     <div class="col-md-6 text-right">
-                                        <strong class="text-black">$<%=total-qrcode.getDeposits()%></strong>
+                                        <strong class="text-black">$<%=total - qrcode.getDeposits()%></strong>
                                     </div>
                                 </div>
 
@@ -161,6 +182,7 @@
                     </div>
                 </div>
             </div>
+            <%}%>
         </div>
     </section>
 

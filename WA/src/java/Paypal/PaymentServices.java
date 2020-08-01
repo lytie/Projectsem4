@@ -33,12 +33,12 @@ public class PaymentServices {
     private static final String CLIENT_SECRET = "EFEOIrjGDlFNuPnT9ZpiswxoFPhqq9LB9wWC5i3MXeQOPQlHT8R5zws8CKMeau2ImU-C7xKyQs3xtb98";
     private static final String MODE = "sandbox";
 
-    public String authorizePayment(Receipt receipt, List<Receiptcomponent> listReceiptcomponents, Qrcode qrcode)
+    public String authorizePayment(List<Receiptcomponent> listReceiptcomponents, Qrcode qrcode)
             throws PayPalRESTException {
 
         Payer payer = getPayerInformation(qrcode);
         RedirectUrls redirectUrls = getRedirectURLs();
-        List<Transaction> listTransaction = getTransactionInformation(receipt, listReceiptcomponents, qrcode);
+        List<Transaction> listTransaction = getTransactionInformation(listReceiptcomponents);
 
         Payment requestPayment = new Payment();
         requestPayment.setTransactions(listTransaction);
@@ -121,33 +121,20 @@ public class PaymentServices {
         return redirectUrls;
     }
 
-    private List<Transaction> getTransactionInformation(Receipt receipt, List<Receiptcomponent> listReceiptcomponents, Qrcode qrcode) {
-        Details details = new Details();
-        details.setSubtotal(String.valueOf(receipt.getSubtotal() - qrcode.getDeposits()));
-        details.setTax(String.valueOf(receipt.getTax()));
-
-        Amount amount = new Amount();
-        amount.setCurrency("USD");
-        amount.setTotal(String.valueOf(receipt.getTotal()));
-        amount.setDetails(details);
-        System.out.println("SubTotal: " + details.getSubtotal());
-        System.out.println("Tax: " + details.getTax());
-        System.out.println("Total: " + amount.getTotal());
-        Transaction transaction = new Transaction();
-        transaction.setAmount(amount);
-        float itemtotal = 0;
+    private List<Transaction> getTransactionInformation(List<Receiptcomponent> listReceiptcomponents) {
+        float roomdeposits = 0;
         ItemList itemList = new ItemList();
         List<Item> items = new ArrayList<>();
         for (Receiptcomponent receiptcomponent : listReceiptcomponents) {
-            if (listReceiptcomponents.indexOf(receiptcomponent) == 0) {
+            if (receiptcomponent.getServiceTypeId().getServiceTypeId() > 3) {
                 Item item = new Item();
                 item.setCurrency("USD");
                 item.setName(receiptcomponent.getComponentName());
-                item.setPrice(String.valueOf(receiptcomponent.getPrice() - qrcode.getDeposits()));
+                item.setPrice(String.valueOf(receiptcomponent.getPrice() - (receiptcomponent.getPrice() * 10 / 100)));
                 item.setTax(String.valueOf(receiptcomponent.getPrice() * 10 / 100));
                 item.setQuantity(String.valueOf(receiptcomponent.getQuantity()));
                 items.add(item);
-                itemtotal += Float.parseFloat(item.getPrice());
+                roomdeposits += receiptcomponent.getPrice() * 10 / 100;
             } else {
                 Item item = new Item();
                 item.setCurrency("USD");
@@ -156,14 +143,36 @@ public class PaymentServices {
                 item.setTax(String.valueOf(receiptcomponent.getPrice() * 10 / 100));
                 item.setQuantity(String.valueOf(receiptcomponent.getQuantity()));
                 items.add(item);
-                itemtotal += Float.parseFloat(item.getPrice());
             }
-
         }
-        System.out.println("itemtotal :" + itemtotal);
         itemList.setItems(items);
+        Details details = new Details();
+        float subtotal = 0;
+        float tax = 0;
+        for (Receiptcomponent receiptcomponent : listReceiptcomponents) {
+            if (receiptcomponent.getServiceTypeId().getServiceTypeId() > 3) {
+                subtotal += receiptcomponent.getSubtotal();
+                tax = subtotal * 10 / 100;
+            } else {
+                subtotal += receiptcomponent.getSubtotal();
+                tax = subtotal * 10 / 100;
+            }
+        }
+        details.setSubtotal(String.valueOf(subtotal-roomdeposits));
+        details.setTax(String.valueOf(subtotal * 10 / 100));
+
+        Amount amount = new Amount();
+        amount.setCurrency("USD");
+        amount.setTotal(String.valueOf(subtotal + tax - roomdeposits));
+        amount.setDetails(details);
+        System.out.println("DetailsSubTotal: " + details.getSubtotal());
+        System.out.println("Details Tax: " + details.getTax());
+        System.out.println("Amount Total: " + amount.getTotal());
+        Transaction transaction = new Transaction();
+        transaction.setAmount(amount);
+
         transaction.setItemList(itemList);
-        transaction.setDescription("Deposits:$ " + qrcode.getDeposits());
+        transaction.setDescription("Room Deposits: " + roomdeposits + "$");
 
         List<Transaction> listTransaction = new ArrayList<>();
         listTransaction.add(transaction);
@@ -230,7 +239,7 @@ public class PaymentServices {
             System.out.println("---Start print createdpayment-----");
             System.out.println(createdPayment);
             return createdPayment;
-            
+
         } catch (PayPalRESTException e) {
             System.out.println("---start print exception---");
             System.err.println(e.getDetails());

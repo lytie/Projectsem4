@@ -152,6 +152,8 @@ public class SessionCartServlet extends HttpServlet {
                 receiptcomponent.setUrl(item.getService().getServiceurl());
                 receiptcomponent.setOrderDate(date);
                 receiptcomponent.setOrdererName(qrcode.getCustomerName());
+                receiptcomponent.setStatus(Boolean.FALSE);
+                receiptcomponent.setServiceTypeId(item.getService().getSerivceTypeId());
                 receiptcomponentClient.create_JSON(receiptcomponent);
                 
                 receipt.setSubtotal(receipt.getSubtotal()+subtotal);

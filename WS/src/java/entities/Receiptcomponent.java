@@ -42,6 +42,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Receiptcomponent.findByOrderDate", query = "SELECT r FROM Receiptcomponent r WHERE r.orderDate = :orderDate"),
     @NamedQuery(name = "Receiptcomponent.findByOrdererName", query = "SELECT r FROM Receiptcomponent r WHERE r.ordererName = :ordererName")})
 public class Receiptcomponent implements Serializable {
+    @Column(name = "PayDate")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date payDate;
     @Column(name = "Status")
     private Boolean status;
     @JoinColumn(name = "ServiceTypeId", referencedColumnName = "ServiceTypeId")
@@ -194,6 +197,14 @@ public class Receiptcomponent implements Serializable {
 
     public void setServiceTypeId(Servicetype serviceTypeId) {
         this.serviceTypeId = serviceTypeId;
+    }
+
+    public Date getPayDate() {
+        return payDate;
+    }
+
+    public void setPayDate(Date payDate) {
+        this.payDate = payDate;
     }
     
 }

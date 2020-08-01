@@ -271,7 +271,7 @@ CREATE TABLE `receipt` (
 
 LOCK TABLES `receipt` WRITE;
 /*!40000 ALTER TABLE `receipt` DISABLE KEYS */;
-INSERT INTO `receipt` VALUES (1,NULL,1400,140,1536,_binary '\0'),(2,NULL,NULL,NULL,NULL,NULL),(3,NULL,NULL,NULL,NULL,NULL),(4,NULL,49,4.9,49,_binary '\0'),(5,NULL,49,4.9,49,_binary '\0'),(6,NULL,49,4.9,49,_binary '\0'),(7,NULL,2530,253,2778,_binary '\0'),(8,NULL,50,5,50,_binary '\0'),(9,NULL,49,4.9,49,_binary '\0'),(10,NULL,50,5,50,_binary '\0'),(11,NULL,50,5,50,_binary '\0');
+INSERT INTO `receipt` VALUES (1,NULL,2560,256,2812,_binary '\0'),(2,NULL,NULL,NULL,NULL,NULL),(3,NULL,NULL,NULL,NULL,NULL),(4,NULL,49,4.9,49,_binary '\0'),(5,NULL,49,4.9,49,_binary '\0'),(6,NULL,49,4.9,49,_binary '\0'),(7,NULL,2530,253,2778,_binary '\0'),(8,NULL,50,5,50,_binary '\0'),(9,NULL,49,4.9,49,_binary '\0'),(10,NULL,50,5,50,_binary '\0'),(11,NULL,50,5,50,_binary '\0');
 /*!40000 ALTER TABLE `receipt` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -294,12 +294,13 @@ CREATE TABLE `receiptcomponent` (
   `OrdererName` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `Status` bit(1) DEFAULT b'0',
   `ServiceTypeId` int DEFAULT NULL,
+  `PayDate` datetime DEFAULT NULL,
   PRIMARY KEY (`ReceiptComponentId`),
   KEY `FK_receiptcomponent_receipt` (`ReceiptId`),
   KEY `FK_receiptcomponent_servicetype_idx` (`ServiceTypeId`),
   CONSTRAINT `FK_receiptcomponent_receipt` FOREIGN KEY (`ReceiptId`) REFERENCES `receipt` (`ReceiptId`),
   CONSTRAINT `FK_receiptcomponent_servicetype` FOREIGN KEY (`ServiceTypeId`) REFERENCES `servicetype` (`ServiceTypeId`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -308,7 +309,7 @@ CREATE TABLE `receiptcomponent` (
 
 LOCK TABLES `receiptcomponent` WRITE;
 /*!40000 ALTER TABLE `receiptcomponent` DISABLE KEYS */;
-INSERT INTO `receiptcomponent` VALUES (1,1,'Room-Bungalow',40,1,40,'Typeroom_Bungalow.jpg','2020-07-15 00:00:00','Bảo Trịnh Thiêm',_binary '\0',NULL),(2,1,'Wine Castle',200,2,400,'experience3.jpg','2020-07-16 00:00:00','Bảo Trịnh Thiêm',_binary '\0',NULL),(3,1,'Costolette di agnello',100,1,100,'our-menu-02.jpg','2020-07-16 00:00:00','Bảo Trịnh Thiêm',_binary '\0',NULL),(4,1,'Costolette di agnello',100,1,100,'our-menu-02.jpg','2020-07-22 18:44:45','BÃ¡ÂºÂ£o TrÃ¡Â»â€¹nh ThiÃƒÂªm',_binary '\0',NULL),(5,1,'Strawberry Cheese Cake',40,1,40,'our-menu-19.jpg','2020-07-22 18:51:17','BÃ¡ÂºÂ£o TrÃ¡Â»â€¹nh ThiÃƒÂªm',_binary '\0',NULL),(6,1,'Strawberry Cheese Cake',40,1,40,'our-menu-19.jpg','2020-07-22 18:54:39','BÃ¡ÂºÂ£o TrÃ¡Â»â€¹nh ThiÃƒÂªm',_binary '\0',NULL),(7,1,' Miele di pollo alla griglia',80,1,80,'our-menu-04.jpg','2020-07-22 18:54:39','BÃ¡ÂºÂ£o TrÃ¡Â»â€¹nh ThiÃƒÂªm',_binary '\0',NULL),(8,1,'Wine Castle',200,2,400,'experience3.jpg','2020-07-22 19:41:14','BÃ¡ÂºÂ£o TrÃ¡Â»â€¹nh ThiÃƒÂªm',_binary '\0',NULL),(9,4,'Room -Superior-Lac Long Quan Street, Cam An, Hoi An, Quang Nam, Vietnam22',49,1,49,'Typeroom_Superior.jpg','2020-07-30 23:07:52','Bao',_binary '\0',NULL),(10,5,'Room -Superior-Lac Long Quan Street, Cam An, Hoi An, Quang Nam, Vietnam22',49,1,49,'Typeroom_Superior.jpg','2020-07-30 23:12:51','Bao',_binary '\0',NULL),(11,6,'Room -Superior-Lac Long Quan Street, Cam An, Hoi An, Quang Nam, Vietnam22',49,1,49,'Typeroom_Superior.jpg','2020-07-30 23:16:40','Bao',_binary '\0',NULL),(12,7,'Room -Bungalow-03-05 Xuan Tam Street, Thuan Phuoc, Hai Chau, Ã„ï¿½a Nang , Viet Nam2',50,1,50,'Typeroom_Bungalow.jpg','2020-07-30 23:21:23','Bao',_binary '\0',NULL),(13,8,'Room -Bungalow-03-05 Xuan Tam Street, Thuan Phuoc, Hai Chau, Ã„ï¿½a Nang , Viet Nam2',50,1,50,'Typeroom_Bungalow.jpg','2020-07-30 23:25:34','Bao',_binary '\0',NULL),(14,9,'Room -Superior-Lac Long Quan Street, Cam An, Hoi An, Quang Nam, Vietnam22',49,1,49,'Typeroom_Superior.jpg','2020-07-30 23:52:30','Bao',_binary '\0',NULL),(15,10,'Room -Bungalow-03-05 Xuan Tam Street, Thuan Phuoc, Hai Chau, Ã„ï¿½a Nang , Viet Nam2',50,1,50,'Typeroom_Bungalow.jpg','2020-07-31 13:58:09','Bao',_binary '\0',NULL),(16,11,'Room -Bungalow-03-05 Xuan Tam Street, Thuan Phuoc, Hai Chau, Ã„ï¿½a Nang , Viet Nam2',50,1,50,'Typeroom_Bungalow.jpg','2020-07-31 14:01:46','Bao',_binary '\0',NULL),(17,1,'Costolette di agnello',100,2,200,'our-menu-02.jpg','2020-07-31 19:46:55','BÃ¡ÂºÂ£o TrÃ¡Â»â€¹nh ThiÃƒÂªm',_binary '\0',NULL),(18,7,'Water Park',1000,2,2000,'experience5.jpg','2020-07-31 19:57:34','Bao',_binary '\0',NULL),(19,7,'Costolette di agnello',100,2,200,'our-menu-02.jpg','2020-07-31 19:58:24','Bao',_binary '\0',NULL),(20,7,' Miele di pollo alla griglia',80,2,160,'our-menu-04.jpg','2020-07-31 19:59:20','Bao',_binary '\0',NULL),(21,7,'Strawberry Cheese Cake',40,3,120,'our-menu-19.jpg','2020-07-31 20:01:13','Bao',_binary '\0',NULL);
+INSERT INTO `receiptcomponent` VALUES (1,1,'Room-Bungalow',40,1,40,'Typeroom_Bungalow.jpg','2020-07-15 00:00:00','BÃ¡ÂºÂ£o TrÃ¡Â»â€¹nh ThiÃƒÂªm',_binary '',4,NULL),(2,1,'Wine Castle',200,2,400,'experience3.jpg','2020-07-16 00:00:00','BÃ¡ÂºÂ£o TrÃ¡Â»â€¹nh ThiÃƒÂªm',_binary '',3,NULL),(3,1,'Costolette di agnello',100,1,100,'our-menu-02.jpg','2020-07-16 00:00:00','BÃ¡ÂºÂ£o TrÃ¡Â»â€¹nh ThiÃƒÂªm',_binary '',1,NULL),(4,1,'Costolette di agnello',100,1,100,'our-menu-02.jpg','2020-07-22 18:44:45','BÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â£o TrÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹nh ThiÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âªm',_binary '',1,NULL),(5,1,'Strawberry Cheese Cake',40,1,40,'our-menu-19.jpg','2020-07-22 18:51:17','BÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â£o TrÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹nh ThiÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âªm',_binary '',1,NULL),(6,1,'Strawberry Cheese Cake',40,1,40,'our-menu-19.jpg','2020-07-22 18:54:39','BÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â£o TrÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹nh ThiÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âªm',_binary '',1,NULL),(7,1,' Miele di pollo alla griglia',80,1,80,'our-menu-04.jpg','2020-07-22 18:54:39','BÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â£o TrÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹nh ThiÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âªm',_binary '',2,NULL),(8,1,'Wine Castle',200,2,400,'experience3.jpg','2020-07-22 19:41:14','BÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â£o TrÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹nh ThiÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âªm',_binary '',3,NULL),(9,4,'Room -Superior-Lac Long Quan Street, Cam An, Hoi An, Quang Nam, Vietnam22',49,1,49,'Typeroom_Superior.jpg','2020-07-30 23:07:52','Bao',_binary '\0',NULL,NULL),(10,5,'Room -Superior-Lac Long Quan Street, Cam An, Hoi An, Quang Nam, Vietnam22',49,1,49,'Typeroom_Superior.jpg','2020-07-30 23:12:51','Bao',_binary '\0',NULL,NULL),(11,6,'Room -Superior-Lac Long Quan Street, Cam An, Hoi An, Quang Nam, Vietnam22',49,1,49,'Typeroom_Superior.jpg','2020-07-30 23:16:40','Bao',_binary '\0',NULL,NULL),(12,7,'Room -Bungalow-03-05 Xuan Tam Street, Thuan Phuoc, Hai Chau, Ã„ï¿½a Nang , Viet Nam2',50,1,50,'Typeroom_Bungalow.jpg','2020-07-30 23:21:23','Bao',_binary '\0',NULL,NULL),(13,8,'Room -Bungalow-03-05 Xuan Tam Street, Thuan Phuoc, Hai Chau, Ã„ï¿½a Nang , Viet Nam2',50,1,50,'Typeroom_Bungalow.jpg','2020-07-30 23:25:34','Bao',_binary '\0',NULL,NULL),(14,9,'Room -Superior-Lac Long Quan Street, Cam An, Hoi An, Quang Nam, Vietnam22',49,1,49,'Typeroom_Superior.jpg','2020-07-30 23:52:30','Bao',_binary '\0',NULL,NULL),(15,10,'Room -Bungalow-03-05 Xuan Tam Street, Thuan Phuoc, Hai Chau, Ã„ï¿½a Nang , Viet Nam2',50,1,50,'Typeroom_Bungalow.jpg','2020-07-31 13:58:09','Bao',_binary '\0',NULL,NULL),(16,11,'Room -Bungalow-03-05 Xuan Tam Street, Thuan Phuoc, Hai Chau, Ã„ï¿½a Nang , Viet Nam2',50,1,50,'Typeroom_Bungalow.jpg','2020-07-31 14:01:46','Bao',_binary '\0',NULL,NULL),(17,1,'Costolette di agnello',100,2,200,'our-menu-02.jpg','2020-07-31 19:46:55','BÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â£o TrÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹nh ThiÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âªm',_binary '',2,NULL),(18,7,'Water Park',1000,2,2000,'experience5.jpg','2020-07-31 19:57:34','Bao',_binary '\0',NULL,NULL),(19,7,'Costolette di agnello',100,2,200,'our-menu-02.jpg','2020-07-31 19:58:24','Bao',_binary '\0',NULL,NULL),(20,7,' Miele di pollo alla griglia',80,2,160,'our-menu-04.jpg','2020-07-31 19:59:20','Bao',_binary '\0',NULL,NULL),(21,7,'Strawberry Cheese Cake',40,3,120,'our-menu-19.jpg','2020-07-31 20:01:13','Bao',_binary '\0',NULL,NULL),(23,1,'Strawberry Cheese Cake',40,1,40,'our-menu-19.jpg','2020-08-01 18:24:49','BÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â£o TrÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹nh ThiÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âªm',_binary '',1,NULL),(24,1,'Strawberry Cheese Cake',40,2,80,'our-menu-19.jpg','2020-08-01 18:34:27','BÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â£o TrÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹nh ThiÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âªm',_binary '',1,NULL),(25,1,'Strawberry Cheese Cake',40,1,40,'our-menu-19.jpg','2020-08-01 19:14:24','BÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â£o TrÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹nh ThiÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âªm',_binary '',1,NULL),(26,1,'Spa',500,2,1000,'experience2.jpg','2020-08-01 22:11:49','BÃ¡ÂºÂ£o TrÃ¡Â»â€¹nh ThiÃƒÂªm',_binary '\0',3,NULL);
 /*!40000 ALTER TABLE `receiptcomponent` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -513,7 +514,7 @@ CREATE TABLE `servicetype` (
   `ServiceTypeId` int NOT NULL AUTO_INCREMENT,
   `TypeName` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`ServiceTypeId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -522,7 +523,7 @@ CREATE TABLE `servicetype` (
 
 LOCK TABLES `servicetype` WRITE;
 /*!40000 ALTER TABLE `servicetype` DISABLE KEYS */;
-INSERT INTO `servicetype` VALUES (1,'Food'),(2,'Drink'),(3,'Ticket');
+INSERT INTO `servicetype` VALUES (1,'Food'),(2,'Drink'),(3,'Ticket'),(4,'RoomDeposits');
 /*!40000 ALTER TABLE `servicetype` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -552,7 +553,7 @@ CREATE TABLE `ticket` (
 
 LOCK TABLES `ticket` WRITE;
 /*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
-INSERT INTO `ticket` VALUES ('lJKNUenf2HkQpe2SNc9E2MWcud3scMkqAXPB9SW6c0hPfchaQJJlSzeb3GbCIPDd10uJCIe0b70OWKiz6DPh6mDchXUaem9s1TEyT0j6n4sqfxgSpq1d4bAZhem1h8qr3moYJbwEfEfTyS21l5ne3oeRG3iRyeW22diHQx4JAVzfyEbMPeCnG1LvHpk22MoElivherWb',2,'Water Park','ticket2','rGf0UJMaVFuZR0nlMtlHkx7cHlL6ackjOVhIBLyL',NULL),('y6hQaFC5msRq4gM2QBwEyvEug7jDRpayZrk5Y2Jx2mSYMpqeRL0YYc1urVcScLY20kDOBmuazGg3t3ZDHrVyP8aAICyitoDJoSDSy1xYjBaxH2Hmv74JrSsjHJvXMQ312c5cqdU2Q7zwkV7oN7rzHNq5zVyXWrU0TRuMEk2e6sogBo0NrHsyr13FOReKZmQCSYmFhwLS',2,'Wine Castle','ticket1.png','38FN8490FNU82RRwWcF','2020-07-22 19:41:14');
+INSERT INTO `ticket` VALUES ('cdYiMv7VCxy8qsFgHkNCTr3SXojHVtFil9LnbfRxuOuQt3wk1W0irFjW9upDerhQgxPFDdUf6V23xWO8Mvkg21Kz1awOZbPyyaqDyBgTpUlkb0lVT4rRJcaJUF4KKVSt7UUC4nkLuoki4CpRILfrzUltGdlXZnu85rU2R17j6pbYbObJrKnhHwKmhx09Bql6AViR9yyZ',2,'Spa','ticket3','38FN8490FNU82RRwWcF',NULL),('lJKNUenf2HkQpe2SNc9E2MWcud3scMkqAXPB9SW6c0hPfchaQJJlSzeb3GbCIPDd10uJCIe0b70OWKiz6DPh6mDchXUaem9s1TEyT0j6n4sqfxgSpq1d4bAZhem1h8qr3moYJbwEfEfTyS21l5ne3oeRG3iRyeW22diHQx4JAVzfyEbMPeCnG1LvHpk22MoElivherWb',2,'Water Park','ticket2','rGf0UJMaVFuZR0nlMtlHkx7cHlL6ackjOVhIBLyL',NULL),('y6hQaFC5msRq4gM2QBwEyvEug7jDRpayZrk5Y2Jx2mSYMpqeRL0YYc1urVcScLY20kDOBmuazGg3t3ZDHrVyP8aAICyitoDJoSDSy1xYjBaxH2Hmv74JrSsjHJvXMQ312c5cqdU2Q7zwkV7oN7rzHNq5zVyXWrU0TRuMEk2e6sogBo0NrHsyr13FOReKZmQCSYmFhwLS',2,'Wine Castle','ticket1.png','38FN8490FNU82RRwWcF','2020-07-22 19:41:14');
 /*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -634,4 +635,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-08-01 15:42:21
+-- Dump completed on 2020-08-01 22:19:05

@@ -14,6 +14,7 @@ import entities.Receiptcomponent;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -113,6 +114,7 @@ public class ExecutePaymentServlet extends HttpServlet {
                 Payment payment = paymentServices.executePayment(paymentId, payerId);
                 for (Receiptcomponent receiptcomponent : list) {
                     receiptcomponent.setStatus(Boolean.TRUE);
+                    receiptcomponent.setPayDate(new Date());
                     receiptcomponentClient.edit_JSON(receiptcomponent, receiptcomponent.getReceiptComponentId().toString());
                 }
                 

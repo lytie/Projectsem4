@@ -42,18 +42,27 @@
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <form role="form" id="quickForm">
+                                <form role="form" id="quickForm" action="Admin_AddConvenient" method="post" enctype="multipart/form-data">
                                     <div class="card-body">
                                         
                                         <div class="form-group col-md-6">
-                                            <label for="exampleInputPassword1">Convenient Name :</label>
-                                            <input type="text" name="text" class="form-control" id="exampleInputFullName" placeholder="Full Name">
+                                            <label >Convenient Name :</label>
+                                            <input type="text" name="name" class="form-control"  placeholder="Convenient Name">
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleInputPassword1">Img Path :</label>
-                                            <input type="file" name="fileupload" class="form-control" id="fileupload" >
+                                            <label>Img Path :</label>
+                                            <img id='output' width='200' />	
+
+                                                <input type='file' class="form-control"  accept='image/*' name='file' id='file'  onchange='loadFile(event)' >
+                                                <script>
+                                                    var loadFile = function (event) {
+                                                        var image = document.getElementById('output');
+                                                        image.src = URL.createObjectURL(event.target.files[0]);
+                                                    };
+                                                </script>
                                         </div>
                                         
+                                        <div>${error}</div>
                                         
                                     </div>
                                     <!-- /.card-body -->

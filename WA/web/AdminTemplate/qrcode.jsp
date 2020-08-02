@@ -88,26 +88,26 @@
                                                                 </c:choose>
                                                             </td>
                                                             <td>
-
-                                                                <c:if test="${date.before(c.checkOutDate)||date==c.checkOutDate}">
-
-                                                                    <c:choose>
-                                                                        <c:when test="${c.getStatus()== true}">
-                                                                            <a class="btn btn-danger btn-sm" href="Admin_StatusQrcode?status=deactivate&id=<c:out value="${c.getQrCodeId()}"/>">
-                                                                                <i class="fas fa-times"></i> Deactivate                          
-                                                                            </a> 
-                                                                        </c:when>
-                                                                        <c:otherwise>
-                                                                            <c:if test="${c.checkInDate==date||c.checkInDate.before(date)}">
-                                                                                <a class="btn btn-success btn-sm" href="Admin_StatusQrcode?status=active&id=<c:out value="${c.getQrCodeId()}"/>">
-                                                                                    <i class="fas fa-check"></i> Active                          
+                                                                <c:if test="${c.checkOutDate}!=null">
+                                                                    <c:if test="${date.before(c.checkOutDate)||date==c.checkOutDate}">
+                                                                        <c:choose>
+                                                                            <c:when test="${c.getStatus()== true}">
+                                                                                <a class="btn btn-danger btn-sm" href="Admin_StatusQrcode?status=deactivate&id=<c:out value="${c.getQrCodeId()}"/>">
+                                                                                    <i class="fas fa-times"></i> Deactivate                          
                                                                                 </a> 
-                                                                            </c:if>
-                                                                            <a class="btn btn-dark btn-sm" href="Admin_StatusQrcode?status=cancel&id=<c:out value="${c.getQrCodeId()}"/>">
-                                                                                <i class="fas fa-ban"></i> Cancel                          
-                                                                            </a> 
-                                                                        </c:otherwise>
-                                                                    </c:choose>   
+                                                                            </c:when>
+                                                                            <c:otherwise>
+                                                                                <c:if test="${c.checkInDate==date||c.checkInDate.before(date)}">
+                                                                                    <a class="btn btn-success btn-sm" href="Admin_StatusQrcode?status=active&id=<c:out value="${c.getQrCodeId()}"/>">
+                                                                                        <i class="fas fa-check"></i> Active                          
+                                                                                    </a> 
+                                                                                </c:if>
+                                                                                <a class="btn btn-dark btn-sm" href="Admin_StatusQrcode?status=cancel&id=<c:out value="${c.getQrCodeId()}"/>">
+                                                                                    <i class="fas fa-ban"></i> Cancel                          
+                                                                                </a> 
+                                                                            </c:otherwise>
+                                                                        </c:choose>   
+                                                                    </c:if>
                                                                 </c:if>
                                                             </td>
                                                         </tr>

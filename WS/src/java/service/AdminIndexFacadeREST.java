@@ -6,6 +6,7 @@
 package service;
 
 import entities.Accountcustomer;
+import entities.Accountemployee;
 import entities.Feedback;
 import entities.Qrcode;
 import entities.Receipt;
@@ -56,7 +57,6 @@ public class AdminIndexFacadeREST {
     @Path("getnewfndorders/{today}/{nextday}")
     @Produces("application/json")
     public List<Receiptcomponent> getnewFoodandDrinkOrders(@PathParam("today") String today, @PathParam("nextday") String nextday) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-mm-dd");
         String query1 = "SELECT * FROM receiptcomponent where OrderDate >= ? and OrderDate < ?";
         String query2 = "SELECT * FROM ticket where BuyDate >= ? and BuyDate < ?";
         String query3 = "SELECT * FROM service ";
@@ -89,7 +89,6 @@ public class AdminIndexFacadeREST {
     @Path("getnewroombooked/{today}/{nextday}")
     @Produces("application/json")
     public List<Qrcode> getnewRoomBooked(@PathParam("today") String today, @PathParam("nextday") String nextday) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-mm-dd");
         String query = "SELECT * FROM qrcode WHERE CreateDate >= ? and CreateDate < ?";
         List<Qrcode> listQrcode = (List<Qrcode>) em.createNativeQuery(query, Qrcode.class)
                 .setParameter(1, today)
@@ -114,7 +113,6 @@ public class AdminIndexFacadeREST {
     @Path("getnewfeedback/{today}/{nextday}")
     @Produces("application/json")
     public List<Feedback> getnewFeedBack(@PathParam("today") String today, @PathParam("nextday") String nextday) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-mm-dd");
         String query = "SELECT * FROM feedback WHERE FeedBackTime >= ? and FeedBackTime < ?";
         List<Feedback> listFeedback = (List<Feedback>) em.createNativeQuery(query, Feedback.class).setParameter(1, today)
                 .setParameter(2, nextday)
@@ -126,7 +124,6 @@ public class AdminIndexFacadeREST {
     @Path("getnewticketsold/{today}/{nextday}")
     @Produces("application/json")
     public List<Ticket> getnewTicketSold(@PathParam("today") String today, @PathParam("nextday") String nextday) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-mm-dd");
         String query = "SELECT * FROM ticket WHERE BuyDate >= ? and BuyDate < ?";
         List<Ticket> listTicket = (List<Ticket>) em.createNativeQuery(query, Ticket.class).setParameter(1, today)
                 .setParameter(2, nextday)
@@ -138,7 +135,6 @@ public class AdminIndexFacadeREST {
     @Path("getnewpaidreceipt/{today}/{nextday}")
     @Produces("application/json")
     public List<Receipt> getnewPaidReceipt(@PathParam("today") String today, @PathParam("nextday") String nextday) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-mm-dd");
         String query = "SELECT * FROM receipt WHERE PayDate >= ? and PayDate < ?";
         List<Receipt> listReceipt = (List<Receipt>) em.createNativeQuery(query, Receipt.class).setParameter(1, today)
                 .setParameter(2, nextday)
@@ -151,7 +147,6 @@ public class AdminIndexFacadeREST {
     @Produces("application/json")
     public List<Qrcode> getQrcodeInUse(@PathParam("from") String from, @PathParam("to") String to) {
         try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-mm-dd");
             String query = "select * from qrcode where QrCodeId in\n"
                     + "                        (\n"
                     + "			      select qrcode.QrCodeId from qrcode where \n"
@@ -179,7 +174,6 @@ public class AdminIndexFacadeREST {
     @Produces("application/json")
     public List<Room> getRoomNotInUse(@PathParam("from") String from, @PathParam("to") String to) {
         try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-mm-dd");
             String query = "select * from room where RoomId not in \n"
                     + "		(\n"
                     + "		select qrcode.RoomId from qrcode where QrCodeId in \n"
@@ -202,6 +196,57 @@ public class AdminIndexFacadeREST {
             System.out.println(e.getMessage());
             return null;
         }
+    }
 
+    @GET
+    @Path("getnewpaidreceiptcomponent/{today}/{nextday}")
+    @Produces("application/json")
+    public List<Receiptcomponent> getnewPaidReceiptComponent(@PathParam("today") String today, @PathParam("nextday") String nextday) {
+        String query = "SELECT * FROM receiptcomponent WHERE PayDate >= ? and PayDate < ?";
+        List<Receiptcomponent> listReceiptcomponent = (List<Receiptcomponent>) em.createNativeQuery(query, Receiptcomponent.class)
+                .setParameter(1, today)
+                .setParameter(2, nextday)
+                .getResultList();
+        return listReceiptcomponent;
+    }
+
+    @GET
+    @Path("getcheckinschedule/{from}/{to}")
+    @Produces("application/json")
+    public List<Qrcode> getCheckInSchedule(@PathParam("from") String from, @PathParam("to") String to) {
+        String query = "SELECT * FROM qrcode WHERE CheckInDate between ? AND ?";
+        List<Qrcode> listQrcode = (List<Qrcode>) em.createNativeQuery(query, Qrcode.class)
+                .setParameter(1, from)
+                .setParameter(2, to)
+                .getResultList();
+        return listQrcode;
+    }
+
+    @GET
+    @Path("getcheckoutschedule/{from}/{to}")
+    @Produces("application/json")
+    public List<Qrcode> getCheckOutSchedule(@PathParam("from") String from, @PathParam("to") String to) {
+        String query = "SELECT * FROM qrcode WHERE CheckOutDate between ? AND ?";
+        List<Qrcode> listQrcode = (List<Qrcode>) em.createNativeQuery(query, Qrcode.class)
+                .setParameter(1, from)
+                .setParameter(2, to)
+                .getResultList();
+        return listQrcode;
+    }
+
+    @GET
+    @Path("getemployeebirthday/{from}/{to}")
+    @Produces("application/json")
+    public List<Accountemployee> getEmployeeBirthDay() {
+        String query = "SELECT * \n"
+                + "FROM  accountemployee \n"
+                + "WHERE  DATE_ADD(DateOfBirth, \n"
+                + "                INTERVAL YEAR(CURDATE())-YEAR(DateOfBirth)\n"
+                + "                         + IF(DAYOFYEAR(CURDATE()) > DAYOFYEAR(DateOfBirth),1,0)\n"
+                + "                YEAR)  \n"
+                + "            BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 365 DAY)";
+        List<Accountemployee> listAccountemployee = (List<Accountemployee>) em.createNativeQuery(query, Accountemployee.class)
+                .getResultList();
+        return listAccountemployee;
     }
 }

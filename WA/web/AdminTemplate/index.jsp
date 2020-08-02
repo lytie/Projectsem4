@@ -9,36 +9,6 @@
 <%@page import="java.util.List"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
-<%
-    List<Receiptcomponent> listReceiptcomponents =(List<Receiptcomponent>) request.getAttribute("listReceiptcomponents");
-    float bookingdeposits = 0;
-    float paidbillrevenue = 0;
-    List<Qrcode> listQrcodes =(List<Qrcode>) request.getAttribute("listQrcodes");
-    for(Qrcode qrcode : listQrcodes){
-        bookingdeposits += qrcode.getDeposits();
-    }
-    List<Feedback> listFeedbacks =(List<Feedback>) request.getAttribute("listFeedbacks");
-    List<Ticket> listTickets =(List<Ticket>) request.getAttribute("listTickets");
-    List<Accountcustomer> listAccountcustomers =(List<Accountcustomer>) request.getAttribute("listAccountcustomers");
-    List<Receipt> listReceipts =(List<Receipt>) request.getAttribute("listReceipts");
-    for(Receipt receipt : listReceipts){
-        paidbillrevenue += receipt.getTotal();
-    }
-    float todayrevenue = bookingdeposits + paidbillrevenue;
-    float yesterdayrevenue = (Float)request.getAttribute("yesterdayrevenue");
-    float allpaidbillrevenue = (Float)request.getAttribute("allpaidbillrevenue");
-    float allbookingdepositsrevenue = (Float)request.getAttribute("allbookingdepositsrevenue");
-    float allrevenue = (Float)request.getAttribute("allrevenue");
-    float distance2day = todayrevenue - yesterdayrevenue;
-    float growthvalue = distance2day/yesterdayrevenue*100;
-    System.out.println(growthvalue);
-    if(Float.isInfinite(growthvalue)){
-        growthvalue = todayrevenue;
-    }
-    if(Float.isNaN(growthvalue)){
-        growthvalue = 0;
-    }
-%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -97,41 +67,48 @@
                                         <div class="chart tab-pane active" id="revenue-chart" style="position: relative;">                                                 
                                             <div class="row">
                                                 <div class="col-md-6 text-uppercase">From Booking Deposits:</div>
-                                                <div class="col-md-6 text-right">$<%=bookingdeposits%></div>
+                                                <div class="col-md-6 text-right">$${todayBookingDepositsRevenue}</div>
                                             </div>   
                                             <div class="row">
-                                                <div class="col-md-6 text-uppercase">from Paid bill:</div>
-                                                <div class="col-md-6 text-right">$<%=paidbillrevenue%></div>
+                                                <div class="col-md-6 text-uppercase">From Paid Services:</div>
+                                                <div class="col-md-6 text-right">$${todayServiceRevenue}</div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6 text-uppercase">Total:</div>
-                                                <div class="col-md-6 text-right">$<%=todayrevenue%></div>
+                                                <div class="col-md-6 text-right">$${todayRevenue}</div>
                                             </div> 
                                             <div class="row " style="border-top:1px solid;padding-top: 10px" >
                                                 <div class="col-md-6 text-uppercase">Yesterday revenue:</div>
                                                 <div class="col-md-6 text-right">
-                                                    <%
-                                                        if(growthvalue<0){
-                                                    %>
-                                                    <span style="color: red;padding-right: 10px"><%=growthvalue%>%<i class="fa fa-arrow-down" aria-hidden="true"></i></span>$<%=yesterdayrevenue%>
-                                                        <%}else{%>
-                                                    <span style="color: green;padding-right: 10px"><%=growthvalue%>%<i class="fa fa-arrow-up" aria-hidden="true"></i></span>$<%=yesterdayrevenue%>
-                                                        <%}%>
+                                                    <c:if test="${growthvalue<0}">
+                                                        <span style="color: red;padding-right: 10px">${growthvalue}%<i class="fa fa-arrow-down" aria-hidden="true"></i></span>$${yesterdayRevenue}
+                                                    </c:if>
+                                                    <c:if test="${growthvalue>=0}">
+                                                        <span style="color: green;padding-right: 10px">${growthvalue}%<i class="fa fa-arrow-up" aria-hidden="true"></i></span>$${yesterdayRevenue}
+                                                    </c:if>    
                                                 </div>
                                             </div> 
                                         </div>
                                         <div class="chart tab-pane" id="sales-chart" style="position: relative;">                    
                                             <div class="row">
                                                 <div class="col-md-6 text-uppercase">From Booking Deposits:</div>
-                                                <div class="col-md-6 text-right">$<%=allbookingdepositsrevenue%></div>
+                                                <div class="col-md-6 text-right">$${allBookingDepositsRevenue}</div>
                                             </div>   
                                             <div class="row">
-                                                <div class="col-md-6 text-uppercase">from Paid bill:</div>
-                                                <div class="col-md-6 text-right">$<%=allpaidbillrevenue%></div>
+                                                <div class="col-md-6 text-uppercase">From Paid Services:</div>
+                                                <div class="col-md-6 text-right">$${allServiceRevenue}</div>
                                             </div>
                                             <div class="row " style="border-top:1px solid;padding-top: 10px" >
-                                                <div class="col-md-6 text-uppercase">Total revenue:</div>
-                                                <div class="col-md-6  text-right">$<%=allrevenue%></div>
+                                                <div class="col-md-6 text-uppercase">Real Revenue:</div>
+                                                <div class="col-md-6  text-right">$${allRealRevenue}</div>
+                                            </div> 
+                                            <div class="row " style="border-top:1px solid;padding-top: 10px" >
+                                                <div class="col-md-6 text-uppercase">Unpaid Revenue:</div>
+                                                <div class="col-md-6  text-right">$${unpaidRevenue}</div>
+                                            </div> 
+                                            <div class="row " style="border-top:1px solid;padding-top: 10px" >
+                                                <div class="col-md-6 text-uppercase">Total Estimated Revenue:</div>
+                                                <div class="col-md-6  text-right">$${estimatedRevenue}</div>
                                             </div> 
                                         </div>  
                                     </div>
@@ -145,7 +122,7 @@
                                 <!-- small box -->
                                 <div class="small-box bg-info">
                                     <div class="inner">
-                                        <h3><%=listReceiptcomponents.size()%></h3>
+                                        <h3>${listNewFoodandDrinksOrders.size()}</h3>
 
                                         <p>New Food and Drinks Orders</p>
                                     </div>
@@ -160,7 +137,7 @@
                                 <!-- small box -->
                                 <div class="small-box bg-success">
                                     <div class="inner">
-                                        <h3><%=listQrcodes.size()%><sup style="font-size: 20px"></sup></h3>
+                                        <h3>${listNewRoomBooked.size()}<sup style="font-size: 20px"></sup></h3>
 
                                         <p>New Room Booked</p>
                                     </div>
@@ -176,7 +153,7 @@
                                 <!-- small box -->
                                 <div class="small-box bg-warning">
                                     <div class="inner">
-                                        <h3><%=listAccountcustomers.size()%></h3>
+                                        <h3>${listNewAccountcustomers.size()}</h3>
 
                                         <p>User Registrations</p>
                                     </div>
@@ -191,7 +168,7 @@
                                 <!-- small box -->
                                 <div class="small-box bg-gradient-danger">
                                     <div class="inner">
-                                        <h3><%=listFeedbacks.size()%></h3>
+                                        <h3>${listNewFeedbacks.size()}</h3>
 
                                         <p>New feedbacks</p>
                                     </div>
@@ -206,7 +183,7 @@
                                 <!-- small box -->
                                 <div class="small-box bg-gradient-teal">
                                     <div class="inner">
-                                        <h3><%=listTickets.size()%></h3>
+                                        <h3>${listNewTickets.size()}</h3>
 
                                         <p>Ticket sold</p>
                                     </div>
@@ -269,22 +246,20 @@
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Today revenue', 'Deposits', 'PaidReceipt', 'Other'],
+            labels: ['Today total revenue', 'Service revenue', 'Room Booking Deposits revenue'],
             datasets: [{
                     
-                    label: 'Today revenue <%=todayrevenue%>$',
-                    data: [<%=todayrevenue%>, <%=bookingdeposits%>,<%=paidbillrevenue%>,0],
+                    label: 'Today total revenue ${todayRevenue}$',
+                    data: [${todayRevenue}, ${todayServiceRevenue},${todayBookingDepositsRevenue}],
                     backgroundColor: [
                         'rgba(54, 162, 235, 0.2)',
                         'rgba(255, 99, 132, 0.2)',                     
                         'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)'
                     ],
                     borderColor: [
                         'rgba(54, 162, 235, 1)',
                         'rgba(255, 99, 132, 1)',
                         'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)'
                     ],
                     borderWidth: 1
                 }]

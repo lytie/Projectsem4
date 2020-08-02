@@ -76,9 +76,9 @@
                                             <label for="todoCheck1"></label>
                                         </div>
                                         <!-- todo text -->
-                                        <span class="text">4 Check-in schedule </span>
+                                        <span class="text">${listCheckInSchedule.size()} Check-in schedule </span>
                                         <!-- Emphasis label -->
-                                        <small class="badge badge-danger"><i class="far fa-clock"></i> 20 mins until check-in time</small>
+                                        
                                         <!-- General tools such as edit or delete-->
                                         <div class="tools">
                                             <a href="AdminIndexServlet" style="color: red"><i class="fas fa-edit"></i></a>
@@ -94,8 +94,7 @@
                                             <input type="checkbox" value="" name="todo2" id="todoCheck2" >
                                             <label for="todoCheck2"></label>
                                         </div>
-                                        <span class="text">40 new customers</span>
-                                        <small class="badge badge-info"><i class="fas fa-user-plus"></i> 6 new customers next check-in</small>
+                                        <span class="text">${newcustomer} new customers</span>
                                         <div class="tools">
                                             <a href="AdminIndexServlet" style="color: red"><i class="fas fa-edit"></i></a>
                                             <i class="fas fa-trash-o"></i>
@@ -110,8 +109,7 @@
                                             <input type="checkbox" value="" name="todo3" id="todoCheck3">
                                             <label for="todoCheck3"></label>
                                         </div>
-                                        <span class="text">7 Check-out schedule</span>
-                                        <small class="badge badge-warning"><i class="far fa-clock"></i> 20 mins until check-out time</small>
+                                        <span class="text">${listCheckOutSchedule.size()} Check-out schedule</span>
                                         <div class="tools">
                                             <a href="AdminIndexServlet" style="color: red"><i class="fas fa-edit"></i></a>
                                             <i class="fas fa-trash-o"></i>
@@ -126,8 +124,8 @@
                                             <input type="checkbox" value="" name="todo4" id="todoCheck4">
                                             <label for="todoCheck4"></label>
                                         </div>
-                                        <span class="text">Bao Birthday</span>
-                                        <small class="badge badge-success"><i class="far fa-clock"></i> 3 days</small>
+                                        <span class="text">${employeeBirthDay.getFullName()} Birthday</span>
+                                        <small class="badge badge-success"><i class="far fa-clock"></i> ${untilbirthday} days</small>
                                         <div class="tools">
                                             <a href="AdminIndexServlet" style="color: red"><i class="fas fa-edit"></i></a>
                                             <i class="fas fa-trash-o"></i>
@@ -177,7 +175,7 @@
                     labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday','Sunday'],
                     datasets: [{
                             label: 'Monday',
-                            data: [12, 19, 3, 5, 2, 3,30],
+                            data: [${monday}, ${tuesday}, ${wednesday}, ${thursday}, ${friday}, ${saturday},${sunday}],
                             backgroundColor: [
                                 'rgba(255, 99, 132, 0.2)',
                                 'rgba(54, 162, 235, 0.2)',

@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package AdminController;
 
 import entities.Qrcode;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -41,17 +41,20 @@ public class Admin_QrCode extends HttpServlet {
             GenericType<List<Qrcode>> genericType = new GenericType<List<Qrcode>>() {
             };
             List<Qrcode> listQrcode = qrcodeClient.findAll_JSON(genericType);
-            Date datenow=new Date();
+            Date datenow = new Date();
             for (Qrcode qrcode : listQrcode) {
-                if (qrcode.getCheckOutDate().before(datenow)) {
-                    qrcode.setStatus(Boolean.FALSE);
-                    qrcodeClient.edit_JSON(qrcode, qrcode.getQrCodeId());
+                if (qrcode.getCheckOutDate() != null) {
+                    if (qrcode.getCheckOutDate().before(datenow)) {
+                        qrcode.setStatus(Boolean.FALSE);
+                        qrcodeClient.edit_JSON(qrcode, qrcode.getQrCodeId());
+                    }
                 }
             }
+            List<Qrcode> newlistQrcode = qrcodeClient.findAll_JSON(genericType);
             System.out.println(datenow);
-            
+
             request.setAttribute("date", datenow);
-            request.setAttribute("listQrcode", listQrcode);
+            request.setAttribute("listQrcode", newlistQrcode);
             request.getRequestDispatcher("AdminTemplate/qrcode.jsp").forward(request, response);
         }
     }

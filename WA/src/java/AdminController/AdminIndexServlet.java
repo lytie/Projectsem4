@@ -31,6 +31,7 @@ import wsc.AccountcustomerClient;
 import wsc.AdminIndexClient;
 import wsc.QrcodeClient;
 import wsc.ReceiptClient;
+import wsc.ReceiptcomponentClient;
 
 /**
  *
@@ -55,6 +56,7 @@ public class AdminIndexServlet extends HttpServlet {
             AdminIndexClient adminIndexClient = new AdminIndexClient();
             QrcodeClient qrcodeClient = new QrcodeClient();
             ReceiptClient receiptClient = new ReceiptClient();
+            ReceiptcomponentClient receiptcomponentClient = new ReceiptcomponentClient();
             GenericType<List<Receiptcomponent>> genListReceiptcomponent = new GenericType<List<Receiptcomponent>>() {
             };
             GenericType<List<Qrcode>> genListQrcode = new GenericType<List<Qrcode>>() {
@@ -75,53 +77,108 @@ public class AdminIndexServlet extends HttpServlet {
             cal.add(Calendar.DATE, 1);
             Calendar calyesterday = Calendar.getInstance();
             calyesterday.add(Calendar.DATE, -1);
-            
+
             String today = dateFormat.format(date);
             String nextday = dateFormat.format(cal.getTime());
             String yesterday = dateFormat.format(calyesterday.getTime());
-            
-            List<Receiptcomponent> listReceiptcomponents = adminIndexClient.getnewFoodandDrinkOrders(genListReceiptcomponent, today, nextday);
-            List<Qrcode> listQrcodes = adminIndexClient.getnewRoomBooked(genListQrcode, today, nextday);
-            List<Feedback> listFeedbacks = adminIndexClient.getnewFeedBack(genListFeedback, today, nextday);
-            List<Ticket> listTickets = adminIndexClient.getnewTicketSold(genListTicket, today, nextday);
-            List<Accountcustomer> listAccountcustomers = adminIndexClient.getnewUserRegistrations(genListAccountcustomer, today, nextday);
-            List<Receipt> listReceipts = adminIndexClient.getnewPaidReceipt(genListReceipt, today, nextday);
-            
-            float yesterdayrevenue = 0;
-            float allrevenue = 0;
-            float allbookingdepositsrevenue =0;
-            float allpaidbillrevenue = 0;
-            List<Qrcode> listyesterdayQrcodes = adminIndexClient.getnewRoomBooked(genListQrcode, yesterday, today);
-            List<Receipt> listyesterdayReceipts = adminIndexClient.getnewPaidReceipt(genListReceipt, yesterday, today);
-            for (Receipt receipt : listyesterdayReceipts) {
-                yesterdayrevenue += receipt.getTotal();
+
+            List<Receiptcomponent> listNewFoodandDrinksOrders = adminIndexClient.getnewFoodandDrinkOrders(genListReceiptcomponent, today, nextday);
+            List<Receiptcomponent> listNewPaidReceiptcomponents = adminIndexClient.getnewPaidReceiptComponent(genListReceiptcomponent, today, nextday);
+            List<Qrcode> listNewRoomBooked = adminIndexClient.getnewRoomBooked(genListQrcode, today, nextday);
+            List<Feedback> listNewFeedbacks = adminIndexClient.getnewFeedBack(genListFeedback, today, nextday);
+            List<Ticket> listNewTickets = adminIndexClient.getnewTicketSold(genListTicket, today, nextday);
+            List<Accountcustomer> listNewAccountcustomers = adminIndexClient.getnewUserRegistrations(genListAccountcustomer, today, nextday);
+            //  List<Receipt> listReceipts = adminIndexClient.getnewPaidReceipt(genListReceipt, today, nextday);
+            List<Qrcode> listYesterdayRoomBooked = adminIndexClient.getnewRoomBooked(genListQrcode, yesterday, today);
+            List<Receiptcomponent> listYesterdayReceiptcomponents = adminIndexClient.getnewPaidReceiptComponent(genListReceiptcomponent, yesterday, today);
+            List<Qrcode> listAllRoomBooked = qrcodeClient.findAll_JSON(genListQrcode);
+            List<Receiptcomponent> listAllReceiptcomponents = receiptcomponentClient.findAll_JSON(genListReceiptcomponent);
+            List<Receipt> listAllReceipt = receiptClient.findAll_JSON(genListReceipt);
+            //Begin calculate yesterday number
+            float yesterdayRevenue = 0;
+            for (Receiptcomponent receiptcomponent : listYesterdayReceiptcomponents) {
+                yesterdayRevenue += receiptcomponent.getSubtotal();
             }
-            for (Qrcode qrcode : listyesterdayQrcodes) {
-                yesterdayrevenue += qrcode.getDeposits();
+            for (Qrcode qrcode : listYesterdayRoomBooked) {
+                yesterdayRevenue += qrcode.getDeposits();
             }
-            List<Qrcode> listAllQrcodes = qrcodeClient.findAll_JSON(genListQrcode);
-            List<Receipt> listAllReceipts = receiptClient.findAll_JSON(genListReceipt);
-            for (Receipt receipt : listAllReceipts) {
-                if(receipt.getTotal()!=null){
-                    allpaidbillrevenue += receipt.getTotal();
+            out.println("</br>Yesterday Revenue:" + yesterdayRevenue);
+            //End calculate yesterday number
+            //Begin calculate today number
+            float todayRevenue = 0;
+            float todayServiceRevenue = 0;
+            float todayBookingDepositsRevenue = 0;
+            for (Receiptcomponent receiptcomponent : listNewPaidReceiptcomponents) {
+                todayServiceRevenue += receiptcomponent.getSubtotal();
+                todayRevenue += receiptcomponent.getSubtotal();
+            }
+            for (Qrcode qrcode : listNewRoomBooked) {
+                if (qrcode.getDeposits() != null) {
+                    todayBookingDepositsRevenue += qrcode.getDeposits();
+                    todayRevenue += qrcode.getDeposits();
                 }
             }
-            for (Qrcode qrcode : listAllQrcodes) {
-                if (qrcode.getDeposits()!=null) {
-                  allbookingdepositsrevenue += qrcode.getDeposits();  
+            out.println("</br>Today Service Revenue:" + todayServiceRevenue);
+            out.println("</br>Today Booking Deposits Revenue:" + todayBookingDepositsRevenue);
+            out.println("</br>Today Revenue:" + todayRevenue);
+            //End calculate today number
+            //Begin calculate all number
+            float allServiceRevenue = 0;
+            float allBookingDepositsRevenue = 0;
+            float allRealRevenue = 0;
+            for (Receiptcomponent receiptcomponent : listAllReceiptcomponents) {
+                if (receiptcomponent.getPayDate() != null) {
+                    allServiceRevenue += receiptcomponent.getSubtotal();
                 }
             }
-            allrevenue = allpaidbillrevenue +allbookingdepositsrevenue;
-            request.setAttribute("listReceiptcomponents", listReceiptcomponents);
-            request.setAttribute("listQrcodes", listQrcodes);
-            request.setAttribute("listFeedbacks", listFeedbacks);
-            request.setAttribute("listTickets", listTickets);
-            request.setAttribute("listAccountcustomers", listAccountcustomers);
-            request.setAttribute("listReceipts", listReceipts);
-            request.setAttribute("yesterdayrevenue", yesterdayrevenue);
-            request.setAttribute("allpaidbillrevenue", allpaidbillrevenue);
-            request.setAttribute("allbookingdepositsrevenue", allbookingdepositsrevenue);
-            request.setAttribute("allrevenue", allrevenue);
+            for (Qrcode qrcode : listAllRoomBooked) {
+                if (qrcode.getDeposits() != null) {
+                    allBookingDepositsRevenue += qrcode.getDeposits();
+                }
+            }
+            allRealRevenue = allServiceRevenue + allBookingDepositsRevenue;
+            out.println("</br>All Service Revenue:" + allServiceRevenue);
+            out.println("</br>All Booking Deposits Revenue:" + allBookingDepositsRevenue);
+            out.println("</br>All Real Revenue:" + allRealRevenue);
+            //End calculate all number
+            //Begin calculate growthvalue
+            float distance2day = todayRevenue - yesterdayRevenue;
+            float growthvalue = distance2day / yesterdayRevenue * 100;
+            if (Float.isInfinite(growthvalue)) {
+                growthvalue = todayRevenue;
+            }
+            if (Float.isNaN(growthvalue)) {
+                growthvalue = 0;
+            }
+            out.println("</br>Growthvalue:" + growthvalue + "%");
+            //End calculate growthvalue
+            //Begin calculate estimated Revenue and unpaidRevenue
+            float estimatedRevenue = 0;
+            float unpaidRevenue = 0;
+            for (Receipt receipt : listAllReceipt) {
+                if (receipt.getTotal() != null) {
+                    estimatedRevenue += receipt.getTotal();
+                }
+            }
+            unpaidRevenue = estimatedRevenue - allRealRevenue;
+            out.println("</br>UnPaid Revenue:" + unpaidRevenue);
+            out.println("</br>Estimated Revenue:" + estimatedRevenue);
+            
+            request.setAttribute("yesterdayRevenue", yesterdayRevenue);
+            request.setAttribute("todayRevenue", todayRevenue);
+            request.setAttribute("todayServiceRevenue", todayServiceRevenue);
+            request.setAttribute("todayBookingDepositsRevenue", todayBookingDepositsRevenue);
+            request.setAttribute("allServiceRevenue", allServiceRevenue);
+            request.setAttribute("allBookingDepositsRevenue", allBookingDepositsRevenue);
+            request.setAttribute("allRealRevenue", allRealRevenue);
+            request.setAttribute("growthvalue", growthvalue);
+            request.setAttribute("estimatedRevenue", estimatedRevenue);
+            request.setAttribute("unpaidRevenue", unpaidRevenue);
+            request.setAttribute("listNewFoodandDrinksOrders", listNewFoodandDrinksOrders);
+            request.setAttribute("listNewRoomBooked", listNewRoomBooked);
+            request.setAttribute("listNewAccountcustomers", listNewAccountcustomers);
+            request.setAttribute("listNewFeedbacks", listNewFeedbacks);
+            request.setAttribute("listNewTickets", listNewTickets);
             request.getRequestDispatcher("AdminTemplate/index.jsp").forward(request, response);
         } catch (ParseException ex) {
             Logger.getLogger(AdminIndexServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -147,7 +204,7 @@ public class AdminIndexServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        }
+    }
 
     /**
      * Returns a short description of the servlet.

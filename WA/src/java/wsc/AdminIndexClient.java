@@ -33,6 +33,12 @@ public class AdminIndexClient {
         webTarget = client.target(BASE_URI).path("adminindex");
     }
 
+    public <T> T getEmployeeBirthDay(javax.ws.rs.core.GenericType<T> responseType, String from, String to) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("getemployeebirthday/{0}/{1}", new Object[]{from, to}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+
     public <T> T getnewPaidReceipt(javax.ws.rs.core.GenericType<T> responseType, String today, String nextday) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path(java.text.MessageFormat.format("getnewpaidreceipt/{0}/{1}", new Object[]{today, nextday}));
@@ -48,6 +54,18 @@ public class AdminIndexClient {
     public <T> T getnewFeedBack(javax.ws.rs.core.GenericType<T> responseType, String today, String nextday) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path(java.text.MessageFormat.format("getnewfeedback/{0}/{1}", new Object[]{today, nextday}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+
+    public <T> T getCheckInSchedule(javax.ws.rs.core.GenericType<T> responseType, String from, String to) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("getcheckinschedule/{0}/{1}", new Object[]{from, to}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+
+    public <T> T getCheckOutSchedule(javax.ws.rs.core.GenericType<T> responseType, String from, String to) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("getcheckoutschedule/{0}/{1}", new Object[]{from, to}));
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
@@ -72,6 +90,12 @@ public class AdminIndexClient {
     public <T> T getRoomNotInUse(javax.ws.rs.core.GenericType<T> responseType, String from, String to) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path(java.text.MessageFormat.format("getroomnotinuse/{0}/{1}", new Object[]{from, to}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+
+    public <T> T getnewPaidReceiptComponent(javax.ws.rs.core.GenericType<T> responseType, String today, String nextday) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("getnewpaidreceiptcomponent/{0}/{1}", new Object[]{today, nextday}));
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 

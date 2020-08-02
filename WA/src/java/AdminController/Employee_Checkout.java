@@ -7,22 +7,27 @@
 package AdminController;
 
 import entities.Qrcode;
+import entities.Receipt;
+import entities.Receiptcomponent;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.GenericType;
 import wsc.QrcodeClient;
+import wsc.ReceiptClient;
+import wsc.ReceiptcomponentClient;
 
 /**
  *
  * @author Admin
  */
-public class Employee_Checkin extends HttpServlet {
+public class Employee_Checkout extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,34 +42,44 @@ public class Employee_Checkin extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
             String qrcodeid = request.getParameter("qrcodeid");
             String action = request.getParameter("action");
             QrcodeClient qrcodeClient = new QrcodeClient();
+            ReceiptClient receiptClient = new ReceiptClient();
+            ReceiptcomponentClient receiptcomponentClient = new ReceiptcomponentClient();
             SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
             GenericType<Qrcode> genQrcode = new GenericType<Qrcode>(){};
+            GenericType<Receipt> genReceipt = new GenericType<Receipt>(){};
+            GenericType<List<Receiptcomponent>> genReceiptcomponent = new GenericType<List<Receiptcomponent>>(){};
             Qrcode qrcode = qrcodeClient.find_JSON(genQrcode, qrcodeid);
-            
-            if (action!=null && action.equals("active")) {
-                if (dateFormat.format(qrcode.getCheckInDate()).equals(dateFormat.format(new Date()))) {
-                    qrcode.setStatus(Boolean.TRUE);
-                    qrcodeClient.edit_JSON(qrcode, qrcode.getQrCodeId());
+            List<Receiptcomponent> listReceiptcomponents = receiptcomponentClient.findbyReceiptID_JSON(genReceiptcomponent, qrcode.getReceiptId().getReceiptId().toString());
+            Receipt receipt = receiptClient.find_JSON(genReceipt, qrcode.getReceiptId().getReceiptId().toString());
+            float realpay = 0;
+            for (Receiptcomponent receiptcomponent : listReceiptcomponents) {
+                if (receiptcomponent.getStatus()) {
+                    realpay += receiptcomponent.getSubtotal();
+                }
+            }
+            if (action!=null && action.equals("deactive")) {
+                if (realpay == receipt.getTotal()) {
                     request.setAttribute("msg", "<div class='success'></div>"
                         + "         <script type=\"text/javascript\">\n"
                         + "            $('.success').each(function () {\n"
-                        + "                swal(\"Check in successfully!!!\", \"\", \"success\");\n"
+                        + "                swal(\"Check out successfully!!!\", \"\", \"success\");\n"
                         + "            });\n"
                         + "        </script>");
                 }else{
                     request.setAttribute("msg", "<div class='success'></div>"
                         + "         <script type=\"text/javascript\">\n"
                         + "            $('.success').each(function () {\n"
-                        + "                swal(\"Your check in date is not today!!!\", \"\", \"error\");\n"
+                        + "                swal(\"Check out fail,pay your bill first!!!\", \"\", \"error\");\n"
                         + "            });\n"
                         + "        </script>");
                 }
             }
             request.setAttribute("qrcode", qrcode);
-            request.getRequestDispatcher("AdminTemplate/employeecheckin.jsp").forward(request, response);
+            request.getRequestDispatcher("AdminTemplate/employeecheckout.jsp").forward(request, response);
         }
     }
 

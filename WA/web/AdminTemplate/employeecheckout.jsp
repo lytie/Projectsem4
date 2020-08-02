@@ -35,7 +35,7 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-12" style="margin-bottom: 20px">
-                                <h1 class="m-0 text-dark text-center">Check in </h1>
+                                <h1 class="m-0 text-dark text-center">Check out </h1>
                             </div>
                             <div class="col-sm-12">         
                                 <div class="row">
@@ -73,12 +73,7 @@
                                         <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Room number: ${qrcode.getRoomId().getRoomId()}</div>
                                         <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Deposits: $${qrcode.getDeposits()}</div>
                                         <div style="padding: 20px">
-                                            <c:if test="${qrcode.getStatus()==true}">
-                                                <a class="btn btn-warning" style="color: white">This Qrcode already active</a>
-                                            </c:if>
-                                            <c:if test="${qrcode.getStatus()!=true}">
-                                                <a class="btn btn-warning" style="color: white" href="Employee_Checkin?qrcodeid=${qrcode.getQrCodeId()}&action=active">Active</a>
-                                            </c:if>                                         
+                                            <a class="btn btn-warning" style="color: white" href="Employee_Checkout?qrcodeid=${qrcode.getQrCodeId()}&action=deactive">Checkout</a>
                                         </div>
                                     </div>
                                 </c:if>
@@ -133,17 +128,17 @@
         </script>
         <script type="text/javascript">
             $(document).on("search", "#qr-reader-results", function() {             // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
-                $.get('Employee_Checkin?qrcodeid=' + $('#qr-reader-results').val(), function(responseXml) {                // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response XML...
+                $.get('Employee_Checkout?qrcodeid=' + $('#qr-reader-results').val(), function(responseXml) {                // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response XML...
                     $("#result").html($(responseXml).find("data").html()); // Parse XML, find <data> element and append its HTML to HTML DOM element with ID "somediv".
                 });
             });
             $(document).on("input", "#qr-reader-results", function() {             // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
-                $.get('Employee_Checkin?qrcodeid=' + $('#qr-reader-results').val(), function(responseXml) {                // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response XML...
+                $.get('Employee_Checkout?qrcodeid=' + $('#qr-reader-results').val(), function(responseXml) {                // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response XML...
                     $("#result").html($(responseXml).find("data").html()); // Parse XML, find <data> element and append its HTML to HTML DOM element with ID "somediv".
                 });
             });
             $(document).on("change", "#qr-reader-results", function() {             // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
-                $.get('Employee_Checkin?qrcodeid=' + $('#qr-reader-results').val(), function(responseXml) {                // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response XML...
+                $.get('Employee_Checkout?qrcodeid=' + $('#qr-reader-results').val(), function(responseXml) {                // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response XML...
                     $("#result").html($(responseXml).find("data").html()); // Parse XML, find <data> element and append its HTML to HTML DOM element with ID "somediv".
                 });
             });

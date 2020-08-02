@@ -58,40 +58,11 @@
 				Send us a Message
 			</h3>
 
-			<form class="wrap-form-reservation size22 m-l-r-auto">
+                    <form class="wrap-form-reservation size22 m-l-r-auto" action="CustomerPageContactServlet" method="post">
 				<div class="row">
-					<div class="col-md-4">
-						<!-- Name -->
-						<span class="txt9">
-							Name
-						</span>
+		
 
-						<div class="wrap-inputname size12 bo2 bo-rad-10 m-t-3 m-b-23">
-							<input class="bo-rad-10 sizefull txt10 p-l-20" type="text" name="name" placeholder="Name">
-						</div>
-					</div>
-
-					<div class="col-md-4">
-						<!-- Email -->
-						<span class="txt9">
-							Email
-						</span>
-
-						<div class="wrap-inputemail size12 bo2 bo-rad-10 m-t-3 m-b-23">
-							<input class="bo-rad-10 sizefull txt10 p-l-20" type="text" name="email" placeholder="Email">
-						</div>
-					</div>
-
-					<div class="col-md-4">
-						<!-- Phone -->
-						<span class="txt9">
-							Phone
-						</span>
-
-						<div class="wrap-inputphone size12 bo2 bo-rad-10 m-t-3 m-b-23">
-							<input class="bo-rad-10 sizefull txt10 p-l-20" type="text" name="phone" placeholder="Phone">
-						</div>
-					</div>
+					
 
 					<div class="col-12">
 						<!-- Message -->

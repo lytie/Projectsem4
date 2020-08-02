@@ -1,14 +1,18 @@
 package CustomerController;
 
+import entities.Feedback;
 import entities.Qrcode;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.Instant;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.GenericType;
+import wsc.FeedbackClient;
 import wsc.QrcodeClient;
 
 /**
@@ -79,8 +83,24 @@ public class CustomerPageContactServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        if(session.getAttribute("qrcodeid")!=null){
+            String message=request.getParameter("message");
+            String id=session.getAttribute("qrcodeid").toString();
+            QrcodeClient qrcodeClient = new QrcodeClient();
+            GenericType<Qrcode> genericType = new GenericType<Qrcode>() {
+            };
+             Qrcode qrcode = qrcodeClient.find_JSON(genericType, id);
+             FeedbackClient feedbackClient=new FeedbackClient();
+        Feedback feedback=new Feedback();
+        feedback.setQrCodeId(qrcode);
+        feedback.setFeedBackMessage(message);
+        feedback.setFeedBackTime(Date.from(Instant.now()));
+       feedbackClient.create_JSON(feedback);
+       request.getRequestDispatcher("CustomerPageIndexServlet").forward(request, response);
     }
+        }
+        
 
     /**
      * Returns a short description of the servlet.

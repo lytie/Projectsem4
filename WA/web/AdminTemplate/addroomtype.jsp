@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html>
 
     <head>
@@ -34,23 +35,39 @@
                                     </div>
                                     <!-- /.card-header -->
                                     <!-- form start -->
-                                    <form role="form" id="quickForm">
+                                    <form role="form" id="quickForm" action="Admin_AddRoomType" method="post" enctype="multipart/form-data">
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label for="exampleInputPassword1">RoomType Name :</label>
-                                                <input type="text" name="text" class="form-control" id="exampleInputFullName" placeholder="Full Name">
+                                                <input type="text" name="name" class="form-control" id="exampleInputFullName" placeholder="RoomType Name" required="">
                                             </div>
-                                            
+
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Decription :</label>
-                                                <textarea type="textarea" name="textarea" class="form-control" id="textarea" placeholder="Information Decription" rows="5" ></textarea> 
+                                                <textarea type="textarea" name="decription" class="form-control" id="textarea" placeholder="Decription" rows="5" required=""></textarea> 
                                             </div>
-                                            <div class="form-group">
-                                            <label for="exampleInputPassword1">Img Path :</label>
-                                            <input type="file" name="fileupload" class="form-control" id="fileupload" placeholder="Choose File Pls" >
-                                        </div>
+
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="customFile" accept='image/*' onchange='loadFile(event)' name='file'>
+                                                <label class="custom-file-label" for="customFile">Choose file Image</label>
+                                                
+                                            </div>
+                                            <div>
+                                                <img id='output' width='200' />	
+
+                                            </div>
+
+
+                                            <script>
+                                                var loadFile = function (event) {
+                                                    var image = document.getElementById('output');
+                                                    image.src = URL.createObjectURL(event.target.files[0]);
+                                                };
+                                            </script>
+
 
                                         </div>
+                                        <div>${error}</div>
                                         <!-- /.card-body -->
                                         <div class="card-footer">
                                             <button type="submit" class="btn btn-primary">Submit</button>

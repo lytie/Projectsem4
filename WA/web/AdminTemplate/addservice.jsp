@@ -45,37 +45,51 @@
                                     </div>
                                     <!-- /.card-header -->
                                     <!-- form start -->
-                                    <form role="form" id="quickForm">
+                                    <form role="form" id="quickForm"action="Admin_AddService" method="post" enctype="multipart/form-data" >
                                         <div class="card-body">
                                             <div class="form-group col-md-6">
-                                                <label for="inputState">Service Type ID</label>
-                                                <select id="inputState" class="form-control">
-                                                    <option selected>--Select Option--</option>
-                                                    <option>Food</option>
-                                                    <option>Drink</option>
-                                                    <option>Entertainment</option>
+                                                <label for="inputState">Service Type</label>
+                                                <select id="inputState" class="form-control" name="serviceType">
+                                                    <c:forEach items="${serviceType}" var="se">
+                                                    
+                                                        <option value="${se.serviceTypeId}">${se.typeName}</option>
+                                                    </c:forEach>
                                                 </select>
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputPassword1">Service Name :</label>
-                                                <input type="text" name="text" class="form-control" id="exampleInputFullName" placeholder="Full Name">
+                                                <input type="text" name="name" class="form-control" id="exampleInputFullName" placeholder="Service Name" required="">
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputPassword1">Price :</label>
-                                                <input type="number" name="number" class="form-control" id="exampleInputFullName" placeholder="Enter your Phone">
+                                                <input type="number" name="price" min="0" class="form-control" id="exampleInputFullName" placeholder="Price" required="">
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Decription :</label>
-                                                <textarea type="textarea" name="textarea" class="form-control" id="textarea" placeholder="Information Decription" rows="5" ></textarea> 
+                                                <textarea type="textarea" name="decription" class="form-control" id="textarea" placeholder="Decription" rows="5" required=""></textarea> 
                                             </div>
 
                                             <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="customFile">
+                                                <input type="file" class="custom-file-input" id="customFile" accept='image/*' onchange='loadFile(event)' name='file'>
                                                 <label class="custom-file-label" for="customFile">Choose file Image</label>
+                                                
+                                            </div>
+                                            <div>
+                                                <img id='output' width='200' />	
+
                                             </div>
 
+
+                                            <script>
+                                                var loadFile = function (event) {
+                                                    var image = document.getElementById('output');
+                                                    image.src = URL.createObjectURL(event.target.files[0]);
+                                                };
+                                            </script>
+
                                         </div>
+                                        <div>${error}</div>
                                         <!-- /.card-body -->
                                         <div class="card-footer">
                                             <button type="submit" class="btn btn-primary">Submit</button>

@@ -6,12 +6,16 @@
 
 package AdminController;
 
+import bean.UploadServlet;
+import entities.Convenient;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import wsc.ConvenientClient;
 
 /**
  *
@@ -63,7 +67,37 @@ public class Admin_AddConvenient extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            
+        
+        String name=null;
+        String img=null;
+        
+            UploadServlet upload=new UploadServlet();
+          Map<String,Object> listCon=  upload.Upload(request, "icon");
+          
+          for (Map.Entry<String, Object> entry : listCon.entrySet()) {
+                if (entry.getKey().equals("name")) {
+                    name = (String) entry.getValue();
+                }
+               
+                if (entry.getKey().equals("file")) {
+                    img = (String) entry.getValue();
+                }
+            }
+          
+          Convenient convenient=new Convenient();
+          ConvenientClient client=new ConvenientClient();
+          convenient.setConvenientName(name);
+          convenient.setUrl(img);
+          client.create_JSON(convenient);
+          request.getRequestDispatcher("Admin_Convenient").forward(request, response);
+          } catch (Exception e) {
+              request.setAttribute("error", e);
+              request.getRequestDispatcher("AdminTemplate/addconvenient.jsp").forward(request, response);
+        }
+        
+        
     }
 
     /**

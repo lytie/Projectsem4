@@ -5,6 +5,7 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -82,17 +83,29 @@
                                             <div class="pi-text">
                                                 <h5>${l.roomTypeName}</h5>
                                                 <span>${l.locationName}</span>
-                                                <p>${l.checkInDate}</p>
-                                                <p>${l.checkOutDate}</p>
+                                                <p><fmt:formatDate value="${l.checkInDate}" pattern="dd/MM/yyyy"/> - <fmt:formatDate value="${l.checkOutDate}" pattern="dd/MM/yyyy"/></p>
+                                                <p></p>
+                                                <p><fmt</p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="profile-agent-widget">
                                             <ul>
-                                                <li>Service Name <span>Quantity <span>Price($)</span></span></li>
+                                                <li class="row">
+                                                    <span class="col-lg-7"><b>Service Name</b></span>
+                                                    <span class="col-lg-2"><b>Quantity </b></span>
+                                                    <span class="col-lg-3"><b>Price($)</b></span>
+                                                </li>
 
-                                                
+                                                <c:forEach items="${booking_bookMB.listReceiptcomponents(l.receiptId)}" var="re">
+                                                    <li class="row">
+                                                    <span class="col-lg-7">${re.componentName}</span>
+                                                    <span class="col-lg-2">${re.quantity} </span>
+                                                    <span class="col-lg-3">${re.subtotal} $</span>
+                                                </li>
+                                                    
+                                                    </c:forEach>
 
                                             </ul>
                                         </div>
@@ -115,7 +128,7 @@
                                     </div>
                                 </div>
                             </div>
-                                                
+
                         </div>
                     </section>
                 </div>

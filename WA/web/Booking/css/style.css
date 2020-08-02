@@ -2761,15 +2761,15 @@ li .richText-btn[data-command=toggleCode] {
   -webkit-transition: all 22s;
   transition: all 0.2s;
 }
-.profile-agent-content .profile-agent-widget ul li span {
+/*.profile-agent-content .profile-agent-widget ul li span {
   font-weight: 600;
   float: right;
   width: 40%;
-}
-.profile-agent-content .profile-agent-widget ul li span span {
+}*/
+/*.profile-agent-content .profile-agent-widget ul li span span {
   font-weight: 600;
   float: right;
-}
+}*/
 .profile-agent-content .profile-agent-newslatter {
   padding-top: 10px;
 }

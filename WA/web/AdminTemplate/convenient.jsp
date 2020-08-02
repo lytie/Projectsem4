@@ -36,7 +36,7 @@
                         <div class="row mb-2">
                             <div class="col-sm-6">
 
-                                <h4><a class="btn btn-info btn-sm" href="#">
+                                <h4><a class="btn btn-info btn-sm" href="Admin_AddConvenient">
                                         <i class=" fa fa-plus">
                                         </i> Add Convenient
                                     </a></h4>
@@ -62,9 +62,9 @@
                                             <table id="example1" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr>
-                                                        <th>Convenient Name :</th>
-                                                        <th>Image :</th>
-                                                        <th>Action</th>
+                                                        <th>Convenient Name </th>
+                                                        <th>Image </th>
+                                                        
 
                                                     </tr>
                                                 </thead>
@@ -76,17 +76,7 @@
 
                                                             <td width="200"><img src="images/icon/${c.url}" width="150" height="100" /></td>
 
-                                                            <td width="20%">
-
-                                                                <a class="btn btn-info btn-sm" href="Admin_UpdateConvenient">
-                                                                    <i class="fas fa-pencil-alt">
-                                                                    </i> Edit
-                                                                </a>
-                                                                <a class="btn btn-danger btn-sm" href="#">
-                                                                    <i class="fas fa-trash">
-                                                                    </i> Delete
-                                                                </a>
-                                                            </td>
+                             
                                                         </tr>
                                                     </c:forEach>
                                                 </tbody>

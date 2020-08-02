@@ -65,10 +65,12 @@ public class History implements Serializable {
     private Float deposits;
     @Column(name = "Total", precision = 12)
     private Float total;
+    
     @Column(name = "ReceiptId")
+    @Id
     private Integer receiptId;
     @Column(name = "AccountCustomerId")
-    @Id
+    
     private Integer accountCustomerId;
     
    

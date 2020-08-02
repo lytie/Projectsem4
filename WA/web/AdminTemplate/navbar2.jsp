@@ -112,14 +112,6 @@
 
                 </li>
                 <li class="nav-item has-treeview">
-                    <a href="Admin_Receipt" class="nav-link">
-                        <i class="nav-icon fa fa-credit-card"></i>
-                        <p>
-                            Order for customers
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon far fa-envelope"></i>
                         <p>
@@ -136,7 +128,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="read-mail.jsp" class="nav-link">
+                            <a href="Employee_Checkout" class="nav-link">
                                 <i class="fa fa-sort-down nav-icon"></i>
                                 <p>Check-out</p>
                             </a>

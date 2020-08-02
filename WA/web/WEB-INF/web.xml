@@ -289,6 +289,10 @@
         <servlet-name>HistoryCustomer</servlet-name>
         <servlet-class>BookingController.HistoryCustomer</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Employee_Checkout</servlet-name>
+        <servlet-class>AdminController.Employee_Checkout</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CustomerPageMenuServlet</servlet-name>
         <url-pattern>/CustomerPageMenuServlet</url-pattern>
@@ -572,6 +576,10 @@
     <servlet-mapping>
         <servlet-name>HistoryCustomer</servlet-name>
         <url-pattern>/HistoryCustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Employee_Checkout</servlet-name>
+        <url-pattern>/Employee_Checkout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

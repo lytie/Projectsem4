@@ -122,9 +122,9 @@
                                                 </div>
                                                 <script>
                                                     $(document).ready(function() {
-                                                    var count = 0;
-                                                    $("#plus").click(function() {
-                                                    $("#proper").append("<div style='margin-left: 15px;padding:5px'>\n\
+                                                        var count = 0;
+                                                        $("#plus").click(function() {
+                                                            $("#proper").append("<div style='margin-left: 15px;padding:5px'>\n\
                                                  <p><input type='file'  accept='image/*' name='image" + count + "' id='file" + count + "'  onchange='loadFile" + count + "(event)' style='display:none;'></p>\n\
                                                  <p><label for='file" + count + "' style='cursor: pointer;color: #009900'>Upload Image</label></p>\n\
                                                  <p><img id='output" + count + "' width='200' />\n\
@@ -137,21 +137,21 @@
                                                          };\n\
                                                      <\/script>\n\
                                             </div>");
-                                                    count++;
-                                                    });
-                                                    $('#proper').on('click', '#detele', function(e) {
-                                                    e.preventDefault();
-                                                    $(this).parent().remove();
-                                                    });
-                                                    document.getElementById("demo").value = count;
+                                                            count++;
+                                                            document.getElementById("demo").value = count;
+                                                        });
+                                                        $('#proper').on('click', '#detele', function(e) {
+                                                            e.preventDefault();
+                                                            $(this).parent().remove();
+                                                        });
+
                                                     });
                                                 </script>
                                                 <div class="" id="proper" style="width: 100%;display: grid;grid-gap: 50px;grid-template-columns: auto auto auto auto; ">
 
 
-
                                                 </div>
-                                                <input id="demo" name="demo" type="hidden"/>
+                                                <input id="demo" name="demo" type="hidden" value="0"/>
                                             </div>
                                         </div>
                                         <div>${error}</div>

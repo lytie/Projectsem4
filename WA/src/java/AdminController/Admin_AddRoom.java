@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package AdminController;
 
 import bean.UploadServlet;
@@ -46,18 +45,20 @@ public class Admin_AddRoom extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            
-            LocationClient client=new LocationClient();
-            GenericType<List<Location>> locationType=new GenericType<List<Location>>(){};
-            List<Location> listLocation=client.findAll_JSON(locationType);
-            
-            RoomtypeClient roomtypeClient=new RoomtypeClient();
-            GenericType<List<Roomtype>> type=new GenericType<List<Roomtype>>(){};
-            List<Roomtype> listRoomType=roomtypeClient.findAll_JSON(type);
-            
+
+            LocationClient client = new LocationClient();
+            GenericType<List<Location>> locationType = new GenericType<List<Location>>() {
+            };
+            List<Location> listLocation = client.findAll_JSON(locationType);
+
+            RoomtypeClient roomtypeClient = new RoomtypeClient();
+            GenericType<List<Roomtype>> type = new GenericType<List<Roomtype>>() {
+            };
+            List<Roomtype> listRoomType = roomtypeClient.findAll_JSON(type);
+
             request.setAttribute("location", listLocation);
             request.setAttribute("roomType", listRoomType);
-            
+
             request.getRequestDispatcher("AdminTemplate/addroom.jsp").forward(request, response);
         }
     }
@@ -89,20 +90,20 @@ public class Admin_AddRoom extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            
-            UploadServlet upload=new UploadServlet();
-            Map<String,Object> listRoom= upload.Upload(request, "images");
-            
-            String location=null;
-            String roomType=null;
-            String price=null;
-            String adult=null;
-            String children=null;
-            String description=null;
-            String bed=null;
-            String size=null;
-            String view=null;
-            String demo=null;
+
+            UploadServlet upload = new UploadServlet();
+            Map<String, Object> listRoom = upload.Upload(request, "images");
+
+            String location = null;
+            String roomType = null;
+            String price = null;
+            String adult = null;
+            String children = null;
+            String description = null;
+            String bed = null;
+            String size = null;
+            String view = null;
+            String demo = null;
             for (Map.Entry<String, Object> entry : listRoom.entrySet()) {
                 if (entry.getKey().equals("location")) {
                     location = (String) entry.getValue();
@@ -134,23 +135,33 @@ public class Admin_AddRoom extends HttpServlet {
                 if (entry.getKey().equals("demo")) {
                     demo = (String) entry.getValue();
                 }
-               
-                
             }
-            
-            int capacity=Integer.parseInt(adult)*2+Integer.parseInt(children);
-            
-            LocationClient locationClient=new LocationClient();
-            GenericType<Location> locaType=new GenericType<Location>(){};
-            Location l=locationClient.find_JSON(locaType, Integer.parseInt(location));
-                    
-            RoomtypeClient typeClient=new RoomtypeClient();
-            GenericType<Roomtype> typeGen=new GenericType<Roomtype>(){};
-            Roomtype r=typeClient.find_JSON(typeGen, roomType);
-            
-            RoomClient roomClient=new RoomClient();
-            Room room=new Room();
-            
+            System.out.println(listRoom);
+            System.out.println(location);
+            System.out.println(roomType);
+            System.out.println(price);
+            System.out.println(adult);
+            System.out.println(children);
+            System.out.println(description);
+            System.out.println(bed);
+            System.out.println(size);
+            System.out.println(view);
+            System.out.println(demo);
+            int capacity = Integer.parseInt(adult) * 2 + Integer.parseInt(children);
+
+            LocationClient locationClient = new LocationClient();
+            GenericType<Location> locaType = new GenericType<Location>() {
+            };
+            Location l = locationClient.find_JSON(locaType, Integer.parseInt(location));
+
+            RoomtypeClient typeClient = new RoomtypeClient();
+            GenericType<Roomtype> typeGen = new GenericType<Roomtype>() {
+            };
+            Roomtype r = typeClient.find_JSON(typeGen, roomType);
+
+            RoomClient roomClient = new RoomClient();
+            Room room = new Room();
+
             room.setBedOption(bed);
             room.setCapacity(capacity);
             room.setDescription(description);
@@ -160,49 +171,48 @@ public class Admin_AddRoom extends HttpServlet {
             room.setSize(size);
             room.setStatus(Boolean.FALSE);
             room.setView(view);
-            
+
             roomClient.create_JSON(room);
-            
-            List<String> listImg=new ArrayList<>();
-            
+
+            List<String> listImg = new ArrayList<>();
+
             for (Map.Entry<String, Object> entry : listRoom.entrySet()) {
-              
+
                 for (int i = 0; i < Integer.parseInt(demo); i++) {
-                    if (entry.getKey().equals("image"+i)) {
-                    listImg.add((String) entry.getValue());
+                    if (entry.getKey().equals("image" + i)) {
+                        listImg.add((String) entry.getValue());
+                    }
                 }
-                }
-                 
             }
-            
-            GenericType<Room> roomGen=new GenericType<Room>(){};
-            Room lRoom=roomClient.last_JSON(roomGen);
-            
-            
-            RoomimageClient roomimageClient=new RoomimageClient();
-            
-            
+
+            GenericType<Room> roomGen = new GenericType<Room>() {
+            };
+            Room lRoom = roomClient.last_JSON(roomGen);
+
+            RoomimageClient roomimageClient = new RoomimageClient();
+
             for (String st : listImg) {
-                Roomimage roomimage=new Roomimage();
+                Roomimage roomimage = new Roomimage();
                 roomimage.setUrl(st);
-                System.out.println("anh upload"+st);
+                System.out.println("anh upload" + st);
                 roomimage.setRoomId(lRoom);
                 roomimageClient.create_JSON(roomimage);
-                
+
             }
-            
+
             request.getRequestDispatcher("Admin_Room").forward(request, response);
-            
-            
+
         } catch (Exception e) {
-            LocationClient client=new LocationClient();
-            GenericType<List<Location>> locationType=new GenericType<List<Location>>(){};
-            List<Location> listLocation=client.findAll_JSON(locationType);
-            
-            RoomtypeClient roomtypeClient=new RoomtypeClient();
-            GenericType<List<Roomtype>> type=new GenericType<List<Roomtype>>(){};
-            List<Roomtype> listRoomType=roomtypeClient.findAll_JSON(type);
-            
+            LocationClient client = new LocationClient();
+            GenericType<List<Location>> locationType = new GenericType<List<Location>>() {
+            };
+            List<Location> listLocation = client.findAll_JSON(locationType);
+
+            RoomtypeClient roomtypeClient = new RoomtypeClient();
+            GenericType<List<Roomtype>> type = new GenericType<List<Roomtype>>() {
+            };
+            List<Roomtype> listRoomType = roomtypeClient.findAll_JSON(type);
+
             request.setAttribute("location", listLocation);
             request.setAttribute("roomType", listRoomType);
             request.setAttribute("error", e);

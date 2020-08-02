@@ -42,10 +42,10 @@ public class UploadServlet extends HttpServlet {
         Map<String,Object> listrequest = new LinkedHashMap<>();
         ClassLoader loader = QrcodeGen.class.getClassLoader();
         String urll =loader.getResource("Generator/").getFile();
-        System.out.println(urll);
-        System.out.println(urll.lastIndexOf("WA"));
+//        System.out.println(urll);
+//        System.out.println(urll.lastIndexOf("WA"));
         String outputFile =urll.replaceAll("%20", " ").substring(1,urll.lastIndexOf("WA")+2)+"/web/images/";
-        System.out.println(outputFile);
+//        System.out.println(outputFile);
         try {
             List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
             for (FileItem item : items) {
@@ -53,8 +53,8 @@ public class UploadServlet extends HttpServlet {
                  // Process regular form field (input type="text|radio|checkbox|etc", select, etc).
                     String fieldName = item.getFieldName();
                     String fieldValue = item.getString();
-                    System.out.println(fieldName);
-                    System.out.println(fieldValue);
+//                    System.out.println(fieldName);
+//                    System.out.println(fieldValue);
                     listrequest.put(fieldName, fieldValue);
                     
                     // ... (do your job here)
@@ -62,11 +62,11 @@ public class UploadServlet extends HttpServlet {
                     // Process form file field (input type="file").
                     String fieldName = item.getFieldName();
                     String fileName = FilenameUtils.getName(item.getName());
-                    System.out.println(fieldName);
-                    System.out.println(fileName);
+//                    System.out.println(fieldName);
+//                    System.out.println(fileName);
                     InputStream fileContent = item.getInputStream();
-                    item.write(new File(outputFile+url+"/"+fileName));
-                    System.out.println(outputFile+url+"/"+fileName);
+                    item.write(new File("/"+outputFile+url+"/"+fileName));
+//                    System.out.println(outputFile+url+"/"+fileName);
                     listrequest.put(fieldName, fileName);
                    
                     

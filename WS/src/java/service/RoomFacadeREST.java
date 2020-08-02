@@ -94,6 +94,14 @@ public class RoomFacadeREST extends AbstractFacade<Room> {
         
         
     }
+    
+    @GET
+     @Path("last")
+    @Produces({"application/xml", "application/json"})
+    public Room last() {
+        String query="SELECT * FROM prj4db.room order by RoomId desc limit 1";
+      return (Room)em.createNativeQuery(query, Room.class).getSingleResult();
+    }
 
     @Override
     protected EntityManager getEntityManager() {

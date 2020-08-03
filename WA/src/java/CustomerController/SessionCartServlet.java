@@ -140,6 +140,7 @@ public class SessionCartServlet extends HttpServlet {
                     qrcodeGen.createQr(ticket.getTicketId(),"ticket","ticket"+String.valueOf(Integer.valueOf(ticketClient.countREST())+1), "png");
                     ticket.setTicketUrl("ticket"+String.valueOf(Integer.valueOf(ticketClient.countREST())+1));
                     ticket.setBuyerID(qrcode);
+                    ticket.setBuyDate(new Date());
                     ticketClient.create_JSON(ticket);
                 }
                 subtotal = subtotal + (item.getService().getServicePrice()* Float.valueOf(request.getParameter("quantity"+cart.indexOf(item))));
@@ -148,7 +149,7 @@ public class SessionCartServlet extends HttpServlet {
                 receiptcomponent.setComponentName(item.getService().getServiceName());
                 receiptcomponent.setPrice(item.getService().getServicePrice());
                 receiptcomponent.setQuantity(Integer.valueOf(request.getParameter("quantity"+cart.indexOf(item))));
-                receiptcomponent.setSubtotal(subtotal);
+                receiptcomponent.setSubtotal(item.getService().getServicePrice()*Float.valueOf(request.getParameter("quantity"+cart.indexOf(item))));
                 receiptcomponent.setUrl(item.getService().getServiceurl());
                 receiptcomponent.setOrderDate(date);
                 receiptcomponent.setOrdererName(qrcode.getCustomerName());

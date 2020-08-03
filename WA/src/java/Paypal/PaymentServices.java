@@ -122,6 +122,7 @@ public class PaymentServices {
     }
 
     private List<Transaction> getTransactionInformation(List<Receiptcomponent> listReceiptcomponents) {
+        float itemamount = 0;
         float roomdeposits = 0;
         ItemList itemList = new ItemList();
         List<Item> items = new ArrayList<>();
@@ -131,19 +132,30 @@ public class PaymentServices {
                 item.setCurrency("USD");
                 item.setName(receiptcomponent.getComponentName());
                 item.setPrice(String.valueOf(receiptcomponent.getPrice() - (receiptcomponent.getPrice() * 10 / 100)));
-                item.setTax(String.valueOf(receiptcomponent.getPrice() * 10 / 100));
+                item.setTax(String.valueOf(receiptcomponent.getPrice()*receiptcomponent.getQuantity() * 10 / 100));
                 item.setQuantity(String.valueOf(receiptcomponent.getQuantity()));
                 items.add(item);
                 roomdeposits += receiptcomponent.getPrice() * 10 / 100;
+      
             } else {
                 Item item = new Item();
                 item.setCurrency("USD");
                 item.setName(receiptcomponent.getComponentName());
                 item.setPrice(String.valueOf(receiptcomponent.getPrice()));
-                item.setTax(String.valueOf(receiptcomponent.getPrice() * 10 / 100));
+                item.setTax(String.valueOf(receiptcomponent.getPrice()*receiptcomponent.getQuantity() * 10 / 100));
                 item.setQuantity(String.valueOf(receiptcomponent.getQuantity()));
                 items.add(item);
+                
             }
+        }
+        int count = 0;
+        for (Item item : items) {
+            System.out.println("itemprice"+count+":"+item.getPrice());
+            System.out.println("item tax"+count+": "+item.getTax());
+            System.out.println("item quantity"+count+": "+item.getQuantity());
+            System.out.println("item total no tax"+count+":"+Float.valueOf(item.getPrice())*Float.valueOf(item.getQuantity()));
+            System.out.println("item total with tax"+count+":"+Float.valueOf(item.getPrice())*Float.valueOf(item.getQuantity())+Float.valueOf(item.getTax()));
+            count++;
         }
         itemList.setItems(items);
         Details details = new Details();
@@ -168,6 +180,7 @@ public class PaymentServices {
         System.out.println("DetailsSubTotal: " + details.getSubtotal());
         System.out.println("Details Tax: " + details.getTax());
         System.out.println("Amount Total: " + amount.getTotal());
+        System.out.println("Item amount:"+ itemamount);
         Transaction transaction = new Transaction();
         transaction.setAmount(amount);
 

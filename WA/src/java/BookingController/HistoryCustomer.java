@@ -48,23 +48,21 @@ public class HistoryCustomer extends HttpServlet {
                 };
                 List<History> listHis = historyClient.findAll_JSON(historyType);
                 List<History> list = new ArrayList<>();
-                
-                Accountcustomer cus=(Accountcustomer)session.getAttribute("user");
+
+                Accountcustomer cus = (Accountcustomer) session.getAttribute("user");
                 System.out.println(cus.getAccountCustomerId());
                 for (History listHi : listHis) {
-                    if (listHi.getAccountCustomerId()==cus.getAccountCustomerId().intValue()) {
-                        list.add(listHi);
-                        
+                    if (listHi.getAccountCustomerId() != null) {
+                        if (cus.getAccountCustomerId().intValue() == listHi.getAccountCustomerId()) {
+                            list.add(listHi);
+                        }
                     }
-                    
-                    
                 }
                 System.out.println(listHis);
                 System.out.println(list);
-               
-                
+
                 request.setAttribute("list", list);
-                Date date=new Date();
+                Date date = new Date();
                 request.setAttribute("date", date);
                 request.getRequestDispatcher("Booking/history.jsp").forward(request, response);
             }

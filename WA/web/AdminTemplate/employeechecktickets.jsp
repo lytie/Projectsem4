@@ -35,7 +35,7 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-12" style="margin-bottom: 20px">
-                                <h1 class="m-0 text-dark text-center">Check out </h1>
+                                <h1 class="m-0 text-dark text-center">Check tickets </h1>
                             </div>
                             <div class="col-sm-12">         
                                 <div class="row">
@@ -59,23 +59,27 @@
                             </div>
                             <span id="result" class="col-6">
                                 <data>
-                                    <c:if test="${qrcode!=null}">
-                                        <div class="col-12"  style="border-style: solid;border-color: #dcdcdc;padding: 20px">
-                                            <div class="row">
-                                                <h2 style="padding-left: 30%;padding-right: 30%">Information</h2>
+                                    <c:if test="${ticket!=null}">
+                                        <c:if test="${ticket.getQuantity()<=0}">
+                                            <div class="col-12"  style="border-style: solid;border-color: #dcdcdc;padding: 20px">
+                                                <div class="row">
+                                                    <h2 style="padding-left: 30%;padding-right: 30%">Ticket used already</h2>
+                                                </div>
                                             </div>
-                                            <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Customer Name: ${qrcode.getCustomerName()}</div>
-                                            <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Email: ${qrcode.getEmailSendedTo()}</div>
-                                            <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Check-in Date: <fmt:formatDate value="${qrcode.getCheckInDate()}" pattern="dd/MM/yyyy"/></div>
-                                            <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Check-out Date: <fmt:formatDate value="${qrcode.getCheckOutDate()}" pattern="dd/MM/yyyy"/></div>
-                                            <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Adults: ${qrcode.getAdultsNum()}</div>
-                                            <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Children: ${qrcode.getChildrenNum()}</div>
-                                            <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Room number: ${qrcode.getRoomId().getRoomId()}</div>
-                                            <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Deposits: $${qrcode.getDeposits()}</div>
-                                            <div style="padding: 20px">
-                                                <a class="btn btn-warning" style="color: white" href="Employee_Checkout?qrcodeid=${qrcode.getQrCodeId()}&action=deactive">Checkout</a>
+                                        </c:if>
+                                        <c:if test="${ticket.getQuantity()>0}">
+                                            <div class="col-12"  style="border-style: solid;border-color: #dcdcdc;padding: 20px">
+                                                <div class="row">
+                                                    <h2 style="padding-left: 30%;padding-right: 30%">Information</h2>
+                                                </div>
+                                                <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Ticket Name: ${ticket.getTicketName()}</div>
+                                                <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Quantity: ${ticket.getQuantity()}</div>
+                                                <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Buy Date: <fmt:formatDate value="${ticket.getBuyDate()}" pattern="dd/MM/yyyy"/></div>
+                                                <div style="padding: 20px">
+                                                    <a class="btn btn-warning" style="color: white" href="Employee_CheckTickets?qrcodeid=${ticket.getTicketId()}&action=use">Use</a>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </c:if>      
                                     </c:if>
                                 </data>
                             </span>    
@@ -127,17 +131,17 @@
         </script>
         <script type="text/javascript">
             $(document).on("search", "#qr-reader-results", function() {             // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
-                $.get('Employee_Checkout?qrcodeid=' + $('#qr-reader-results').val(), function(responseXml) {                // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response XML...
+                $.get('Employee_CheckTickets?qrcodeid=' + $('#qr-reader-results').val(), function(responseXml) {                // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response XML...
                     $("#result").html($(responseXml).find("data").html()); // Parse XML, find <data> element and append its HTML to HTML DOM element with ID "somediv".
                 });
             });
             $(document).on("input", "#qr-reader-results", function() {             // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
-                $.get('Employee_Checkout?qrcodeid=' + $('#qr-reader-results').val(), function(responseXml) {                // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response XML...
+                $.get('Employee_CheckTickets?qrcodeid=' + $('#qr-reader-results').val(), function(responseXml) {                // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response XML...
                     $("#result").html($(responseXml).find("data").html()); // Parse XML, find <data> element and append its HTML to HTML DOM element with ID "somediv".
                 });
             });
             $(document).on("change", "#qr-reader-results", function() {             // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
-                $.get('Employee_Checkout?qrcodeid=' + $('#qr-reader-results').val(), function(responseXml) {                // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response XML...
+                $.get('Employee_CheckTickets?qrcodeid=' + $('#qr-reader-results').val(), function(responseXml) {                // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response XML...
                     $("#result").html($(responseXml).find("data").html()); // Parse XML, find <data> element and append its HTML to HTML DOM element with ID "somediv".
                 });
             });

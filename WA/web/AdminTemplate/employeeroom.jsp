@@ -113,26 +113,47 @@
                                                 <div class="icon">
                                                     <i class="fa fa-hotel"></i>
                                                 </div>
-                                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                                <a data-toggle="modal" data-target="#R${lIU.getQrCodeId()}"  class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                                             </div>
                                         </div>
-                                    </c:forEach>
-                                    <c:forEach items="${listClear}" var="lC">
-                                        <div class="col-lg-3 col-6">
-                                            <!-- small box -->
-                                            <div class="small-box bg-danger">
-                                                <div class="inner">
-                                                    <h3 style="font-size: 20px">${lC.roomId}</h3>
+                                        <!--modal start-->
+                                        <div class="modal" id="R${lIU.getQrCodeId()}">
+                                            <div class="modal-dialog modal-dialog-scollable modal-xl" style="padding:10%" >
+                                                <div class="modal-content"style="color: white; background-color: #6f6d6d;">
+                                                    <!-- Modal Header -->
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title" style="padding:1% 11%">From: <fmt:formatDate value="${lIU.getCheckInDate()}" pattern="dd/MM/yyyy"/> to <fmt:formatDate value="${lIU.getCheckOutDate()}" pattern="dd/MM/yyyy"/></h4>
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    </div>
 
-                                                    <p>No customer yet</p>
+                                                    <!-- Modal body -->
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-4" >
+                                                                <div style="padding: 10%">
+                                                                    <img src="./images/qrcode/${lIU.getUrl()}" style="max-width: 100%;padding: 10%" alt="Bungalow_room1_c"/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-8" style="border-left-style: solid">
+                                                                
+                                                                <div style="padding: 10%">
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Customer Name: ${lIU.getCustomerName()}</div>
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Email: ${lIU.getEmailSendedTo()}</div>
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Room number: ${lIU.getRoomId().getRoomId()}</div>
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Book Date: <fmt:formatDate value="${lIU.getCreateDate()}" pattern="dd/MM/yyyy"/></div>
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Adults: ${lIU.getAdultsNum()}</div>
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Children: ${lIU.getChildrenNum()}</div>
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Deposits: $${lIU.getDeposits()}</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="icon">
-                                                    <i class="fa fa-hotel"></i>
-                                                </div>
-                                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                                             </div>
                                         </div>
-                                    </c:forEach>
+                                        <!--modal end-->
+                                    </c:forEach>      
+
                                     <c:forEach items="${listReserved}" var="lR">
                                         <div class="col-lg-3 col-6">
                                             <!-- small box -->
@@ -140,14 +161,50 @@
                                                 <div class="inner">
                                                     <h3 style="font-size: 20px">${lR.roomId.roomId}</h3>
 
-                                                    <p>${lR.customerName}</p>
+                                                    <p>${lR.customerName}</p>                                               
                                                 </div>
                                                 <div class="icon">
                                                     <i class="fa fa-hotel"></i>
                                                 </div>
-                                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                                <a data-toggle="modal" data-target="#R${lR.getQrCodeId()}"  class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                                             </div>
                                         </div>
+                                        <!--modal start-->
+                                        <div class="modal" id="R${lR.getQrCodeId()}">
+                                            <div class="modal-dialog modal-dialog-scollable modal-xl" style="padding:10%" >
+                                                <div class="modal-content"style="color: white; background-color: #6f6d6d;">
+                                                    <!-- Modal Header -->
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title" style="padding:1% 11%">From: <fmt:formatDate value="${lR.getCheckInDate()}" pattern="dd/MM/yyyy"/> to <fmt:formatDate value="${lR.getCheckOutDate()}" pattern="dd/MM/yyyy"/></h4>
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    </div>
+
+                                                    <!-- Modal body -->
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-4" >
+                                                                <div style="padding: 10%">
+                                                                    <img src="./images/qrcode/${lR.getUrl()}" style="max-width: 100%;padding: 10%" alt="Bungalow_room1_c"/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-8" style="border-left-style: solid">
+                                                                
+                                                                <div style="padding: 10%">
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Customer Name: ${lR.getCustomerName()}</div>
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Email: ${lR.getEmailSendedTo()}</div>
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Room number: ${lR.getRoomId().getRoomId()}</div>
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Book Date: <fmt:formatDate value="${lR.getCreateDate()}" pattern="dd/MM/yyyy"/></div>
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Adults: ${lR.getAdultsNum()}</div>
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Children: ${lR.getChildrenNum()}</div>
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Deposits: $${lR.getDeposits()}</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--modal end-->
                                     </c:forEach>
                                     <c:forEach items="${listPrepareToCheckout}" var="lPTC">
                                         <div class="col-lg-3 col-6">
@@ -157,6 +214,58 @@
                                                     <h3 style="font-size: 20px">${lPTC.roomId.roomId}</h3>
 
                                                     <p>${lPTC.customerName}</p>
+                                                </div>
+                                                <div class="icon">
+                                                    <i class="fa fa-hotel"></i>
+                                                </div>
+                                                <a href="${lPTC.getQrCodeId()}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                            </div>
+                                        </div>
+                                            <!--modal start-->
+                                        <div class="modal" id="R${lPTC.getQrCodeId()}">
+                                            <div class="modal-dialog modal-dialog-scollable modal-xl" style="padding:10%" >
+                                                <div class="modal-content"style="color: white; background-color: #6f6d6d;">
+                                                    <!-- Modal Header -->
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title" style="padding:1% 11%">From: <fmt:formatDate value="${lPTC.getCheckInDate()}" pattern="dd/MM/yyyy"/> to <fmt:formatDate value="${lPTC.getCheckOutDate()}" pattern="dd/MM/yyyy"/></h4>
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    </div>
+
+                                                    <!-- Modal body -->
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-4" >
+                                                                <div style="padding: 10%">
+                                                                    <img src="./images/qrcode/${lPTC.getUrl()}" style="max-width: 100%;padding: 10%" alt="Bungalow_room1_c"/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-8" style="border-left-style: solid">
+                                                                
+                                                                <div style="padding: 10%">
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Customer Name: ${lPTC.getCustomerName()}</div>
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Email: ${lPTC.getEmailSendedTo()}</div>
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Room number: ${lPTC.getRoomId().getRoomId()}</div>
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Book Date: <fmt:formatDate value="${lPTC.getCreateDate()}" pattern="dd/MM/yyyy"/></div>
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Adults: ${lPTC.getAdultsNum()}</div>
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Children: ${lPTC.getChildrenNum()}</div>
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Deposits: $${lPTC.getDeposits()}</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--modal end-->
+                                    </c:forEach>
+                                    <c:forEach items="${listClear}" var="lC">
+                                        <div class="col-lg-3 col-6">
+                                            <!-- small box -->
+                                            <div class="small-box bg-danger">
+                                                <div class="inner">
+                                                    <h3 style="font-size: 20px">${lC.roomId}</h3>
+
+                                                    <p>No customer yet</p>
                                                 </div>
                                                 <div class="icon">
                                                     <i class="fa fa-hotel"></i>
@@ -200,7 +309,17 @@
                             format: 'yyyy-mm-dd'
                     });</script>            
         <script type="text/javascript">
-                    $(document).on("change", "#locationid", function() {             // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
+                    $(document).on("input", "#locationid", function() {             // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
+                $.get('Employee_Room?locationid=' + $('#locationid').val() + '&start=' + $('#datepicker1').val() + '&end=' + $('#datepicker2').val(), function(responseXml) {                // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response XML...
+                    $("#result").html($(responseXml).find("data").html()); // Parse XML, find <data> element and append its HTML to HTML DOM element with ID "somediv".
+                });
+            });
+            $(document).on("focusout", "#datepicker1", function() {             // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
+                $.get('Employee_Room?locationid=' + $('#locationid').val() + '&start=' + $('#datepicker1').val() + '&end=' + $('#datepicker2').val(), function(responseXml) {                // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response XML...
+                    $("#result").html($(responseXml).find("data").html()); // Parse XML, find <data> element and append its HTML to HTML DOM element with ID "somediv".
+                });
+            });
+            $(document).on("focusout", "#datepicker2", function() {             // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
                 $.get('Employee_Room?locationid=' + $('#locationid').val() + '&start=' + $('#datepicker1').val() + '&end=' + $('#datepicker2').val(), function(responseXml) {                // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response XML...
                     $("#result").html($(responseXml).find("data").html()); // Parse XML, find <data> element and append its HTML to HTML DOM element with ID "somediv".
                 });

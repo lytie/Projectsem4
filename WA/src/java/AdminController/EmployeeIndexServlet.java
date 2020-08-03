@@ -66,8 +66,8 @@ public class EmployeeIndexServlet extends HttpServlet {
             String nextday = dateFormat.format(cal.getTime());
             String yesterday = dateFormat.format(calyesterday.getTime());
 
-            List<Qrcode> listCheckInSchedule = adminIndexClient.getCheckInSchedule(genListQrcode, yesterday, today);
-            List<Qrcode> listCheckOutSchedule = adminIndexClient.getCheckOutSchedule(genListQrcode, yesterday, today);
+            List<Qrcode> listCheckInSchedule = adminIndexClient.getCheckInSchedule(genListQrcode, today, nextday);
+            List<Qrcode> listCheckOutSchedule = adminIndexClient.getCheckOutSchedule(genListQrcode, today, nextday);
             List<Accountemployee> listEmployeeBirthDay = adminIndexClient.getEmployeeBirthDay(genListAccountemployee, yesterday, today);
             Accountemployee employeeBirthDay = listEmployeeBirthDay.get(0);
             int newcustomer = 0;

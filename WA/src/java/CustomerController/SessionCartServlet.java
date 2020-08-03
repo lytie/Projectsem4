@@ -64,23 +64,35 @@ public class SessionCartServlet extends HttpServlet {
         };
         Service service = new Service();
         HttpSession session = request.getSession();
-        if (session.getAttribute("cart") == null) {
-            List<Item> cart = new ArrayList<Item>();
-            cart.add(new Item(serviceClient.find_JSON(genericType, request.getParameter("serviceid")), 1));
-            session.setAttribute("cart", cart);
-        } else {
-            List<Item> cart = (List<Item>) session.getAttribute("cart");
-            int index = isExisting(Integer.valueOf(request.getParameter("serviceid")), cart);
-            if (index == -1) {
+        boolean status =(boolean) session.getAttribute("status");
+        System.out.println("status="+status);
+        if (status==true) {
+            if (session.getAttribute("cart") == null) {
+                List<Item> cart = new ArrayList<Item>();
                 cart.add(new Item(serviceClient.find_JSON(genericType, request.getParameter("serviceid")), 1));
+                session.setAttribute("cart", cart);
             } else {
-                int quantity = cart.get(index).getQuantity() + 1;
-                cart.get(index).setQuantity(quantity);
+                List<Item> cart = (List<Item>) session.getAttribute("cart");
+                int index = isExisting(Integer.valueOf(request.getParameter("serviceid")), cart);
+                if (index == -1) {
+                    cart.add(new Item(serviceClient.find_JSON(genericType, request.getParameter("serviceid")), 1));
+                } else {
+                    int quantity = cart.get(index).getQuantity() + 1;
+                    cart.get(index).setQuantity(quantity);
+                }
+                session.setAttribute("cart", cart);
             }
-            session.setAttribute("cart", cart);
+            String referer = request.getHeader("Referer");
+            response.sendRedirect(referer);
+        }else{
+            request.setAttribute("msg", "<div class='error'></div>"
+                    + "         <script type=\"text/javascript\">\n"
+                    + "            $('.error').each(function () {\n"
+                    + "                swal(\"You have to check-in first to order!!!\", \"\", \"error\");\n"
+                    + "            });\n"
+                    + "        </script>");
+            request.getRequestDispatcher("/CustomerPageIndexServlet").forward(request, response);
         }
-        String referer = request.getHeader("Referer");
-        response.sendRedirect(referer);
     }
 
     protected void doGet_Remove(HttpServletRequest request, HttpServletResponse response)
@@ -100,29 +112,33 @@ public class SessionCartServlet extends HttpServlet {
         if (session.getAttribute("cart") != null) {
             List<Item> cart = (List<Item>) session.getAttribute("cart");
             for (Item item : cart) {
-                item.setQuantity(Integer.valueOf(request.getParameter("quantity"+cart.indexOf(item))));
+                item.setQuantity(Integer.valueOf(request.getParameter("quantity" + cart.indexOf(item))));
             }
             session.setAttribute("cart", cart);
         }
         String referer = request.getHeader("Referer");
         response.sendRedirect(referer);
     }
+
     protected void doGet_DisplayCart(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         response.sendRedirect("CustomerPageCartServlet?id=" + (String) session.getAttribute("qrcodeid"));
     }
-    
+
     protected void doGet_Confirm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, WriterException {
         HttpSession session = request.getSession();
         TicketClient ticketClient = new TicketClient();
         ReceiptcomponentClient receiptcomponentClient = new ReceiptcomponentClient();
-        GenericType<Receiptcomponent> genericReceiptcomponent = new GenericType<Receiptcomponent>() {};
+        GenericType<Receiptcomponent> genericReceiptcomponent = new GenericType<Receiptcomponent>() {
+        };
         ReceiptClient receiptClient = new ReceiptClient();
-        GenericType<Receipt> genericReceipt = new GenericType<Receipt>() {};
+        GenericType<Receipt> genericReceipt = new GenericType<Receipt>() {
+        };
         QrcodeClient qrcodeClient = new QrcodeClient();
-        GenericType<Qrcode> genericQrcode = new GenericType<Qrcode>() {};
+        GenericType<Qrcode> genericQrcode = new GenericType<Qrcode>() {
+        };
         Qrcode qrcode = qrcodeClient.find_JSON(genericQrcode, String.valueOf(session.getAttribute("qrcodeid")));
         Receipt receipt = qrcode.getReceiptId();
         StringGenerator stringGenerator = new StringGenerator();
@@ -132,34 +148,34 @@ public class SessionCartServlet extends HttpServlet {
             List<Item> cart = (List<Item>) session.getAttribute("cart");
             float subtotal = 0;
             for (Item item : cart) {
-                if (item.getService().getSerivceTypeId().getServiceTypeId()==3) {
+                if (item.getService().getSerivceTypeId().getServiceTypeId() == 3) {
                     Ticket ticket = new Ticket();
-                    ticket.setQuantity(Integer.valueOf(request.getParameter("quantity"+cart.indexOf(item))));
+                    ticket.setQuantity(Integer.valueOf(request.getParameter("quantity" + cart.indexOf(item))));
                     ticket.setTicketName(item.getService().getServiceName());
                     ticket.setTicketId(stringGenerator.generate(200));
-                    qrcodeGen.createQr(ticket.getTicketId(),"ticket","ticket"+String.valueOf(Integer.valueOf(ticketClient.countREST())+1), "png");
-                    ticket.setTicketUrl("ticket"+String.valueOf(Integer.valueOf(ticketClient.countREST())+1));
+                    qrcodeGen.createQr(ticket.getTicketId(), "ticket", "ticket" + String.valueOf(Integer.valueOf(ticketClient.countREST()) + 1), "png");
+                    ticket.setTicketUrl("ticket" + String.valueOf(Integer.valueOf(ticketClient.countREST()) + 1));
                     ticket.setBuyerID(qrcode);
                     ticket.setBuyDate(new Date());
                     ticketClient.create_JSON(ticket);
                 }
-                subtotal = subtotal + (item.getService().getServicePrice()* Float.valueOf(request.getParameter("quantity"+cart.indexOf(item))));
+                subtotal = subtotal + (item.getService().getServicePrice() * Float.valueOf(request.getParameter("quantity" + cart.indexOf(item))));
                 Receiptcomponent receiptcomponent = new Receiptcomponent();
                 receiptcomponent.setReceiptId(receipt);
                 receiptcomponent.setComponentName(item.getService().getServiceName());
                 receiptcomponent.setPrice(item.getService().getServicePrice());
-                receiptcomponent.setQuantity(Integer.valueOf(request.getParameter("quantity"+cart.indexOf(item))));
-                receiptcomponent.setSubtotal(item.getService().getServicePrice()*Float.valueOf(request.getParameter("quantity"+cart.indexOf(item))));
+                receiptcomponent.setQuantity(Integer.valueOf(request.getParameter("quantity" + cart.indexOf(item))));
+                receiptcomponent.setSubtotal(item.getService().getServicePrice() * Float.valueOf(request.getParameter("quantity" + cart.indexOf(item))));
                 receiptcomponent.setUrl(item.getService().getServiceurl());
                 receiptcomponent.setOrderDate(date);
                 receiptcomponent.setOrdererName(qrcode.getCustomerName());
                 receiptcomponent.setStatus(Boolean.FALSE);
                 receiptcomponent.setServiceTypeId(item.getService().getSerivceTypeId());
                 receiptcomponentClient.create_JSON(receiptcomponent);
-                
-                receipt.setSubtotal(receipt.getSubtotal()+subtotal);
-                receipt.setTax(receipt.getSubtotal()*10/100);
-                receipt.setTotal(receipt.getSubtotal()+receipt.getTax()-qrcode.getDeposits());
+
+                receipt.setSubtotal(receipt.getSubtotal() + subtotal);
+                receipt.setTax(receipt.getSubtotal() * 10 / 100);
+                receipt.setTotal(receipt.getSubtotal() + receipt.getTax() - qrcode.getDeposits());
                 receiptClient.edit_JSON(receipt, String.valueOf(qrcode.getReceiptId().getReceiptId()));
             }
             session.removeAttribute("cart");

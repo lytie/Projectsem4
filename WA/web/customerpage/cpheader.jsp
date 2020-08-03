@@ -45,11 +45,12 @@
                             <li>
                                 <a href="CustomerPageInformationServlet">Your Information</a>
                             </li>
-
+                            <li>
+                                <a href="CustomerPageTicketServlet">Your Ticket</a>
+                            </li>
                             <li>
                                 <a href="CustomerPageCartServlet">Your bill</a>
                             </li>
-
                             <li>
                                 <a href="CustomerPageContactServlet">Feedback</a>
                             </li>

@@ -78,7 +78,7 @@
                                         <!-- todo text -->
                                         <span class="text">${listCheckInSchedule.size()} Check-in schedule </span>
                                         <!-- Emphasis label -->
-                                        
+
                                         <!-- General tools such as edit or delete-->
                                         <div class="tools">
                                             <a href="AdminIndexServlet" style="color: red"><i class="fas fa-edit"></i></a>
@@ -125,7 +125,19 @@
                                             <label for="todoCheck4"></label>
                                         </div>
                                         <span class="text">${employeeBirthDay.getFullName()} Birthday</span>
-                                        <small class="badge badge-success"><i class="far fa-clock"></i> ${untilbirthday} days</small>
+                                        <small class="badge badge-success"><i class="far fa-clock"></i> 
+                                            <c:choose>
+                                                <c:when test="${untilbirthday >=365}">
+                                                    Today
+                                                </c:when>
+                                                <c:when test="${untilbirthday ==1}">
+                                                    Tomorrow
+                                                </c:when>
+                                                <c:otherwise>
+                                                    ${untilbirthday} days
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </small>
                                         <div class="tools">
                                             <a href="AdminIndexServlet" style="color: red"><i class="fas fa-edit"></i></a>
                                             <i class="fas fa-trash-o"></i>
@@ -172,7 +184,7 @@
             var myChart = new Chart(ctx, {
                 type: 'horizontalBar',
                 data: {
-                    labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday','Sunday'],
+                    labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
                     datasets: [{
                             label: 'Monday',
                             data: [${monday}, ${tuesday}, ${wednesday}, ${thursday}, ${friday}, ${saturday},${sunday}],

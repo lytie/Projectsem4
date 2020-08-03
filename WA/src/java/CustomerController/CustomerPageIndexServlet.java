@@ -43,6 +43,7 @@ public class CustomerPageIndexServlet extends HttpServlet {
                     qrcode = qrcodeClient.find_JSON(genericType, request.getParameter("id"));
                     if (qrcode != null) {
                         session.setAttribute("qrcodeid", qrcode.getQrCodeId());
+                        session.setAttribute("status", qrcode.getStatus());
                         request.getRequestDispatcher("/CustomerPageIndexServlet").forward(request, response);
                     } else {
                         out.print("Not found qrcode");

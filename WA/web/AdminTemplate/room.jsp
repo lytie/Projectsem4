@@ -1,290 +1,329 @@
 <%-- 
-    Document   : room
-    Created on : Jul 13, 2020, 4:12:44 PM
+    Document   : index2
+    Created on : Jul 13, 2020, 4:10:52 PM
     Author     : ADMIN
 --%>
-<%@page import="bean.common"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="entities.Room"%>
-<%@page import="java.util.List"%>
 
+<?xml version="1.0" encoding="UTF-8"?>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page  import="bean.common"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <!DOCTYPE html>
-<html>
+<html lang="en" >
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>AdminLTE 3 | Room</title>
-        <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="AdminTemplate/plugins/select2/css/select2.min.css">
-        <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-        <!-- Font Awesome -->
+        <title>EMPLOYEE | </title>
+
+        <!-- Font Awesome Icons -->
         <%@include file="css.jsp" %>
-        <style>
-            .grid-container {
-                display: grid;
-                grid-template-columns: auto auto auto auto;
-                grid-gap: 20px;
+        <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
 
-
-            }
-
-
-
-            .price {
-                grid-row-start: 1;
-                grid-row-end: 3;
-            }
-            .Description {
-                grid-column-start: 2;
-                grid-column-end: 5;
-            }
-        </style>
+        <link href="<%=common.url%>/dist/css/datepicker-foundation.min.css" rel="stylesheet"/>
     </head>
-    <body class="hold-transition sidebar-mini">
+    <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed" >
         <div class="wrapper">
 
             <%@include file="navbar.jsp" %>
+
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
-
-                <section class="content-header">
+                <div class="content-header">
                     <div class="container-fluid">
-
-
-                        <h1 style="margin-bottom: 10px">List Room</h1>
-
-                        <div class="d-flex" >
-                            <h4 style="width: 12%"> <a class="btn btn-info btn-sm" href="Admin_AddRoom">
-                                    <i class="fa fa-plus"></i> Add Room </a></h4>
-
-                            <form style="width: 30%" action="Admin_Room" method="post">         
-                                <div class="form-group" >
-                                    <label>Location</label>
-                                    <select class="select" data-placeholder="Select a State" name="location" style="width: 60%">
-
-                                        <c:forEach items="${booking_bookMB.listLocation()}" var="lo">
-                                            <option value="${lo.locationId}" <c:if test="${locationOne.locationId==lo.locationId}">selected</c:if>>${lo.locationName}</option>
-                                        </c:forEach>
-                                    </select>
-
-                                    <input type="submit" value="filter"/>
+                        <form action="Employee_Room" method="post">
+                            <div class="row mb-2">
+                                <div class="col-sm-12" style="margin-bottom: 20px">
+                                    <h1 class="m-0 text-dark text-center">List Room </h1>
                                 </div>
-                            </form>
-                            <div>
-                                Address :${locationOne.address}
-                            </div>
-                        </div>
-
+                                <div class="col-sm-6">
+                                    <div class="row" id="range">
+                                        <div class="col-4">
+                                            Location:
+                                            <select class="select form-control" data-placeholder="Select a State" id="locationid" name="locationid" >
+                                                <option value="findall" selected>All</option>
+                                                <c:forEach items="${listLocation}" var="l">
+                                                    <option value="${l.getLocationId()}">${l.getLocationName()}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>                               
+                                        <div class="col-4">
+                                            From:
+                                            <input type="text" required id="datepicker1" name="start" class="form-control" />
+                                        </div>
+                                        <div class="col-4">
+                                            To:
+                                            <input type="text" required id="datepicker2" name="end" class="form-control" />
+                                        </div>                            
+                                    </div>
+                                </div>
+                                <div class="col-sm-6" >
+                                    <div class="row">
+                                        <div class="col-12" style="float: right">
+                                            <div style="width: 20px;height: 20px;background-color: #28a745;float: right"></div>
+                                            <div style="float: right;margin-right: 10px">In-use</div> 
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12" style="float: right">
+                                            <div style="width: 20px;height: 20px;background-color: #dc3545;float: right"></div>
+                                            <div style="float: right;margin-right: 10px">Clear</div> 
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12" style="float: right">
+                                            <div style="width: 20px;height: 20px;background-color: #007bff;float: right"></div>
+                                            <div style="float: right;margin-right: 10px">Reserved</div> 
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12" style="float: right">
+                                            <div style="width: 20px;height: 20px;background-color: #6d1bf3;float: right"></div>
+                                            <div style="float: right;margin-right: 10px">Prepare to checkout</div> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- /.row -->
+                        </form>
                     </div><!-- /.container-fluid -->
-                </section>
+                </div>
+                <!-- /.content-header -->
 
                 <!-- Main content -->
                 <section class="content">
-                    <div class="container-fluid">
-                        <!-- Small boxes (Stat box) -->
+                    <div class="container-fluid" id="result">
                         <div class="row">
+                            <data>
+                                <div class="row">
+                                    <c:forEach items="${listInUse}" var="lIU">
+                                        <div class="col-lg-3 col-6">
+                                            <!-- small box -->
+                                            <div class="small-box bg-success">
+                                                <div class="inner">
+                                                    <h3 style="font-size: 20px">${lIU.roomId.roomId}</h3>
 
-                            <c:forEach items="${listroom}" var="l">
-                                <!-- ./col -->
-                                <div class="col-lg-3 col-6">
-                                    <!-- small box -->
-                                    <div class="small-box <c:if test="${l.status==true}"> bg-success</c:if> <c:if test="${l.status==false}">bg-danger"</c:if>>
-                                            <div class="inner">
-                                                    <h3>${l.roomId}</h3>
-
-                                            <p>${l.roomTypeId.roomTypeName}</p>
-                                        </div>
-                                        <div class="icon">
-                                            <i class="fas fa-hotel"></i>
-                                        </div>
-                                        <a  data-toggle="modal" data-target="#R${l.roomId}"  class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                                    </div>
-                                    <!--                                    modal start-->
-                                    <div class="modal" id="R${l.roomId}">
-                                        <div class="modal-dialog modal-dialog-scollable modal-xl " >
-                                            <div class="modal-content">
-
-                                                <!-- Modal Header -->
-                                                <div class="modal-header">
-                                                    <h4 class="modal-title">${l.roomTypeId.roomTypeName} -${l.locationId.locationName} ${l.roomId}</h4>
-                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <p>${lIU.customerName}</p>
                                                 </div>
-
-                                                <!-- Modal body -->
-                                                <div class="modal-body">
-
-                                                    <form action="Admin_UpdateRoom" >
-
-                                                        <table style="width: 100%;" >
-                                                            <tr>
-                                                                <td rowspan="2">
-                                                                    <div style="font-size: 25px;">
-                                                                        Price:
-                                                                        <div><input value="${l.price}" type="text" name="priceUp" /></div>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div>
-                                                                        Type:${l.roomTypeId.roomTypeName}
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div>
-                                                                        Location: ${l.locationId.locationName}
-                                                                    </div> 
-                                                                </td>
-                                                                <td>
-                                                                    <div>
-                                                                        Status:  <select class="select" name="statusUp" >
-                                                                            <option value="true" <c:if test="${l.status==true}">selected</c:if> >active</option>
-                                                                            <option value="false" <c:if test="${l.status==false}">selected</c:if> >inactive</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td colspan="3">
-                                                                        <div>
-                                                                            <textarea cols="100" rows="5" name="desUp">${l.description}</textarea>
-
-                                                                    </div> 
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td> <div>Bed Option:${l.bedOption}</div></td>
-                                                                <td><div>Size: ${l.size}<sup>2</sup></div></td>
-                                                                <td><div>View: ${l.view}</div></td>
-                                                                <td>
-                                                                    <div>Capacity: 
-                                                                <span><c:if test="${l.capacity%2!=0}">${(l.capacity-1)/2}</c:if><c:if test="${l.capacity%2==0}">${(l.capacity)/2}</c:if> Adults</span>
-                                                                <span>${l.capacity%2} Children</span>
-                                                            </div>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-
-                                                       
-                                                        <div style="margin-top: 20px;">
-                                                            <div class="d-flex justify-content-around">
-                                                                <c:forEach items="${booking_bookMB.listRoomImg(l.roomId)}" var="img">
-                                                                    <div style="width: 15%;">
-                                                                        <img src="<%=common.urlImg%>/images/${img.url}" alt="Img Room" style="width: 100%;"/>
-                                                                        <p>Remove <input type="checkbox" value="${img.roomImageId}" name="ImgR${img.roomImageId}"/></p>
-
-                                                                    </div>
-
-                                                                </c:forEach>
-
-
-                                                            </div>
-                                                        </div>
-                                                        <div style="margin-top: 20px; ">
-                                                            <div>
-                                                                <p id="plus${l.roomId}" style="cursor: pointer;">Add Image <i class='fas fa-plus' ></i></p> 
-                                                            </div>
-                                                            <script>
-                                                                $(document).ready(function() {
-                                                                var count = 0;
-                                                                $("#plus${l.roomId}").click(function() {
-                                                                $("#proper${l.roomId}").append("<div style='margin-left: 15px;padding:5px'>\n\
-                                                             <p><input type='file'  accept='image/*' name='image" + count + "' id='file" + count + "'  onchange='loadFile" + count + "(event)' style='display:none;'></p>\n\
-                                                             <p><label for='file" + count + "' style='cursor: pointer;color: #009900'>Upload Image</label></p>\n\
-                                                             <p><img id='output" + count + "' width='200' />\n\
-                                                                </p> <input type='text'  value='" + count + "'/>\n\
-                                                             <div id='detele' style='cursor: pointer;color:#CC0000 '>Remove Image</div>\n\
-                                                                 <script>\n\
-                                                                     var loadFile" + count + " = function(event) {\n\
-                                                                                 var image = document.getElementById('output" + count + "');\n\
-                                                                                 image.src = URL.createObjectURL(event.target.files[0]);\n\
-                                                                     };\n\
-                                                                 <\/script>\n\
-                                                        </div>");
-                                                                count++;
-                                                                });
-                                                                $('#proper${l.roomId}').on('click', '#detele', function(e) {
-                                                                e.preventDefault();
-                                                                $(this).parent().remove();
-                                                                });
-                                                                document.getElementById("demo").value = count;
-                                                                });
-                                                            </script>
-                                                            <div class="" id="proper${l.roomId}" style="width: 100%;display: grid;grid-gap: 50px;grid-template-columns: auto auto auto auto; ">
-
-
-
-                                                            </div>
-
-                                                        </div> 
-                                                        <input type="hidden" id="demo" name="countImg"/>
-                                                        <input type="hidden" name="IdRoom" value="${l.roomId}"/>
-                                                        <div style="padding: 10px 45%">
-                                                            <input type="submit" value="Save" class="btn btn-outline-primary"/>
-                                                        </div>
-                                                    </form>
-
+                                                <div class="icon">
+                                                    <i class="fa fa-hotel"></i>
                                                 </div>
-
-                                                <!-- Modal footer -->
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                                </div>
-
+                                                <a data-toggle="modal" data-target="#R${lIU.getQrCodeId()}"  class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                                             </div>
                                         </div>
-                                    </div>
-                                    <!--                                modal end-->
+                                        <!--modal start-->
+                                        <div class="modal" id="R${lIU.getQrCodeId()}">
+                                            <div class="modal-dialog modal-dialog-scollable modal-xl" style="padding:10%" >
+                                                <div class="modal-content"style="color: white; background-color: #6f6d6d;">
+                                                    <!-- Modal Header -->
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title" style="padding:1% 11%">From: <fmt:formatDate value="${lIU.getCheckInDate()}" pattern="dd/MM/yyyy"/> to <fmt:formatDate value="${lIU.getCheckOutDate()}" pattern="dd/MM/yyyy"/></h4>
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    </div>
+
+                                                    <!-- Modal body -->
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-4" >
+                                                                <div style="padding: 10%">
+                                                                    <img src="./images/qrcode/${lIU.getUrl()}" style="max-width: 100%;padding: 10%" alt="Bungalow_room1_c"/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-8" style="border-left-style: solid">
+                                                                
+                                                                <div style="padding: 10%">
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Customer Name: ${lIU.getCustomerName()}</div>
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Email: ${lIU.getEmailSendedTo()}</div>
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Room number: ${lIU.getRoomId().getRoomId()}</div>
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Book Date: <fmt:formatDate value="${lIU.getCreateDate()}" pattern="dd/MM/yyyy"/></div>
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Adults: ${lIU.getAdultsNum()}</div>
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Children: ${lIU.getChildrenNum()}</div>
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Deposits: $${lIU.getDeposits()}</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--modal end-->
+                                    </c:forEach>      
+
+                                    <c:forEach items="${listReserved}" var="lR">
+                                        <div class="col-lg-3 col-6">
+                                            <!-- small box -->
+                                            <div class="small-box bg-blue">
+                                                <div class="inner">
+                                                    <h3 style="font-size: 20px">${lR.roomId.roomId}</h3>
+
+                                                    <p>${lR.customerName}</p>                                               
+                                                </div>
+                                                <div class="icon">
+                                                    <i class="fa fa-hotel"></i>
+                                                </div>
+                                                <a data-toggle="modal" data-target="#R${lR.getQrCodeId()}"  class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                            </div>
+                                        </div>
+                                        <!--modal start-->
+                                        <div class="modal" id="R${lR.getQrCodeId()}">
+                                            <div class="modal-dialog modal-dialog-scollable modal-xl" style="padding:10%" >
+                                                <div class="modal-content"style="color: white; background-color: #6f6d6d;">
+                                                    <!-- Modal Header -->
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title" style="padding:1% 11%">From: <fmt:formatDate value="${lR.getCheckInDate()}" pattern="dd/MM/yyyy"/> to <fmt:formatDate value="${lR.getCheckOutDate()}" pattern="dd/MM/yyyy"/></h4>
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    </div>
+
+                                                    <!-- Modal body -->
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-4" >
+                                                                <div style="padding: 10%">
+                                                                    <img src="./images/qrcode/${lR.getUrl()}" style="max-width: 100%;padding: 10%" alt="Bungalow_room1_c"/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-8" style="border-left-style: solid">
+                                                                
+                                                                <div style="padding: 10%">
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Customer Name: ${lR.getCustomerName()}</div>
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Email: ${lR.getEmailSendedTo()}</div>
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Room number: ${lR.getRoomId().getRoomId()}</div>
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Book Date: <fmt:formatDate value="${lR.getCreateDate()}" pattern="dd/MM/yyyy"/></div>
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Adults: ${lR.getAdultsNum()}</div>
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Children: ${lR.getChildrenNum()}</div>
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Deposits: $${lR.getDeposits()}</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--modal end-->
+                                    </c:forEach>
+                                    <c:forEach items="${listPrepareToCheckout}" var="lPTC">
+                                        <div class="col-lg-3 col-6">
+                                            <!-- small box -->
+                                            <div class="small-box bg-gradient-gray-dark">
+                                                <div class="inner">
+                                                    <h3 style="font-size: 20px">${lPTC.roomId.roomId}</h3>
+
+                                                    <p>${lPTC.customerName}</p>
+                                                </div>
+                                                <div class="icon">
+                                                    <i class="fa fa-hotel"></i>
+                                                </div>
+                                                <a href="${lPTC.getQrCodeId()}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                            </div>
+                                        </div>
+                                            <!--modal start-->
+                                        <div class="modal" id="R${lPTC.getQrCodeId()}">
+                                            <div class="modal-dialog modal-dialog-scollable modal-xl" style="padding:10%" >
+                                                <div class="modal-content"style="color: white; background-color: #6f6d6d;">
+                                                    <!-- Modal Header -->
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title" style="padding:1% 11%">From: <fmt:formatDate value="${lPTC.getCheckInDate()}" pattern="dd/MM/yyyy"/> to <fmt:formatDate value="${lPTC.getCheckOutDate()}" pattern="dd/MM/yyyy"/></h4>
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    </div>
+
+                                                    <!-- Modal body -->
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-4" >
+                                                                <div style="padding: 10%">
+                                                                    <img src="./images/qrcode/${lPTC.getUrl()}" style="max-width: 100%;padding: 10%" alt="Bungalow_room1_c"/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-8" style="border-left-style: solid">
+                                                                
+                                                                <div style="padding: 10%">
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Customer Name: ${lPTC.getCustomerName()}</div>
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Email: ${lPTC.getEmailSendedTo()}</div>
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Room number: ${lPTC.getRoomId().getRoomId()}</div>
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Book Date: <fmt:formatDate value="${lPTC.getCreateDate()}" pattern="dd/MM/yyyy"/></div>
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Adults: ${lPTC.getAdultsNum()}</div>
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Children: ${lPTC.getChildrenNum()}</div>
+                                                                    <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Deposits: $${lPTC.getDeposits()}</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--modal end-->
+                                    </c:forEach>
+                                    <c:forEach items="${listClear}" var="lC">
+                                        <div class="col-lg-3 col-6">
+                                            <!-- small box -->
+                                            <div class="small-box bg-danger">
+                                                <div class="inner">
+                                                    <h3 style="font-size: 20px">${lC.roomId}</h3>
+
+                                                    <p>No customer yet</p>
+                                                </div>
+                                                <div class="icon">
+                                                    <i class="fa fa-hotel"></i>
+                                                </div>
+                                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                            </div>
+                                        </div>
+                                    </c:forEach>
                                 </div>
-
-                            </c:forEach>
-
-                            <div class="card-body pt-0">
-                                <!--The calendar -->
-                                <div id="calendar" style="width: 100%"></div>
-                            </div>
-                            <!-- /.card-body -->
+                            </data>
+                            <!-- ./col -->
                         </div>
-                        <!-- /.card -->
+
+                    </div><!--/. container-fluid -->
                 </section>
                 <!-- /.content -->
             </div>
             <!-- /.content-wrapper -->
-            <footer class="main-footer">
-                <div class="float-right d-none d-sm-block">
-                    <b>Version</b> 3.0.5
-                </div>
-                <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
-                reserved.
-            </footer>
 
             <!-- Control Sidebar -->
             <aside class="control-sidebar control-sidebar-dark">
                 <!-- Control sidebar content goes here -->
             </aside>
             <!-- /.control-sidebar -->
+
+            <!-- Main Footer -->
+            <%@include file="footer.jsp" %>
         </div>
         <!-- ./wrapper -->
 
+        <!-- REQUIRED SCRIPTS -->
         <!-- jQuery -->
         <%@include file="jslink.jsp" %>
-
-
+        <script src="<%=common.url%>/dist/js/datepicker-full.js">
+        </script>
+        <script>
+            const elem3 = document.getElementById('range');
+                    const datepicker3 = new DateRangePicker(elem3, {
+                    minDate: "2019-01-01",
+                            buttonClass: 'btn',
+                            format: 'yyyy-mm-dd'
+                    });</script>            
+        <script type="text/javascript">
+                    $(document).on("input", "#locationid", function() {             // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
+                $.get('Admin_Room?locationid=' + $('#locationid').val() + '&start=' + $('#datepicker1').val() + '&end=' + $('#datepicker2').val(), function(responseXml) {                // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response XML...
+                    $("#result").html($(responseXml).find("data").html()); // Parse XML, find <data> element and append its HTML to HTML DOM element with ID "somediv".
+                });
+            });
+            $(document).on("focusout", "#datepicker1", function() {             // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
+                $.get('Admin_Room?locationid=' + $('#locationid').val() + '&start=' + $('#datepicker1').val() + '&end=' + $('#datepicker2').val(), function(responseXml) {                // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response XML...
+                    $("#result").html($(responseXml).find("data").html()); // Parse XML, find <data> element and append its HTML to HTML DOM element with ID "somediv".
+                });
+            });
+            $(document).on("focusout", "#datepicker2", function() {             // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
+                $.get('Admin_Room?locationid=' + $('#locationid').val() + '&start=' + $('#datepicker1').val() + '&end=' + $('#datepicker2').val(), function(responseXml) {                // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response XML...
+                    $("#result").html($(responseXml).find("data").html()); // Parse XML, find <data> element and append its HTML to HTML DOM element with ID "somediv".
+                });
+            });
+        </script>
     </body>
-    <script src="AdminTemplate/plugins/select2/js/select2.full.min.js"></script>
-    <script>
-                                                                $(function() {
-                                                                //Initialize Select2 Elements
-                                                                $('.select').select2()
-
-
-
-                                                                });
-    </script>
 </html>
-

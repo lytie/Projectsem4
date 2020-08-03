@@ -57,33 +57,33 @@
                             <div class="col-6">
                                 <div id="qr-reader" style="width:100%"></div>
                             </div>
-                            <span id="result" class="col-6"></span>
-                            <data>
-                                <c:if test="${qrcode!=null}">
-                                    <div class="col-12"  style="border-style: solid;border-color: #dcdcdc;padding: 20px">
-                                        <div class="row">
-                                            <h2 style="padding-left: 30%;padding-right: 30%">Information</h2>
+                            <span id="result" class="col-6">
+                                <data>
+                                    <c:if test="${qrcode!=null}">
+                                        <div class="col-12"  style="border-style: solid;border-color: #dcdcdc;padding: 20px">
+                                            <div class="row">
+                                                <h2 style="padding-left: 30%;padding-right: 30%">Information</h2>
+                                            </div>
+                                            <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Customer Name: ${qrcode.getCustomerName()}</div>
+                                            <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Email: ${qrcode.getEmailSendedTo()}</div>
+                                            <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Check-in Date: <fmt:formatDate value="${qrcode.getCheckInDate()}" pattern="dd/MM/yyyy"/></div>
+                                            <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Check-out Date: <fmt:formatDate value="${qrcode.getCheckOutDate()}" pattern="dd/MM/yyyy"/></div>
+                                            <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Adults: ${qrcode.getAdultsNum()}</div>
+                                            <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Children: ${qrcode.getChildrenNum()}</div>
+                                            <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Room number: ${qrcode.getRoomId().getRoomId()}</div>
+                                            <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Deposits: $${qrcode.getDeposits()}</div>
+                                            <div style="padding: 20px">
+                                                <c:if test="${qrcode.getStatus()==true}">
+                                                    <a class="btn btn-warning" style="color: white">This Qrcode already active</a>
+                                                </c:if>
+                                                <c:if test="${qrcode.getStatus()!=true}">
+                                                    <a class="btn btn-warning" style="color: white" href="Employee_Checkin?qrcodeid=${qrcode.getQrCodeId()}&action=active">Active</a>
+                                                </c:if>                                         
+                                            </div>
                                         </div>
-                                        <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Customer Name: ${qrcode.getCustomerName()}</div>
-                                        <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Email: ${qrcode.getEmailSendedTo()}</div>
-                                        <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Check-in Date: <fmt:formatDate value="${qrcode.getCheckInDate()}" pattern="dd/MM/yyyy"/></div>
-                                        <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Check-out Date: <fmt:formatDate value="${qrcode.getCheckOutDate()}" pattern="dd/MM/yyyy"/></div>
-                                        <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Adults: ${qrcode.getAdultsNum()}</div>
-                                        <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Children: ${qrcode.getChildrenNum()}</div>
-                                        <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Room number: ${qrcode.getRoomId().getRoomId()}</div>
-                                        <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Deposits: $${qrcode.getDeposits()}</div>
-                                        <div style="padding: 20px">
-                                            <c:if test="${qrcode.getStatus()==true}">
-                                                <a class="btn btn-warning" style="color: white">This Qrcode already active</a>
-                                            </c:if>
-                                            <c:if test="${qrcode.getStatus()!=true}">
-                                                <a class="btn btn-warning" style="color: white" href="Employee_Checkin?qrcodeid=${qrcode.getQrCodeId()}&action=active">Active</a>
-                                            </c:if>                                         
-                                        </div>
-                                    </div>
-                                </c:if>
-
-                            </data>
+                                    </c:if>
+                                </data>
+                            </span>
 
                         </div>
 
@@ -107,7 +107,7 @@
         <!-- ./wrapper -->
 
         <!-- REQUIRED SCRIPTS -->
-        
+
         <!-- jQuery -->
         <%@include file="jslink.jsp" %>
         <script src="AdminTemplate/dist/js/html5-qrcode.min.js"></script>

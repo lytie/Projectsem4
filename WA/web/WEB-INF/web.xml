@@ -293,6 +293,10 @@
         <servlet-name>Employee_Checkout</servlet-name>
         <servlet-class>AdminController.Employee_Checkout</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Employee_CheckTickets</servlet-name>
+        <servlet-class>AdminController.Employee_CheckTickets</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CustomerPageMenuServlet</servlet-name>
         <url-pattern>/CustomerPageMenuServlet</url-pattern>
@@ -580,6 +584,10 @@
     <servlet-mapping>
         <servlet-name>Employee_Checkout</servlet-name>
         <url-pattern>/Employee_Checkout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Employee_CheckTickets</servlet-name>
+        <url-pattern>/Employee_CheckTickets</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

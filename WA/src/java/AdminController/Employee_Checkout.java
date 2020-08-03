@@ -54,35 +54,38 @@ public class Employee_Checkout extends HttpServlet {
             };
             GenericType<List<Receiptcomponent>> genReceiptcomponent = new GenericType<List<Receiptcomponent>>() {
             };
-            Qrcode qrcode = qrcodeClient.find_JSON(genQrcode, qrcodeid);
-            List<Receiptcomponent> listReceiptcomponents = receiptcomponentClient.findbyReceiptID_JSON(genReceiptcomponent, qrcode.getReceiptId().getReceiptId().toString());
-            Receipt receipt = receiptClient.find_JSON(genReceipt, qrcode.getReceiptId().getReceiptId().toString());
-            float realpay = 0;
-            for (Receiptcomponent receiptcomponent : listReceiptcomponents) {
-                if (receiptcomponent.getStatus() != null) {
-                    if (receiptcomponent.getStatus()) {
-                        realpay += receiptcomponent.getSubtotal();
+            if (qrcodeid != null) {
+                Qrcode qrcode = qrcodeClient.find_JSON(genQrcode, qrcodeid);
+                List<Receiptcomponent> listReceiptcomponents = receiptcomponentClient.findbyReceiptID_JSON(genReceiptcomponent, qrcode.getReceiptId().getReceiptId().toString());
+                Receipt receipt = receiptClient.find_JSON(genReceipt, qrcode.getReceiptId().getReceiptId().toString());
+                float realpay = 0;
+                for (Receiptcomponent receiptcomponent : listReceiptcomponents) {
+                    if (receiptcomponent.getStatus() != null) {
+                        if (receiptcomponent.getStatus()) {
+                            realpay += receiptcomponent.getSubtotal();
+                        }
                     }
                 }
-            }
-            if (action != null && action.equals("deactive")) {
-                if (realpay == receipt.getTotal()) {
-                    request.setAttribute("msg", "<div class='success'></div>"
-                            + "         <script type=\"text/javascript\">\n"
-                            + "            $('.success').each(function () {\n"
-                            + "                swal(\"Check out successfully!!!\", \"\", \"success\");\n"
-                            + "            });\n"
-                            + "        </script>");
-                } else {
-                    request.setAttribute("msg", "<div class='success'></div>"
-                            + "         <script type=\"text/javascript\">\n"
-                            + "            $('.success').each(function () {\n"
-                            + "                swal(\"Check out fail,pay your bill first!!!\", \"\", \"error\");\n"
-                            + "            });\n"
-                            + "        </script>");
+                if (action != null && action.equals("deactive")) {
+                    if (realpay == receipt.getTotal()) {
+                        request.setAttribute("msg", "<div class='success'></div>"
+                                + "         <script type=\"text/javascript\">\n"
+                                + "            $('.success').each(function () {\n"
+                                + "                swal(\"Check out successfully!!!\", \"\", \"success\");\n"
+                                + "            });\n"
+                                + "        </script>");
+                    } else {
+                        request.setAttribute("msg", "<div class='success'></div>"
+                                + "         <script type=\"text/javascript\">\n"
+                                + "            $('.success').each(function () {\n"
+                                + "                swal(\"Check out fail,pay your bill first!!!\", \"\", \"error\");\n"
+                                + "            });\n"
+                                + "        </script>");
+                    }
                 }
+                request.setAttribute("qrcode", qrcode);
             }
-            request.setAttribute("qrcode", qrcode);
+
             request.getRequestDispatcher("AdminTemplate/employeecheckout.jsp").forward(request, response);
         }
     }

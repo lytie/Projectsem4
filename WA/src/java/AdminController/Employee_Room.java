@@ -42,7 +42,7 @@ public class Employee_Room extends HttpServlet {
     GenericType<List<Location>> genListLocation = new GenericType<List<Location>>() {
     };
     Date now = new Date();
-    SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -77,6 +77,8 @@ public class Employee_Room extends HttpServlet {
             List<Room> listRoomNotInUse;
 
             if (start == null || end == null) {
+                request.setAttribute("listLocation", listLocation);
+                request.getRequestDispatcher("AdminTemplate/employeeroom.jsp").forward(request, response);
                 listQrcodeInUse = adminIndexClient.getQrcodeInUse(genListQrcode, "2020-01-01", dateFormat.format(now));
                 listRoomNotInUse = adminIndexClient.getRoomNotInUse(genListRoom, "2020-01-01", dateFormat.format(now));
             } else {

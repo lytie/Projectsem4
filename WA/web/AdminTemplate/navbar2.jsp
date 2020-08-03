@@ -109,7 +109,6 @@
 
                         </p>
                     </a>
-
                 </li>
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
@@ -135,8 +134,14 @@
                         </li>
                     </ul>
                 </li>
-
-
+                <li class="nav-item has-treeview">
+                    <a href="Employee_CheckTickets" class="nav-link">
+                        <i class="nav-icon fa fa-user"></i>
+                        <p>
+                            Check tickets 
+                        </p>
+                    </a>
+                </li>
         </nav>
         <!-- /.sidebar-menu -->
     </div>

@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-package CustomerController;
+package AdminController;
 
 import entities.Qrcode;
 import entities.Ticket;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.GenericType;
 import wsc.QrcodeClient;
 import wsc.TicketClient;
@@ -24,7 +24,7 @@ import wsc.TicketClient;
  *
  * @author Admin
  */
-public class CustomerPageTicketServlet extends HttpServlet {
+public class Employee_CheckTickets extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,32 +39,35 @@ public class CustomerPageTicketServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            HttpSession session = request.getSession();
-            QrcodeClient qrcodeClient = new QrcodeClient();
-            GenericType<Qrcode> genericType = new GenericType<Qrcode>() {
+            String qrcodeid = request.getParameter("qrcodeid");
+            String action = request.getParameter("action");
+            TicketClient ticketClient = new TicketClient();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
+            GenericType<Ticket> genTicket = new GenericType<Ticket>() {
             };
-            Qrcode qrcode = new Qrcode();
-            if (session.getAttribute("qrcodeid") == null) {
-                if (request.getParameter("id") == null) {
-                    out.print("Error");
-                } else {
-                    qrcode = qrcodeClient.find_JSON(genericType, request.getParameter("id"));
-                    if (qrcode != null) {
-                        session.setAttribute("qrcodeid", qrcode.getQrCodeId());
-                        session.setAttribute("status", qrcode.getStatus());
-                        request.getRequestDispatcher("/CustomerPageTicketServlet").forward(request, response);
-                    } else {
-                        out.print("Not found qrcode");
-                    }
-                }
-            } else {
-                TicketClient ticketClient = new TicketClient();
-                GenericType<List<Ticket>> genericListTicket = new GenericType<List<Ticket>>() {
-                };
-                List<Ticket> list = ticketClient.findTicketByQR_JSON(genericListTicket,session.getAttribute("qrcodeid").toString());
-                request.setAttribute("list", list);
-                request.getRequestDispatcher("/customerpage/ticket.jsp").forward(request, response);
+            Ticket ticket = ticketClient.find_JSON(genTicket, qrcodeid);
+
+            if (action != null && action.equals("use")) {
+                if (ticket.getQuantity()<=0) {
+                    request.setAttribute("msg", "<div class='success'></div>"
+                        + "         <script type=\"text/javascript\">\n"
+                        + "            $('.success').each(function () {\n"
+                        + "                swal(\"Ticket used already!!!\", \"\", \"error\");\n"
+                        + "            });\n"
+                        + "        </script>");
+                }else{
+                    ticket.setQuantity(ticket.getQuantity()-1);
+                    ticketClient.edit_JSON(ticket,ticket.getTicketId().toString());
+                    request.setAttribute("msg", "<div class='success'></div>"
+                        + "         <script type=\"text/javascript\">\n"
+                        + "            $('.success').each(function () {\n"
+                        + "                swal(\"Ticket use successfully!!!\", \"\", \"success\");\n"
+                        + "            });\n"
+                        + "        </script>");
+                }        
             }
+            request.setAttribute("ticket", ticket);
+            request.getRequestDispatcher("AdminTemplate/employeechecktickets.jsp").forward(request, response);
         }
     }
 

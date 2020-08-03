@@ -123,12 +123,14 @@ public class Booking_payment extends HttpServlet {
                     }
                 }
             } while (check);
-
+            System.out.println("inDate:"+inDate);
+            System.out.println("outDate:"+outDate);
             //format date
             DateFormat df = new SimpleDateFormat("YYYY-MM-dd");
             Date dateIn = df.parse(inDate);
             Date dateOut = df.parse(outDate);
-
+            System.out.println("datein:"+dateIn);
+            System.out.println("dateout:"+dateOut);
             //get Img QR
             String qrcodeImg = null;
             boolean checked = false;

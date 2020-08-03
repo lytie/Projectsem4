@@ -56,12 +56,15 @@
         Qrcode qrcode = (Qrcode) request.getAttribute("qrcode");
         List<Receiptcomponent> list = (List<Receiptcomponent>) request.getAttribute("list");
         for (Receiptcomponent receiptcomponent : list) {
-            if (!receiptcomponent.getStatus()) {
-                count++;
-                subtotal += receiptcomponent.getSubtotal();
-                tax = subtotal * 10 / 100;
-                total = subtotal + tax;
+            if(receiptcomponent.getStatus()!= null){
+                if (!receiptcomponent.getStatus()) {
+                    count++;
+                    subtotal += receiptcomponent.getSubtotal();
+                    tax = subtotal * 10 / 100;
+                    total = subtotal + tax;
+                }
             }
+            
         }
 
     %>

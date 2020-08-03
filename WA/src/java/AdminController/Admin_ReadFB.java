@@ -38,11 +38,8 @@ public class Admin_ReadFB extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
               String feedbackid = request.getParameter("feedbackid");
               FeedbackClient feedbackclient = new FeedbackClient();
-              GenericType<List<Feedback>> genlistFeedback = new GenericType<List<Feedback>>(){};
               GenericType<Feedback> feedback = new GenericType<Feedback>(){};
-               List<Feedback> listfeedback = feedbackclient.findbyFeedbackID_JSON(genlistFeedback, feedbackid);
                Feedback feedbacklist = feedbackclient.find_JSON(feedback, feedbackid);
-               request.setAttribute("listfeedback", listfeedback);
                request.setAttribute("feedbacklist", feedbacklist);
                request.getRequestDispatcher("AdminTemplate/readfb.jsp").forward(request, response);
         }

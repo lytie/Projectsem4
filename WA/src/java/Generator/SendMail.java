@@ -54,7 +54,7 @@ public class SendMail {
         String urll =loader.getResource("Generator/").getFile();
        
         String outputFile =urll.replaceAll("%20", " ").substring(1,urll.lastIndexOf("WA")+2)+"/web/images/";
-            String filename1 = outputFile + filename;
+            String filename1 = "/"+outputFile + filename;
            
             messageBodyPart2.attachFile(filename1); //1 noi dung
             // 5) create Multipart object and add MimeBodyPart objects to this object

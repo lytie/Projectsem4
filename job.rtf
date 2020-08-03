@@ -1,29 +1,38 @@
 {\rtf1\ansi\ansicpg1252\cocoartf2513
 \cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
+{\colortbl;\red255\green255\blue255;\red217\green11\blue5;}
+{\*\expandedcolortbl;;\cssrgb\c88946\c14202\c0;}
 \margl1440\margr1440\vieww10800\viewh8400\viewkind0
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
-\f0\fs24 \cf0 (Tien)Create employee \
-(Tien)Qrcode list : status : khi kh\'e1ch h\'e0ng check in th\'ec nv active \
-			khi kh\'e1ch h\'e0ng check out th\'ec nv No active\
+\f0\fs24 \cf0 Booking:\
+	//\cf2 Bug l\uc0\u7895 i \u273 \u7863 t ph\'f2ng ng\'e0y t\u7841 o ra l\'e0 n\u259 m 2019\cf0 \
 \
-			khi qu\'e1 ng\'e0y check out th\'ec t\uc0\u7921  \u273 \u7897 ng No active\
+	Haven: default checkindate checkoutdate\
+		adults: kh\'f4ng cho gi\'e1 tr\uc0\u7883  0\
+		(checkoutdate ph\uc0\u7843 i h\u417 n 1 ng\'e0y)\
+		g\uc0\u7855 n link book now\
+	th\'f4ng b\'e1o verify active \
+	signup th\'eam ng\'e0y t\uc0\u7841 o \
+	history : n\uc0\u7871 u null \
+	Booking : th\'eam khung cho t\uc0\u7915 ng room, (price=s\u7889  ng\'e0y *gi\'e1 ph\'f2ng)(deposit l\'e0 10%price)	(status=0)\
+	\
+	confirm info :GET th\'f4ng tin n\uc0\u7871 u c\'f3 \u273 \u259 ng nh\u7853 p \
+	\
+	t\uc0\u7841 o ph\'f2ng \u273 \'e3 \u273 \u7863 t :\
+	add status qrcode\
+	add status c\uc0\u7911 a b\u7843 ng receptcompoment, service type id=4\
 \
-			tr\uc0\u432 \u7899 c ng\'e0y checkin kh\'f4ng cho active\
-\
-			n\uc0\u7871 u kh\'e1ch h\'e0ng h\u7911 y ph\'f2ng cho checkindate v\'e0 checkoutDate v\u7873  ng\'e0y tr\u432 \u7899 c 			ng\'e0y h\'f4m nay \
-\
-(Bao)listRoom : filter Theo ng\'e0y, location ,\
-	.     click v\'e0o t\uc0\u7915 ng v\'e0o : emloyee : show chi ti\u7871 t ph\'f2ng(ph\'f2ng tr\u7889 ng), chi ti\u7871 t th\'f4ng tin ng\u432 \u7901 i \u273 \u7863 t 				(ph\'f2ng \u273 \'e3 c\'f3 ng\u432 \u7901 i \u7903  v\'e0 ph\'f2ng \u273 \'e3 c\'f3 ng\u432 \u7901 i check in)\
-				.admin: show nh\uc0\u432  employee nh\u432 ng s\u7917 a th\'f4ng tin 						ph\'f2ng(price,\u7843 nh,description, s\u7917 a v\'e0 th\'eam ti\u7879 n \'edch)\
 \
 \
-(Tien)Location : create\
-		s\uc0\u7917 a \u7843 nh ,t\'ean \u273 \u7883 a ch\u7881  \
-(Thai )Convenient: add\
-(Thai)FeedBack : cho xem th\'f4i \
+\
+\
+\
+Customer: khi status =0 th\'ec kh\'f4ng \uc0\u273 \u432 \u7907 c mua \
+		th\uc0\u7889 ng k\'ea (drink, food,entertainment)\
+		\
+		\
+		\
 \
 		\
 \

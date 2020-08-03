@@ -6,22 +6,22 @@
 
 package AdminController;
 
-import bean.UploadServlet;
-import entities.Roomtype;
+import entities.Feedback;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Map;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import wsc.RoomtypeClient;
+import javax.ws.rs.core.GenericType;
+import wsc.FeedbackClient;
 
 /**
  *
  * @author ADMIN
  */
-public class Admin_AddRoomType extends HttpServlet {
+public class Admin_Feedback extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,9 +35,17 @@ public class Admin_AddRoomType extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            request.getRequestDispatcher("AdminTemplate/addroomtype.jsp").forward(request, response);
+            FeedbackClient feedbackClient = new FeedbackClient();
+            GenericType<List<Feedback>> typ = new GenericType<List<Feedback>>() {
+            };
+            List<Feedback> listfb = feedbackClient.findAll_JSON(typ);
+
+            request.setAttribute("listfb", listfb);
+
+            request.getRequestDispatcher("AdminTemplate/feedback.jsp").forward(request, response);
         }
     }
 
@@ -67,41 +75,7 @@ public class Admin_AddRoomType extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            UploadServlet uploadServlet = new UploadServlet();
-        RoomtypeClient roomtypeClient=new RoomtypeClient();
-        Roomtype roomtype=new Roomtype();
-        
-        String name=null;
-        String description=null;
-        String img=null;
-        
-        Map<String,Object> listRoomType=uploadServlet.Upload(request, "img");
-        
-        for (Map.Entry<String,Object> object : listRoomType.entrySet()) {
-            
-            if(object.getKey().equals("name")){
-                name=object.getValue().toString();
-            }
-            if(object.getKey().equals("decription")){
-                description=object.getValue().toString();
-            }
-            if(object.getKey().equals("file")){
-                img=object.getValue().toString();
-            }
-        }
-        
-        roomtype.setDescription(description);
-        roomtype.setRoomTypeName(name);
-        roomtype.setUrl(img);
-        roomtypeClient.create_JSON(roomtype);
-        request.getRequestDispatcher("Admin_RoomType").forward(request, response);
-        } catch (Exception e) {
-            request.setAttribute("error", e);
-            request.getRequestDispatcher("AdminTemplate/addroomtype.jsp").forward(request, response);
-        }
-        
-        
+        processRequest(request, response);
     }
 
     /**

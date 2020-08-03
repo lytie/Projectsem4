@@ -375,7 +375,8 @@
 
             const elem1 = document.querySelector('input[name="start"]');
             const datepicker1 = new Datepicker(elem1, {
-                buttonClass: 'btn'
+                buttonClass: 'btn',
+                
             });
             const elem2 = document.getElementById('inline');
             const datepicker2 = new Datepicker(elem2, {
@@ -385,7 +386,8 @@
             const datepicker3 = new DateRangePicker(elem3, {
                 minDate: new Date(),
                 buttonClass: 'btn',
-                format: 'yyyy-mm-dd'
+                format: 'yyyy-mm-dd',
+                defaultViewDate: new Date()
             });</script>
         <script src="dist/js/datepicker.min.js">
         </script>

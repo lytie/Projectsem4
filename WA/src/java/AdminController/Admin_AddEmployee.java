@@ -96,7 +96,7 @@ public class Admin_AddEmployee extends HttpServlet {
             GenericType<Role> rType=new GenericType<Role>(){};
             Role role1=client.find_JSON(rType, role);
             
-            SimpleDateFormat format=new SimpleDateFormat("YYYY-MM-dd");
+            SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
             Date dob=format.parse(datepicker);
             
             AccountemployeeClient clientAcc=new AccountemployeeClient();

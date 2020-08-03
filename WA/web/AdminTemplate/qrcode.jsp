@@ -88,7 +88,7 @@
                                                                 </c:choose>
                                                             </td>
                                                             <td>
-                                                                <c:if test="${c.checkOutDate}!=null">
+                                                                <c:if test="${c.checkOutDate!=null}">
                                                                     <c:if test="${date.before(c.checkOutDate)||date==c.checkOutDate}">
                                                                         <c:choose>
                                                                             <c:when test="${c.getStatus()== true}">

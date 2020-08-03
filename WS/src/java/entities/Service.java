@@ -36,6 +36,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Service.findByServiceDescription", query = "SELECT s FROM Service s WHERE s.serviceDescription = :serviceDescription"),
     @NamedQuery(name = "Service.findByServiceurl", query = "SELECT s FROM Service s WHERE s.serviceurl = :serviceurl")})
 public class Service implements Serializable {
+
+    @Column(name = "status")
+    private Boolean status;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -136,6 +139,14 @@ public class Service implements Serializable {
     @Override
     public String toString() {
         return "entities.Service[ serviceId=" + serviceId + " ]";
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
     
 }

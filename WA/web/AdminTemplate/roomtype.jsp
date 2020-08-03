@@ -39,7 +39,7 @@
                         <div class="row mb-2">
                             <div class="col-sm-6">
 
-                                <h4><a class="btn btn-info btn-sm" href="Admin_RoomType">
+                                <h4><a class="btn btn-info btn-sm" href="Admin_AddRoomType">
                                         <i class=" fa fa-plus">
                                         </i> Add RoomType
                                     </a></h4>
@@ -89,10 +89,7 @@
                                                                     <i class="fas fa-pencil-alt">
                                                                     </i> Edit
                                                                 </a>
-                                                                <a class="btn btn-danger btn-sm" href="#">
-                                                                    <i class="fas fa-trash">
-                                                                    </i> Delete
-                                                                </a>
+                                                               
                                                             </td>
                                                         </tr>
                                                     </c:forEach>

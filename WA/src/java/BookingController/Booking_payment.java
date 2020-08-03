@@ -126,7 +126,8 @@ public class Booking_payment extends HttpServlet {
             System.out.println("inDate:"+inDate);
             System.out.println("outDate:"+outDate);
             //format date
-            DateFormat df = new SimpleDateFormat("YYYY-MM-dd");
+           
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             Date dateIn = df.parse(inDate);
             Date dateOut = df.parse(outDate);
             System.out.println("datein:"+dateIn);

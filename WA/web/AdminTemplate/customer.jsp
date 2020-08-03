@@ -33,11 +33,7 @@
                 <section class="content-header">
                     <div class="container-fluid">
                         <div class="row mb-2">
-                            <div class="col-sm-6">
-
-                                <h4> <a class="btn btn-info btn-sm" href="Admin_AddRoom">
-                                        <i class="fa fa-plus"></i> Add Customer </a></h4>
-                            </div>
+                            
 
                         </div>
                     </div><!-- /.container-fluid -->
@@ -68,8 +64,7 @@
                                                         <th>Token</th>
                                                         <th>Active</th>
 
-                                                        <th>Action</th>
-
+                                                        
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -81,19 +76,7 @@
                                                             <td width="20%"><c:out value="${c.getToken()}"/></td>
                                                             <td><c:out value="${c.getActive()}"/></td>
 
-                                                            <td>
-
-                                                                <a class="btn btn-info btn-sm" href="#">
-                                                                    <i class="fas fa-pencil-alt">
-                                                                    </i>
-                                                                    Edit
-                                                                </a>
-                                                                <a class="btn btn-danger btn-sm" href="#">
-                                                                    <i class="fas fa-trash">
-                                                                    </i>
-                                                                    Delete
-                                                                </a>
-                                                            </td>
+                                                           
                                                         </tr>
                                                     </c:forEach>
 

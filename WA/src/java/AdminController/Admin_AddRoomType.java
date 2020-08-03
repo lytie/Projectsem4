@@ -10,11 +10,13 @@ import bean.UploadServlet;
 import entities.Roomtype;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.GenericType;
 import wsc.RoomtypeClient;
 
 /**
@@ -95,7 +97,14 @@ public class Admin_AddRoomType extends HttpServlet {
         roomtype.setRoomTypeName(name);
         roomtype.setUrl(img);
         roomtypeClient.create_JSON(roomtype);
-        request.getRequestDispatcher("Admin_RoomType").forward(request, response);
+        
+        RoomtypeClient roomtypeClients = new RoomtypeClient();
+            GenericType<List<Roomtype>> typ = new GenericType<List<Roomtype>>() {
+            };
+            List<Roomtype> listType = roomtypeClients.findAll_JSON(typ);
+            request.setAttribute("listType", listType);
+
+             request.getRequestDispatcher("AdminTemplate/roomtype.jsp").forward(request, response);
         } catch (Exception e) {
             request.setAttribute("error", e);
             request.getRequestDispatcher("AdminTemplate/addroomtype.jsp").forward(request, response);

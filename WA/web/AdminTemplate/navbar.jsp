@@ -101,27 +101,16 @@
                     </a>
 
                 </li>
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-book"></i>
+                 <li class="nav-item has-treeview">
+                    <a href="Admin_Customer" class="nav-link">
+                        <i class="nav-icon fa fa-map-signs"></i>
                         <p>
                             Customers
-                            <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
 
-
-                        <li class="nav-item">
-                            <a href="Admin_Customer" class="nav-link">
-                                <i class="fa fa-sort-down nav-icon"></i>
-                                <p>Information</p>
-                            </a>
-                        </li>
-
-
-                    </ul>
                 </li>
+               
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fa fa-bed"></i>
@@ -138,14 +127,7 @@
                             </a>
                         </li>
                     </ul>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="Admin_RoomImage" class="nav-link">
-                                <i class="fa fa-sort-down nav-icon"></i>
-                                <p>Room Image</p>
-                            </a>
-                        </li>
-                    </ul>
+                   
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="Admin_RoomType" class="nav-link">
@@ -175,37 +157,14 @@
                 </li>
                 <li class="nav-item has-treeview">
                     <a href="Admin_Services" class="nav-link">
-                        <i class="nav-icon fa fa-bed"></i>
+                        <i class="nav-icon fa fa-map-signs"></i>
                         <p>
                             Service
-                            <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="Admin_Services" class="nav-link">
-                                <i class="fa fa-sort-down nav-icon"></i>
-                                <p>List Service</p>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="roomImage.jsp" class="nav-link">
-                                <i class="fa fa-sort-down nav-icon"></i>
-                                <p>List Food</p>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="roomtype.jsp" class="nav-link">
-                                <i class="fa fa-sort-down nav-icon"></i>
-                                <p>List Drink</p>
-                            </a>
-                        </li>
-                    </ul>
+
                 </li>
+               
                 <li class="nav-item has-treeview">
                     <a href="Admin_Convenient" class="nav-link">
                         <i class="nav-icon fa fa-wifi"></i>

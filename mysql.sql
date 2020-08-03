@@ -1,8 +1,10 @@
--- MySQL dump 10.13  Distrib 8.0.19, for Win64 (x86_64)
+CREATE DATABASE  IF NOT EXISTS `prj4db` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `prj4db`;
+-- MySQL dump 10.13  Distrib 8.0.19, for macos10.15 (x86_64)
 --
--- Host: localhost    Database: prj4db
+-- Host: 127.0.0.1    Database: prj4db
 -- ------------------------------------------------------
--- Server version	8.0.19
+-- Server version	5.7.26
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -23,12 +25,12 @@ DROP TABLE IF EXISTS `accountcustomer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `accountcustomer` (
-  `AccountCustomerId` int NOT NULL AUTO_INCREMENT,
-  `Email` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Password` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `FullName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `Phone` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `token` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `AccountCustomerId` int(11) NOT NULL AUTO_INCREMENT,
+  `Email` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Password` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `FullName` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `Phone` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `active` bit(1) DEFAULT b'0',
   `CreateDate` datetime DEFAULT NULL,
   PRIMARY KEY (`AccountCustomerId`)
@@ -41,7 +43,7 @@ CREATE TABLE `accountcustomer` (
 
 LOCK TABLES `accountcustomer` WRITE;
 /*!40000 ALTER TABLE `accountcustomer` DISABLE KEYS */;
-INSERT INTO `accountcustomer` VALUES (1,'abc@gmail.com','123456','Trịnh Thiêm Bảo','03940435','ytfvghvhg',_binary '\0','2020-07-26 00:00:00'),(2,'maiyeujiyeon@gmail.com','FeKw08M4keuw8e9gnsQZQgwg4yDOlMZfvIwzEkSOsiU=','tie ly','0943544532','mUtHqxZoEtEvbeuQV2',_binary '\0','2020-07-26 00:00:00'),(3,'maybe@sds.sx','73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8=','maybe','3425676656','B6TTiRNnDja0dbEF',_binary '\0','2020-07-27 00:00:00'),(4,'ko@re.com','jZae727K08KaOmKSgOaGzww/XVqGr/PKEgIMkjrcbJI=','lanxe','0234545362','Qii5w4M1EB1O',_binary '\0','2020-07-27 00:00:00'),(5,'lofd@sd.cx','i7DPbrmxfQ99IrRW8SElfcElTh8BZlNwR2OD6ndt9BQ=','lofd','0324345634','FJSczpNCSBwjRe',_binary '\0','2020-07-26 00:00:00'),(6,'kongnhanvo55555@gmail.com','73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8=','emr','0435254873','6BzC0YbkHZxKPYHO',_binary '\0','2020-07-27 00:00:00'),(7,'mre@ds.ds','PeqlQYzvT0iAaMxgEagCsrN8rdOvzoBnR3jCXiHy+xw=','mer','0342323434','dZ0uarZdIkSAw1',_binary '\0','2020-07-26 00:00:00'),(8,'ert@fd.fd','i7DPbrmxfQ99IrRW8SElfcElTh8BZlNwR2OD6ndt9BQ=','ert','0435545634','9LMqdg2drFDaCJ',_binary '\0','2020-07-27 00:00:00'),(9,'tre@df.dx','jZae727K08KaOmKSgOaGzww/XVqGr/PKEgIMkjrcbJI=','tre','0345248935','szv2xIWOwaPL',_binary '\0','2020-07-26 00:00:00'),(10,'ds@ds.re','i7DPbrmxfQ99IrRW8SElfcElTh8BZlNwR2OD6ndt9BQ=','poldf','0987386532','kpVWMJwqIz8dGe',_binary '\0','2020-07-27 00:00:00'),(14,'yyyoyoooo1123@gmail.com','73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8=','yoyo','0398865142','eK1k5Y8i',_binary '','2020-07-26 00:00:00');
+INSERT INTO `accountcustomer` VALUES (1,'abc@gmail.com','123456','Trịnh Thiêm Bảo','03940435','ytfvghvhg',_binary '','2020-07-26 00:00:00'),(2,'maiyeujiyeon@gmail.com','FeKw08M4keuw8e9gnsQZQgwg4yDOlMZfvIwzEkSOsiU=','tie ly','0943544532','mUtHqxZoEtEvbeuQV2',_binary '','2020-07-26 00:00:00'),(3,'maybe@sds.sx','73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8=','maybe','3425676656','B6TTiRNnDja0dbEF',_binary '','2020-07-27 00:00:00'),(4,'ko@re.com','jZae727K08KaOmKSgOaGzww/XVqGr/PKEgIMkjrcbJI=','lanxe','0234545362','Qii5w4M1EB1O',_binary '','2020-07-27 00:00:00'),(5,'lofd@sd.cx','i7DPbrmxfQ99IrRW8SElfcElTh8BZlNwR2OD6ndt9BQ=','lofd','0324345634','FJSczpNCSBwjRe',_binary '','2020-07-26 00:00:00'),(6,'kongnhanvo55555@gmail.com','73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8=','emr','0435254873','6BzC0YbkHZxKPYHO',_binary '','2020-07-27 00:00:00'),(7,'mre@ds.ds','PeqlQYzvT0iAaMxgEagCsrN8rdOvzoBnR3jCXiHy+xw=','mer','0342323434','dZ0uarZdIkSAw1',_binary '','2020-07-26 00:00:00'),(8,'ert@fd.fd','i7DPbrmxfQ99IrRW8SElfcElTh8BZlNwR2OD6ndt9BQ=','ert','0435545634','9LMqdg2drFDaCJ',_binary '','2020-07-27 00:00:00'),(9,'tre@df.dx','jZae727K08KaOmKSgOaGzww/XVqGr/PKEgIMkjrcbJI=','tre','0345248935','szv2xIWOwaPL',_binary '','2020-07-26 00:00:00'),(10,'ds@ds.re','i7DPbrmxfQ99IrRW8SElfcElTh8BZlNwR2OD6ndt9BQ=','poldf','0987386532','kpVWMJwqIz8dGe',_binary '','2020-07-27 00:00:00'),(14,'yyyoyoooo1123@gmail.com','73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8=','yoyo','0398865142','eK1k5Y8i',_binary '','2020-07-26 00:00:00');
 /*!40000 ALTER TABLE `accountcustomer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -53,13 +55,13 @@ DROP TABLE IF EXISTS `accountemployee`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `accountemployee` (
-  `accountId` int NOT NULL AUTO_INCREMENT,
-  `Email` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Password` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `FullName` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `Phone` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `accountId` int(11) NOT NULL AUTO_INCREMENT,
+  `Email` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Password` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `FullName` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `Phone` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `DateOfBirth` datetime DEFAULT NULL,
-  `RoleId` int DEFAULT NULL,
+  `RoleId` int(11) DEFAULT NULL,
   `Status` bit(1) DEFAULT b'0',
   `Token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`accountId`),
@@ -87,9 +89,9 @@ DROP TABLE IF EXISTS `convenient`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `convenient` (
-  `ConvenientId` int NOT NULL AUTO_INCREMENT,
-  `ConvenientName` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `url` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ConvenientId` int(11) NOT NULL AUTO_INCREMENT,
+  `ConvenientName` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `url` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`ConvenientId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -112,14 +114,14 @@ DROP TABLE IF EXISTS `feedback`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `feedback` (
-  `FeedBackId` int NOT NULL AUTO_INCREMENT,
-  `FeedBackMessage` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `QrCodeId` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `FeedBackId` int(11) NOT NULL AUTO_INCREMENT,
+  `FeedBackMessage` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `QrCodeId` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `FeedBackTime` datetime DEFAULT NULL,
   PRIMARY KEY (`FeedBackId`),
   KEY `FK_feedback_qrcode` (`QrCodeId`),
   CONSTRAINT `FK_feedback_qrcode` FOREIGN KEY (`QrCodeId`) REFERENCES `qrcode` (`QrCodeId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -128,6 +130,7 @@ CREATE TABLE `feedback` (
 
 LOCK TABLES `feedback` WRITE;
 /*!40000 ALTER TABLE `feedback` DISABLE KEYS */;
+INSERT INTO `feedback` VALUES (1,'abc','4H0bXV1cmxxHkRguBpdQve5c0SHPJFYekJn6Q0Sp','2020-08-02 23:13:32');
 /*!40000 ALTER TABLE `feedback` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -161,10 +164,10 @@ DROP TABLE IF EXISTS `img_hero`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `img_hero` (
-  `id_hero` int NOT NULL AUTO_INCREMENT,
-  `img` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `text_Title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `text_short` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `id_hero` int(11) NOT NULL AUTO_INCREMENT,
+  `img` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `text_Title` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `text_short` varchar(150) CHARACTER SET utf8 DEFAULT NULL,
   `choose` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id_hero`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
@@ -188,13 +191,13 @@ DROP TABLE IF EXISTS `location`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `location` (
-  `LocationId` int NOT NULL AUTO_INCREMENT,
-  `LocationName` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `LocationUrl` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Introduce` varchar(2005) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Address` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `LocationId` int(11) NOT NULL AUTO_INCREMENT,
+  `LocationName` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `LocationUrl` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Introduce` varchar(2005) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Address` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`LocationId`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -215,19 +218,19 @@ DROP TABLE IF EXISTS `qrcode`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `qrcode` (
-  `QrCodeId` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `CustomerName` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `EmailSendedTo` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `QrCodeId` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `CustomerName` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `EmailSendedTo` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `CreateDate` datetime DEFAULT NULL,
   `CheckInDate` datetime DEFAULT NULL,
   `CheckOutDate` datetime DEFAULT NULL,
-  `RoomId` int DEFAULT NULL,
-  `AdultsNum` int DEFAULT NULL,
-  `ChildrenNum` int DEFAULT NULL,
+  `RoomId` int(11) DEFAULT NULL,
+  `AdultsNum` int(11) DEFAULT NULL,
+  `ChildrenNum` int(11) DEFAULT NULL,
   `Deposits` float DEFAULT NULL,
-  `ReceiptId` int DEFAULT NULL,
-  `Url` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `AccountCustomerId` int DEFAULT NULL,
+  `ReceiptId` int(11) DEFAULT NULL,
+  `Url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `AccountCustomerId` int(11) DEFAULT NULL,
   `Status` bit(1) DEFAULT NULL,
   PRIMARY KEY (`QrCodeId`),
   KEY `FK_qrcode_receipt` (`ReceiptId`),
@@ -243,7 +246,7 @@ CREATE TABLE `qrcode` (
 
 LOCK TABLES `qrcode` WRITE;
 /*!40000 ALTER TABLE `qrcode` DISABLE KEYS */;
-INSERT INTO `qrcode` VALUES ('34DSFWE45DFGER3we3F','MayBe','sd@gmail.com','2020-07-13 00:00:00','2020-07-15 00:00:00','2020-07-17 00:00:00',2,1,1,NULL,2,NULL,NULL,_binary '\0'),('38FN8490FNU82RRwWcF','Bảo Trịnh Thiêm','abc@gmail.com','2020-07-13 00:00:00','2020-07-15 00:00:00','2020-07-17 00:00:00',1,2,0,4,1,NULL,NULL,_binary ''),('3yụhr5ehh',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,_binary '\0'),('4H0bXV1cmxxHkRguBpdQve5c0SHPJFYekJn6Q0Sp','Bao','baodragonpro@gmail.com','2020-07-31 13:58:09','2019-12-29 00:00:00','2019-12-29 00:00:00',4,1,1,5,10,'k7e3Sy7kpS.png',NULL,_binary '\0'),('4wVmZzVAW32QVVBNRJTnC5rj8tK4uVer7Olt4u6u','Bao','baodragonpro@gmail.com','2020-07-30 23:16:40','2019-12-29 00:00:00','2019-12-29 00:00:00',5,1,2,4.9,6,'ovPeiZgKMl',NULL,_binary '\0'),('bU7CU4yMGw9MhaGJNOJ5sFhaPHNYZr0gabxkWcBK','Bao','baodragonpro@gmail.com','2020-07-30 23:52:30','2019-12-29 00:00:00','2019-12-29 00:00:00',6,1,2,4.9,9,'PZTd2oQDcR.png',NULL,_binary '\0'),('DINthIRBAVWxTHuQWqtliGj5sQz3sEA1vDHSca9A','Bao','baodragonpro@gmail.com','2020-07-30 23:25:34','2019-12-29 00:00:00','2019-12-29 00:00:00',7,1,1,5,8,'5O57ODgln0.png',NULL,_binary '\0'),('DSF34dsfDVK435UdsfWEF','Balabala','bala@ex.com','2020-07-20 00:00:00','2020-07-22 00:00:00','2020-07-25 00:00:00',2,2,NULL,NULL,3,NULL,NULL,_binary '\0'),('PvGvl58SulkUOlUB4IutWCqYCujgMJzIiUBXnyjR','Bao','baodragonpro@gmail.com','2020-07-31 14:01:46','2019-12-29 00:00:00','2019-12-29 00:00:00',9,1,1,5,11,'p6BqOThSvg.png',NULL,_binary '\0'),('rGf0UJMaVFuZR0nlMtlHkx7cHlL6ackjOVhIBLyL','Bao','baodragonpro@gmail.com','2020-07-30 23:21:23','2019-12-29 00:00:00','2019-12-29 00:00:00',12,1,1,5,7,'Xs6DPJYEMM.png',NULL,_binary '\0');
+INSERT INTO `qrcode` VALUES ('34DSFWE45DFGER3we3F','MayBe','sd@gmail.com','2020-07-13 00:00:00','2020-08-15 00:00:00','2020-08-17 00:00:00',2,1,1,NULL,2,NULL,14,_binary '\0'),('38FN8490FNU82RRwWcF','Bảo Trịnh Thiêm','abc@gmail.com','2020-07-13 00:00:00','2020-07-15 00:00:00','2020-07-17 00:00:00',1,2,0,4,1,NULL,14,_binary '\0'),('4H0bXV1cmxxHkRguBpdQve5c0SHPJFYekJn6Q0Sp','Bao','baodragonpro@gmail.com','2020-07-31 13:58:09','2019-12-29 00:00:00','2019-12-29 00:00:00',4,1,1,5,10,'k7e3Sy7kpS.png',14,_binary '\0'),('4wVmZzVAW32QVVBNRJTnC5rj8tK4uVer7Olt4u6u','Bao','baodragonpro@gmail.com','2020-07-30 23:16:40','2019-12-29 00:00:00','2019-12-29 00:00:00',5,1,2,4.9,6,'ovPeiZgKMl',14,_binary '\0'),('70X8iSE0v9kapWmpNcE7aMhvUJDCa25hvzdwVjqg','yoyo','yyyoyoooo1123@gmail.com','2020-08-03 15:31:56','2019-12-29 00:00:00','2019-12-29 00:00:00',5,1,1,3.4,14,'0PuF506oA1.png',14,_binary '\0'),('bU7CU4yMGw9MhaGJNOJ5sFhaPHNYZr0gabxkWcBK','Bao','baodragonpro@gmail.com','2020-07-30 23:52:30','2019-12-29 00:00:00','2019-12-29 00:00:00',6,1,2,4.9,9,'PZTd2oQDcR.png',2,_binary '\0'),('DINthIRBAVWxTHuQWqtliGj5sQz3sEA1vDHSca9A','Bao','baodragonpro@gmail.com','2020-07-30 23:25:34','2019-12-29 00:00:00','2019-12-29 00:00:00',7,1,1,5,8,'5O57ODgln0.png',3,_binary '\0'),('DSF34dsfDVK435UdsfWEF','Balabala','bala@ex.com','2020-07-20 00:00:00','2020-07-22 00:00:00','2020-07-25 00:00:00',2,2,NULL,NULL,3,NULL,4,_binary '\0'),('KSjgJiAfrO17RSiT9N0DIWuUzyS53EQp9TN7K0vL','yoyo','yyyoyoooo1123@gmail.com','2020-08-03 15:02:39','2019-12-29 00:00:00','2019-12-29 00:00:00',5,1,1,3.4,13,'03qicuZC4p.png',14,_binary '\0'),('l33d6pTnAdaACpafDjkIix3XDeRLIEdUEGQN9otd','er','yyyoyoooo1123@gmail.com','2020-08-03 15:51:48','2020-08-02 16:29:02','2020-08-02 16:29:02',2,1,1,5,17,'7PLKWKLf7X.png',NULL,_binary '\0'),('lhpIqV3niZGG1uv76cjI6UcIRcWLGgW3p8lkpSZ6','yoyo','yyyoyoooo1123@gmail.com','2020-08-03 15:38:09','2019-12-29 00:00:00','2019-12-29 00:00:00',2,1,1,5,16,'GUEGSQoigL.png',14,_binary '\0'),('PvGvl58SulkUOlUB4IutWCqYCujgMJzIiUBXnyjR','Bao','baodragonpro@gmail.com','2020-07-31 14:01:46','2019-12-29 00:00:00','2019-12-29 00:00:00',9,1,1,5,11,'p6BqOThSvg.png',5,_binary '\0'),('Q5ML7ltMRF1YNN4OwO20JLzHwDpWRaxkRBcoxU6S','oik','yyyoyoooo1123@gmail.com','2020-08-03 15:54:12','2019-12-29 00:00:00','2019-12-29 00:00:00',2,1,1,5,18,'k3d4I0XxNP.png',NULL,_binary '\0'),('rGf0UJMaVFuZR0nlMtlHkx7cHlL6ackjOVhIBLyL','Bao','baodragonpro@gmail.com','2020-07-30 23:21:23','2019-12-29 00:00:00','2019-12-29 00:00:00',12,1,1,5,4,'Xs6DPJYEMM.png',6,_binary '\0');
 /*!40000 ALTER TABLE `qrcode` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -255,14 +258,14 @@ DROP TABLE IF EXISTS `receipt`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `receipt` (
-  `ReceiptId` int NOT NULL AUTO_INCREMENT,
+  `ReceiptId` int(11) NOT NULL AUTO_INCREMENT,
   `PayDate` datetime DEFAULT NULL,
   `Subtotal` float DEFAULT NULL,
   `Tax` float DEFAULT NULL,
   `Total` float DEFAULT NULL,
   `PayStatus` bit(1) DEFAULT NULL,
   PRIMARY KEY (`ReceiptId`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -271,7 +274,7 @@ CREATE TABLE `receipt` (
 
 LOCK TABLES `receipt` WRITE;
 /*!40000 ALTER TABLE `receipt` DISABLE KEYS */;
-INSERT INTO `receipt` VALUES (1,NULL,2560,256,2812,_binary '\0'),(2,NULL,NULL,NULL,NULL,NULL),(3,NULL,NULL,NULL,NULL,NULL),(4,NULL,49,4.9,49,_binary '\0'),(5,NULL,49,4.9,49,_binary '\0'),(6,NULL,49,4.9,49,_binary '\0'),(7,NULL,2530,253,2778,_binary '\0'),(8,NULL,50,5,50,_binary '\0'),(9,NULL,49,4.9,49,_binary '\0'),(10,NULL,50,5,50,_binary '\0'),(11,NULL,50,5,50,_binary '\0');
+INSERT INTO `receipt` VALUES (1,NULL,2560,256,2812,_binary '\0'),(2,NULL,345,34,4535,_binary '\0'),(3,NULL,345,32,3454,_binary '\0'),(4,NULL,49,4.9,49,_binary '\0'),(5,NULL,49,4.9,49,_binary '\0'),(6,NULL,49,4.9,49,_binary '\0'),(7,NULL,2530,253,2778,_binary '\0'),(8,NULL,50,5,50,_binary '\0'),(9,NULL,49,4.9,49,_binary '\0'),(10,NULL,50,5,50,_binary '\0'),(11,NULL,50,5,50,_binary '\0'),(12,NULL,50,5,50,_binary '\0'),(13,NULL,34,3.4,34,_binary '\0'),(14,NULL,34,3.4,34,_binary '\0'),(15,NULL,50,5,50,_binary '\0'),(16,NULL,50,5,50,_binary '\0'),(17,NULL,50,5,50,_binary '\0'),(18,NULL,50,5,50,_binary '\0');
 /*!40000 ALTER TABLE `receipt` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -283,24 +286,24 @@ DROP TABLE IF EXISTS `receiptcomponent`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `receiptcomponent` (
-  `ReceiptComponentId` int NOT NULL AUTO_INCREMENT,
-  `ReceiptId` int DEFAULT NULL,
-  `ComponentName` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `ReceiptComponentId` int(11) NOT NULL AUTO_INCREMENT,
+  `ReceiptId` int(11) DEFAULT NULL,
+  `ComponentName` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   `Price` float DEFAULT NULL,
-  `Quantity` int DEFAULT NULL,
+  `Quantity` int(11) DEFAULT NULL,
   `Subtotal` float DEFAULT NULL,
-  `url` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `url` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   `OrderDate` datetime DEFAULT NULL,
-  `OrdererName` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `OrdererName` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   `Status` bit(1) DEFAULT b'0',
-  `ServiceTypeId` int DEFAULT NULL,
+  `ServiceTypeId` int(11) DEFAULT NULL,
   `PayDate` datetime DEFAULT NULL,
   PRIMARY KEY (`ReceiptComponentId`),
   KEY `FK_receiptcomponent_receipt` (`ReceiptId`),
   KEY `FK_receiptcomponent_servicetype_idx` (`ServiceTypeId`),
   CONSTRAINT `FK_receiptcomponent_receipt` FOREIGN KEY (`ReceiptId`) REFERENCES `receipt` (`ReceiptId`),
   CONSTRAINT `FK_receiptcomponent_servicetype` FOREIGN KEY (`ServiceTypeId`) REFERENCES `servicetype` (`ServiceTypeId`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -309,7 +312,7 @@ CREATE TABLE `receiptcomponent` (
 
 LOCK TABLES `receiptcomponent` WRITE;
 /*!40000 ALTER TABLE `receiptcomponent` DISABLE KEYS */;
-INSERT INTO `receiptcomponent` VALUES (1,1,'Room-Bungalow',40,1,40,'Typeroom_Bungalow.jpg','2020-07-15 00:00:00','BÃ¡ÂºÂ£o TrÃ¡Â»â€¹nh ThiÃƒÂªm',_binary '',4,NULL),(2,1,'Wine Castle',200,2,400,'experience3.jpg','2020-07-16 00:00:00','BÃ¡ÂºÂ£o TrÃ¡Â»â€¹nh ThiÃƒÂªm',_binary '',3,NULL),(3,1,'Costolette di agnello',100,1,100,'our-menu-02.jpg','2020-07-16 00:00:00','BÃ¡ÂºÂ£o TrÃ¡Â»â€¹nh ThiÃƒÂªm',_binary '',1,NULL),(4,1,'Costolette di agnello',100,1,100,'our-menu-02.jpg','2020-07-22 18:44:45','BÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â£o TrÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹nh ThiÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âªm',_binary '',1,NULL),(5,1,'Strawberry Cheese Cake',40,1,40,'our-menu-19.jpg','2020-07-22 18:51:17','BÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â£o TrÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹nh ThiÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âªm',_binary '',1,NULL),(6,1,'Strawberry Cheese Cake',40,1,40,'our-menu-19.jpg','2020-07-22 18:54:39','BÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â£o TrÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹nh ThiÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âªm',_binary '',1,NULL),(7,1,' Miele di pollo alla griglia',80,1,80,'our-menu-04.jpg','2020-07-22 18:54:39','BÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â£o TrÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹nh ThiÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âªm',_binary '',2,NULL),(8,1,'Wine Castle',200,2,400,'experience3.jpg','2020-07-22 19:41:14','BÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â£o TrÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹nh ThiÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âªm',_binary '',3,NULL),(9,4,'Room -Superior-Lac Long Quan Street, Cam An, Hoi An, Quang Nam, Vietnam22',49,1,49,'Typeroom_Superior.jpg','2020-07-30 23:07:52','Bao',_binary '\0',NULL,NULL),(10,5,'Room -Superior-Lac Long Quan Street, Cam An, Hoi An, Quang Nam, Vietnam22',49,1,49,'Typeroom_Superior.jpg','2020-07-30 23:12:51','Bao',_binary '\0',NULL,NULL),(11,6,'Room -Superior-Lac Long Quan Street, Cam An, Hoi An, Quang Nam, Vietnam22',49,1,49,'Typeroom_Superior.jpg','2020-07-30 23:16:40','Bao',_binary '\0',NULL,NULL),(12,7,'Room -Bungalow-03-05 Xuan Tam Street, Thuan Phuoc, Hai Chau, Ã„ï¿½a Nang , Viet Nam2',50,1,50,'Typeroom_Bungalow.jpg','2020-07-30 23:21:23','Bao',_binary '\0',NULL,NULL),(13,8,'Room -Bungalow-03-05 Xuan Tam Street, Thuan Phuoc, Hai Chau, Ã„ï¿½a Nang , Viet Nam2',50,1,50,'Typeroom_Bungalow.jpg','2020-07-30 23:25:34','Bao',_binary '\0',NULL,NULL),(14,9,'Room -Superior-Lac Long Quan Street, Cam An, Hoi An, Quang Nam, Vietnam22',49,1,49,'Typeroom_Superior.jpg','2020-07-30 23:52:30','Bao',_binary '\0',NULL,NULL),(15,10,'Room -Bungalow-03-05 Xuan Tam Street, Thuan Phuoc, Hai Chau, Ã„ï¿½a Nang , Viet Nam2',50,1,50,'Typeroom_Bungalow.jpg','2020-07-31 13:58:09','Bao',_binary '\0',NULL,NULL),(16,11,'Room -Bungalow-03-05 Xuan Tam Street, Thuan Phuoc, Hai Chau, Ã„ï¿½a Nang , Viet Nam2',50,1,50,'Typeroom_Bungalow.jpg','2020-07-31 14:01:46','Bao',_binary '\0',NULL,NULL),(17,1,'Costolette di agnello',100,2,200,'our-menu-02.jpg','2020-07-31 19:46:55','BÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â£o TrÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹nh ThiÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âªm',_binary '',2,NULL),(18,7,'Water Park',1000,2,2000,'experience5.jpg','2020-07-31 19:57:34','Bao',_binary '\0',NULL,NULL),(19,7,'Costolette di agnello',100,2,200,'our-menu-02.jpg','2020-07-31 19:58:24','Bao',_binary '\0',NULL,NULL),(20,7,' Miele di pollo alla griglia',80,2,160,'our-menu-04.jpg','2020-07-31 19:59:20','Bao',_binary '\0',NULL,NULL),(21,7,'Strawberry Cheese Cake',40,3,120,'our-menu-19.jpg','2020-07-31 20:01:13','Bao',_binary '\0',NULL,NULL),(23,1,'Strawberry Cheese Cake',40,1,40,'our-menu-19.jpg','2020-08-01 18:24:49','BÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â£o TrÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹nh ThiÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âªm',_binary '',1,NULL),(24,1,'Strawberry Cheese Cake',40,2,80,'our-menu-19.jpg','2020-08-01 18:34:27','BÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â£o TrÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹nh ThiÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âªm',_binary '',1,NULL),(25,1,'Strawberry Cheese Cake',40,1,40,'our-menu-19.jpg','2020-08-01 19:14:24','BÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â£o TrÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹nh ThiÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âªm',_binary '',1,NULL),(26,1,'Spa',500,2,1000,'experience2.jpg','2020-08-01 22:11:49','BÃ¡ÂºÂ£o TrÃ¡Â»â€¹nh ThiÃƒÂªm',_binary '\0',3,NULL);
+INSERT INTO `receiptcomponent` VALUES (1,1,'Room-Bungalow',40,1,40,'Typeroom_Bungalow.jpg','2020-07-15 00:00:00','BÃ¡ÂºÂ£o TrÃ¡Â»â€¹nh ThiÃƒÂªm',_binary '',4,NULL),(2,1,'Wine Castle',200,2,400,'experience3.jpg','2020-07-16 00:00:00','BÃ¡ÂºÂ£o TrÃ¡Â»â€¹nh ThiÃƒÂªm',_binary '',3,NULL),(3,1,'Costolette di agnello',100,1,100,'our-menu-02.jpg','2020-07-16 00:00:00','BÃ¡ÂºÂ£o TrÃ¡Â»â€¹nh ThiÃƒÂªm',_binary '',1,NULL),(4,1,'Costolette di agnello',100,1,100,'our-menu-02.jpg','2020-07-22 18:44:45','BÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â£o TrÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹nh ThiÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âªm',_binary '',1,NULL),(5,1,'Strawberry Cheese Cake',40,1,40,'our-menu-19.jpg','2020-07-22 18:51:17','BÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â£o TrÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹nh ThiÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âªm',_binary '',1,NULL),(6,1,'Strawberry Cheese Cake',40,1,40,'our-menu-19.jpg','2020-07-22 18:54:39','BÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â£o TrÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹nh ThiÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âªm',_binary '',1,NULL),(7,1,' Miele di pollo alla griglia',80,1,80,'our-menu-04.jpg','2020-07-22 18:54:39','BÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â£o TrÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹nh ThiÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âªm',_binary '',2,NULL),(8,1,'Wine Castle',200,2,400,'experience3.jpg','2020-07-22 19:41:14','BÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â£o TrÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹nh ThiÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âªm',_binary '',3,NULL),(9,4,'Room -Superior-Lac Long Quan Street, Cam An, Hoi An, Quang Nam, Vietnam22',49,1,49,'Typeroom_Superior.jpg','2020-07-30 23:07:52','Bao',_binary '\0',NULL,NULL),(10,5,'Room -Superior-Lac Long Quan Street, Cam An, Hoi An, Quang Nam, Vietnam22',49,1,49,'Typeroom_Superior.jpg','2020-07-30 23:12:51','Bao',_binary '\0',NULL,NULL),(11,6,'Room -Superior-Lac Long Quan Street, Cam An, Hoi An, Quang Nam, Vietnam22',49,1,49,'Typeroom_Superior.jpg','2020-07-30 23:16:40','Bao',_binary '\0',NULL,NULL),(12,7,'Room -Bungalow-03-05 Xuan Tam Street, Thuan Phuoc, Hai Chau, Ã„ï¿½a Nang , Viet Nam2',50,1,50,'Typeroom_Bungalow.jpg','2020-07-30 23:21:23','Bao',_binary '\0',NULL,NULL),(13,8,'Room -Bungalow-03-05 Xuan Tam Street, Thuan Phuoc, Hai Chau, Ã„ï¿½a Nang , Viet Nam2',50,1,50,'Typeroom_Bungalow.jpg','2020-07-30 23:25:34','Bao',_binary '\0',NULL,NULL),(14,9,'Room -Superior-Lac Long Quan Street, Cam An, Hoi An, Quang Nam, Vietnam22',49,1,49,'Typeroom_Superior.jpg','2020-07-30 23:52:30','Bao',_binary '\0',NULL,NULL),(15,10,'Room -Bungalow-03-05 Xuan Tam Street, Thuan Phuoc, Hai Chau, Ã„ï¿½a Nang , Viet Nam2',50,1,50,'Typeroom_Bungalow.jpg','2020-07-31 13:58:09','Bao',_binary '\0',NULL,NULL),(16,11,'Room -Bungalow-03-05 Xuan Tam Street, Thuan Phuoc, Hai Chau, Ã„ï¿½a Nang , Viet Nam2',50,1,50,'Typeroom_Bungalow.jpg','2020-07-31 14:01:46','Bao',_binary '\0',NULL,NULL),(17,1,'Costolette di agnello',100,2,200,'our-menu-02.jpg','2020-07-31 19:46:55','BÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â£o TrÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹nh ThiÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âªm',_binary '',2,NULL),(18,7,'Water Park',1000,2,2000,'experience5.jpg','2020-07-31 19:57:34','Bao',_binary '\0',NULL,NULL),(19,7,'Costolette di agnello',100,2,200,'our-menu-02.jpg','2020-07-31 19:58:24','Bao',_binary '\0',NULL,NULL),(20,7,' Miele di pollo alla griglia',80,2,160,'our-menu-04.jpg','2020-07-31 19:59:20','Bao',_binary '\0',NULL,NULL),(21,7,'Strawberry Cheese Cake',40,3,120,'our-menu-19.jpg','2020-07-31 20:01:13','Bao',_binary '\0',NULL,NULL),(23,1,'Strawberry Cheese Cake',40,1,40,'our-menu-19.jpg','2020-08-01 18:24:49','BÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â£o TrÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹nh ThiÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âªm',_binary '',1,NULL),(24,1,'Strawberry Cheese Cake',40,2,80,'our-menu-19.jpg','2020-08-01 18:34:27','BÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â£o TrÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹nh ThiÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âªm',_binary '',1,NULL),(25,1,'Strawberry Cheese Cake',40,1,40,'our-menu-19.jpg','2020-08-01 19:14:24','BÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â£o TrÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹nh ThiÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âªm',_binary '',1,NULL),(26,1,'Spa',500,2,1000,'experience2.jpg','2020-08-01 22:11:49','BÃ¡ÂºÂ£o TrÃ¡Â»â€¹nh ThiÃƒÂªm',_binary '\0',3,NULL),(27,12,'Room -Bungalow-Da Nang2',50,1,50,'Typeroom_Bungalow.jpg','2020-08-03 14:56:56','yoyoy',NULL,NULL,NULL),(28,13,'Room -Deluxe-Da Nang5',34,1,34,'Typeroom_Deluxe.jpg','2020-08-03 15:02:39','yoyo',NULL,NULL,NULL),(29,14,'Room -Deluxe-Da Nang5',34,1,34,'Typeroom_Deluxe.jpg','2020-08-03 15:31:56','yoyo',NULL,NULL,NULL),(30,15,'Room -Bungalow-Da Nang2',50,1,50,'Typeroom_Bungalow.jpg','2020-08-03 15:36:39','yoyo',NULL,NULL,NULL),(31,16,'Room -Bungalow-Da Nang2',50,1,50,'Typeroom_Bungalow.jpg','2020-08-03 15:38:09','yoyo',NULL,NULL,NULL),(32,17,'Room -Bungalow-Da Nang2',50,1,50,'Typeroom_Bungalow.jpg','2020-08-03 15:51:48','er',NULL,NULL,NULL),(33,18,'Room -Bungalow-Da Nang2',50,1,50,'Typeroom_Bungalow.jpg','2020-08-03 15:54:12','oik',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `receiptcomponent` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -321,8 +324,8 @@ DROP TABLE IF EXISTS `role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `role` (
-  `RoleId` int NOT NULL AUTO_INCREMENT,
-  `RoleName` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `RoleId` int(11) NOT NULL AUTO_INCREMENT,
+  `RoleName` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`RoleId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -345,16 +348,16 @@ DROP TABLE IF EXISTS `room`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `room` (
-  `RoomId` int NOT NULL AUTO_INCREMENT,
-  `LocationId` int DEFAULT NULL,
-  `RoomTypeId` int DEFAULT NULL,
+  `RoomId` int(11) NOT NULL AUTO_INCREMENT,
+  `LocationId` int(11) DEFAULT NULL,
+  `RoomTypeId` int(11) DEFAULT NULL,
   `Price` float DEFAULT NULL,
   `Status` bit(1) DEFAULT NULL,
-  `Description` varchar(2550) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `BedOption` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `Size` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `View` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `capacity` int DEFAULT NULL,
+  `Description` varchar(2550) CHARACTER SET utf8 DEFAULT NULL,
+  `BedOption` varchar(80) CHARACTER SET utf8 DEFAULT NULL,
+  `Size` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
+  `View` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `capacity` int(11) DEFAULT NULL,
   PRIMARY KEY (`RoomId`),
   KEY `FK_room_location` (`LocationId`),
   KEY `FK_room_roomtype` (`RoomTypeId`),
@@ -399,9 +402,9 @@ DROP TABLE IF EXISTS `roomconvenient`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `roomconvenient` (
-  `RoomId` int DEFAULT NULL,
-  `ConvenientId` int DEFAULT NULL,
-  `id` int NOT NULL AUTO_INCREMENT,
+  `RoomId` int(11) DEFAULT NULL,
+  `ConvenientId` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`),
   KEY `FK_roomconvenient_convenient` (`ConvenientId`),
   KEY `FK_roomconvenient_room` (`RoomId`),
@@ -428,9 +431,9 @@ DROP TABLE IF EXISTS `roomimage`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `roomimage` (
-  `RoomImageId` int NOT NULL AUTO_INCREMENT,
-  `RoomId` int DEFAULT NULL,
-  `Url` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `RoomImageId` int(11) NOT NULL AUTO_INCREMENT,
+  `RoomId` int(11) DEFAULT NULL,
+  `Url` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`RoomImageId`),
   KEY `FK_roomimage_room` (`RoomId`),
   CONSTRAINT `FK_roomimage_room` FOREIGN KEY (`RoomId`) REFERENCES `room` (`RoomId`)
@@ -455,12 +458,12 @@ DROP TABLE IF EXISTS `roomtype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `roomtype` (
-  `RoomTypeId` int NOT NULL AUTO_INCREMENT,
-  `RoomTypeName` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `Description` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `url` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `RoomTypeId` int(11) NOT NULL AUTO_INCREMENT,
+  `RoomTypeName` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `Description` varchar(500) CHARACTER SET utf8 DEFAULT NULL,
+  `url` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`RoomTypeId`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -481,16 +484,17 @@ DROP TABLE IF EXISTS `service`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `service` (
-  `ServiceId` int NOT NULL AUTO_INCREMENT,
-  `SerivceTypeId` int DEFAULT NULL,
-  `ServiceName` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `ServiceId` int(11) NOT NULL AUTO_INCREMENT,
+  `SerivceTypeId` int(11) DEFAULT NULL,
+  `ServiceName` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
   `ServicePrice` float DEFAULT NULL,
-  `ServiceDescription` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `Serviceurl` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ServiceDescription` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `Serviceurl` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `status` bit(1) DEFAULT b'1',
   PRIMARY KEY (`ServiceId`),
   KEY `FK_foodanddrink_fndtype` (`SerivceTypeId`),
   CONSTRAINT `fk_service_servicetype` FOREIGN KEY (`SerivceTypeId`) REFERENCES `servicetype` (`ServiceTypeId`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -499,7 +503,7 @@ CREATE TABLE `service` (
 
 LOCK TABLES `service` WRITE;
 /*!40000 ALTER TABLE `service` DISABLE KEYS */;
-INSERT INTO `service` VALUES (1,1,'Costolette di agnello',100,'lorem i sum','our-menu-02.jpg'),(2,1,' Miele di pollo alla griglia',80,'lorem i sum','our-menu-04.jpg'),(3,2,'Macallan Fine & Rare Scotch Whisky',500,'lorem i sum','our-menu-05.jpg'),(4,1,'Strawberry Cheese Cake',40,'lorem i sum','our-menu-19.jpg'),(5,3,'Water Park',1000,'lorem i sum','experience5.jpg'),(6,3,'Spa',500,'lorem i sum','experience2.jpg'),(7,3,'Wine Castle',200,'lorem i sum','experience3.jpg'),(8,3,'Safari Zone',1000,'lorem i sum','experience4.jpg'),(9,1,'45g536hg',2343,'lorem i sum','lorem i sum'),(10,1,'45b45g',213,'lorem i sum','lorem i sum');
+INSERT INTO `service` VALUES (1,1,'Costolette di agnello',100,'lorem i sum','our-menu-02.jpg',_binary ''),(2,1,' Miele di pollo alla griglia',80,'lorem i sum','our-menu-04.jpg',_binary ''),(3,2,'Macallan Fine & Rare Scotch Whisky',500,'lorem i sum','our-menu-05.jpg',_binary ''),(4,1,'Strawberry Cheese Cake',40,'lorem i sum','our-menu-19.jpg',_binary ''),(5,3,'Water Park',1000,'lorem i sum','experience5.jpg',_binary ''),(6,3,'Spa',500,'lorem i sum','experience2.jpg',_binary ''),(7,3,'Wine Castle',200,'lorem i sum','experience3.jpg',_binary ''),(8,3,'Safari Zone',1000,'lorem i sum','experience4.jpg',_binary '');
 /*!40000 ALTER TABLE `service` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -511,8 +515,8 @@ DROP TABLE IF EXISTS `servicetype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `servicetype` (
-  `ServiceTypeId` int NOT NULL AUTO_INCREMENT,
-  `TypeName` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `ServiceTypeId` int(11) NOT NULL AUTO_INCREMENT,
+  `TypeName` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`ServiceTypeId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -535,11 +539,11 @@ DROP TABLE IF EXISTS `ticket`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ticket` (
-  `TicketId` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `Quantity` int DEFAULT NULL,
-  `TicketName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `TicketUrl` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `BuyerID` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `TicketId` varchar(500) CHARACTER SET utf8 NOT NULL,
+  `Quantity` int(11) DEFAULT NULL,
+  `TicketName` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `TicketUrl` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `BuyerID` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `BuyDate` datetime DEFAULT NULL,
   PRIMARY KEY (`TicketId`),
   KEY `FK_ticket_buyer_idx` (`BuyerID`),
@@ -573,6 +577,10 @@ SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = @saved_cs_client;
 
 --
+-- Dumping events for database 'prj4db'
+--
+
+--
 -- Final view structure for view `history`
 --
 
@@ -582,7 +590,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
 /*!50001 SET character_set_client      = utf8mb4 */;
 /*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `history` AS select `c`.`url` AS `url`,`c`.`RoomTypeName` AS `RoomTypeName`,`d`.`LocationName` AS `LocationName`,`a`.`CheckInDate` AS `CheckInDate`,`a`.`CheckOutDate` AS `CheckOutDate`,`e`.`Subtotal` AS `Subtotal`,`e`.`Tax` AS `Tax`,`a`.`Deposits` AS `Deposits`,`e`.`Total` AS `Total`,`a`.`ReceiptId` AS `ReceiptId`,`a`.`AccountCustomerId` AS `AccountCustomerId` from ((((`qrcode` `a` join `room` `b` on((`a`.`RoomId` = `b`.`RoomId`))) join `roomtype` `c` on((`b`.`RoomTypeId` = `c`.`RoomTypeId`))) join `location` `d` on((`b`.`LocationId` = `d`.`LocationId`))) join `receipt` `e` on((`a`.`ReceiptId` = `e`.`ReceiptId`))) */;
@@ -635,4 +643,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-08-01 22:19:05
+-- Dump completed on 2020-08-03 17:15:11

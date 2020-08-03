@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package AdminController;
 
 import entities.Qrcode;
@@ -49,33 +48,38 @@ public class Employee_Checkout extends HttpServlet {
             ReceiptClient receiptClient = new ReceiptClient();
             ReceiptcomponentClient receiptcomponentClient = new ReceiptcomponentClient();
             SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
-            GenericType<Qrcode> genQrcode = new GenericType<Qrcode>(){};
-            GenericType<Receipt> genReceipt = new GenericType<Receipt>(){};
-            GenericType<List<Receiptcomponent>> genReceiptcomponent = new GenericType<List<Receiptcomponent>>(){};
+            GenericType<Qrcode> genQrcode = new GenericType<Qrcode>() {
+            };
+            GenericType<Receipt> genReceipt = new GenericType<Receipt>() {
+            };
+            GenericType<List<Receiptcomponent>> genReceiptcomponent = new GenericType<List<Receiptcomponent>>() {
+            };
             Qrcode qrcode = qrcodeClient.find_JSON(genQrcode, qrcodeid);
             List<Receiptcomponent> listReceiptcomponents = receiptcomponentClient.findbyReceiptID_JSON(genReceiptcomponent, qrcode.getReceiptId().getReceiptId().toString());
             Receipt receipt = receiptClient.find_JSON(genReceipt, qrcode.getReceiptId().getReceiptId().toString());
             float realpay = 0;
             for (Receiptcomponent receiptcomponent : listReceiptcomponents) {
-                if (receiptcomponent.getStatus()) {
-                    realpay += receiptcomponent.getSubtotal();
+                if (receiptcomponent.getStatus() != null) {
+                    if (receiptcomponent.getStatus()) {
+                        realpay += receiptcomponent.getSubtotal();
+                    }
                 }
             }
-            if (action!=null && action.equals("deactive")) {
+            if (action != null && action.equals("deactive")) {
                 if (realpay == receipt.getTotal()) {
                     request.setAttribute("msg", "<div class='success'></div>"
-                        + "         <script type=\"text/javascript\">\n"
-                        + "            $('.success').each(function () {\n"
-                        + "                swal(\"Check out successfully!!!\", \"\", \"success\");\n"
-                        + "            });\n"
-                        + "        </script>");
-                }else{
+                            + "         <script type=\"text/javascript\">\n"
+                            + "            $('.success').each(function () {\n"
+                            + "                swal(\"Check out successfully!!!\", \"\", \"success\");\n"
+                            + "            });\n"
+                            + "        </script>");
+                } else {
                     request.setAttribute("msg", "<div class='success'></div>"
-                        + "         <script type=\"text/javascript\">\n"
-                        + "            $('.success').each(function () {\n"
-                        + "                swal(\"Check out fail,pay your bill first!!!\", \"\", \"error\");\n"
-                        + "            });\n"
-                        + "        </script>");
+                            + "         <script type=\"text/javascript\">\n"
+                            + "            $('.success').each(function () {\n"
+                            + "                swal(\"Check out fail,pay your bill first!!!\", \"\", \"error\");\n"
+                            + "            });\n"
+                            + "        </script>");
                 }
             }
             request.setAttribute("qrcode", qrcode);

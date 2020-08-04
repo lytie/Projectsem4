@@ -96,7 +96,7 @@
                                         <div class="boking-datepicker" >
 
                                             <i class="gj-icon" role="right-icon" >event</i>
-                                            <input id="datepicker1"  name="start"/>
+                                            <input id="datepicker1"  name="start" value="${start}"/>
                                         </div>
                                     </div>
                                     <!-- Single Select Box -->
@@ -107,7 +107,7 @@
                                         </div>
                                         <div class="boking-datepicker">
                                             <i class="gj-icon" role="right-icon">event</i>
-                                            <input id="datepicker2"  name="end" />
+                                            <input id="datepicker2"  name="end" value="${end}"/>
                                         </div>
                                     </div>
 
@@ -169,7 +169,8 @@
 
                                     <!-- Single Select Box -->
                                     <div class="single-select-box pt-45 mb-30">
-                                        <input type="submit" class="btn select-btn" value="Book Now"/>
+                                        <a href="Booking" class="btn select-btn">Book Now </a>
+                                       
                                     </div>
 
 

@@ -26,7 +26,7 @@
                             <!-- logo -->
                             <div class="col-xl-2 col-lg-2">
                                 <div class="logo">
-                                    <a href="index.jsp"><img src="http://localhost:8080/WA/images/img/newlogo1.png" alt=""></a>
+                                    <a href="Haven"><img src="http://localhost:8080/WA/images/img/newlogo1.png" alt=""></a>
                                 </div>
                             </div>
                             <div class="col-xl-8 col-lg-8">

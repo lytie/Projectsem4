@@ -7,10 +7,15 @@ package BookingController;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -30,6 +35,22 @@ public class Haven extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
+        HttpSession session = request.getSession();
+        Date date =new Date();
+        DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+        String d=dateFormat.format(date);
+       Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            cal.add(Calendar.DATE, 1);
+        String d1=dateFormat.format(cal.getTime());
+           
+        if (session.getAttribute("start")==null) {
+            session.setAttribute("start", d);
+        }
+        if (session.getAttribute("end")==null) {
+            session.setAttribute("end",d1 );
+        }
         
         request.getRequestDispatcher("Booking/index.jsp").forward(request, response);
     }

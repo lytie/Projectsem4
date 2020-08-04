@@ -25,6 +25,28 @@
 <!-- AdminLTE for demo purposes -->
 <script src="AdminTemplate/dist/js/demo.js"></script>
 <!-- page script -->
+
+
+<!-- jquery-validation -->
+<script src="AdminTemplate/plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="AdminTemplate/plugins/jquery-validation/additional-methods.min.js"></script>
+
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="AdminTemplate/dist/js/pages/dashboard.js"></script>
+<!-- ChartJS -->
+<script src="AdminTemplate/plugins/chart.js/Chart.min.js"></script>
+<script src='https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.min.js'></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous">
+</script>
+<script src="AdminTemplate/dist/js/jquery.tableToExcel.js"></script>
+
 <script>
     $(function() {
         $("#example1").DataTable({
@@ -42,18 +64,3 @@
         });
     });
 </script>
-
-<!-- jquery-validation -->
-<script src="AdminTemplate/plugins/jquery-validation/jquery.validate.min.js"></script>
-<script src="AdminTemplate/plugins/jquery-validation/additional-methods.min.js"></script>
-
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="AdminTemplate/dist/js/pages/dashboard.js"></script>
-<!-- ChartJS -->
-<script src="AdminTemplate/plugins/chart.js/Chart.min.js"></script>
-<script src='https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.min.js'></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>

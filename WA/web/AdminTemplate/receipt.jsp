@@ -38,7 +38,21 @@
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
-
+                <section class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                               
+                                <h4>
+                                    <button onclick="$('table').tblToExcel();" class="btn btn-info btn-sm" href="#">
+                                        <i class=" fa fa-download">
+                                        </i> Export to excel
+                                    </button>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
                 <!-- Main content -->
                 <section class="content">
@@ -69,39 +83,39 @@
                                                 <tbody>
                                                     <c:forEach items="${listrc}" var="lc">
                                                         <tr>
-                                                        <td>${lc.getReceiptId()}</td>
-                                                        <td>
-                                                            <c:choose>
-                                                                <c:when test="${lc.getPayDate()==null}">
-                                                                    ---------
-                                                                </c:when>
-                                                                <c:otherwise>
-                                                                    <fmt:formatDate value="${lc.getPayDate()}" pattern="dd/MM/yyyy HH:mm"/>
-                                                                </c:otherwise>
-                                                            </c:choose>
-                                                        </td>
-                                                        <td>${lc.getSubtotal()}</td>
-                                                        <td >${lc.getTax()}</td>
-                                                        <td >${lc.getTotal()}</td>
-                                                        <td >
-                                                            <c:choose>
-                                                                <c:when test="${lc.getPayDate()==null}">
-                                                                    UnPaid
-                                                                </c:when>
-                                                                <c:otherwise>
-                                                                    Paid
-                                                                </c:otherwise>
-                                                            </c:choose>
-                                                        </td>
-                                                        <td>
-                                                            <a class="btn btn-info btn-sm" href="Admin_ReceiptInfo?receiptid=${lc.getReceiptId()}">
-                                                                <i class="fas fa-info">
-                                                                </i> See Details
-                                                            </a>
-                                                        </td>
-                                                    </tr>
+                                                            <td>${lc.getReceiptId()}</td>
+                                                            <td>
+                                                                <c:choose>
+                                                                    <c:when test="${lc.getPayDate()==null}">
+                                                                        ---------
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <fmt:formatDate value="${lc.getPayDate()}" pattern="dd/MM/yyyy HH:mm"/>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                            </td>
+                                                            <td>${lc.getSubtotal()}</td>
+                                                            <td >${lc.getTax()}</td>
+                                                            <td >${lc.getTotal()}</td>
+                                                            <td >
+                                                                <c:choose>
+                                                                    <c:when test="${lc.getPayDate()==null}">
+                                                                        UnPaid
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        Paid
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                            </td>
+                                                            <td>
+                                                                <a class="btn btn-info btn-sm" href="Admin_ReceiptInfo?receiptid=${lc.getReceiptId()}">
+                                                                    <i class="fas fa-info">
+                                                                    </i> See Details
+                                                                </a>
+                                                            </td>
+                                                        </tr>
                                                     </c:forEach>
-                                                  
+
                                                 </tbody>
 
                                             </table>
@@ -119,7 +133,7 @@
                 <!-- /.content -->
             </div>
             <!-- /.content-wrapper -->
-             <%@include file="footer.jsp" %>
+            <%@include file="footer.jsp" %>
 
             <!-- Control Sidebar -->
             <aside class="control-sidebar control-sidebar-dark">
@@ -131,6 +145,7 @@
 
         <!-- jQuery -->
         <%@include file="jslink.jsp" %>
+            
     </body>
 
 </html>

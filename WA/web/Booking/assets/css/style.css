@@ -1614,8 +1614,10 @@ label {
     transition: .6s; } }
 
 .customar-padding {
-  padding-top: 260px;
-  padding-bottom: 93px; 
+    margin-top: 60px;
+  padding-top: 160px;
+  padding-bottom: 193px; 
+  
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1200px) {

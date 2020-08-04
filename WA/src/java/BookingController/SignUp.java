@@ -11,6 +11,7 @@ import bean.encrypt;
 import entities.Accountcustomer;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -155,6 +156,7 @@ public class SignUp extends HttpServlet {
 
             } while (c == true);
 
+             Date d=new Date();
             //thuc thi neu err... null nguoc lai tra ve loi
             if (errName == null && errEmail == null && errPass == null && errPhone == null && errConfirmPass == null) {
 
@@ -164,6 +166,7 @@ public class SignUp extends HttpServlet {
                 accCus.setPhone(phone);
                 accCus.setToken(token);
                 accCus.setActive(false);
+                accCus.setCreateDate(d);
                 accC.create_JSON(accCus);
 
                 out.println("<div class=\"success\"></div>");

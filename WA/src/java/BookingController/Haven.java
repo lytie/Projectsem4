@@ -45,11 +45,11 @@ public class Haven extends HttpServlet {
             cal.add(Calendar.DATE, 1);
         String d1=dateFormat.format(cal.getTime());
            
-        if (session.getAttribute("start")==null) {
-            session.setAttribute("start", d);
+        if (session.getAttribute("inDate")==null) {
+            session.setAttribute("inDate", d);
         }
-        if (session.getAttribute("end")==null) {
-            session.setAttribute("end",d1 );
+        if (session.getAttribute("outDate")==null) {
+            session.setAttribute("outDate",d1 );
         }
         
         request.getRequestDispatcher("Booking/index.jsp").forward(request, response);

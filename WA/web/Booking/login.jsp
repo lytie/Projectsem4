@@ -93,7 +93,7 @@
         </div>
 
 
-
+                        <div class="${success}"></div>
 
         <!--===============================================================================================-->
         <script src="<%=common.url%>/vendor/jquery/jquery-3.2.1.min.js"></script>
@@ -134,6 +134,11 @@
         <script type="text/javascript">
             $('.pass').each(function () {
                 swal("Reset Password Success", "", "success");
+            });
+        </script>
+        <script type="text/javascript">
+            $('.verify').each(function () {
+                swal("Your account has been activated", "", "success");
             });
         </script>
     </body>

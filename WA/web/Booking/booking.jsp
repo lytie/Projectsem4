@@ -156,7 +156,6 @@
 
                                         <div class="select-itms">
                                             <select name="selectAdult" id="select1">
-                                                <option value="0" <c:if test="${adult==0}">selected</c:if>>0</option>
                                                 <option value="1" <c:if test="${adult==1}">selected</c:if>>1</option>
                                                 <option value="2" <c:if test="${adult==2}">selected</c:if>>2</option>
                                                 <option value="3" <c:if test="${adult==3}">selected</c:if>>3</option>
@@ -210,9 +209,20 @@
                     <%
                         if(request.getAttribute("check")== "true"){
                     %>
-                <c:forEach items="${booking_bookMB.listRoomBook(inDate, outDate, location, capation)}" var="rb">
+               <c:choose >
+                <c:when test="${booking_bookMB.listRoomBook(inDate, outDate, location, capation).isEmpty()}">
+                    <div style="margin: 200px ">
+                        <div style="font-family: 'Lucida Console', Courier, monospace;font-size: 25px"> No suitable rooms found </div>
+                    
+                    
+                    </div>
+                </c:when>
+                <c:otherwise >
+                    
+                    
+                    <c:forEach items="${booking_bookMB.listRoomBook(inDate, outDate, location, capation)}" var="rb">
 
-                    <section class="make-customer-area customar-padding fix">
+                        <section class="make-customer-area customar-padding fix" style=" border: 2px dashed #dca73a; border-radius: 5px">
                         <div class="container-fluid p-0">
                             <div class="row">
                                 <div class="col-xl-5 col-lg-6">
@@ -227,7 +237,7 @@
                                         <h2 name="name">${rb.roomTypeName} - ${booking_bookMB.location(rb.roomId).locationName} ${booking_bookMB.room(rb.roomId).roomId}</h2>
                                         <input type="hidden" name="nameRoom" value=""/>
                                         <div class="caption-details">
-                                            <p class="pera-dtails">Price: ${rb.price}$ </p>
+                                            <p class="pera-dtails">Price: ${rb.price}$ /day </p>
 
                                             <div style="display: grid;grid-template-columns: auto auto auto;">
                                                 <p>VIEW: <sqan>${rb.view}</sqan></p>
@@ -358,13 +368,19 @@
 
 
                 </c:forEach>
+                </c:otherwise>
+               </c:choose>
                     
 <%
     
        
 }else{
 %>
-<div>Not found</div>
+<div style="margin: 200px ">
+                        <div style="font-family: 'Lucida Console', Courier, monospace;font-size: 25px"> No suitable rooms found </div>
+                    
+                    
+                    </div>
 <%
 }
 %>

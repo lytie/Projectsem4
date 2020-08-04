@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -30,11 +31,42 @@ public class Booking extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String check="false";
+
+        HttpSession session = request.getSession();
+        String check = "true";
+
+        if (session.getAttribute("inDate") == null || session.getAttribute("outDate") == null) {
+            check = "false";
+        } else {
+
+            int location = 1;
+            int adult = 1;
+            int children = 1;
+            if (session.getAttribute("location") == null) {
+                session.setAttribute("location", location);
+            }
+//
+            if (session.getAttribute("adult") == null) {
+                session.setAttribute("adult", adult);
+//            request.setAttribute("adult", 1);
+            }
+//
+            if (session.getAttribute("children") == null) {
+                session.setAttribute("children", children);
+            }
+//
+            if (session.getAttribute("capation") == null) {
+                session.setAttribute("capation", adult * 2 + children);
+            }
+
+            request.setAttribute("inDate", session.getAttribute("inDate"));
+            request.setAttribute("outDate", session.getAttribute("outDate"));
+            request.setAttribute("location", location);
+            request.setAttribute("adult", adult);
+            request.setAttribute("children", children);
+        }
         request.setAttribute("check", check);
-    
-    
-    request.getRequestDispatcher("Booking/booking.jsp").forward(request, response);
+        request.getRequestDispatcher("Booking/booking.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

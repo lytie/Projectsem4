@@ -63,10 +63,24 @@
                 </div>
             </div>
             <!-- slider Area End-->
+            
             <%
                 if (session.getAttribute("user") != null) {
-
+                        
             %>
+            
+            <c:choose >
+                <c:when test="${list.isEmpty()}">
+                    <div style="margin: 200px ">
+                        <div style="font-family: 'Lucida Console', Courier, monospace;font-size: 25px"> You have no room usage history yet </div>
+                    
+                    
+                    </div>
+                </c:when>
+                <c:otherwise >
+                    
+                
+            
             <c:forEach items="${list}" var="l">
                 <!-- History Start-->
                 <div class="container-fluid mb-105">
@@ -133,6 +147,8 @@
                     </section>
                 </div>
             </c:forEach>
+                </c:otherwise>
+            </c:choose>
             <!-- History End-->
             <%} else {
             %>

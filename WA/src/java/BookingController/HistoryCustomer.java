@@ -61,6 +61,8 @@ public class HistoryCustomer extends HttpServlet {
                 System.out.println(listHis);
                 System.out.println(list);
 
+                
+                
                 request.setAttribute("list", list);
                 Date date = new Date();
                 request.setAttribute("date", date);

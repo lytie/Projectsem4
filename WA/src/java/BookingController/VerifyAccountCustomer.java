@@ -51,6 +51,7 @@ public class VerifyAccountCustomer extends HttpServlet {
             }
         }
       
+        request.setAttribute("success", "verify");
 request.getRequestDispatcher("Booking/login.jsp").forward(request, response);     
         
     }

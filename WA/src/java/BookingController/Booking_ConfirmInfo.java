@@ -9,6 +9,13 @@ import Generator.SendMail;
 import entities.Accountcustomer;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,14 +39,40 @@ public class Booking_ConfirmInfo extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        try {
+            response.setContentType("text/html;charset=UTF-8");
 
-        int idRoom = Integer.valueOf(request.getParameter("id"));
+            int idRoom = Integer.valueOf(request.getParameter("id"));
 
-        request.setAttribute("id", idRoom);
-        
+            request.setAttribute("id", idRoom);
 
-        request.getRequestDispatcher("Booking/confirm_infomation.jsp").forward(request, response);
+            HttpSession session = request.getSession();
+
+            String in = session.getAttribute("inDate").toString();
+
+            String out = session.getAttribute("outDate").toString();
+
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            Date datein = df.parse(in);
+            Date dateout = df.parse(out);
+
+            Calendar calIn = Calendar.getInstance();
+            Calendar calOut = Calendar.getInstance();
+            calIn.setTime(datein);
+            calOut.setTime(dateout);
+            long date = (dateout.getTime() - datein.getTime()) / ((24 * 3600 * 1000));
+
+            if (session.getAttribute("user") != null) {
+                Accountcustomer accountcustomer = (Accountcustomer) session.getAttribute("user");
+                request.setAttribute("AccCus", accountcustomer);
+
+            }
+
+            request.setAttribute("date", date);
+            request.getRequestDispatcher("Booking/confirm_infomation.jsp").forward(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(Booking_ConfirmInfo.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
@@ -70,7 +103,6 @@ public class Booking_ConfirmInfo extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-    
         //processRequest(request, response);
     }
 

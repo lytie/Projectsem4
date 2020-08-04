@@ -136,13 +136,14 @@
                                         <li>
                                             <a href="" class="">
                                                 <p>Price: </p>
-                                                <p>${booking_bookMB.room(id).price}$</p>
+                                                <p>${booking_bookMB.room(id).price*date}$</p>
+                                                
                                             </a>
                                         </li>
                                         <li>
                                             <a href="" class="">
                                                 <p>Deposit (10%)</p>
-                                                <h3>${(booking_bookMB.room(id).price)/10}$</h3>
+                                                <h3>${(booking_bookMB.room(id).price*date)/10}$</h3>
                                                 <p></p>
                                             </a>
                                         </li>
@@ -159,17 +160,17 @@
 
                                     <div class="">
                                         <div class="form-group">
-                                            <input class="form-control " name="name"  type="text" placeholder="Enter your name" required=""/>
+                                            <input class="form-control " name="name"  type="text" placeholder="Enter your name" required="" value="${AccCus.fullName}"/>
                                         </div>
                                     </div>
                                     <div class="">
                                         <div class="form-group">
-                                            <input class="form-control " name="email"  type="email"  placeholder="Email"required=""/>
+                                            <input class="form-control " name="email"  type="email"  placeholder="Email"required="" value="${AccCus.email}"/>
                                         </div>
                                     </div>
                                     <div class="">
                                         <div class="form-group">
-                                            <input class="form-control" name="phone"  type="text" placeholder="Enter Phone"required=""/>
+                                            <input class="form-control" name="phone" minlength="10" type="text" placeholder="Enter Phone"required="" value="${AccCus.phone}"/>
                                         </div>
                                     </div>
                                     <input type="hidden" name="start" value="<%=start%>"/>
@@ -177,7 +178,7 @@
                                     <input type="hidden" name="selectAdult" value="<%=selectAdult%>"/>
                                     <input type="hidden" name="selectChildren" value="<%=selectChildren%>"/>
                                     <input type="hidden" name="idRoom" value="${id}"/>
-                                    <input type="hidden" name="price" value="${(booking_bookMB.room(id).price)}"/>
+                                    <input type="hidden" name="price" value="${(booking_bookMB.room(id).price*date)}"/>
                                     
                                     <div class="form-group mt-3">
                                         <button type="submit" class="button button-contactForm boxed-btn">Booking</button>

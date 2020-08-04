@@ -96,7 +96,7 @@
                                         <div class="boking-datepicker" >
 
                                             <i class="gj-icon" role="right-icon" >event</i>
-                                            <input id="datepicker1"  name="start" value="${start}"/>
+                                            <input id="datepicker1"  name="start" value="${inDate}"/>
                                         </div>
                                     </div>
                                     <!-- Single Select Box -->
@@ -107,7 +107,7 @@
                                         </div>
                                         <div class="boking-datepicker">
                                             <i class="gj-icon" role="right-icon">event</i>
-                                            <input id="datepicker2"  name="end" value="${end}"/>
+                                            <input id="datepicker2"  name="end" value="${outDate}"/>
                                         </div>
                                     </div>
 
@@ -137,7 +137,7 @@
 
                                             <div class="select-itms">
                                                 <select name="selectAdult" id="select1">
-                                                    <option value="0">0</option>
+                                                    
                                                     <option value="1" selected="">1</option>
                                                     <option value="2">2</option>
                                                     <option value="3">3</option>
@@ -169,7 +169,7 @@
 
                                     <!-- Single Select Box -->
                                     <div class="single-select-box pt-45 mb-30">
-                                        <a href="Booking" class="btn select-btn">Book Now </a>
+                                        <input type="submit" class="btn select-btn" value="Book Now" />
                                        
                                     </div>
 
@@ -235,7 +235,8 @@
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
                                         incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.
                                     </p>
-                                    <a href="#" class="btn more-btn1">Book now <i class="ti-angle-right"></i> </a>
+                                     
+                                    <a href="Booking" class="btn more-btn1">Book now <i class="ti-angle-right"></i> </a>
                                 </div>
                             </div>
                         </div>

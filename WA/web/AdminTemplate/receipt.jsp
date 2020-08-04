@@ -44,10 +44,6 @@
                             <div class="col-sm-6">
                                
                                 <h4>
-                                    <button onclick="$('table').tblToExcel();" class="btn btn-info btn-sm" href="#">
-                                        <i class=" fa fa-download">
-                                        </i> Export to excel
-                                    </button>
                                 </h4>
                             </div>
                         </div>

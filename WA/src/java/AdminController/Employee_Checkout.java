@@ -47,7 +47,7 @@ public class Employee_Checkout extends HttpServlet {
             QrcodeClient qrcodeClient = new QrcodeClient();
             ReceiptClient receiptClient = new ReceiptClient();
             ReceiptcomponentClient receiptcomponentClient = new ReceiptcomponentClient();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             GenericType<Qrcode> genQrcode = new GenericType<Qrcode>() {
             };
             GenericType<Receipt> genReceipt = new GenericType<Receipt>() {

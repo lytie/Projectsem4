@@ -85,7 +85,7 @@
 
                                                             <td>
 
-                                                                <a class="btn btn-info btn-sm" href="Admin_UpdateRoomType">
+                                                                <a class="btn btn-info btn-sm" href="Admin_UpdateRoomType?id=${t.getRoomTypeId()}">
                                                                     <i class="fas fa-pencil-alt">
                                                                     </i> Edit
                                                                 </a>

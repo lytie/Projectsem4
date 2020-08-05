@@ -41,6 +41,7 @@ public class Admin_ReadFB extends HttpServlet {
               GenericType<Feedback> feedback = new GenericType<Feedback>(){};
                Feedback feedbacklist = feedbackclient.find_JSON(feedback, feedbackid);
                request.setAttribute("feedbacklist", feedbacklist);
+               System.out.println("message:"+feedbacklist.getFeedBackMessage());
                request.getRequestDispatcher("AdminTemplate/readfb.jsp").forward(request, response);
         }
     }

@@ -246,6 +246,14 @@
         <servlet-class>AdminController.Admin_ForgetPassword</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>Admin_Feedback</servlet-name>
+        <servlet-class>AdminController.Admin_Feedback</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Admin_ReadFB</servlet-name>
+        <servlet-class>AdminController.Admin_ReadFB</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>Admin_RecoverPassword</servlet-name>
         <servlet-class>AdminController.Admin_RecoverPassword</servlet-class>
     </servlet>
@@ -384,6 +392,14 @@
     <servlet-mapping>
         <servlet-name>VerifyAccountCustomer</servlet-name>
         <url-pattern>/VerifyAccountCustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Admin_Feedback</servlet-name>
+        <url-pattern>/Admin_Feedback</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Admin_ReadFB</servlet-name>
+        <url-pattern>/Admin_ReadFB</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Booking_Logout</servlet-name>

@@ -34,21 +34,32 @@
                                     </div>
                                     <!-- /.card-header -->
                                     <!-- form start -->
-                                    <form role="form" id="quickForm">
+                                    <form role="form" id="quickForm" action="Admin_UpdateRoomType" method="post" enctype="multipart/form-data">
                                         <div class="card-body">
+                                            <input type="hidden" name="id" value="${roomtype.getRoomTypeId()}" >
                                             <div class="form-group">
                                                 <label for="exampleInputPassword1">RoomType Name :</label>
-                                                <input type="text" name="text" class="form-control" id="exampleInputFullName" placeholder="Full Name">
+                                                <input type="text" name="name" value="${roomtype.getRoomTypeName()}" class="form-control" id="" placeholder="Location Name" required="">
                                             </div>
                                             
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Decription :</label>
-                                                <textarea type="textarea" name="textarea" class="form-control" id="textarea" placeholder="Information Decription" rows="5" ></textarea> 
+                                                <textarea type="textarea" name="description" class="form-control" id="textarea" placeholder="Information Decription" rows="5" required="">${roomtype.getDescription()}</textarea>
                                             </div>
-                                            <div class="form-group">
-                                            <label for="exampleInputPassword1">Img Path :</label>
-                                            <input type="file" name="fileupload" class="form-control" id="fileupload" placeholder="Choose File Pls" >
-                                        </div>
+                                            <div class="form-group col-md-6">
+                                                                                          
+                                                <img id='output' width='200' src="images/img/${roomtype.getUrl()}"/>	
+
+                                                <input type='file' class="form-control"  accept='image/*' name='file' id='file'  onchange='loadFile(event)' >
+                                                <script>
+                                                    var loadFile = function (event) {
+                                                        var image = document.getElementById('output');
+                                                        image.src = URL.createObjectURL(event.target.files[0]);
+                                                    };
+                                                </script>
+                                            </div>
+
+                                            <div style="color: red;font-size: 18px"> ${error}</div>
 
                                         </div>
                                         <!-- /.card-body -->

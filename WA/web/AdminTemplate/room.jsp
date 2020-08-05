@@ -26,6 +26,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
 
         <link href="<%=common.url%>/dist/css/datepicker-foundation.min.css" rel="stylesheet"/>
+              
     </head>
     <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed" >
         <div class="wrapper">
@@ -301,8 +302,9 @@
         <%@include file="jslink.jsp" %>
         <script src="<%=common.url%>/dist/js/datepicker-full.js">
         </script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
         <script>
             const elem3 = document.getElementById('range');
                     const datepicker3 = new DateRangePicker(elem3, {

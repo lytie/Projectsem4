@@ -16,6 +16,8 @@ import entities.Qrcode;
 import entities.Receipt;
 import entities.Receiptcomponent;
 import entities.Room;
+import entities.Service;
+import entities.Servicetype;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
@@ -35,6 +37,7 @@ import wsc.QrcodeClient;
 import wsc.ReceiptClient;
 import wsc.ReceiptcomponentClient;
 import wsc.RoomClient;
+import wsc.ServicetypeClient;
 
 /**
  *
@@ -99,6 +102,12 @@ public class Booking_payment extends HttpServlet {
             };
             Room room = roomClient.find_JSON(roomType, idRoom);
 
+            
+            //serviceType
+            ServicetypeClient servicetypeClient=new ServicetypeClient();
+            GenericType<Servicetype> serviceTypeGen=new GenericType<Servicetype>(){};
+           Servicetype servicetype= servicetypeClient.find_JSON(serviceTypeGen, "4");
+            
             // Receiptcomponent
             Receiptcomponent receiptcomponent = new Receiptcomponent();
             receiptcomponent.setComponentName("Room -" + room.getRoomTypeId().getRoomTypeName() + "-" + room.getLocationId().getLocationName() + idRoom);
@@ -109,6 +118,8 @@ public class Booking_payment extends HttpServlet {
             receiptcomponent.setSubtotal(priceSub);
             receiptcomponent.setUrl(room.getRoomTypeId().getUrl());
             receiptcomponent.setOrderDate(datenow);
+            receiptcomponent.setStatus(Boolean.FALSE);
+            receiptcomponent.setServiceTypeId(servicetype);
             receiptcomponentClient.create_JSON(receiptcomponent);
 
             //check trung
@@ -159,6 +170,7 @@ public class Booking_payment extends HttpServlet {
             qrcode.setReceiptId(receipt);
             qrcode.setUrl(qrcodeImg + ".png");
             qrcode.setRoomId(room);
+            qrcode.setStatus(false);
             qrcode.setCreateDate(datenow);
 
             if (request.getParameter("idCus") != null) {

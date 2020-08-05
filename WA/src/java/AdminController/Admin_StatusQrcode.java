@@ -70,6 +70,7 @@ public class Admin_StatusQrcode extends HttpServlet {
                 
             }else if(status.equals("cancel")){
                 qrcode.setStatus(Boolean.FALSE);
+                qrcode.setAccountCustomerId(null);
                 qrcode.setCheckInDate(cal.getTime());
                 qrcode.setCheckOutDate(cal.getTime());
             }

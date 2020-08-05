@@ -141,6 +141,7 @@
 
         <!-- jQuery -->
         <%@include file="jslink.jsp" %>
+        ${msg}
     </body>
 
 </html>

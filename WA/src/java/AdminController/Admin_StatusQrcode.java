@@ -6,6 +6,8 @@
 package AdminController;
 
 import entities.Qrcode;
+import entities.Receipt;
+import entities.Receiptcomponent;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
@@ -19,6 +21,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.GenericType;
 import wsc.QrcodeClient;
+import wsc.ReceiptClient;
+import wsc.ReceiptcomponentClient;
 
 /**
  *
@@ -39,44 +43,70 @@ public class Admin_StatusQrcode extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
-            
-            
-            String status=request.getParameter("status");
-            String id=request.getParameter("id");
-            
+
+            String status = request.getParameter("status");
+            String id = request.getParameter("id");
+
             QrcodeClient qrcodeClient = new QrcodeClient();
+            ReceiptClient receiptClient = new ReceiptClient();
+            ReceiptcomponentClient receiptcomponentClient = new ReceiptcomponentClient();
             GenericType<Qrcode> genericType = new GenericType<Qrcode>() {
             };
+            GenericType<List<Receiptcomponent>> genReceiptcomponent = new GenericType<List<Receiptcomponent>>() {
+            };
+            GenericType<Receipt> genReceipt = new GenericType<Receipt>() {
+            };
             Qrcode qrcode = qrcodeClient.find_JSON(genericType, id);
-            
-            
-            Date date=new Date();
-                   
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = new Date();
+
             Calendar cal = Calendar.getInstance();
             cal.setTime(date);
             cal.add(Calendar.DATE, -1);
-           
-            
-            
-            
-            if(status.equals("deactivate")){
-                qrcode.setStatus(Boolean.FALSE);
-                qrcode.setCheckOutDate(cal.getTime());
-                
-                
-            }else if(status.equals("active")){
+
+            if (status.equals("deactivate")) {
+
+                List<Receiptcomponent> listReceiptcomponents = receiptcomponentClient.findbyReceiptID_JSON(genReceiptcomponent, qrcode.getReceiptId().getReceiptId().toString());
+                Receipt receipt = receiptClient.find_JSON(genReceipt, qrcode.getReceiptId().getReceiptId().toString());
+                float realpay = 0;
+                for (Receiptcomponent receiptcomponent : listReceiptcomponents) {
+                    if (receiptcomponent.getStatus() != null) {
+                        if (receiptcomponent.getStatus()) {
+                            realpay += receiptcomponent.getSubtotal();
+                        }
+                    }
+                }
+
+                if (realpay == receipt.getSubtotal()) {
+                    qrcode.setStatus(Boolean.FALSE);
+                    qrcode.setCheckOutDate(cal.getTime());
+                    request.setAttribute("msg", "<div class='success'></div>"
+                            + "         <script type=\"text/javascript\">\n"
+                            + "            $('.success').each(function () {\n"
+                            + "                swal(\"Check out successfully!!!\", \"\", \"success\");\n"
+                            + "            });\n"
+                            + "        </script>");
+                } else {
+                    request.setAttribute("msg", "<div class='success'></div>"
+                            + "         <script type=\"text/javascript\">\n"
+                            + "            $('.success').each(function () {\n"
+                            + "                swal(\"Check out fail,pay your bill first!!!\", \"\", \"error\");\n"
+                            + "            });\n"
+                            + "        </script>");
+                }
+            } else if (status.equals("active")) {
                 qrcode.setStatus(Boolean.TRUE);
-                
-            }else if(status.equals("cancel")){
+
+            } else if (status.equals("cancel")) {
                 qrcode.setStatus(Boolean.FALSE);
                 qrcode.setAccountCustomerId(null);
                 qrcode.setCheckInDate(cal.getTime());
                 qrcode.setCheckOutDate(cal.getTime());
             }
-            qrcodeClient.edit_JSON(qrcode,id);
+            qrcodeClient.edit_JSON(qrcode, id);
             request.getRequestDispatcher("Admin_QrCode").forward(request, response);
-            
+
         }
     }
 

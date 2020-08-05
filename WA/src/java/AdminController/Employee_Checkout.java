@@ -67,7 +67,7 @@ public class Employee_Checkout extends HttpServlet {
                     }
                 }
                 if (action != null && action.equals("deactive")) {
-                    if (realpay == receipt.getTotal()) {
+                    if (realpay == receipt.getSubtotal()) {
                         request.setAttribute("msg", "<div class='success'></div>"
                                 + "         <script type=\"text/javascript\">\n"
                                 + "            $('.success').each(function () {\n"

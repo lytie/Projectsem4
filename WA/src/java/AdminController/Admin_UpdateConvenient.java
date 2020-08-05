@@ -40,7 +40,7 @@ public class Admin_UpdateConvenient extends HttpServlet {
             String id=request.getParameter("id");
             ConvenientClient client=new ConvenientClient();
             GenericType<Convenient> type=new GenericType<Convenient>(){};
-            Convenient convenient=client.find_JSON(type, Integer.parseInt(id));
+            Convenient convenient=client.find_JSON(type, id);
             
             request.setAttribute("convenient", convenient);
              request.getRequestDispatcher("AdminTemplate/updateconvenient.jsp").forward(request, response);
@@ -72,52 +72,8 @@ public class Admin_UpdateConvenient extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-    {
-        String id=request.getParameter("id");
-       try (PrintWriter out = response.getWriter()){
-            UploadServlet uploadServlet = new UploadServlet();
-
-            ConvenientClient convenientClient = new ConvenientClient();
-            GenericType<Convenient> type=new GenericType<Convenient>(){};
-             String ids = null;
-            String name = null;
-            String file = null;
-            Map<String,Object> listrequest = uploadServlet.Upload(request, "img");
-            for (Map.Entry<String, Object> entry : listrequest.entrySet()) {
-                if (entry.getKey().equals("id")) {
-                    ids = (String) entry.getValue();
-                }
-                if (entry.getKey().equals("name")) {
-                    name = (String) entry.getValue();
-                }
-                
-                if (entry.getKey().equals("file")) {
-                    file = (String) entry.getValue();
-                }
-            }
-             System.out.println("id:"+ids);
-            System.out.println("name:"+name);
-            System.out.println("file:"+file);
-            System.out.println(listrequest);
-            Convenient convenient = convenientClient.find_JSON(type, Integer.parseInt(ids));
-
-            convenient.setConvenientName(name);
-            if(file!=null){
-            convenient.setUrl(file);
-            }
-
-            convenientClient.edit_JSON(convenient, ids);
-            request.getRequestDispatcher("Admin_Convenient").forward(request, response);
-        } catch (Exception ex) {
-             ConvenientClient client=new ConvenientClient();
-            GenericType<Convenient> type=new GenericType<Convenient>(){};
-            Convenient convenient=client.find_JSON(type, Integer.parseInt(id));
-            
-            request.setAttribute("convenient", convenient);
-            request.setAttribute("error", ex.getMessage());
-            request.getRequestDispatcher("AdminTemplate/addconvenient.jsp").forward(request, response);
-        }
+            throws ServletException, IOException{
+        
     }
         
     

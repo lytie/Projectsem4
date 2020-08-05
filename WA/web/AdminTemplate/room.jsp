@@ -301,6 +301,8 @@
         <%@include file="jslink.jsp" %>
         <script src="<%=common.url%>/dist/js/datepicker-full.js">
         </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
         <script>
             const elem3 = document.getElementById('range');
                     const datepicker3 = new DateRangePicker(elem3, {

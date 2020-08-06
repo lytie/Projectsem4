@@ -50,7 +50,7 @@ public class CustomerPageAboutServlet extends HttpServlet {
                 }
             } else {
                 request.getRequestDispatcher("/customerpage/about.jsp").forward(request, response);
-            }     
+            }
         }
     }
 
@@ -81,17 +81,18 @@ public class CustomerPageAboutServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String qrcodeid = request.getParameter("id");
-            QrcodeClient qrcodeClient = new QrcodeClient();
-            GenericType<Qrcode> genericType = new GenericType<Qrcode>(){};
-            Qrcode qrcode = new Qrcode();
-            qrcode = qrcodeClient.find_JSON(genericType, qrcodeid);
-            if (qrcode != null) {
-                HttpSession session = request.getSession();
-                session.setAttribute("qrcodeid", qrcodeid);
-                //request.getRequestDispatcher("/customerpage/index.jsp").forward(request, response);
-            }else{
-                //out.print("false");
-            }
+        QrcodeClient qrcodeClient = new QrcodeClient();
+        GenericType<Qrcode> genericType = new GenericType<Qrcode>() {
+        };
+        Qrcode qrcode = new Qrcode();
+        qrcode = qrcodeClient.find_JSON(genericType, qrcodeid);
+        if (qrcode != null) {
+            HttpSession session = request.getSession();
+            session.setAttribute("qrcodeid", qrcodeid);
+            //request.getRequestDispatcher("/customerpage/index.jsp").forward(request, response);
+        } else {
+            //out.print("false");
+        }
         processRequest(request, response);
     }
 

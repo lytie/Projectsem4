@@ -85,23 +85,22 @@ public class CustomerPageContactServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        if(session.getAttribute("qrcodeid")!=null){
-            String message=request.getParameter("message");
-            String id=session.getAttribute("qrcodeid").toString();
+        if (session.getAttribute("qrcodeid") != null) {
+            String message = request.getParameter("message");
+            String id = session.getAttribute("qrcodeid").toString();
             QrcodeClient qrcodeClient = new QrcodeClient();
             GenericType<Qrcode> genericType = new GenericType<Qrcode>() {
             };
-             Qrcode qrcode = qrcodeClient.find_JSON(genericType, id);
-             FeedbackClient feedbackClient=new FeedbackClient();
-        Feedback feedback=new Feedback();
-        feedback.setQrCodeId(qrcode);
-        feedback.setFeedBackMessage(message);
-        feedback.setFeedBackTime(Date.from(Instant.now()));
-       feedbackClient.create_JSON(feedback);
-       request.getRequestDispatcher("CustomerPageIndexServlet").forward(request, response);
-    }
+            Qrcode qrcode = qrcodeClient.find_JSON(genericType, id);
+            FeedbackClient feedbackClient = new FeedbackClient();
+            Feedback feedback = new Feedback();
+            feedback.setQrCodeId(qrcode);
+            feedback.setFeedBackMessage(message);
+            feedback.setFeedBackTime(Date.from(Instant.now()));
+            feedbackClient.create_JSON(feedback);
+            request.getRequestDispatcher("CustomerPageIndexServlet").forward(request, response);
         }
-        
+    }
 
     /**
      * Returns a short description of the servlet.

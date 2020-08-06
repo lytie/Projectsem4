@@ -81,7 +81,7 @@
 
                                         <!-- General tools such as edit or delete-->
                                         <div class="tools">
-                                            <a href="AdminIndexServlet" style="color: red"><i class="fas fa-edit"></i></a>
+                                            <a href="#" style="color: red"><i class="fas fa-edit"></i></a>
                                             <i class="fas fa-trash-o"></i>
                                         </div>
                                     </li>
@@ -96,7 +96,7 @@
                                         </div>
                                         <span class="text">${newcustomer} new customers</span>
                                         <div class="tools">
-                                            <a href="AdminIndexServlet" style="color: red"><i class="fas fa-edit"></i></a>
+                                            <a href="#" style="color: red"><i class="fas fa-edit"></i></a>
                                             <i class="fas fa-trash-o"></i>
                                         </div>
                                     </li>
@@ -111,7 +111,7 @@
                                         </div>
                                         <span class="text">${listCheckOutSchedule.size()} Check-out schedule</span>
                                         <div class="tools">
-                                            <a href="AdminIndexServlet" style="color: red"><i class="fas fa-edit"></i></a>
+                                            <a href="#" style="color: red"><i class="fas fa-edit"></i></a>
                                             <i class="fas fa-trash-o"></i>
                                         </div>
                                     </li>
@@ -139,7 +139,7 @@
                                             </c:choose>
                                         </small>
                                         <div class="tools">
-                                            <a href="AdminIndexServlet" style="color: red"><i class="fas fa-edit"></i></a>
+                                            <a href="#" style="color: red"><i class="fas fa-edit"></i></a>
                                             <i class="fas fa-trash-o"></i>
                                         </div>
                                     </li>

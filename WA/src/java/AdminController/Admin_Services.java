@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package AdminController;
 
 import entities.Service;
@@ -35,22 +34,39 @@ public class Admin_Services extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
         try (PrintWriter out = response.getWriter()) {
-            
+
             ServiceClient serviceClient = new ServiceClient();
-            GenericType<List<Service>> genericType = new GenericType<List<Service>>() {};
-            List<Service> listfood = new ArrayList<Service>();
-            List<Service> listdrink = new ArrayList<Service>();
-            List<Service> listentertainment = new ArrayList <Service>();
-            listfood = serviceClient.listfood_JSON(genericType);
-            listdrink = serviceClient.listdrink_JSON(genericType);
-            listentertainment = serviceClient.listticket_JSON(genericType);
-            request.setAttribute("listfood", listfood);
-            request.setAttribute("listdrink", listdrink);
-            request.setAttribute("listentertainment",listentertainment);
-            request.getRequestDispatcher("AdminTemplate/food.jsp").forward(request, response);
+            GenericType<List<Service>> genericType = new GenericType<List<Service>>() {
+            };
+            String type = request.getParameter("type");
+            List<Service> list = new ArrayList<Service>();
+            System.out.println("type:"+type);
+            if (type != null) {
+                switch (type) {
+                    case "all":
+                        list = serviceClient.findAll_JSON(genericType);
+                        break;
+                    case "food":
+                        list = serviceClient.listfood_JSON(genericType);
+                        break;
+                    case "drink":
+                        list = serviceClient.listdrink_XML(genericType);
+                        break;
+                    case "ticket":
+                        list = serviceClient.listticket_JSON(genericType);
+                        break;
+                    default:
+                        list = serviceClient.findAll_JSON(genericType);
+                }
+            }else{
+                list = serviceClient.findAll_JSON(genericType);
+            }
+            //getSerivceTypeId().getTypeName()
+            request.setAttribute("list", list);
+            request.getRequestDispatcher("AdminTemplate/service.jsp").forward(request, response);
         }
     }
 

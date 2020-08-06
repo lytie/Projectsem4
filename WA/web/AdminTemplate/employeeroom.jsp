@@ -209,7 +209,7 @@
                                     <c:forEach items="${listPrepareToCheckout}" var="lPTC">
                                         <div class="col-lg-3 col-6">
                                             <!-- small box -->
-                                            <div class="small-box bg-gradient-gray-dark">
+                                            <div class="small-box" style="background-color: #6d1bf3;color: white">
                                                 <div class="inner">
                                                     <h3 style="font-size: 20px">${lPTC.roomId.roomId}</h3>
 
@@ -218,7 +218,7 @@
                                                 <div class="icon">
                                                     <i class="fa fa-hotel"></i>
                                                 </div>
-                                                <a href="${lPTC.getQrCodeId()}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                                <a data-toggle="modal" data-target="#R${lPTC.getQrCodeId()}"  class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                                             </div>
                                         </div>
                                             <!--modal start-->

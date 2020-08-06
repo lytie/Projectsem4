@@ -13,6 +13,6 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2019 <span class="text-warning">Haven deluxe</span>.</strong>
+    <strong>Copyright &copy; 2020<span class="text-warning">Haven deluxe</span>.</strong>
     All rights reserved.
 </footer>

@@ -17,9 +17,9 @@
 <!-- Header -->
 <header>
     <!-- Header desktop -->
-    <div class="wrap-menu-header gradient1 trans-0-4">
+    <div class="wrap-menu-header gradient1 trans-0-4"style="height: 130px">
         <div class="container h-full">
-            <div class="wrap_header trans-0-3">
+            <div class="wrap_header trans-0-3" >
                 <!-- Logo -->
                 <div class="logo">
                     <a href="index.html">
@@ -28,7 +28,7 @@
                 </div>
 
                 <!-- Menu -->
-                <div class="wrap_menu p-l-45 p-l-0-xl">
+                <div class="wrap_menu p-l-30 p-l-0-xl">
                     <nav class="menu">
                         <ul class="main_menu">
                             <li>
@@ -54,32 +54,33 @@
                             <li>
                                 <a href="CustomerPageContactServlet">Feedback</a>
                             </li>
+                            <li>
+                                <div class="social flex-w flex-l-m p-r-20">
+                                    <a href="#"><i class="fa fa-tripadvisor" aria-hidden="true"></i></a>
+                                    <a href="#"><i class="fa fa-facebook m-l-21" aria-hidden="true"></i></a>
+                                    <a href="#"><i class="fa fa-twitter m-l-21" aria-hidden="true"></i></a>
+                                    <a href="#" class="btn-show-sidebar m-l-33 trans-0-4">
+                                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+
+                                        <%
+                                            int itemnum = 0;
+                                            if (session.getAttribute("cart") != null) {
+
+                                                List<Item> cart = (List<Item>) session.getAttribute("cart");
+                                                for (Item item : cart) {
+                                                    itemnum++;
+                                                }
+                                            }
+                                        %>
+                                        <span class="number"><%=itemnum%></span>
+                                    </a>
+                                    <!--<button class="btn-show-sidebar m-l-33 trans-0-4"></button>-->
+                                </div>
+                            </li>
                         </ul>
                     </nav>
                 </div>
 
-                <!-- Social -->
-                <div class="social flex-w flex-l-m p-r-20">
-                    <a href="#"><i class="fa fa-tripadvisor" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-facebook m-l-21" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-twitter m-l-21" aria-hidden="true"></i></a>
-                    <a href="#" class="btn-show-sidebar m-l-33 trans-0-4">
-                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-
-                        <%
-                            int itemnum = 0;
-                            if (session.getAttribute("cart") != null) {
-
-                                List<Item> cart = (List<Item>) session.getAttribute("cart");
-                                for (Item item : cart) {
-                                    itemnum++;
-                                }
-                            }
-                        %>
-                        <span class="number"><%=itemnum%></span>
-                    </a>
-                    <!--<button class="btn-show-sidebar m-l-33 trans-0-4"></button>-->
-                </div>
             </div>
         </div>
     </div>
@@ -121,36 +122,36 @@
                             %>
                             <tr>
                         <input type="hidden" value="<%=item.getService().getServiceId()%>"/>
-                                <td class="product-thumbnail">
-                                    <img src="./images/customerpageimg/<%= item.getService().getServiceurl()%>" alt="Image" class="img-fluid">
-                                </td>
-                                <td class="product-name">
-                                    <h2 class="h5 text-black"><%= item.getService().getServiceName()%></h2>
-                                </td>
-                                <td>$<%= item.getService().getServicePrice()%></td>
-                                <td>
-                                    <div class="input-group mb-3" style="max-width: 120px;">
-                                        <div class="input-group-prepend">   
-                                            <button class="btn btn-outline-warning js-btn-minus"
-                                                    type="button" >&minus;</button>
-                                        </div>
-                                        <input type="text" readonly name="quantity<%=cart.indexOf(item)%>" class="form-control text-center " value="<%=item.getQuantity()%>" placeholder=""
-                                               aria-label="Example text with button addon"
-                                               aria-describedby="button-addon1">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-outline-warning js-btn-plus"
-                                                    type="button">&plus;</button>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="full-price">$<%= item.getService().getServicePrice() * item.getQuantity()%></td>
-                                <td><a href="SessionCartServlet?action=remove&serviceid=<%=item.getService().getServiceId()%>" onclick="return confirm('Do you want to remove this ?')"
-                                       class="btn btn-outline-danger height-auto btn-sm">X</a></td>
-                            </tr>
-                            <%
-                                    }
+                        <td class="product-thumbnail">
+                            <img src="./images/customerpageimg/<%= item.getService().getServiceurl()%>" alt="Image" class="img-fluid">
+                        </td>
+                        <td class="product-name">
+                            <h2 class="h5 text-black"><%= item.getService().getServiceName()%></h2>
+                        </td>
+                        <td>$<%= item.getService().getServicePrice()%></td>
+                        <td>
+                            <div class="input-group mb-3" style="max-width: 120px;">
+                                <div class="input-group-prepend">   
+                                    <button class="btn btn-outline-warning js-btn-minus"
+                                            type="button" >&minus;</button>
+                                </div>
+                                <input type="text" readonly name="quantity<%=cart.indexOf(item)%>" class="form-control text-center " value="<%=item.getQuantity()%>" placeholder=""
+                                       aria-label="Example text with button addon"
+                                       aria-describedby="button-addon1">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-warning js-btn-plus"
+                                            type="button">&plus;</button>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="full-price">$<%= item.getService().getServicePrice() * item.getQuantity()%></td>
+                        <td><a href="SessionCartServlet?action=remove&serviceid=<%=item.getService().getServiceId()%>" onclick="return confirm('Do you want to remove this ?')"
+                               class="btn btn-outline-danger height-auto btn-sm">X</a></td>
+                        </tr>
+                        <%
                                 }
-                            %>
+                            }
+                        %>
                         </tbody>
                     </table>
                 </div>

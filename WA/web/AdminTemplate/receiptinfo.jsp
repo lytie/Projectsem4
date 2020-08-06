@@ -62,6 +62,7 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <table class="table table-bordered table-striped">
+                                                            <fmt:setLocale value = "en_US"/>
                                                             <thead>
                                                                 <tr>
                                                                     <th>Order Date </th>
@@ -85,10 +86,11 @@
                                                         </table>
                                                     </div>
                                                     <div class="col-md-6" style="padding: 20px;">
-                                                        <div>Subtotal: ${receipt.getSubtotal()}</div>
-                                                        <div>Tax: ${receipt.getTax()}</div>
-                                                        <div>Deposits: ${receipt.getSubtotal()+receipt.getTax()-receipt.getTotal()}</div>
-                                                        <div>Total:${receipt.getTotal()}</div>
+                                                        
+                                                        <div>Subtotal:<fmt:formatNumber maxFractionDigits="3" type="currency" value="${receipt.getSubtotal()}"/> </div>
+                                                        <div>Tax:<fmt:formatNumber maxFractionDigits="3" type="currency" value="${receipt.getTax()}"/> </div>
+                                                        <div>Deposits:<fmt:formatNumber maxFractionDigits="3" type="currency" value="${receipt.getSubtotal()+receipt.getTax()-receipt.getTotal()}"/></div>
+                                                        <div>Total:<fmt:formatNumber maxFractionDigits="3" type="currency" value="${receipt.getTotal()}"/></div>
                                                         <c:choose>
                                                             <c:when test="${receipt.getPayStatus()==true}">
                                                                 <button class="btn btn-success col-12" style="margin-top: 10px">Paid</button>

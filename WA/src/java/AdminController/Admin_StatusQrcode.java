@@ -81,6 +81,8 @@ public class Admin_StatusQrcode extends HttpServlet {
                 if (realpay == receipt.getSubtotal()) {
                     qrcode.setStatus(Boolean.FALSE);
                     qrcode.setCheckOutDate(cal.getTime());
+                    receipt.setPayDate(new Date());
+                    receiptClient.edit_JSON(receipt, receipt.getReceiptId().toString());
                     request.setAttribute("msg", "<div class='success'></div>"
                             + "         <script type=\"text/javascript\">\n"
                             + "            $('.success').each(function () {\n"

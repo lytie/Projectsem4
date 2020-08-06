@@ -56,11 +56,11 @@
                                         </div>                               
                                         <div class="col-4">
                                             From:
-                                            <input type="text" required id="datepicker1" name="start" class="form-control" />
+                                            <input type="text" required id="datepicker1" autocomplete="off" name="start" class="form-control" />
                                         </div>
                                         <div class="col-4">
                                             To:
-                                            <input type="text" required id="datepicker2" name="end" class="form-control" />
+                                            <input type="text" required id="datepicker2" autocomplete="off" name="end" class="form-control" />
                                         </div>                            
                                     </div>
                                 </div>

@@ -103,8 +103,6 @@ public class Admin_AddEmployee extends HttpServlet {
             GenericType<List<Accountemployee>> accType=new GenericType<List<Accountemployee>>(){};
             List<Accountemployee> listAcc=clientAcc.findAll_JSON(accType);
             StringGenerator gen=new StringGenerator();
-            encrypt en=new encrypt();
-            String pass=en.changed(password);
             String token=null;
             boolean check=false;
             do {       

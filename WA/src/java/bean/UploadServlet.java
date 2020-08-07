@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.AbstractMap;
 import java.util.ArrayList;
@@ -65,12 +66,14 @@ public class UploadServlet extends HttpServlet {
 //                    System.out.println(fieldName);
 //                    System.out.println(fileName);
                     InputStream fileContent = item.getInputStream();
-                    File file = new File("/" + outputFile + url + "/" + fileName);
-                    if (file.exists()) {
-                        file.delete();
-
+                    File file = new File(("/" + outputFile + url + "/" + fileName).trim());
+                    if (file.exists() && file.isFile()) {
+                        listrequest.put("existedFile", file.getName());
+                        System.out.println("file exists rồi");
+                        
                     }
-                    item.write(new File("/" + outputFile + url + "/" + fileName));
+                    
+                    item.write(file);
 
                     fileContent.close();
                     Thread.sleep(10000);

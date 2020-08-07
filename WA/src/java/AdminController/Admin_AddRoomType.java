@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package AdminController;
 
 import bean.UploadServlet;
@@ -71,46 +70,53 @@ public class Admin_AddRoomType extends HttpServlet {
             throws ServletException, IOException {
         try {
             UploadServlet uploadServlet = new UploadServlet();
-        RoomtypeClient roomtypeClient=new RoomtypeClient();
-        Roomtype roomtype=new Roomtype();
-        
-        String name=null;
-        String description=null;
-        String img=null;
-        
-        Map<String,Object> listRoomType=uploadServlet.Upload(request, "img");
-        
-        for (Map.Entry<String,Object> object : listRoomType.entrySet()) {
-            
-            if(object.getKey().equals("name")){
-                name=object.getValue().toString();
+            RoomtypeClient roomtypeClient = new RoomtypeClient();
+            Roomtype roomtype = new Roomtype();
+
+            String name = null;
+            String description = null;
+            String img = null;
+            String existedFile = null;
+
+            Map<String, Object> listRoomType = uploadServlet.Upload(request, "img");
+
+            for (Map.Entry<String, Object> object : listRoomType.entrySet()) {
+
+                if (object.getKey().equals("name")) {
+                    name = object.getValue().toString();
+                }
+                if (object.getKey().equals("decription")) {
+                    description = object.getValue().toString();
+                }
+                if (object.getKey().equals("file")) {
+                    img = object.getValue().toString();
+                }
+                if (object.getKey().equals("existedFile")) {
+                    existedFile = (String) object.getValue();
+                }
             }
-            if(object.getKey().equals("decription")){
-                description=object.getValue().toString();
+
+            roomtype.setDescription(description);
+            roomtype.setRoomTypeName(name);
+            if (img != null) {
+                roomtype.setUrl(img);
+            } else {
+                roomtype.setUrl(existedFile);
             }
-            if(object.getKey().equals("file")){
-                img=object.getValue().toString();
-            }
-        }
-        
-        roomtype.setDescription(description);
-        roomtype.setRoomTypeName(name);
-        roomtype.setUrl(img);
-        roomtypeClient.create_JSON(roomtype);
-        
-        RoomtypeClient roomtypeClients = new RoomtypeClient();
+            roomtypeClient.create_JSON(roomtype);
+
+            RoomtypeClient roomtypeClients = new RoomtypeClient();
             GenericType<List<Roomtype>> typ = new GenericType<List<Roomtype>>() {
             };
             List<Roomtype> listType = roomtypeClients.findAll_JSON(typ);
             request.setAttribute("listType", listType);
 
-             request.getRequestDispatcher("AdminTemplate/roomtype.jsp").forward(request, response);
+            request.getRequestDispatcher("AdminTemplate/roomtype.jsp").forward(request, response);
         } catch (Exception e) {
             request.setAttribute("error", e);
             request.getRequestDispatcher("AdminTemplate/addroomtype.jsp").forward(request, response);
         }
-        
-        
+
     }
 
     /**

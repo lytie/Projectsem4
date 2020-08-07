@@ -10,8 +10,10 @@ import Paypal.PaymentServices;
 import com.paypal.base.rest.PayPalRESTException;
 import entities.Accountcustomer;
 import entities.Room;
+import entities.Roombooking;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -21,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.GenericType;
 import wsc.RoomClient;
+import wsc.RoombookingClient;
 
 /**
  *
@@ -52,26 +55,55 @@ public class Booking_Process extends HttpServlet {
             String idRoom = request.getParameter("idRoom");
             String price = request.getParameter("price");
 
-            RoomClient client = new RoomClient();
-            GenericType<Room> gt = new GenericType<Room>() {
+            RoomClient roomClient = new RoomClient();
+            GenericType<Room> roomGenericType = new GenericType<Room>() {
             };
+            Room r = roomClient.find_JSON(roomGenericType, idRoom);
 
-            Room room = client.find_JSON(gt, idRoom);
-            String idName = room.getRoomTypeId().getRoomTypeName() + "-" + room.getLocationId().getLocationName() + idRoom;
+            int capation = Integer.parseInt(children) + Integer.parseInt(adult) * 2;
 
-            PaymentServices paymentServices = new PaymentServices();
+            RoombookingClient roombookingClient = new RoombookingClient();
+            GenericType<List<Roombooking>> listRoomBook = new GenericType<List<Roombooking>>() {
+            };
+            List<Roombooking> list = roombookingClient.bookRoom_JSON(listRoomBook, inDate, outDate, r.getLocationId().getLocationId(), capation);
 
-            
-            System.out.println("test name:"+name);
-            
-            if (request.getParameter("idCus") != null) {
-                String idCus = request.getParameter("idCus");
-                response.sendRedirect(paymentServices.authorizePayment(String.valueOf((Float.valueOf(price) / 10)), idName, name, email, "http://localhost:8080/WA/Booking_payment?name=" + name.replace(" ", "+") + "&email=" + email + "&phone=" + phone + "&inDate=" + inDate + "&outDate=" + outDate + "&adult=" + adult + "&children=" + children + "&idRoom=" + idRoom + "&price=" + price + "&idCus=" + idCus));
-
-            } else {
-                response.sendRedirect(paymentServices.authorizePayment(String.valueOf((Float.valueOf(price) / 10)), idName, name, email, "http://localhost:8080/WA/Booking_payment?name=" + name.replace(" ", "+") + "&email=" + email + "&phone=" + phone + "&inDate=" + inDate + "&outDate=" + outDate + "&adult=" + adult + "&children=" + children + "&idRoom=" + idRoom + "&price=" + price));
+            boolean exists = true;
+            for (Roombooking roombooking : list) {
+                if (roombooking.getRoomId() == Integer.valueOf(idRoom)) {
+                    exists = false;
+                }
             }
 
+            if (exists) {
+
+                request.setAttribute("exists", "<div class=\"exists\"></div><script type=\"text/javascript\">\n"
+                        + "            $('.exists').each(function () {\n"
+                        + "                 swal(\"Book room fail \", \"The room has been booked\", \"warning\");\n"
+                        + "            });\n"
+                        + "        </script>");
+                request.getRequestDispatcher("Haven").forward(request, response);
+
+            } else {
+
+                RoomClient client = new RoomClient();
+                GenericType<Room> gt = new GenericType<Room>() {
+                };
+
+                Room room = client.find_JSON(gt, idRoom);
+                String idName = room.getRoomTypeId().getRoomTypeName() + "-" + room.getLocationId().getLocationName() + idRoom;
+
+                PaymentServices paymentServices = new PaymentServices();
+
+                System.out.println("test name:" + name);
+
+                if (request.getParameter("idCus") != null) {
+                    String idCus = request.getParameter("idCus");
+                    response.sendRedirect(paymentServices.authorizePayment(String.valueOf((Float.valueOf(price) / 10)), idName, name, email, "http://localhost:8080/WA/Booking_payment?name=" + name.replace(" ", "+") + "&email=" + email + "&phone=" + phone + "&inDate=" + inDate + "&outDate=" + outDate + "&adult=" + adult + "&children=" + children + "&idRoom=" + idRoom + "&price=" + price + "&idCus=" + idCus));
+
+                } else {
+                    response.sendRedirect(paymentServices.authorizePayment(String.valueOf((Float.valueOf(price) / 10)), idName, name, email, "http://localhost:8080/WA/Booking_payment?name=" + name.replace(" ", "+") + "&email=" + email + "&phone=" + phone + "&inDate=" + inDate + "&outDate=" + outDate + "&adult=" + adult + "&children=" + children + "&idRoom=" + idRoom + "&price=" + price));
+                }
+            }
         } catch (PayPalRESTException ex) {
             Logger.getLogger(Booking_Process.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -114,26 +146,56 @@ public class Booking_Process extends HttpServlet {
         String price = request.getParameter("price");
         SendMail send = new SendMail();
 
-        HttpSession session = request.getSession();
-        if (session.getAttribute("user") != null) {
-            Accountcustomer accountcustomer = (Accountcustomer) session.getAttribute("user");
-            send.sendToken(email, "Account Verification ", "Please click on the link below to verify your email\n "
-                    + "http://localhost:8080/WA/Booking_Process?status=true&name=" + name.replace(" ", "+") + "&email=" + email + "&phone=" + phone + "&inDate=" + inDate + "&outDate=" + outDate + "&adult=" + adult + "&children=" + children + "&idRoom=" + idRoom + "&price=" + price + "&idCus=" + accountcustomer.getAccountCustomerId());
+        RoomClient roomClient = new RoomClient();
+        GenericType<Room> roomGenericType = new GenericType<Room>() {
+        };
+        Room r = roomClient.find_JSON(roomGenericType, idRoom);
+        
+        int capation = Integer.parseInt(children) + Integer.parseInt(adult) * 2;
+        
+        RoombookingClient roombookingClient = new RoombookingClient();
+        GenericType<List<Roombooking>> listRoomBook = new GenericType<List<Roombooking>>() {
+        };
+        List<Roombooking> list = roombookingClient.bookRoom_JSON(listRoomBook, inDate, outDate, r.getLocationId().getLocationId(), capation);
 
-        } else {
-            send.sendToken(email, "Account Verification ", "Please click on the link below to verify your email\n "
-                    + "http://localhost:8080/WA/Booking_Process?status=true&name=" + name.replace(" ", "+") + "&email=" + email + "&phone=" + phone + "&inDate=" + inDate + "&outDate=" + outDate + "&adult=" + adult + "&children=" + children + "&idRoom=" + idRoom + "&price=" + price);
-
+        boolean exists = true;
+        for (Roombooking roombooking : list) {
+            if (roombooking.getRoomId() == Integer.valueOf(idRoom)) {
+                exists = false;
+            }
         }
 
-        request.setAttribute("success", "<div class=\"success\"></div><script type=\"text/javascript\">\n" +
-"            $('.success').each(function () {\n" +
-"                swal(\"Please check your email to pay by paypal\", \"Email sended to: "+email+"\", \"success\");\n" +
-"            });\n" +
-"        </script>");
-        
-        request.setAttribute("id", idRoom);
-        request.getRequestDispatcher("Booking/index.jsp").forward(request, response);
+        if (exists) {
+
+            request.setAttribute("exists", "<div class=\"exists\"></div><script type=\"text/javascript\">\n"
+                    + "            $('.exists').each(function () {\n"
+                    + "                swal(\"The room has been booked \", \"\", \"warning\");\n"
+                    + "            });\n"
+                    + "        </script>");
+            request.getRequestDispatcher("Haven").forward(request, response);
+
+        } else {
+            HttpSession session = request.getSession();
+            if (session.getAttribute("user") != null) {
+                Accountcustomer accountcustomer = (Accountcustomer) session.getAttribute("user");
+                send.sendToken(email, "Account Verification ", "Please click on the link below to verify your email and pay your bill with paypal\n "
+                        + "http://localhost:8080/WA/Booking_Process?status=true&name=" + name.replace(" ", "+") + "&email=" + email + "&phone=" + phone + "&inDate=" + inDate + "&outDate=" + outDate + "&adult=" + adult + "&children=" + children + "&idRoom=" + idRoom + "&price=" + price + "&idCus=" + accountcustomer.getAccountCustomerId());
+
+            } else {
+                send.sendToken(email, "Account Verification ", "Please click on the link below to verify your email and pay your bill with paypal \n "
+                        + "http://localhost:8080/WA/Booking_Process?status=true&name=" + name.replace(" ", "+") + "&email=" + email + "&phone=" + phone + "&inDate=" + inDate + "&outDate=" + outDate + "&adult=" + adult + "&children=" + children + "&idRoom=" + idRoom + "&price=" + price);
+
+            }
+
+            request.setAttribute("success", "<div class=\"success\"></div><script type=\"text/javascript\">\n"
+                    + "            $('.success').each(function () {\n"
+                    + "                swal(\"Please check your email to pay by paypal\", \"Email sended to: " + email + "\", \"success\");\n"
+                    + "            });\n"
+                    + "        </script>");
+
+            request.setAttribute("id", idRoom);
+            request.getRequestDispatcher("Booking/index.jsp").forward(request, response);
+        }
     }
 
     /**

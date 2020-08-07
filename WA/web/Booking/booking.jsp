@@ -55,6 +55,9 @@
         <link rel="stylesheet" type="text/css" href="<%=common.url%>/css/demo.css" />
         <!-- Modernizr is used for flexbox fallback -->
         <script src="<%=common.url%>/js/modernizr.custom.js"></script>
+         <link rel='stylesheet' href='https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.css'>
+        <script src='https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.min.js'></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     </head>
     <body>
         <!-- Preloader Start -->
@@ -113,7 +116,7 @@
                                     <div class="boking-datepicker" >
 
                                         <i class="gj-icon" role="right-icon" >event</i>
-                                       
+
                                         <input id="datepicker1"  name="start" value="${inDate}"/>
                                     </div>
                                 </div>
@@ -206,184 +209,186 @@
             <div class="view">
                 <section class="grids">
                     <!--                get room-->
-                    <%
-                        if(request.getAttribute("check")== "true"){
-                    %>
-               <c:choose >
-                <c:when test="${booking_bookMB.listRoomBook(inDate, outDate, location, capation).isEmpty()}">
-                    <div style="margin: 200px ">
-                        <div style="font-family: 'Lucida Console', Courier, monospace;font-size: 25px"> No suitable rooms found </div>
-                    
-                    
-                    </div>
-                </c:when>
-                <c:otherwise >
-                    
-                    
-                    <c:forEach items="${booking_bookMB.listRoomBook(inDate, outDate, location, capation)}" var="rb">
-
-                        <section class="make-customer-area customar-padding fix" style=" border: 2px dashed #dca73a; border-radius: 5px">
-                        <div class="container-fluid p-0">
-                            <div class="row">
-                                <div class="col-xl-5 col-lg-6">
-                                    <div class="customer-img mb-120">
-
-                                        <img src="<%=common.urlImg%>/img/${rb.url}" class="customar-img2" alt="">
-                                    </div>
-                                </div>
-                                <div class=" col-xl-7 col-lg-6">
-                                    <div class="customer-caption">
-
-                                        <h2 name="name">${rb.roomTypeName} - ${booking_bookMB.location(rb.roomId).locationName} ${booking_bookMB.room(rb.roomId).roomId}</h2>
-                                        <input type="hidden" name="nameRoom" value=""/>
-                                        <div class="caption-details">
-                                            <p class="pera-dtails">Price: ${rb.price}$ /day </p>
-
-                                            <div style="display: grid;grid-template-columns: auto auto auto;">
-                                                <p>VIEW: <sqan>${rb.view}</sqan></p>
-                                                <p>BED OPTIONS: <sqan>${rb.bedOptions}</sqan></p>
-                                                <p>ROOM SIZE: <sqan>${rb.roomSize} m<sup>2</sup> </sqan></p>
-
-                                            </div>
-                                        </div>
-
-                                        <span>
-                                            <a href="" data-toggle="modal" data-target="#M${rb.roomId}">View more details</a>
-                                        </span>
+                <%
+                    if (request.getAttribute("check") == "true") {
+                %>
+                           
+                
+                <c:choose >
+                    <c:when test="${booking_bookMB.listRoomBook(inDate, outDate, location, capation).isEmpty()}">
+                        <div style="margin: 200px ">
+                            <div style="font-family: 'Lucida Console', Courier, monospace;font-size: 25px"> No suitable rooms found </div>
 
 
-                                        <div class="product"> 
-                                            <span class="">Add to compare
-                                                <label class="action action--compare-add">
-
-                                                    <input class="check-hidden" type="checkbox" />
-                                                    <i class="fa fa-plus"></i>
-                                                    <i class="fa fa-check"></i>
-                                                </label>
-                                            </span>
-                                            <div class="product__info">
-                                                <img class="product__image extra" src="<%=common.urlImg%>/img/${rb.url}" alt="Product 1" />
-                                                <h3 class="extra">${rb.roomTypeName}</h3>
-                                                <span class="extra">$ ${rb.price}</span>
-                                                <span class="extra">${rb.view}</span>
-                                                <span class="extra">${rb.bedOptions}</span>
-                                                <span class="extra">${rb.roomSize} m<sup>2</sup></span>
-
-                                            </div>
-
-                                        </div>
-
-                                        <div class="header-btn">
-                                            <a href="Booking_ConfirmInfo?name=${rb.roomTypeName} - ${booking_bookMB.location(rb.roomId).locationName} ${booking_bookMB.room(rb.roomId).roomId}&price=${rb.price}&id=${rb.roomId}" class="btn  ">Booking</a>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
                         </div>
-                    </section>
-                    <!-- The Modal -->
-                    <div class="modal fade" id="M${rb.roomId}">
-                        <div class="modal-dialog modal-dialog-scrollable modal-xl">
-                            <div class="modal-content">
+                    </c:when>
+                    <c:otherwise >
 
-                                <!-- Modal Header -->
-                                <div class="modal-header">
-                                    <h1 class="modal-title">${rb.roomTypeName}</h1>
-                                    <button type="button" class="close" data-dismiss="modal">×</button>
-                                </div>
 
-                                <!-- Modal body -->
-                                <div class="modal-body">
-                                    <section class="make-customer-area ">
-                                        <div class="container-fluid p-0">
-                                            <div class="row">
-                                                <div class="col-xl-5 col-lg-6">
-                                                    <div id="D${rb.roomId}" class="carousel slide" data-ride="carousel">
-                                                        <ul class="carousel-indicators">
-                                                            <li data-target="#D${rb.roomId}" data-slide-to="0" class="active">
+                        <c:forEach items="${booking_bookMB.listRoomBook(inDate, outDate, location, capation)}" var="rb">
 
-                                                            </li>
-                                                            <!--                                                        list data-sile-to-->
-                                                            <c:forEach items="${booking_bookMB.listDot(rb.roomId)}" var="dot">
-                                                                <li data-target="D${rb.roomId}" data-slide-to="${dot.intValue()}"></li>
-                                                                </c:forEach>
-                                                        </ul>
-                                                        <div class="carousel-inner">
-                                                            <!--                                                        list carousel-->
-                                                            <c:forEach items="${booking_bookMB.listRoomImg(rb.roomId)}" var="img" >
-                                                                <c:if  test="${booking_bookMB.listRoomImg(rb.roomId).indexOf(img)==0}">
-                                                                    <div class="carousel-item active"> 
-                                                                        <img src="<%=common.urlImg%>/images/${img.url}" alt="img" >
+                            <section class="make-customer-area customar-padding fix" style=" border: 2px dashed #dca73a; border-radius: 5px">
+                                <div class="container-fluid p-0">
+                                    <div class="row">
+                                        <div class="col-xl-5 col-lg-6">
+                                            <div class="customer-img mb-120">
 
-                                                                    </div>
-                                                                </c:if>
-                                                                <c:if  test="${booking_bookMB.listRoomImg(rb.roomId).indexOf(img)!=0}">
-                                                                    <div class="carousel-item"> 
-                                                                        <img src="<%=common.urlImg%>/images/${img.url}" alt="img" >
+                                                <img src="<%=common.urlImg%>/img/${rb.url}" class="customar-img2" alt="">
+                                            </div>
+                                        </div>
+                                        <div class=" col-xl-7 col-lg-6">
+                                            <div class="customer-caption">
 
-                                                                    </div>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </div>
-                                                        <a class="carousel-control-prev" href="#D${rb.roomId}" data-slide="prev">
-                                                            <span class="carousel-control-prev-icon"></span>
-                                                        </a>
-                                                        <a class="carousel-control-next" href="#D${rb.roomId}" data-slide="next">
-                                                            <span class="carousel-control-next-icon"></span>
-                                                        </a>
+                                                <h2 name="name">${rb.roomTypeName} - ${booking_bookMB.location(rb.roomId).locationName} ${booking_bookMB.room(rb.roomId).roomId}</h2>
+                                                <input type="hidden" name="nameRoom" value=""/>
+                                                <div class="caption-details">
+                                                    <p class="pera-dtails">Price: ${rb.price}$ /day </p>
+
+                                                    <div style="display: grid;grid-template-columns: auto auto auto;">
+                                                        <p>VIEW: <sqan>${rb.view}</sqan></p>
+                                                        <p>BED OPTIONS: <sqan>${rb.bedOptions}</sqan></p>
+                                                        <p>ROOM SIZE: <sqan>${rb.roomSize} m<sup>2</sup> </sqan></p>
+
                                                     </div>
                                                 </div>
-                                                <div class=" col-xl-7 col-lg-6">
 
-                                                    <div style="display: grid; grid-template-columns: auto auto auto auto;">
-                                                        <!--                                                    list icon-->
-                                                        <c:forEach items="${booking_bookMB.listConvenient(rb.roomId)}" var="convenient">
-                                                            <div>
-                                                                <img src="<%=common.urlImg%>/icon/${convenient.url}" alt="${convenient.convenientName}" width="25%">
-                                                                <p>${convenient.convenientName}</p>
+                                                <span>
+                                                    <a href="" data-toggle="modal" data-target="#M${rb.roomId}">View more details</a>
+                                                </span>
+
+
+                                                <div class="product"> 
+                                                    <span class="">Add to compare
+                                                        <label class="action action--compare-add">
+
+                                                            <input class="check-hidden" type="checkbox" />
+                                                            <i class="fa fa-plus"></i>
+                                                            <i class="fa fa-check"></i>
+                                                        </label>
+                                                    </span>
+                                                    <div class="product__info">
+                                                        <img class="product__image extra" src="<%=common.urlImg%>/img/${rb.url}" alt="Product 1" />
+                                                        <h3 class="extra">${rb.roomTypeName}</h3>
+                                                        <span class="extra">$ ${rb.price}</span>
+                                                        <span class="extra">${rb.view}</span>
+                                                        <span class="extra">${rb.bedOptions}</span>
+                                                        <span class="extra">${rb.roomSize} m<sup>2</sup></span>
+
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="header-btn">
+                                                    <a href="Booking_ConfirmInfo?name=${rb.roomTypeName} - ${booking_bookMB.location(rb.roomId).locationName} ${booking_bookMB.room(rb.roomId).roomId}&price=${rb.price}&id=${rb.roomId}" class="btn  ">Booking</a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <!-- The Modal -->
+                            <div class="modal fade" id="M${rb.roomId}">
+                                <div class="modal-dialog modal-dialog-scrollable modal-xl">
+                                    <div class="modal-content">
+
+                                        <!-- Modal Header -->
+                                        <div class="modal-header">
+                                            <h1 class="modal-title">${rb.roomTypeName}</h1>
+                                            <button type="button" class="close" data-dismiss="modal">×</button>
+                                        </div>
+
+                                        <!-- Modal body -->
+                                        <div class="modal-body">
+                                            <section class="make-customer-area ">
+                                                <div class="container-fluid p-0">
+                                                    <div class="row">
+                                                        <div class="col-xl-5 col-lg-6">
+                                                            <div id="D${rb.roomId}" class="carousel slide" data-ride="carousel">
+                                                                <ul class="carousel-indicators">
+                                                                    <li data-target="#D${rb.roomId}" data-slide-to="0" class="active">
+
+                                                                    </li>
+                                                                    <!--                                                        list data-sile-to-->
+                                                                    <c:forEach items="${booking_bookMB.listDot(rb.roomId)}" var="dot">
+                                                                        <li data-target="D${rb.roomId}" data-slide-to="${dot.intValue()}"></li>
+                                                                        </c:forEach>
+                                                                </ul>
+                                                                <div class="carousel-inner">
+                                                                    <!--                                                        list carousel-->
+                                                                    <c:forEach items="${booking_bookMB.listRoomImg(rb.roomId)}" var="img" >
+                                                                        <c:if  test="${booking_bookMB.listRoomImg(rb.roomId).indexOf(img)==0}">
+                                                                            <div class="carousel-item active"> 
+                                                                                <img src="<%=common.urlImg%>/images/${img.url}" alt="img" >
+
+                                                                            </div>
+                                                                        </c:if>
+                                                                        <c:if  test="${booking_bookMB.listRoomImg(rb.roomId).indexOf(img)!=0}">
+                                                                            <div class="carousel-item"> 
+                                                                                <img src="<%=common.urlImg%>/images/${img.url}" alt="img" >
+
+                                                                            </div>
+                                                                        </c:if>
+                                                                    </c:forEach>
+                                                                </div>
+                                                                <a class="carousel-control-prev" href="#D${rb.roomId}" data-slide="prev">
+                                                                    <span class="carousel-control-prev-icon"></span>
+                                                                </a>
+                                                                <a class="carousel-control-next" href="#D${rb.roomId}" data-slide="next">
+                                                                    <span class="carousel-control-next-icon"></span>
+                                                                </a>
                                                             </div>
-                                                        </c:forEach>
+                                                        </div>
+                                                        <div class=" col-xl-7 col-lg-6">
+
+                                                            <div style="display: grid; grid-template-columns: auto auto auto auto;">
+                                                                <!--                                                    list icon-->
+                                                                <c:forEach items="${booking_bookMB.listConvenient(rb.roomId)}" var="convenient">
+                                                                    <div>
+                                                                        <img src="<%=common.urlImg%>/icon/${convenient.url}" alt="${convenient.convenientName}" width="25%">
+                                                                        <p>${convenient.convenientName}</p>
+                                                                    </div>
+                                                                </c:forEach>
 
 
+                                                            </div>
+
+                                                        </div>
                                                     </div>
-
                                                 </div>
-                                            </div>
+                                            </section>
+
+                                            <p>
+                                                ${booking_bookMB.room(rb.roomId).description}</p>
                                         </div>
-                                    </section>
 
-                                    <p>
-                                        ${booking_bookMB.room(rb.roomId).description}</p>
+                                        <!-- Modal footer -->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                        </div>
+
+                                    </div>
                                 </div>
-
-                                <!-- Modal footer -->
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                </div>
-
                             </div>
-                        </div>
-                    </div>
 
 
-                </c:forEach>
-                </c:otherwise>
-               </c:choose>
-                    
-<%
-    
-       
-}else{
-%>
-<div style="margin: 200px ">
-                        <div style="font-family: 'Lucida Console', Courier, monospace;font-size: 25px"> No suitable rooms found </div>
-                    
-                    
-                    </div>
-<%
-}
-%>
+                        </c:forEach>
+                    </c:otherwise>
+                </c:choose>
+                   
+
+                <%
+
+                } else {
+                %>
+                <div style="margin: 200px ">
+                    <div style="font-family: 'Lucida Console', Courier, monospace;font-size: 25px"> No suitable rooms found </div>
+
+
+                </div>
+                <%
+                    }
+                %>
             </section>
         </div>
         <!-- product compare wrapper -->
@@ -394,7 +399,7 @@
 
 
 
-
+${error}
         <!-- Footer Start-->
         <%@include file="footer.html" %>
 
@@ -456,20 +461,22 @@
         <script src="<%=common.url%>/dist/js/datepicker-full.js">
         </script>
         <script>
-                    const elem1 = document.querySelector('input[name="start"]');
-                    const datepicker1 = new Datepicker(elem1, {
-                    buttonClass: 'btn'
-                    });
-                    const elem2 = document.getElementById('inline');
-                    const datepicker2 = new Datepicker(elem2, {
-                    buttonClass: 'btn'
-                    });
-                    const elem3 = document.getElementById('range');
-                    const datepicker3 = new DateRangePicker(elem3, {
-                    minDate: new Date(),
-                            buttonClass: 'btn',
-                            format: 'yyyy-mm-dd'
-                    });</script>
+            const elem1 = document.querySelector('input[name="start"]');
+            const datepicker1 = new Datepicker(elem1, {
+                buttonClass: 'btn'
+            });
+            const elem2 = document.getElementById('inline');
+            const datepicker2 = new Datepicker(elem2, {
+                buttonClass: 'btn'
+            });
+            const elem3 = document.getElementById('range');
+            const datepicker3 = new DateRangePicker(elem3, {
+                minDate: new Date(),
+                buttonClass: 'btn',
+                format: 'yyyy-mm-dd'
+            });</script>
+
+      
         <script src="<%=common.url%>/dist/js/datepicker.min.js">
         </script>
         <script src="<%=common.url%>/dist/js/locales/fr.min.js">
@@ -479,5 +486,7 @@
 
         <script src="<%=common.url%>/js/classie.js"></script>
         <script src="<%=common.url%>/js/main.js"></script>
+                <script src="https://momentjs.com/downloads/moment.js"></script>
+
     </body>
 </html>

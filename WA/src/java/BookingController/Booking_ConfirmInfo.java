@@ -7,6 +7,7 @@ package BookingController;
 
 import Generator.SendMail;
 import entities.Accountcustomer;
+import entities.Roombooking;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
@@ -14,6 +15,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -21,6 +23,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.ws.rs.core.GenericType;
+import wsc.RoombookingClient;
 
 /**
  *
@@ -44,7 +48,7 @@ public class Booking_ConfirmInfo extends HttpServlet {
 
             int idRoom = Integer.valueOf(request.getParameter("id"));
 
-            request.setAttribute("id", idRoom);
+            
 
             HttpSession session = request.getSession();
 
@@ -52,6 +56,31 @@ public class Booking_ConfirmInfo extends HttpServlet {
 
             String out = session.getAttribute("outDate").toString();
 
+            String capation = session.getAttribute("capation").toString();
+            String location = session.getAttribute("location").toString();
+
+            RoombookingClient roombookingClient=new RoombookingClient();
+            GenericType<List<Roombooking>>  listRoomBook=new GenericType<List<Roombooking>>(){};
+            List<Roombooking> list=roombookingClient.bookRoom_JSON(listRoomBook,in,out,Integer.parseInt(location),Integer.parseInt(capation));
+             
+            boolean exists=true;
+            for (Roombooking roombooking : list) {
+                if(roombooking.getRoomId()==idRoom){
+                    exists=false;
+                }
+            }
+            
+            if(exists){
+                
+                 request.setAttribute("exists", "<div class=\"exists\"></div><script type=\"text/javascript\">\n" +
+"            $('.exists').each(function () {\n" +
+"                 swal(\"Book room fail \", \"The room has been booked\", \"warning\");\n" +
+"            });\n" +
+"        </script>");
+                 request.getRequestDispatcher("Haven").forward(request, response);
+                
+            }else{
+            
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             Date datein = df.parse(in);
             Date dateout = df.parse(out);
@@ -67,9 +96,9 @@ public class Booking_ConfirmInfo extends HttpServlet {
                 request.setAttribute("AccCus", accountcustomer);
 
             }
-
+            request.setAttribute("id", idRoom);
             request.setAttribute("date", date);
-            request.getRequestDispatcher("Booking/confirm_infomation.jsp").forward(request, response);
+            request.getRequestDispatcher("Booking/confirm_infomation.jsp").forward(request, response);}
         } catch (ParseException ex) {
             Logger.getLogger(Booking_ConfirmInfo.class.getName()).log(Level.SEVERE, null, ex);
         }

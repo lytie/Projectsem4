@@ -39,7 +39,7 @@
         <link rel="stylesheet" href="<%=common.url%>/assets/css/responsive.css"/>
         <link rel="stylesheet" href="<%=common.url%>/assets/css/style.css"/>
         <link href="<%=common.url%>/dist/css/datepicker-foundation.min.css" rel="stylesheet"/>
- <link rel='stylesheet' href='https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.css'>
+        <link rel='stylesheet' href='https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.css'>
         <script src='https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.min.js'></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     </head>
@@ -83,10 +83,10 @@
                 <div class="container">
                     <div class="row ">
                         <div class="col-12">
-                            
+
                             <form action="Booking_bookServlet" method="">
                                 <div class="booking-wrap d-flex justify-content-between align-items-center" id="range">
-
+                                  
                                     <!-- select in date -->
                                     <div class="single-select-box mb-30">
                                         <!-- select out date -->
@@ -110,7 +110,7 @@
                                             <input id="datepicker2"  name="end" value="${outDate}"/>
                                         </div>
                                     </div>
-
+                                
                                     <!-- Single Select Box -->
                                     <div class="single-select-box mb-30">
                                         <div class="boking-tittle">
@@ -137,7 +137,7 @@
 
                                             <div class="select-itms">
                                                 <select name="selectAdult" id="select1">
-                                                    
+
                                                     <option value="1" selected="">1</option>
                                                     <option value="2">2</option>
                                                     <option value="3">3</option>
@@ -170,7 +170,7 @@
                                     <!-- Single Select Box -->
                                     <div class="single-select-box pt-45 mb-30">
                                         <input type="submit" class="btn select-btn" value="Book Now" />
-                                       
+
                                     </div>
 
 
@@ -235,7 +235,7 @@
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
                                         incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.
                                     </p>
-                                     
+
                                     <a href="Booking" class="btn more-btn1">Book now <i class="ti-angle-right"></i> </a>
                                 </div>
                             </div>
@@ -264,7 +264,7 @@
                         <!--                            top type room-->
                         <c:forEach items="${booking_bookMB.toplistRoomtype()}" var="toplr">
                             <div class="col-xl-4 col-lg-6 col-md-6">
-                               
+
                                 <div class="single-room mb-50">
                                     <div class="room-img">
                                         <a><img src="<%=common.urlImg%>/img/${toplr.url}" alt="" width="100%" height="300"></a>
@@ -313,8 +313,8 @@
             <!-- Gallery img End-->
         </main>
 
-                                
-                                ${success}
+                                ${error}
+        ${success}
         <!-- Footer Start-->
         <%@include file="footer.html" %>
         <!-- JS here -->
@@ -377,20 +377,39 @@
 
             const elem1 = document.querySelector('input[name="start"]');
             const datepicker1 = new Datepicker(elem1, {
-                buttonClass: 'btn',
-                
+                buttonClass: 'btn'
+
             });
             const elem2 = document.getElementById('inline');
             const datepicker2 = new Datepicker(elem2, {
                 buttonClass: 'btn'
             });
+
             const elem3 = document.getElementById('range');
             const datepicker3 = new DateRangePicker(elem3, {
                 minDate: new Date(),
                 buttonClass: 'btn',
-                format: 'yyyy-mm-dd',
-                defaultViewDate: new Date()
-            });</script>
+                format: 'yyyy-mm-dd'
+
+            });
+
+        </script>
+
+        <script type="text/javascript">
+               
+//            $(document).on("focusout", "#datepicker1", function() {             // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
+//                $.get('CheckinoutDate?inDate='+ $('#datepicker1').val() + '&outDate=' + $('#datepicker2').val(), function(responseXml) {                // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response XML...
+//               //
+//
+//    });
+//            });
+//            $(document).on("focusout", "#datepicker2", function() {             // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
+//                $.get('CheckinoutDate?inDate='+ $('#datepicker1').val() + '&outDate=' + $('#datepicker2').val(), function(responseXml) {                // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response XML...
+//    //
+//
+//    });
+            });
+        </script>
         <script src="dist/js/datepicker.min.js">
         </script>
         <script src="dist/js/locales/fr.min.js">

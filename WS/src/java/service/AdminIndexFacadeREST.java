@@ -67,20 +67,22 @@ public class AdminIndexFacadeREST {
                 .setParameter(2, nextday)
                 .getResultList();
         List<Service> listService = em.createNativeQuery(query3, Service.class).getResultList();
-        for (Ticket ticket : listTicket) {
-            for (Receiptcomponent receiptcomponent : listReceiptcomponent) {
-                if (ticket.getTicketName().equals(receiptcomponent.getComponentName())) {
-                    listReceiptcomponent.remove(receiptcomponent);
-                }
-            }
-        }
+        System.out.println("listReceiptcomponent:" + listReceiptcomponent.size());
+        System.out.println("listTicket:" + listTicket.size());
+        System.out.println("listService:" + listService.size());
+
         List<Receiptcomponent> listnewFoodandDrinkOrders = new ArrayList<Receiptcomponent>();
         for (Service service : listService) {
-            for (Receiptcomponent receiptcomponent : listReceiptcomponent) {
-                if (service.getServiceName().equals(receiptcomponent.getComponentName())) {
-                    listnewFoodandDrinkOrders.add(receiptcomponent);
+            try {
+                for (Receiptcomponent receiptcomponent : listReceiptcomponent) {
+                    if (service.getServiceName().equals(receiptcomponent.getComponentName())) {
+                        listnewFoodandDrinkOrders.add(receiptcomponent);
+                    }
                 }
+            } catch (Exception e) {
+                System.out.println("erorrrr:" + e.getMessage());
             }
+
         }
         return listnewFoodandDrinkOrders;
     }

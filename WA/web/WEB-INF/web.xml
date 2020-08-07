@@ -190,20 +190,12 @@
         <servlet-class>AdminController.Admin_Services</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Admin_UpdateConvenient</servlet-name>
-        <servlet-class>AdminController.Admin_UpdateConvenient</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>Admin_UpdateEmployee</servlet-name>
         <servlet-class>AdminController.Admin_UpdateEmployee</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Admin_UpdateLocation</servlet-name>
         <servlet-class>AdminController.Admin_UpdateLocation</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>Admin_UpdateReceipt</servlet-name>
-        <servlet-class>AdminController.Admin_UpdateReceipt</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Admin_UpdateRoom</servlet-name>
@@ -502,20 +494,12 @@
         <url-pattern>/Admin_Services</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Admin_UpdateConvenient</servlet-name>
-        <url-pattern>/Admin_UpdateConvenient</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>Admin_UpdateEmployee</servlet-name>
         <url-pattern>/Admin_UpdateEmployee</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Admin_UpdateLocation</servlet-name>
         <url-pattern>/Admin_UpdateLocation</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Admin_UpdateReceipt</servlet-name>
-        <url-pattern>/Admin_UpdateReceipt</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Admin_UpdateRoom</servlet-name>

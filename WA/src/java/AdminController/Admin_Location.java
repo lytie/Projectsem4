@@ -41,7 +41,8 @@ public class Admin_Location extends HttpServlet {
             GenericType<List<Location>> typ = new GenericType<List<Location>>() {
             };
             List<Location> listlc = locationClient.findAll_JSON(typ);
-
+            System.out.println("msg:"+request.getParameter("msg"));
+            request.setAttribute("msg", request.getParameter("msg"));
             request.setAttribute("listlc", listlc);
 
             request.getRequestDispatcher("AdminTemplate/location.jsp").forward(request, response);

@@ -86,7 +86,7 @@ public class Admin_AddService extends HttpServlet {
             String price=null;
             String decription=null;
             String file=null;
-            
+            String existedFile = null;
             Map<String,Object> listService=uploadServlet.Upload(request, "customerpageimg");
             
             for (Map.Entry<String, Object> entry : listService.entrySet()) {
@@ -105,7 +105,9 @@ public class Admin_AddService extends HttpServlet {
                 if(entry.getKey().equals("file")){
                     file=entry.getValue().toString();
                 }
-                
+                if (entry.getKey().equals("existedFile")) {
+                    existedFile = (String) entry.getValue();
+                }
             }
             
             ServicetypeClient servicetypeClient=new ServicetypeClient();
@@ -116,7 +118,11 @@ public class Admin_AddService extends HttpServlet {
             service.setServiceDescription(decription);
             service.setServiceName(name);
             service.setServicePrice(Float.parseFloat(price));
-            service.setServiceurl(file);
+            if (file != null) {
+                service.setServiceurl(file);
+            } else {
+                service.setServiceurl(existedFile);
+            }
             
             serviceClient.create_JSON(service);
             request.getRequestDispatcher("Admin_Services").forward(request, response);

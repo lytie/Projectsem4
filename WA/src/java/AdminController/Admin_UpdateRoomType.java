@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package AdminController;
 
 import bean.UploadServlet;
@@ -37,13 +36,14 @@ public class Admin_UpdateRoomType extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String id=request.getParameter("id");
-            RoomtypeClient client=new RoomtypeClient();
-            GenericType<Roomtype> type=new GenericType<Roomtype>(){};
-            Roomtype roomtype=client.find_JSON(type,id );
-            
+            String id = request.getParameter("id");
+            RoomtypeClient client = new RoomtypeClient();
+            GenericType<Roomtype> type = new GenericType<Roomtype>() {
+            };
+            Roomtype roomtype = client.find_JSON(type, id);
+
             request.setAttribute("roomtype", roomtype);
-             request.getRequestDispatcher("AdminTemplate/updateroomtype.jsp").forward(request, response);
+            request.getRequestDispatcher("AdminTemplate/updateroomtype.jsp").forward(request, response);
         }
     }
 
@@ -59,7 +59,7 @@ public class Admin_UpdateRoomType extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         processRequest(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -73,17 +73,19 @@ public class Admin_UpdateRoomType extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id=request.getParameter("id");
-       try (PrintWriter out = response.getWriter()){
+        String id = request.getParameter("id");
+        try (PrintWriter out = response.getWriter()) {
             UploadServlet uploadServlet = new UploadServlet();
 
             RoomtypeClient roomtypeClient = new RoomtypeClient();
-            GenericType<Roomtype> type=new GenericType<Roomtype>(){};
-             String ids = null;
+            GenericType<Roomtype> type = new GenericType<Roomtype>() {
+            };
+            String ids = null;
             String name = null;
             String description = null;
             String file = null;
-            Map<String,Object> listrequest = uploadServlet.Upload(request, "img");
+            String existedFile = null;
+            Map<String, Object> listrequest = uploadServlet.Upload(request, "img");
             for (Map.Entry<String, Object> entry : listrequest.entrySet()) {
                 if (entry.getKey().equals("id")) {
                     ids = (String) entry.getValue();
@@ -97,27 +99,33 @@ public class Admin_UpdateRoomType extends HttpServlet {
                 if (entry.getKey().equals("file")) {
                     file = (String) entry.getValue();
                 }
+                if (entry.getKey().equals("existedFile")) {
+                    existedFile = (String) entry.getValue();
+                }
             }
-             System.out.println("id:"+ids);
-            System.out.println("name:"+name);
-            System.out.println("description:"+description);
-            System.out.println("file:"+file);
+            System.out.println("id:" + ids);
+            System.out.println("name:" + name);
+            System.out.println("description:" + description);
+            System.out.println("file:" + file);
             System.out.println(listrequest);
-            Roomtype roomtype = roomtypeClient.find_JSON(type,ids);
+            Roomtype roomtype = roomtypeClient.find_JSON(type, ids);
 
             roomtype.setRoomTypeName(name);
             roomtype.setDescription(description);
-            if(file!=null){
-            roomtype.setUrl(file);
+            if (file != null) {
+                roomtype.setUrl(file);
+            }else{
+                roomtype.setDescription(existedFile);
             }
 
             roomtypeClient.edit_JSON(roomtype, ids);
             request.getRequestDispatcher("Admin_RoomType").forward(request, response);
         } catch (Exception ex) {
-             RoomtypeClient client=new RoomtypeClient();
-            GenericType<Roomtype> type=new GenericType<Roomtype>(){};
-            Roomtype roomtype=client.find_JSON(type, id);
-            
+            RoomtypeClient client = new RoomtypeClient();
+            GenericType<Roomtype> type = new GenericType<Roomtype>() {
+            };
+            Roomtype roomtype = client.find_JSON(type, id);
+
             request.setAttribute("roomtype", roomtype);
             request.setAttribute("error", ex.getMessage());
             request.getRequestDispatcher("AdminTemplate/addroomtype.jsp").forward(request, response);

@@ -69,7 +69,7 @@ public class EmployeeIndexServlet extends HttpServlet {
             List<Qrcode> listCheckInSchedule = adminIndexClient.getCheckInSchedule(genListQrcode, today, nextday);
             List<Qrcode> listCheckOutSchedule = adminIndexClient.getCheckOutSchedule(genListQrcode, today, nextday);
             List<Accountemployee> listEmployeeBirthDay = adminIndexClient.getEmployeeBirthDay(genListAccountemployee, yesterday, today);
-            Accountemployee employeeBirthDay = listEmployeeBirthDay.get(0);
+
             int newcustomer = 0;
             for (Qrcode qrcode : listCheckInSchedule) {
                 if (qrcode.getChildrenNum() != null) {
@@ -79,22 +79,27 @@ public class EmployeeIndexServlet extends HttpServlet {
                     newcustomer += qrcode.getAdultsNum();
                 }
             }
-            int bdyear = Integer.valueOf(dateFormatyear.format(employeeBirthDay.getDateOfBirth()));
-            int bdmonth = Integer.valueOf(dateFormatmonth.format(employeeBirthDay.getDateOfBirth()));
-            int bdday = Integer.valueOf(dateFormatday.format(employeeBirthDay.getDateOfBirth()));
-            LocalDate lcToday = LocalDate.now();
-            LocalDate birthday = LocalDate.of(bdyear, bdmonth, bdday);
-            LocalDate nextBDay = birthday.withYear(lcToday.getYear());
-            if (nextBDay.isBefore(lcToday) || nextBDay.isEqual(lcToday)) {
-                nextBDay = nextBDay.plusYears(1);
+            if (listEmployeeBirthDay.size() > 0) {
+                Accountemployee employeeBirthDay = listEmployeeBirthDay.get(0);
+                int bdyear = Integer.valueOf(dateFormatyear.format(employeeBirthDay.getDateOfBirth()));
+                int bdmonth = Integer.valueOf(dateFormatmonth.format(employeeBirthDay.getDateOfBirth()));
+                int bdday = Integer.valueOf(dateFormatday.format(employeeBirthDay.getDateOfBirth()));
+                LocalDate lcToday = LocalDate.now();
+                LocalDate birthday = LocalDate.of(bdyear, bdmonth, bdday);
+                LocalDate nextBDay = birthday.withYear(lcToday.getYear());
+                if (nextBDay.isBefore(lcToday) || nextBDay.isEqual(lcToday)) {
+                    nextBDay = nextBDay.plusYears(1);
+                }
+                Period p = Period.between(lcToday, nextBDay);
+                long p2 = ChronoUnit.DAYS.between(lcToday, nextBDay);
+                System.out.println("There are " + p.getMonths() + " months, and "
+                        + p.getDays() + " days until your next birthday. ("
+                        + p2 + " total)");
+                request.setAttribute("employeeBirthDay", employeeBirthDay);
+                request.setAttribute("untilbirthday", p2);
             }
-            Period p = Period.between(lcToday, nextBDay);
-            long p2 = ChronoUnit.DAYS.between(lcToday, nextBDay);
-            System.out.println("There are " + p.getMonths() + " months, and "
-                    + p.getDays() + " days until your next birthday. ("
-                    + p2 + " total)");
 
-            Calendar c = Calendar.getInstance();    
+            Calendar c = Calendar.getInstance();
             c.setFirstDayOfWeek(Calendar.MONDAY);
             c.set(Calendar.DAY_OF_WEEK, c.getFirstDayOfWeek());
             String weekstartDate = dateFormat.format(c.getTime());
@@ -102,36 +107,36 @@ public class EmployeeIndexServlet extends HttpServlet {
             String weekendDate = dateFormat.format(c.getTime());
 
             List<Qrcode> listWeekCheckInSchedule = adminIndexClient.getCheckInSchedule(genListQrcode, weekstartDate, weekendDate);
-            System.out.println("listweek size:"+listWeekCheckInSchedule.size());
-            int monday =0;
-            int tuesday =0;
-            int wednesday =0;
-            int thursday =0;
-            int friday =0;
-            int saturday =0;
-            int sunday =0;
+            System.out.println("listweek size:" + listWeekCheckInSchedule.size());
+            int monday = 0;
+            int tuesday = 0;
+            int wednesday = 0;
+            int thursday = 0;
+            int friday = 0;
+            int saturday = 0;
+            int sunday = 0;
             for (Qrcode qrcode : listWeekCheckInSchedule) {
                 c.setTime(qrcode.getCheckInDate());
-                if (c.get(Calendar.DAY_OF_WEEK)==Calendar.MONDAY)  {
-                    monday += qrcode.getAdultsNum()+qrcode.getChildrenNum();
+                if (c.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY) {
+                    monday += qrcode.getAdultsNum() + qrcode.getChildrenNum();
                 }
-                if (c.get(Calendar.DAY_OF_WEEK)==Calendar.TUESDAY)  {
-                    tuesday += qrcode.getAdultsNum()+qrcode.getChildrenNum();
+                if (c.get(Calendar.DAY_OF_WEEK) == Calendar.TUESDAY) {
+                    tuesday += qrcode.getAdultsNum() + qrcode.getChildrenNum();
                 }
-                if (c.get(Calendar.DAY_OF_WEEK)==Calendar.WEDNESDAY)  {
-                    wednesday += qrcode.getAdultsNum()+qrcode.getChildrenNum();
+                if (c.get(Calendar.DAY_OF_WEEK) == Calendar.WEDNESDAY) {
+                    wednesday += qrcode.getAdultsNum() + qrcode.getChildrenNum();
                 }
-                if (c.get(Calendar.DAY_OF_WEEK)==Calendar.THURSDAY)  {
-                    thursday += qrcode.getAdultsNum()+qrcode.getChildrenNum();
+                if (c.get(Calendar.DAY_OF_WEEK) == Calendar.THURSDAY) {
+                    thursday += qrcode.getAdultsNum() + qrcode.getChildrenNum();
                 }
-                if (c.get(Calendar.DAY_OF_WEEK)==Calendar.FRIDAY)  {
-                    friday += qrcode.getAdultsNum()+qrcode.getChildrenNum();
+                if (c.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY) {
+                    friday += qrcode.getAdultsNum() + qrcode.getChildrenNum();
                 }
-                if (c.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY)  {
-                    saturday += qrcode.getAdultsNum()+qrcode.getChildrenNum();
+                if (c.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
+                    saturday += qrcode.getAdultsNum() + qrcode.getChildrenNum();
                 }
-                if (c.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY)  {
-                    sunday += qrcode.getAdultsNum()+qrcode.getChildrenNum();
+                if (c.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+                    sunday += qrcode.getAdultsNum() + qrcode.getChildrenNum();
                 }
             }
             request.setAttribute("monday", monday);
@@ -141,8 +146,6 @@ public class EmployeeIndexServlet extends HttpServlet {
             request.setAttribute("friday", friday);
             request.setAttribute("saturday", saturday);
             request.setAttribute("sunday", sunday);
-            request.setAttribute("employeeBirthDay", employeeBirthDay);
-            request.setAttribute("untilbirthday", p2);
             request.setAttribute("newcustomer", newcustomer);
             request.setAttribute("listCheckInSchedule", listCheckInSchedule);
             request.setAttribute("listCheckOutSchedule", listCheckOutSchedule);

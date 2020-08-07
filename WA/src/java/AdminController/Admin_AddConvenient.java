@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package AdminController;
 
 import bean.UploadServlet;
@@ -68,36 +67,41 @@ public class Admin_AddConvenient extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            
-        
-        String name=null;
-        String img=null;
-        
-            UploadServlet upload=new UploadServlet();
-          Map<String,Object> listCon=  upload.Upload(request, "icon");
-          
-          for (Map.Entry<String, Object> entry : listCon.entrySet()) {
+
+            String name = null;
+            String img = null;
+            String existedFile = null;
+            UploadServlet upload = new UploadServlet();
+            Map<String, Object> listCon = upload.Upload(request, "icon");
+
+            for (Map.Entry<String, Object> entry : listCon.entrySet()) {
                 if (entry.getKey().equals("name")) {
                     name = (String) entry.getValue();
                 }
-               
+
                 if (entry.getKey().equals("file")) {
                     img = (String) entry.getValue();
                 }
+                if (entry.getKey().equals("existedFile")) {
+                    existedFile = (String) entry.getValue();
+                }
             }
-          
-          Convenient convenient=new Convenient();
-          ConvenientClient client=new ConvenientClient();
-          convenient.setConvenientName(name);
-          convenient.setUrl(img);
-          client.create_JSON(convenient);
-          request.getRequestDispatcher("Admin_Convenient").forward(request, response);
-          } catch (Exception e) {
-              request.setAttribute("error", e);
-              request.getRequestDispatcher("AdminTemplate/addconvenient.jsp").forward(request, response);
+
+            Convenient convenient = new Convenient();
+            ConvenientClient client = new ConvenientClient();
+            convenient.setConvenientName(name);
+            if (img != null) {
+                convenient.setUrl(img);
+            } else {
+                convenient.setUrl(existedFile);
+            }
+            client.create_JSON(convenient);
+            request.getRequestDispatcher("Admin_Convenient").forward(request, response);
+        } catch (Exception e) {
+            request.setAttribute("error", e);
+            request.getRequestDispatcher("AdminTemplate/addconvenient.jsp").forward(request, response);
         }
-        
-        
+
     }
 
     /**

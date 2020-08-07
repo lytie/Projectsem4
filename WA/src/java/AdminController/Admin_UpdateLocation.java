@@ -82,11 +82,12 @@ public class Admin_UpdateLocation extends HttpServlet {
 
             LocationClient locationClient = new LocationClient();
             GenericType<Location> type=new GenericType<Location>(){};
-             String ids = null;
+            String ids = null;
             String name = null;
             String address = null;
             String introduce = null;
             String file = null;
+            String existedFile = null ;
             Map<String,Object> listrequest = uploadServlet.Upload(request, "img");
             for (Map.Entry<String, Object> entry : listrequest.entrySet()) {
                 if (entry.getKey().equals("id")) {
@@ -104,21 +105,28 @@ public class Admin_UpdateLocation extends HttpServlet {
                 if (entry.getKey().equals("file")) {
                     file = (String) entry.getValue();
                 }
+                if (entry.getKey().equals("existedFile")) {
+                    existedFile = (String) entry.getValue();
+                }
             }
              System.out.println("id:"+ids);
             System.out.println("name:"+name);
             System.out.println("address:"+address);
             System.out.println("introduce:"+introduce);
             System.out.println("file:"+file);
+             System.out.println("existedFile:"+existedFile);
+         
             System.out.println(listrequest);
             Location location = locationClient.find_JSON(type, Integer.parseInt(ids));
 
             location.setAddress(address);
             location.setIntroduce(introduce);
             location.setLocationName(name);
-            if(file!=null){
-            location.setLocationUrl(file);
-            }
+            if (file != null) {
+               location.setLocationUrl(file);
+           } else {
+               location.setLocationUrl(existedFile);
+           }
 
             locationClient.edit_JSON(location, ids);
             request.getRequestDispatcher("Admin_Location").forward(request, response);
@@ -127,6 +135,7 @@ public class Admin_UpdateLocation extends HttpServlet {
             GenericType<Location> type=new GenericType<Location>(){};
             Location location=client.find_JSON(type, Integer.parseInt(id));
             
+           
             request.setAttribute("location", location);
             request.setAttribute("error", ex.getMessage());
             request.getRequestDispatcher("AdminTemplate/addlocation.jsp").forward(request, response);

@@ -78,7 +78,7 @@ public class Admin_AddLocation extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try (PrintWriter out = response.getWriter()){
+        try (PrintWriter out = response.getWriter()) {
             UploadServlet uploadServlet = new UploadServlet();
 
             LocationClient locationClient = new LocationClient();
@@ -87,7 +87,8 @@ public class Admin_AddLocation extends HttpServlet {
             String address = null;
             String introduce = null;
             String file = null;
-            Map<String,Object> listrequest = uploadServlet.Upload(request, "img");
+            String existedFile = null;
+            Map<String, Object> listrequest = uploadServlet.Upload(request, "img");
             for (Map.Entry<String, Object> entry : listrequest.entrySet()) {
                 if (entry.getKey().equals("name")) {
                     name = (String) entry.getValue();
@@ -101,18 +102,24 @@ public class Admin_AddLocation extends HttpServlet {
                 if (entry.getKey().equals("file")) {
                     file = (String) entry.getValue();
                 }
+                if (entry.getKey().equals("existedFile")) {
+                    existedFile = (String) entry.getValue();
+                }
             }
-            System.out.println("name:"+name);
-            System.out.println("address:"+address);
-            System.out.println("introduce:"+introduce);
-            System.out.println("file:"+file);
+            System.out.println("name:" + name);
+            System.out.println("address:" + address);
+            System.out.println("introduce:" + introduce);
+            System.out.println("file:" + file);
             System.out.println(listrequest);
 
             location.setAddress(address);
             location.setIntroduce(introduce);
             location.setLocationName(name);
-            location.setLocationUrl(file);
-
+            if (file != null) {
+                location.setLocationUrl(file);
+            } else {
+                location.setLocationUrl(existedFile);
+            }
 
             locationClient.create_JSON(location);
             request.getRequestDispatcher("Admin_Location").forward(request, response);

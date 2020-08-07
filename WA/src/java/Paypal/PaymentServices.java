@@ -211,7 +211,7 @@ public class PaymentServices {
 
         Item item = new Item();
         item.setCurrency("USD");
-        item.setName(nameRoom + "10%");
+        item.setName(nameRoom + " (10%)");
         item.setPrice(deposit);
         item.setQuantity("1");
         items.add(item);

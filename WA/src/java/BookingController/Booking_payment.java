@@ -110,7 +110,7 @@ public class Booking_payment extends HttpServlet {
             
             // Receiptcomponent
             Receiptcomponent receiptcomponent = new Receiptcomponent();
-            receiptcomponent.setComponentName("Room -" + room.getRoomTypeId().getRoomTypeName() + "-" + room.getLocationId().getLocationName() + idRoom);
+            receiptcomponent.setComponentName("Room -" + room.getRoomTypeId().getRoomTypeName() + "-" + room.getLocationId().getLocationName() +" "+ idRoom +"("+datenow+")");
             receiptcomponent.setOrdererName(name);
             receiptcomponent.setPrice(priceSub);
             receiptcomponent.setQuantity(1);

@@ -39,7 +39,7 @@ public class QrcodeGen {
         System.out.println(url);
         System.out.println(url.lastIndexOf("WA"));
     String outputFile =url.replaceAll("%20", " ").substring(1,url.lastIndexOf("WA")+2)+"/web/images/"+foldername+"/"+imgname+"."+filetype;
-    Path path = FileSystems.getDefault().getPath(outputFile);
+    Path path = FileSystems.getDefault().getPath("/"+outputFile);
     MatrixToImageWriter.writeToPath(matrix, "PNG", path);
         System.out.println(path.toAbsolutePath());
     // Write to byte array

@@ -48,7 +48,8 @@
             Your Order
         </h2>
     </section>
-    <%                                        float subtotal = 0;
+    <%                                        
+        float subtotal = 0;
         float tax = 0;
         float total = 0;
         int count = 0;
@@ -73,7 +74,8 @@
     <!-- Reservation -->
     <section class="section-reservation bg1-pattern p-t-100 p-b-113">
         <div class="site-section">
-            <%                if (count == 0) {
+            <%                
+                if (count == 0) {
             %>
             <h1 class="text-center">You have pay all the bill</h1>
             <%
@@ -86,7 +88,7 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th></th>
+
                                         <th class="product-thumbnail">Order Date</th>
                                         <th class="product-name">Product</th>
                                         <th class="product-price">Price</th>
@@ -99,12 +101,10 @@
 
                                     <%
                                         for (Receiptcomponent receiptcomponent : list) {
-
                                     %>
                                     <tr class="product" style="<%if (receiptcomponent.getStatus()) {
                                             out.print("display:none");
                                         }%>">
-                                        <td><%=receiptcomponent.getStatus()%></td>
                                         <td class="product-thumbnail cart-row">
                                             <%=format.format(receiptcomponent.getOrderDate())%>
                                         </td>
@@ -195,12 +195,8 @@
     <!-- Container Selection1 -->
     <div id="dropDownSelect1"></div>
 
-
-
     <!--===============================================================================================-->
     <%@ include file="jslink.jsp" %>
-
-
 
 </body>
 

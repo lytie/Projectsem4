@@ -54,7 +54,8 @@ public class CustomerPageCartServlet extends HttpServlet {
                 }
             } else {
                 ReceiptcomponentClient receiptcomponentClient = new ReceiptcomponentClient();
-                GenericType<List<Receiptcomponent>> genType = new GenericType<List<Receiptcomponent>>() {};
+                GenericType<List<Receiptcomponent>> genType = new GenericType<List<Receiptcomponent>>() {
+                };
                 List<Receiptcomponent> list = new ArrayList<Receiptcomponent>();
                 qrcode = qrcodeClient.find_JSON(genericType, session.getAttribute("qrcodeid").toString());
                 list = receiptcomponentClient.findbyReceiptID_JSON(genType, String.valueOf(qrcode.getReceiptId().getReceiptId()));
@@ -62,8 +63,6 @@ public class CustomerPageCartServlet extends HttpServlet {
                 request.setAttribute("qrcode", qrcode);
                 request.getRequestDispatcher("/customerpage/cart.jsp").forward(request, response);
             }
-            
-            /* TODO output your page here. You may use following sample code. */
         }
     }
 

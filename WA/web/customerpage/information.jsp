@@ -45,7 +45,7 @@
 	<!-- Title Page -->
 	<section class="bg-title-page flex-c-m p-t-160 p-b-80 p-l-15 p-r-15" style="background-image: url(./images/customerpageimg/bg-title-page-02.jpg);">
 		<h2 class="tit6 t-center">
-                    Informations ${sessionScope.qrcodeid}
+                    Informations 
 		</h2>
 	</section>
 	<!-- Gallery -->
@@ -54,20 +54,28 @@
 		<div class="container">
 			<div class="row">
                 <div class="col-md-4">
-                    <img src="./images/customerpageimg/image.png" style="max-width: 100%;max-height: 100%;width: 100%" alt="">
+                    <img src="./images/qrcode/${qrcode.getUrl()}" style="max-width: 100%;max-height: 100%;width: 100%" alt="">
                 </div>
                 <div class="col-md-8">
                     <div style="background-color: #dddddd40;height: 100%;" class=" p-md-4">
                         <h2 class="mb-3">${qrcode.getCustomerName()}</h2>
                         <div class="row">
-                            <div class="p-3 col-md-6">
-                                <p>CodeId: <span class="p-l-20">${qrcode.getQrCodeId()}</span></p>
-                                <p>Email: <span class="p-l-20">${qrcode.getEmailSendedTo()}</span></p>
+                            <div class="p-3 col-md-8">
+                                <div class="row">
+                                    <p>CodeId: <span class="p-l-20">${qrcode.getQrCodeId()}</span></p>
+                                </div>
+                                <div class="row">
+                                    <p>Email: <span class="p-l-20">${qrcode.getEmailSendedTo()}</span></p>
+                                </div>
                                 <fmt:setLocale value="en_US"/>
-                                <p>Check-in Date: <span class="p-l-20"><fmt:formatDate value="${qrcode.getCheckInDate()}" pattern="dd-MMMM-YYYY"/></span></p>
-                                <p>Check-out Date: <span class="p-l-20"><fmt:formatDate value="${qrcode.getCheckOutDate()}" pattern="dd-MMMM-YYYY"/></span></p>
+                                <div class="row">
+                                    <p>Check-in Date: <span class="p-l-20"><fmt:formatDate value="${qrcode.getCheckInDate()}" pattern="dd-MMMM-YYYY"/></span></p>
+                                </div>
+                                <div class="row">
+                                    <p>Check-out Date: <span class="p-l-20"><fmt:formatDate value="${qrcode.getCheckOutDate()}" pattern="dd-MMMM-YYYY"/></span></p>
+                                </div>                     
                             </div>
-                            <div class="p-3 col-md-6">
+                            <div class="p-3 col-md-4">
                                 <p>Room number: <span class="p-l-20">${qrcode.getRoomId().getRoomId()}</span></p>
                                 <p>Number of adults: <span class="p-l-20">${qrcode.getAdultsNum()}</span></p>
                                 <p>Number of children: <span class="p-l-20">${qrcode.getChildrenNum()}</span></p>

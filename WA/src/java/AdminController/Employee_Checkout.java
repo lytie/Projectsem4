@@ -68,6 +68,8 @@ public class Employee_Checkout extends HttpServlet {
                 }
                 if (action != null && action.equals("deactive")) {
                     if (realpay == receipt.getSubtotal()) {
+                        receipt.setPayDate(new Date());
+                        receiptClient.edit_JSON(receipt, receipt.getReceiptId().toString());
                         request.setAttribute("msg", "<div class='success'></div>"
                                 + "         <script type=\"text/javascript\">\n"
                                 + "            $('.success').each(function () {\n"

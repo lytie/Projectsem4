@@ -66,6 +66,8 @@ public class UploadServlet extends HttpServlet {
 //                    System.out.println(fileName);
                     InputStream fileContent = item.getInputStream();
                     item.write(new File("/"+outputFile+url+"/"+fileName));
+                    fileContent.close();
+                    Thread.sleep(10000);
 //                    System.out.println(outputFile+url+"/"+fileName);
                     listrequest.put(fieldName, fileName);
                    

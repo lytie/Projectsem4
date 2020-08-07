@@ -50,7 +50,18 @@ public class CustomerPageIndexServlet extends HttpServlet {
                     }
                 }
             } else {
-                request.getRequestDispatcher("/customerpage/index.jsp").forward(request, response);
+                if (request.getParameter("id") != null) {
+                   qrcode = qrcodeClient.find_JSON(genericType, request.getParameter("id"));
+                   if (qrcode != null) {
+                        session.setAttribute("qrcodeid", qrcode.getQrCodeId());
+                        session.setAttribute("status", qrcode.getStatus());
+                        request.getRequestDispatcher("/customerpage/index.jsp").forward(request, response);
+                    }else {
+                        out.print("Not found qrcode");
+                    }
+                }else{
+                    request.getRequestDispatcher("/customerpage/index.jsp").forward(request, response);
+                }   
             }
 
             /* TODO output your page here. You may use following sample code. */

@@ -17,7 +17,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-        <title>EMPLOYEE | </title>
+        <title>Admin Haven</title>
 
         <!-- Font Awesome Icons -->
         <%@include file="css.jsp" %>

@@ -50,20 +50,20 @@
 
     <!-- Gallery -->
     <div class="section-gallery p-t-118 p-b-100">
-
+        <c:if test="${list.size()==0}">
+            <h1 class="t-center">You have no ticket</h1>
+        </c:if>
         <div class="wrap-gallery isotope-grid flex-w p-l-25 p-r-25">
             <!-- - -->
             <c:forEach items="${list}" var="l">
                 <div class="item-gallery isotope-item bo-rad-10 hov-img-zoom">
-                <h2 class="t-center m-b-20">${l.getTicketName()}-Left:${l.getQuantity()}</h2>
-                <img src="./images/ticket/${l.getTicketUrl()}" alt="IMG-GALLERY">
-
-                <div class="overlay-item-gallery trans-0-4 flex-c-m">
-                    <a class="btn-show-gallery flex-c-m fa fa-search" href="./images/ticket/${l.getTicketUrl()}" data-lightbox="gallery"></a>
+                    <h2 class="t-center m-b-20">${l.getTicketName()}-Left:${l.getQuantity()}</h2>
+                    <img src="./images/ticket/${l.getTicketUrl()}" alt="IMG-GALLERY">
+                    <div class="overlay-item-gallery trans-0-4 flex-c-m">
+                        <a class="btn-show-gallery flex-c-m fa fa-search" href="./images/ticket/${l.getTicketUrl()}" data-lightbox="gallery"></a>
+                    </div>
                 </div>
-            </div>
             </c:forEach>
-
         </div>
     </div>
 

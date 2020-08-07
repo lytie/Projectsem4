@@ -115,7 +115,7 @@ public class Employee_Room extends HttpServlet {
                 if (qrcode.getStatus()) {
                     //Check if checkout time tomorrow;
                     calendar2.setTime(dateFormat.parse(dateFormat.format(qrcode.getCheckOutDate())));
-                    calendar2.add(Calendar.DATE, 1);
+                    calendar2.add(Calendar.DATE, -1);
                     if (calendar2.getTime().equals(calendar1.getTime())) {
                         listPrepareToCheckout.add(qrcode);
                     } else {

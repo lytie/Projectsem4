@@ -19,14 +19,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-        <title>EMPLOYEE | </title>
+        <title>Admin Haven</title>
 
         <!-- Font Awesome Icons -->
         <%@include file="css.jsp" %>
         <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
 
         <link href="<%=common.url%>/dist/css/datepicker-foundation.min.css" rel="stylesheet"/>
-              
+
     </head>
     <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed" >
         <div class="wrapper">
@@ -56,11 +56,11 @@
                                         </div>                               
                                         <div class="col-4">
                                             From:
-                                            <input type="text" required id="datepicker1" name="start" class="form-control" />
+                                            <input type="text" required id="datepicker1" autocomplete="off" name="start" class="form-control" />
                                         </div>
                                         <div class="col-4">
                                             To:
-                                            <input type="text" required id="datepicker2" name="end" class="form-control" />
+                                            <input type="text" required id="datepicker2" autocomplete="off" name="end" class="form-control" />
                                         </div>                            
                                     </div>
                                 </div>
@@ -136,7 +136,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-8" style="border-left-style: solid">
-                                                                
+
                                                                 <div style="padding: 10%">
                                                                     <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Customer Name: ${lIU.getCustomerName()}</div>
                                                                     <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Email: ${lIU.getEmailSendedTo()}</div>
@@ -189,7 +189,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-8" style="border-left-style: solid">
-                                                                
+
                                                                 <div style="padding: 10%">
                                                                     <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Customer Name: ${lR.getCustomerName()}</div>
                                                                     <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Email: ${lR.getEmailSendedTo()}</div>
@@ -210,7 +210,7 @@
                                     <c:forEach items="${listPrepareToCheckout}" var="lPTC">
                                         <div class="col-lg-3 col-6">
                                             <!-- small box -->
-                                            <div class="small-box bg-gradient-gray-dark">
+                                            <div class="small-box" style="background-color: #6d1bf3;color: white">
                                                 <div class="inner">
                                                     <h3 style="font-size: 20px">${lPTC.roomId.roomId}</h3>
 
@@ -219,10 +219,10 @@
                                                 <div class="icon">
                                                     <i class="fa fa-hotel"></i>
                                                 </div>
-                                                <a href="${lPTC.getQrCodeId()}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                                <a data-toggle="modal" data-target="#R${lPTC.getQrCodeId()}"  class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                                             </div>
                                         </div>
-                                            <!--modal start-->
+                                        <!--modal start-->
                                         <div class="modal" id="R${lPTC.getQrCodeId()}">
                                             <div class="modal-dialog modal-dialog-scollable modal-xl" style="padding:10%" >
                                                 <div class="modal-content"style="color: white; background-color: #6f6d6d;">
@@ -241,7 +241,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-8" style="border-left-style: solid">
-                                                                
+
                                                                 <div style="padding: 10%">
                                                                     <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Customer Name: ${lPTC.getCustomerName()}</div>
                                                                     <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Email: ${lPTC.getEmailSendedTo()}</div>
@@ -302,14 +302,14 @@
         <%@include file="jslink.jsp" %>
         <script src="<%=common.url%>/dist/js/datepicker-full.js">
         </script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
         <script>
             const elem3 = document.getElementById('range');
                     const datepicker3 = new DateRangePicker(elem3, {
                     minDate: "2019-01-01",
-                            buttonClass: 'btn',
+                            buttonClass: 'btn btn-warning',
                             format: 'yyyy-mm-dd'
                     });</script>            
         <script type="text/javascript">

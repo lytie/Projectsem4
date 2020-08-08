@@ -6,9 +6,11 @@
 package AdminController;
 
 import bean.UploadServlet;
+import entities.Convenient;
 import entities.ImgHero;
 import entities.Location;
 import entities.Room;
+import entities.Roomconvenient;
 import entities.Roomimage;
 import entities.Roomtype;
 import entities.VConvenientroom;
@@ -22,9 +24,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.GenericType;
+import wsc.ConvenientClient;
 import wsc.ImgHeroClient;
 import wsc.LocationClient;
 import wsc.RoomClient;
+import wsc.RoomconvenientClient;
 import wsc.RoomimageClient;
 import wsc.RoomtypeClient;
 import wsc.VConvenientroomClient;
@@ -53,7 +57,9 @@ public class Admin_UpdateRoom extends HttpServlet {
             RoomtypeClient roomtypeClient = new RoomtypeClient();
             LocationClient client = new LocationClient();
             RoomimageClient roomimageClient = new RoomimageClient();
-            VConvenientroomClient vConvenientroomClient = new VConvenientroomClient();
+            ConvenientClient convenientClient = new ConvenientClient();
+            RoomconvenientClient roomconvenientClient = new RoomconvenientClient();
+
             GenericType<Room> genRoom = new GenericType<Room>() {
             };
             GenericType<List<Location>> genListLocation = new GenericType<List<Location>>() {
@@ -62,19 +68,25 @@ public class Admin_UpdateRoom extends HttpServlet {
             };
             GenericType<List<Roomimage>> genListRoomimage = new GenericType<List<Roomimage>>() {
             };
-            GenericType<List<VConvenientroom>> genListVConvenientroom = new GenericType<List<VConvenientroom>>() {
+            GenericType<List<Convenient>> genListConvenient = new GenericType<List<Convenient>>() {
             };
-            
+            GenericType<List<Roomconvenient>> genListRoomconvenient = new GenericType<List<Roomconvenient>>() {
+            };
+
             Room room = roomClient.find_JSON(genRoom, id);
             List<Location> listLocation = client.findAll_JSON(genListLocation);
             List<Roomtype> listRoomType = roomtypeClient.findAll_JSON(genListRoomtype);
             List<Roomimage> listRoomimage = roomimageClient.getImg_JSON(genListRoomimage, Integer.parseInt(id));
-            List<VConvenientroom> listVConvenientrooms = vConvenientroomClient.convenientImg_JSON(genListVConvenientroom, Integer.parseInt(id));
-            
-            for (Roomimage roomimage : listRoomimage) {
-                System.out.println("url:" + roomimage.getUrl());
+            List<Convenient> listConvenients = convenientClient.findAll_JSON(genListConvenient);
+            List<Roomconvenient> listRoomconvenients = roomconvenientClient.findAll_JSON(genListRoomconvenient);
+            List<Roomconvenient> listRoomconvenient = new ArrayList<>();
+            for (Roomconvenient roomconvenient : listRoomconvenients) {
+                if (roomconvenient.getRoomId().getRoomId() == Integer.parseInt(id)) {
+                    listRoomconvenient.add(roomconvenient);
+                }
             }
-            request.setAttribute("listVConvenientrooms",listVConvenientrooms);
+            request.setAttribute("listConvenients", listConvenients);
+            request.setAttribute("listRoomconvenients", listRoomconvenient);
             request.setAttribute("listRoomimage", listRoomimage);
             request.setAttribute("listLocation", listLocation);
             request.setAttribute("listRoomType", listRoomType);
@@ -95,7 +107,20 @@ public class Admin_UpdateRoom extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String id = request.getParameter("id");
+        String action = request.getParameter("action");
+        RoomClient roomClient = new RoomClient();
+        GenericType<Room> genRoom = new GenericType<Room>() {
+        };
+        Room room = roomClient.find_JSON(genRoom, id);
+        if (action.equals("deactive")) {
+            room.setStatus(Boolean.FALSE);
+        }
+        if (action.equals("active")) {
+            room.setStatus(Boolean.TRUE);
+        }
+        roomClient.edit_JSON(room, room.getRoomId().toString());
+        request.getRequestDispatcher("Admin_ListRoom").forward(request, response);
     }
 
     /**
@@ -114,6 +139,8 @@ public class Admin_UpdateRoom extends HttpServlet {
         RoomtypeClient roomtypeClient = new RoomtypeClient();
         LocationClient locationClient = new LocationClient();
         RoomimageClient roomimageClient = new RoomimageClient();
+        ConvenientClient convenientClient = new ConvenientClient();
+        RoomconvenientClient roomconvenientClient = new RoomconvenientClient();
         GenericType<Room> genRoom = new GenericType<Room>() {
         };
         GenericType<Location> genLocation = new GenericType<Location>() {
@@ -121,6 +148,14 @@ public class Admin_UpdateRoom extends HttpServlet {
         GenericType<Roomtype> genRoomtype = new GenericType<Roomtype>() {
         };
         GenericType<List<Roomimage>> genListRoomimage = new GenericType<List<Roomimage>>() {
+        };
+        GenericType<Convenient> genConvenient = new GenericType<Convenient>() {
+        };
+        GenericType<List<Convenient>> genListConvenient = new GenericType<List<Convenient>>() {
+        };
+        GenericType<List<Roomconvenient>> genListRoomconvenient = new GenericType<List<Roomconvenient>>() {
+        };
+        GenericType<Roomconvenient> genRoomconvenient = new GenericType<Roomconvenient>() {
         };
         UploadServlet upload = new UploadServlet();
         Map<String, Object> form = upload.Upload(request, "images");
@@ -134,6 +169,7 @@ public class Admin_UpdateRoom extends HttpServlet {
         String size = null;
         String view = null;
         String demo = null;
+        String totalconvenients = null;
         for (Map.Entry<String, Object> entry : form.entrySet()) {
             if (entry.getKey().equals("roomid")) {
                 roomid = (String) entry.getValue();
@@ -165,8 +201,12 @@ public class Admin_UpdateRoom extends HttpServlet {
             if (entry.getKey().equals("demo")) {
                 demo = (String) entry.getValue();
             }
+            if (entry.getKey().equals("totalconvenients")) {
+                totalconvenients = (String) entry.getValue();
+            }
         }
         List<String> listImg = new ArrayList<>();
+        List<String> listrequestConvenientId = new ArrayList<>();
         if (demo != null) {
             for (Map.Entry<String, Object> entry : form.entrySet()) {
                 for (int i = 0; i < Integer.parseInt(demo); i++) {
@@ -187,6 +227,12 @@ public class Admin_UpdateRoom extends HttpServlet {
                     listImg.add((String) entry.getValue());
                 }
             }
+            for (int i = 0; i < Integer.parseInt(totalconvenients) + 1; i++) {
+                if (entry.getKey().equals("convenients" + i)) {
+                    listrequestConvenientId.add((String) entry.getValue());
+                }
+
+            }
         }
         System.out.println(roomid);
         System.out.println(locationid);
@@ -200,7 +246,7 @@ public class Admin_UpdateRoom extends HttpServlet {
         System.out.println(demo);
         System.out.println(form);
         System.out.println(listImg);
-
+        System.out.println(listrequestConvenientId);
         room.setLocationId(locationClient.find_JSON(genLocation, Integer.parseInt(locationid)));
         room.setRoomTypeId(roomtypeClient.find_JSON(genRoomtype, roomtypeid));
         room.setPrice(Float.parseFloat(price));
@@ -211,6 +257,23 @@ public class Admin_UpdateRoom extends HttpServlet {
         room.setSize(size);
         room.setView(view);
 
+        List<Convenient> listConvenients = convenientClient.findAll_JSON(genListConvenient);
+        List<Roomconvenient> listRoomconvenients = roomconvenientClient.findAll_JSON(genListRoomconvenient);
+        List<Roomconvenient> listRoomconvenient = new ArrayList<>();
+        for (Roomconvenient roomconvenient : listRoomconvenients) {
+            if (roomconvenient.getRoomId().getRoomId() == Integer.parseInt(roomid)) {
+                listRoomconvenient.add(roomconvenient);
+            }
+        }
+        for (Roomconvenient roomconvenient : listRoomconvenient) {
+            roomconvenientClient.remove(roomconvenient.getId().toString());
+        }
+        for (String string : listrequestConvenientId) {
+            Roomconvenient roomconvenient = new Roomconvenient();
+            roomconvenient.setConvenientId(convenientClient.find_JSON(genConvenient, string));
+            roomconvenient.setRoomId(room);
+            roomconvenientClient.create_JSON(roomconvenient);
+        }
         for (Roomimage roomimage : listRoomimage) {
             roomimageClient.remove(roomimage.getRoomImageId().toString());
         }
@@ -220,6 +283,7 @@ public class Admin_UpdateRoom extends HttpServlet {
             roomimage.setUrl(listImg.get(i));
             roomimageClient.create_JSON(roomimage);
         }
+
         System.out.println("locationid:" + room.getLocationId());
         System.out.println("RoomTypeId:" + room.getRoomTypeId());
         System.out.println("price:" + room.getPrice());
@@ -230,8 +294,9 @@ public class Admin_UpdateRoom extends HttpServlet {
         System.out.println("size:" + room.getSize());
         System.out.println("view:" + room.getView());
 
-        roomClient.edit_XML(room, roomid);
-        //processRequest(request, response);
+        roomClient.edit_JSON(room, roomid);
+
+        request.getRequestDispatcher("Admin_ListRoom").forward(request, response);
     }
 
     /**

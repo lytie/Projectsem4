@@ -93,10 +93,19 @@
                                                                         <i class="fas fa-pencil-alt">
                                                                         </i> Details-Edit
                                                                     </a>
-                                                                    <a class="btn btn-danger btn-sm" href="#">
-                                                                        <i class="fas fa-ban">
-                                                                        </i> De-active 
-                                                                    </a>
+                                                                    <c:if test="${s.getStatus()==true}">
+                                                                        <a class="btn btn-danger btn-sm" href="Admin_UpdateRoom?id=${s.getRoomId()}&action=deactive">
+                                                                            <i class="fas fa-ban">
+                                                                            </i> De-active 
+                                                                        </a>
+                                                                    </c:if>
+                                                                        <c:if test="${s.getStatus()!=true}">
+                                                                        <a class="btn btn-success btn-sm" href="Admin_UpdateRoom?id=${s.getRoomId()}&action=active">
+                                                                            <i class="fas fa-check">
+                                                                            </i> Active 
+                                                                        </a>
+                                                                    </c:if>
+
                                                                 </td>
 
                                                             </tr>

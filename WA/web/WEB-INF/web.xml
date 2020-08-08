@@ -305,6 +305,14 @@
         <servlet-name>Admin_ListRoom</servlet-name>
         <servlet-class>AdminController.Admin_ListRoom</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Admin_ImgHero</servlet-name>
+        <servlet-class>AdminController.Admin_ImgHero</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Admin_AddImgHero</servlet-name>
+        <servlet-class>AdminController.Admin_AddImgHero</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CustomerPageMenuServlet</servlet-name>
         <url-pattern>/CustomerPageMenuServlet</url-pattern>
@@ -604,6 +612,14 @@
     <servlet-mapping>
         <servlet-name>Admin_ListRoom</servlet-name>
         <url-pattern>/Admin_ListRoom</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Admin_ImgHero</servlet-name>
+        <url-pattern>/Admin_ImgHero</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Admin_AddImgHero</servlet-name>
+        <url-pattern>/Admin_AddImgHero</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

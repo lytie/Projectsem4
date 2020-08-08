@@ -32,7 +32,7 @@
         </div>
     </form>
     <!-- Right navbar links -->
-    
+
 </nav>
 <!-- /.navbar -->
 
@@ -59,7 +59,15 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
        with font-awesome or any other icon font library -->
+                <li class="nav-item has-treeview">
+                    <a href="Admin_ImgHero" class="nav-link">
+                        <i class="nav-icon fa fa-credit-card"></i>
+                        <p>
+                            Banner
+                        </p>
+                    </a>
 
+                </li>
                 <li class="nav-item has-treeview">
                     <a href="Admin_Employee" class="nav-link">
                         <i class="nav-icon fa fa-user"></i>
@@ -70,7 +78,7 @@
                     </a>
 
                 </li>
-                 <li class="nav-item has-treeview">
+                <li class="nav-item has-treeview">
                     <a href="Admin_Customer" class="nav-link">
                         <i class="nav-icon fa fa-map-signs"></i>
                         <p>
@@ -79,7 +87,7 @@
                     </a>
 
                 </li>
-               
+
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fa fa-bed"></i>
@@ -96,7 +104,7 @@
                             </a>
                         </li>
                     </ul>
-                   
+
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="Admin_RoomType" class="nav-link">
@@ -141,7 +149,7 @@
                     </a>
 
                 </li>
-               
+
                 <li class="nav-item has-treeview">
                     <a href="Admin_Convenient" class="nav-link">
                         <i class="nav-icon fa fa-wifi"></i>

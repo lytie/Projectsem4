@@ -73,7 +73,7 @@ public class ImgHeroFacadeREST extends AbstractFacade<ImgHero> {
     @Path("HeroImg")
     @Produces({"application/xml", "application/json"})
     public List<ImgHero> HeroImg() {
-        String query="SELECT * FROM img_hero where choose=true limit 5";
+        String query="SELECT * FROM img_hero where choose=true order by id_hero desc limit 5";
         
         return em.createNativeQuery(query,ImgHero.class).getResultList();
     }

@@ -3,26 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package AdminController;
 
-import bean.UploadServlet;
-import entities.Roomtype;
+import entities.Room;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.GenericType;
-import wsc.RoomtypeClient;
+import wsc.RoomClient;
 
 /**
  *
- * @author ADMIN
+ * @author Admin
  */
-public class Admin_AddRoomType extends HttpServlet {
+public class Admin_ListRoom extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,8 +36,11 @@ public class Admin_AddRoomType extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            request.getRequestDispatcher("AdminTemplate/addroomtype.jsp").forward(request, response);
+            RoomClient roomClient = new RoomClient();
+            GenericType<List<Room>> genListRoom = new GenericType<List<Room>>(){};
+            List<Room> listRooms = roomClient.findAll_JSON(genListRoom);
+            request.setAttribute("list", listRooms);
+            request.getRequestDispatcher("AdminTemplate/listroom.jsp").forward(request, response);
         }
     }
 
@@ -68,55 +70,7 @@ public class Admin_AddRoomType extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            UploadServlet uploadServlet = new UploadServlet();
-            RoomtypeClient roomtypeClient = new RoomtypeClient();
-            Roomtype roomtype = new Roomtype();
-
-            String name = null;
-            String description = null;
-            String img = null;
-            String existedFile = null;
-
-            Map<String, Object> listRoomType = uploadServlet.Upload(request, "img");
-
-            for (Map.Entry<String, Object> object : listRoomType.entrySet()) {
-
-                if (object.getKey().equals("name")) {
-                    name = object.getValue().toString();
-                }
-                if (object.getKey().equals("decription")) {
-                    description = object.getValue().toString();
-                }
-                if (object.getKey().equals("file")) {
-                    img = object.getValue().toString();
-                }
-                if (object.getKey().equals("existedFile0")) {
-                    existedFile = (String) object.getValue();
-                }
-            }
-
-            roomtype.setDescription(description);
-            roomtype.setRoomTypeName(name);
-            if (img != null) {
-                roomtype.setUrl(img);
-            } else {
-                roomtype.setUrl(existedFile);
-            }
-            roomtypeClient.create_JSON(roomtype);
-
-            RoomtypeClient roomtypeClients = new RoomtypeClient();
-            GenericType<List<Roomtype>> typ = new GenericType<List<Roomtype>>() {
-            };
-            List<Roomtype> listType = roomtypeClients.findAll_JSON(typ);
-            request.setAttribute("listType", listType);
-
-            request.getRequestDispatcher("AdminTemplate/roomtype.jsp").forward(request, response);
-        } catch (Exception e) {
-            request.setAttribute("error", e);
-            request.getRequestDispatcher("AdminTemplate/addroomtype.jsp").forward(request, response);
-        }
-
+        processRequest(request, response);
     }
 
     /**

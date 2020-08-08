@@ -171,7 +171,7 @@ public class Admin_AddRoom extends HttpServlet {
             room.setSize(size);
             room.setStatus(Boolean.FALSE);
             room.setView(view);
-
+            room.setStatus(Boolean.TRUE);
             roomClient.create_JSON(room);
 
             List<String> listImg = new ArrayList<>();
@@ -200,7 +200,7 @@ public class Admin_AddRoom extends HttpServlet {
 
             }
 
-            request.getRequestDispatcher("Admin_Room").forward(request, response);
+            request.getRequestDispatcher("Admin_ListRoom").forward(request, response);
 
         } catch (Exception e) {
             LocationClient client = new LocationClient();

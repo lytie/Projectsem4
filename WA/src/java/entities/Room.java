@@ -54,7 +54,7 @@ public class Room implements Serializable {
     @Column(name = "Status")
     private Boolean status;
     @Size(max = 255)
-    @Column(name = "Description", length = 255)
+    @Column(name = "Description", length = 500)
     private String description;
     @Size(max = 80)
     @Column(name = "BedOption", length = 80)

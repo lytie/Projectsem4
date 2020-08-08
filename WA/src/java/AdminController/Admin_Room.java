@@ -78,7 +78,7 @@ public class Admin_Room extends HttpServlet {
 
             if (start == null || end == null) {
                 request.setAttribute("listLocation", listLocation);
-                request.getRequestDispatcher("AdminTemplate/room.jsp").forward(request, response);
+                request.getRequestDispatcher("AdminTemplate/roombooking.jsp").forward(request, response);
                 listQrcodeInUse = adminIndexClient.getQrcodeInUse(genListQrcode, "2020-01-01", dateFormat.format(now));
                 listRoomNotInUse = adminIndexClient.getRoomNotInUse(genListRoom, "2020-01-01", dateFormat.format(now));
             } else {
@@ -131,7 +131,7 @@ public class Admin_Room extends HttpServlet {
             request.setAttribute("listInUse", listInUse);
             request.setAttribute("listReserved", listReserved);
             request.setAttribute("listPrepareToCheckout", listPrepareToCheckout);
-            request.getRequestDispatcher("AdminTemplate/room.jsp").forward(request, response);
+            request.getRequestDispatcher("AdminTemplate/roombooking.jsp").forward(request, response);
         } catch (ParseException ex) {
             System.out.println("error:" + ex.getMessage());
             Logger.getLogger(Employee_Room.class.getName()).log(Level.SEVERE, null, ex);

@@ -105,7 +105,7 @@ public class Admin_AddService extends HttpServlet {
                 if(entry.getKey().equals("file")){
                     file=entry.getValue().toString();
                 }
-                if (entry.getKey().equals("existedFile")) {
+                if (entry.getKey().equals("existedFile0")) {
                     existedFile = (String) entry.getValue();
                 }
             }
@@ -114,6 +114,7 @@ public class Admin_AddService extends HttpServlet {
             GenericType<Servicetype> genericType=new GenericType<Servicetype>(){};
             Servicetype servicetypes=servicetypeClient.find_JSON(genericType, serviceType);
             
+            service.setStatus(Boolean.TRUE);
             service.setSerivceTypeId(servicetypes);
             service.setServiceDescription(decription);
             service.setServiceName(name);

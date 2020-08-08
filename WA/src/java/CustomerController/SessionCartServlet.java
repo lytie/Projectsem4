@@ -146,8 +146,9 @@ public class SessionCartServlet extends HttpServlet {
         Date date = new Date();
         if (session.getAttribute("cart") != null) {
             List<Item> cart = (List<Item>) session.getAttribute("cart");
-            float subtotal = 0;
+            
             for (Item item : cart) {
+                float subtotal = 0;
                 if (item.getService().getSerivceTypeId().getServiceTypeId() == 3) {
                     Ticket ticket = new Ticket();
                     ticket.setQuantity(Integer.valueOf(request.getParameter("quantity" + cart.indexOf(item))));

@@ -25,6 +25,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -149,7 +150,7 @@ public class Booking_payment extends HttpServlet {
             
             // Receiptcomponent
             Receiptcomponent receiptcomponent = new Receiptcomponent();
-            receiptcomponent.setComponentName("Room -" + room.getRoomTypeId().getRoomTypeName() + "-" + room.getLocationId().getLocationName() +" "+ idRoom +"("+datenow+")");
+            receiptcomponent.setComponentName("Room -" + room.getRoomTypeId().getRoomTypeName() + "-" + room.getLocationId().getLocationName() +" "+ idRoom);
             receiptcomponent.setOrdererName(name);
             receiptcomponent.setPrice(priceSub);
             receiptcomponent.setQuantity(1);
@@ -182,6 +183,14 @@ public class Booking_payment extends HttpServlet {
             Date dateOut = df.parse(outDate);
             System.out.println("datein:"+dateIn);
             System.out.println("dateout:"+dateOut);
+            
+            Calendar calIn=Calendar.getInstance();
+            calIn.setTime(dateIn);
+            calIn.add(Calendar.HOUR, 9);
+            Calendar calOut=Calendar.getInstance();
+            calOut.setTime(dateOut);
+            calOut.add(Calendar.HOUR, 9);
+            
             //get Img QR
             String qrcodeImg = null;
             boolean checked = false;
@@ -204,8 +213,8 @@ public class Booking_payment extends HttpServlet {
             qrcode.setCustomerName(name);
             qrcode.setDeposits(Float.valueOf(price) / 10);
             qrcode.setEmailSendedTo(email);
-            qrcode.setCheckInDate(dateIn);
-            qrcode.setCheckOutDate(dateOut);
+            qrcode.setCheckInDate(calIn.getTime());
+            qrcode.setCheckOutDate(calOut.getTime());
             qrcode.setReceiptId(receipt);
             qrcode.setUrl(qrcodeImg + ".png");
             qrcode.setRoomId(room);

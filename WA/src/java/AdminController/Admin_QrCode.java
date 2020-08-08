@@ -50,11 +50,11 @@ public class Admin_QrCode extends HttpServlet {
                     }
                 }
             }
-            List<Qrcode> newlistQrcode = qrcodeClient.findAll_JSON(genericType);
+            
             System.out.println(datenow);
 
             request.setAttribute("date", datenow);
-            request.setAttribute("listQrcode", newlistQrcode);
+            request.setAttribute("listQrcode", listQrcode);
             request.getRequestDispatcher("AdminTemplate/qrcode.jsp").forward(request, response);
         }
     }

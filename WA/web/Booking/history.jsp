@@ -136,9 +136,34 @@
 
                                                     </ul>
                                                     <c:choose>
-                                                        <c:when test="${l.getCheckOutDate().before(date) || l.getCheckOutDate().compareTo(date)==0}">
+                                                        <c:when test="${(l.getCheckOutDate().before(date) || l.getCheckOutDate().compareTo(date)==0) && l.payStatus==true}">
                                                             <div style="padding: 35%">
+                                                                 
                                                                 <i class='far fa-check-circle' style='font-size:60px;color:#00AA00'></i>
+                                                            </div>
+                                                        </c:when>
+                                                        <c:when test="${(l.getCheckOutDate().before(date) || l.getCheckOutDate().compareTo(date)==0) && l.payStatus!=true}">
+                                                            <div style="padding: 35%">
+                                                                 
+                                                                <i class='fas fa-ban'style='font-size:60px;color:#BDBDBD'></i>
+                                                            </div>
+                                                        </c:when>
+                                                        <c:when test="${l.getCheckInDate().after(date)}">
+                                                            <div style="padding: 35%">
+                                                                <i class='fas fa-map-marker-alt' style='font-size:60px;color:#BDBDBD'></i>
+                                                               
+                                                            </div>
+                                                        </c:when>
+                                                        <c:when test="${(l.getCheckInDate().before(date) || l.getCheckInDate().compareTo(date)==0) && status==true}">
+                                                            <div style="padding: 35%">
+                                                                 <i class='fas fa-map-marker-alt' style='font-size:60px;color:#00AA00'></i>
+                                                              
+                                                            </div>
+                                                        </c:when>
+                                                         <c:when test="${(l.getCheckInDate().before(date) || l.getCheckInDate().compareTo(date)==0) && status!=true}">
+                                                            <div style="padding: 35%">
+                                                                 <i class='fas fa-exclamation-circle' style='font-size:60px;color:#D7DF01'></i>
+                                                              
                                                             </div>
                                                         </c:when>
                                                         <c:otherwise>

@@ -128,6 +128,12 @@
                                                         <input type="text" readonly name="view" class="form-control" value="${room.getView()}" placeholder="Enter Room Capacity">
                                                     </div>
                                                 </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="exampleInputPassword1">Room Convenient</label>
+                                                    <c:forEach items="${listVConvenientrooms}" var="s">
+                                                        <img src="images/icon/${s.getUrl()}" />
+                                                    </c:forEach>
+                                                </div>
                                                 <div class="form-group col-md-12">
                                                     <label for="exampleInputPassword1">Room Image</label>
                                                     <div id="btnRoomImage" class="btn btn-info" style="margin-left: 10px;margin-bottom: 10px">Edit</div>
@@ -141,7 +147,7 @@
                                                             </div>
                                                         </c:forEach>
                                                     </div>
-                                                    
+
                                                 </div>    
                                             </div>
                                         </div>

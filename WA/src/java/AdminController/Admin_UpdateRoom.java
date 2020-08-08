@@ -11,6 +11,7 @@ import entities.Location;
 import entities.Room;
 import entities.Roomimage;
 import entities.Roomtype;
+import entities.VConvenientroom;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ import wsc.LocationClient;
 import wsc.RoomClient;
 import wsc.RoomimageClient;
 import wsc.RoomtypeClient;
+import wsc.VConvenientroomClient;
 
 /**
  *
@@ -51,6 +53,7 @@ public class Admin_UpdateRoom extends HttpServlet {
             RoomtypeClient roomtypeClient = new RoomtypeClient();
             LocationClient client = new LocationClient();
             RoomimageClient roomimageClient = new RoomimageClient();
+            VConvenientroomClient vConvenientroomClient = new VConvenientroomClient();
             GenericType<Room> genRoom = new GenericType<Room>() {
             };
             GenericType<List<Location>> genListLocation = new GenericType<List<Location>>() {
@@ -59,14 +62,19 @@ public class Admin_UpdateRoom extends HttpServlet {
             };
             GenericType<List<Roomimage>> genListRoomimage = new GenericType<List<Roomimage>>() {
             };
+            GenericType<List<VConvenientroom>> genListVConvenientroom = new GenericType<List<VConvenientroom>>() {
+            };
+            
             Room room = roomClient.find_JSON(genRoom, id);
             List<Location> listLocation = client.findAll_JSON(genListLocation);
             List<Roomtype> listRoomType = roomtypeClient.findAll_JSON(genListRoomtype);
             List<Roomimage> listRoomimage = roomimageClient.getImg_JSON(genListRoomimage, Integer.parseInt(id));
+            List<VConvenientroom> listVConvenientrooms = vConvenientroomClient.convenientImg_JSON(genListVConvenientroom, Integer.parseInt(id));
+            
             for (Roomimage roomimage : listRoomimage) {
                 System.out.println("url:" + roomimage.getUrl());
             }
-
+            request.setAttribute("listVConvenientrooms",listVConvenientrooms);
             request.setAttribute("listRoomimage", listRoomimage);
             request.setAttribute("listLocation", listLocation);
             request.setAttribute("listRoomType", listRoomType);
@@ -217,7 +225,7 @@ public class Admin_UpdateRoom extends HttpServlet {
         System.out.println("price:" + room.getPrice());
         System.out.println("capacity:" + room.getCapacity());
         System.out.println("description:" + room.getDescription());
-        System.out.println("description lenght"+room.getDescription().length());
+        System.out.println("description lenght" + room.getDescription().length());
         System.out.println("bedoption:" + room.getBedOption());
         System.out.println("size:" + room.getSize());
         System.out.println("view:" + room.getView());

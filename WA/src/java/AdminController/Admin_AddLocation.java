@@ -102,7 +102,7 @@ public class Admin_AddLocation extends HttpServlet {
                 if (entry.getKey().equals("file")) {
                     file = (String) entry.getValue();
                 }
-                if (entry.getKey().equals("existedFile")) {
+                if (entry.getKey().equals("existedFile0")) {
                     existedFile = (String) entry.getValue();
                 }
             }

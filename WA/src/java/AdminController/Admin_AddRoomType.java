@@ -91,7 +91,7 @@ public class Admin_AddRoomType extends HttpServlet {
                 if (object.getKey().equals("file")) {
                     img = object.getValue().toString();
                 }
-                if (object.getKey().equals("existedFile")) {
+                if (object.getKey().equals("existedFile0")) {
                     existedFile = (String) object.getValue();
                 }
             }

@@ -7,7 +7,6 @@
 package entities;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,11 +17,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -53,8 +50,8 @@ public class Room implements Serializable {
     private Float price;
     @Column(name = "Status")
     private Boolean status;
-    @Size(max = 255)
-    @Column(name = "Description", length = 500)
+    @Size(max = 2550)
+    @Column(name = "Description", length = 2550)
     private String description;
     @Size(max = 80)
     @Column(name = "BedOption", length = 80)
@@ -67,18 +64,12 @@ public class Room implements Serializable {
     private String view;
     @Column(name = "capacity")
     private Integer capacity;
-    @OneToMany(mappedBy = "roomId")
-    private List<Qrcode> qrcodeList;
-    @OneToMany(mappedBy = "roomId")
-    private List<Roomimage> roomimageList;
     @JoinColumn(name = "LocationId", referencedColumnName = "LocationId")
     @ManyToOne
     private Location locationId;
     @JoinColumn(name = "RoomTypeId", referencedColumnName = "RoomTypeId")
     @ManyToOne
     private Roomtype roomTypeId;
-    @OneToMany(mappedBy = "roomId")
-    private List<Roomconvenient> roomconvenientList;
 
     public Room() {
     }
@@ -151,24 +142,6 @@ public class Room implements Serializable {
         this.capacity = capacity;
     }
 
-    @XmlTransient
-    public List<Qrcode> getQrcodeList() {
-        return qrcodeList;
-    }
-
-    public void setQrcodeList(List<Qrcode> qrcodeList) {
-        this.qrcodeList = qrcodeList;
-    }
-
-    @XmlTransient
-    public List<Roomimage> getRoomimageList() {
-        return roomimageList;
-    }
-
-    public void setRoomimageList(List<Roomimage> roomimageList) {
-        this.roomimageList = roomimageList;
-    }
-
     public Location getLocationId() {
         return locationId;
     }
@@ -183,15 +156,6 @@ public class Room implements Serializable {
 
     public void setRoomTypeId(Roomtype roomTypeId) {
         this.roomTypeId = roomTypeId;
-    }
-
-    @XmlTransient
-    public List<Roomconvenient> getRoomconvenientList() {
-        return roomconvenientList;
-    }
-
-    public void setRoomconvenientList(List<Roomconvenient> roomconvenientList) {
-        this.roomconvenientList = roomconvenientList;
     }
 
     @Override

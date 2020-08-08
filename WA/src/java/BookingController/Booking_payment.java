@@ -209,6 +209,7 @@ public class Booking_payment extends HttpServlet {
             qrcode.setReceiptId(receipt);
             qrcode.setUrl(qrcodeImg + ".png");
             qrcode.setRoomId(room);
+            qrcode.setPhone(phone);
             qrcode.setStatus(false);
             qrcode.setCreateDate(datenow);
 

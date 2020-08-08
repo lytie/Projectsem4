@@ -63,90 +63,98 @@
                 </div>
             </div>
             <!-- slider Area End-->
-            
+
             <%
                 if (session.getAttribute("user") != null) {
-                        
+
             %>
-            
+
             <c:choose >
                 <c:when test="${list.isEmpty()}">
                     <div style="margin: 200px ">
                         <div style="font-family: 'Lucida Console', Courier, monospace;font-size: 25px"> You have no room usage history yet </div>
-                    
-                    
+
+
                     </div>
                 </c:when>
                 <c:otherwise >
-                    
-                
-            
-            <c:forEach items="${list}" var="l">
-                <!-- History Start-->
-                <div class="container-fluid mb-105">
-                    <section class="profile-section spad">
-                        <div class="container">
-                            <div class="profile-agent-content">
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <div class="profile-agent-info">
-                                            <div class="">
-                                                <img src="images/img/${l.url}" alt="${l.url}">
 
-                                            </div>
-                                            <div class="pi-text">
-                                                <h5>${l.roomTypeName}</h5>
-                                                <span>${l.locationName}</span>
-                                                <p><fmt:formatDate value="${l.checkInDate}" pattern="dd/MM/yyyy"/> - <fmt:formatDate value="${l.checkOutDate}" pattern="dd/MM/yyyy"/></p>
-                                                <p></p>
-                                                <p><fmt</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="profile-agent-widget">
-                                            <ul>
-                                                <li class="row">
-                                                    <span class="col-lg-7"><b>Service Name</b></span>
-                                                    <span class="col-lg-2"><b>Quantity </b></span>
-                                                    <span class="col-lg-3"><b>Price($)</b></span>
-                                                </li>
 
-                                                <c:forEach items="${booking_bookMB.listReceiptcomponents(l.receiptId)}" var="re">
-                                                    <li class="row">
-                                                    <span class="col-lg-7">${re.componentName}</span>
-                                                    <span class="col-lg-2">${re.quantity} </span>
-                                                    <span class="col-lg-3">${re.subtotal} $</span>
-                                                </li>
-                                                    
-                                                    </c:forEach>
 
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <div class="profile-agent-newslatter">
-                                            <ul>
-                                                <li>SubTotal: <span>${l.subtotal}$</span></li>
-                                                <li>Tax: <span>${l.tax}$</span></li>
-                                                <li>Deposits: <span>${l.deposits}$</span></li>
-                                                <li>Total: <span>${l.total}$</span></li>
+                    <c:forEach items="${list}" var="l">
+                        <!-- History Start-->
+                        <div class="container-fluid mb-105">
+                            <section class="profile-section spad">
+                                <div class="container">
+                                    <div class="profile-agent-content">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="profile-agent-info">
+                                                    <div class="">
+                                                        <img src="images/img/${l.url}" alt="${l.url}">
 
-                                            </ul>
-                                            <c:if test="${l.getCheckOutDate().before(date)}">
-                                                <div style="padding: 35%">
-                                                    <i class='far fa-check-circle' style='font-size:60px;color:#00AA00'></i>
+                                                    </div>
+                                                    <div class="pi-text">
+                                                        <h5>${l.roomTypeName}</h5>
+                                                        <span>${l.locationName}</span>
+                                                        <p><fmt:formatDate value="${l.checkInDate}" pattern="dd/MM/yyyy"/> - <fmt:formatDate value="${l.checkOutDate}" pattern="dd/MM/yyyy"/></p>
+                                                        <p></p>
+                                                        <p><fmt</p>
+                                                    </div>
                                                 </div>
-                                            </c:if>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="profile-agent-widget">
+                                                    <ul>
+                                                        <li class="row">
+                                                            <span class="col-lg-7"><b>Service Name</b></span>
+                                                            <span class="col-lg-2"><b>Quantity </b></span>
+                                                            <span class="col-lg-3"><b>Price($)</b></span>
+                                                        </li>
+
+                                                        <c:forEach items="${booking_bookMB.listReceiptcomponents(l.receiptId)}" var="re">
+                                                            <li class="row">
+                                                                <span class="col-lg-7"> <div> ${re.componentName}</div>
+                                                                    <div>(<fmt:formatDate value="${re.orderDate}" pattern="dd-MM-yyyy : HH:mm:ss"/>)</div>
+                                                                   </span>
+                                                                <span class="col-lg-2">${re.quantity} </span>
+                                                                <span class="col-lg-3">${re.subtotal} $</span>
+                                                            </li>
+
+                                                        </c:forEach>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="profile-agent-newslatter">
+                                                    <ul>
+                                                        <li>SubTotal: <span>${l.subtotal}$</span></li>
+                                                        <li>Tax: <span>${l.tax}$</span></li>
+                                                        <li>Deposits: <span>${l.deposits}$</span></li>
+                                                        <li>Total: <span>${l.total}$</span></li>
+
+                                                    </ul>
+                                                    <c:choose>
+                                                        <c:when test="${l.getCheckOutDate().before(date) || l.getCheckOutDate().compareTo(date)==0}">
+                                                            <div style="padding: 35%">
+                                                                <i class='far fa-check-circle' style='font-size:60px;color:#00AA00'></i>
+                                                            </div>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            
+                                                        </c:otherwise>
+                                                    </c:choose>
+
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
 
+                                </div>
+                            </section>
                         </div>
-                    </section>
-                </div>
-            </c:forEach>
+                    </c:forEach>
                 </c:otherwise>
             </c:choose>
             <!-- History End-->

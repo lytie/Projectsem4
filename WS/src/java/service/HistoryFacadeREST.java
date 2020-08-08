@@ -82,6 +82,15 @@ public class HistoryFacadeREST extends AbstractFacade<History> {
     public String countREST() {
         return String.valueOf(super.count());
     }
+    
+    @GET
+    @Path("findHistory")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<History> findHistory() {
+        
+        return em.createNativeQuery("SELECT * FROM history order by CreateDate desc", History.class).getResultList();
+        
+    }
 
     @Override
     protected EntityManager getEntityManager() {

@@ -40,7 +40,7 @@ public class Admin_QrCode extends HttpServlet {
             QrcodeClient qrcodeClient = new QrcodeClient();
             GenericType<List<Qrcode>> genericType = new GenericType<List<Qrcode>>() {
             };
-            List<Qrcode> listQrcode = qrcodeClient.findAll_JSON(genericType);
+            List<Qrcode> listQrcode = qrcodeClient.findQrcode_JSON(genericType);
             Date datenow = new Date();
             for (Qrcode qrcode : listQrcode) {
                 if (qrcode.getCheckOutDate() != null) {

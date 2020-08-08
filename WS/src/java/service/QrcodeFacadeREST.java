@@ -74,6 +74,15 @@ public class QrcodeFacadeREST extends AbstractFacade<Qrcode> {
     public List<Qrcode> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
+    
+    
+     @GET
+    @Path("findQrcode")
+    @Produces({"application/xml", "application/json"})
+    public List<Qrcode> findQrcode() {
+        return  em.createNativeQuery("SELECT * FROM qrcode order by CreateDate desc", Qrcode.class).getResultList();
+    }
+    
 
     @GET
     @Path("count")

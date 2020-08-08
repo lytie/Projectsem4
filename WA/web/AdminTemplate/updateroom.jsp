@@ -35,7 +35,7 @@
                         <div class="row mb-2">
                             <div class="col-sm-6">
                                 <h4>
-                                    <a class="btn btn-info btn-sm" href="Admin_AddRoom">
+                                    <a class="btn btn-info btn-sm" href="Admin_ListRoom">
                                         <i class=" fa fa-plus">
                                         </i> Back to list
                                     </a>   
@@ -130,9 +130,23 @@
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label for="exampleInputPassword1">Room Convenient</label>
-                                                    <c:forEach items="${listVConvenientrooms}" var="s">
-                                                        <img src="images/icon/${s.getUrl()}" />
-                                                    </c:forEach>
+                                                    <div id="rRoomImage" class="row">
+                                                        <input type="hidden" name="totalconvenients" value="${listConvenients.size()}"/>
+                                                        <c:forEach items="${listConvenients}" var="s">
+                                                            <div class="col-md-1" style="padding: 10px">
+                                                                <label class="checkbox-inline">
+                                                                    <input type="checkbox" value="${s.getConvenientId()}" name="convenients${listConvenients.indexOf(s)+1}"
+                                                                           <c:forEach items="${listRoomconvenients}" var="l">
+                                                                               <c:if test="${l.getConvenientId().getConvenientId()==s.getConvenientId()}">checked</c:if>
+                                                                               <c:if test="${l.getConvenientId().getConvenientId()!=s.getConvenientId()}"></c:if>
+                                                                           </c:forEach> 
+                                                                    />
+                                                                    <img src="images/icon/${s.getUrl()}" style="width: 100%;height: 100%" />
+                                                                </label>
+                                                            </div> 
+                                                        </c:forEach>
+
+                                                    </div>
                                                 </div>
                                                 <div class="form-group col-md-12">
                                                     <label for="exampleInputPassword1">Room Image</label>
@@ -173,12 +187,7 @@
                 <!-- /.content -->
             </div>
             <!-- /.content-wrapper -->
-            <footer class="main-footer">
-                <div class="float-right d-none d-sm-block">
-                    <b>Version</b> 3.0.5
-                </div>
-                <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-            </footer>
+            <%@include file="footer.jsp" %>
 
             <!-- Control Sidebar -->
             <aside class="control-sidebar control-sidebar-dark">

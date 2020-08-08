@@ -16,6 +16,7 @@ import entities.Qrcode;
 import entities.Receipt;
 import entities.Receiptcomponent;
 import entities.Room;
+import entities.Roombooking;
 import entities.Service;
 import entities.Servicetype;
 import java.io.IOException;
@@ -24,6 +25,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -37,6 +39,7 @@ import wsc.QrcodeClient;
 import wsc.ReceiptClient;
 import wsc.ReceiptcomponentClient;
 import wsc.RoomClient;
+import wsc.RoombookingClient;
 import wsc.ServicetypeClient;
 
 /**
@@ -58,13 +61,9 @@ public class Booking_payment extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String paymentId = request.getParameter("paymentId");
-            String payerId = request.getParameter("PayerID");
-
-            PaymentServices paymentServices = new PaymentServices();
-            Payment payment = paymentServices.executePayment(paymentId, payerId);
-
-            String name = request.getParameter("name");
+            
+            
+             String name = request.getParameter("name");
             String email = request.getParameter("email");
             String phone = request.getParameter("phone");
             String inDate = request.getParameter("inDate");
@@ -73,6 +72,47 @@ public class Booking_payment extends HttpServlet {
             String children = request.getParameter("children");
             String idRoom = request.getParameter("idRoom");
             String price = request.getParameter("price");
+            
+            
+            
+        RoomClient roomClient = new RoomClient();
+        GenericType<Room> roomGenericType = new GenericType<Room>() {
+        };
+        Room r = roomClient.find_JSON(roomGenericType, idRoom);
+        
+        int capation = Integer.parseInt(children) + Integer.parseInt(adult) * 2;
+        
+        RoombookingClient roombookingClient = new RoombookingClient();
+        GenericType<List<Roombooking>> listRoomBook = new GenericType<List<Roombooking>>() {
+        };
+        List<Roombooking> list = roombookingClient.bookRoom_JSON(listRoomBook, inDate, outDate, r.getLocationId().getLocationId(), capation);
+
+        boolean exists = true;
+        for (Roombooking roombooking : list) {
+            if (roombooking.getRoomId() == Integer.valueOf(idRoom)) {
+                exists = false;
+            }
+        }
+
+        if (exists) {
+
+            request.setAttribute("exists", "<div class=\"exists\"></div><script type=\"text/javascript\">\n"
+                    + "            $('.exists').each(function () {\n"
+                    + "                swal(\"Book room fail \", \"The room has been booked\", \"warning\");\n"
+                    + "            });\n"
+                    + "        </script>");
+            request.getRequestDispatcher("Haven").forward(request, response);
+
+        }else{
+            
+            
+            String paymentId = request.getParameter("paymentId");
+            String payerId = request.getParameter("PayerID");
+
+            PaymentServices paymentServices = new PaymentServices();
+            Payment payment = paymentServices.executePayment(paymentId, payerId);
+
+           
 
             Date datenow = new Date();
             QrcodeClient qrcodeClient = new QrcodeClient();
@@ -97,7 +137,7 @@ public class Booking_payment extends HttpServlet {
 
             ReceiptcomponentClient receiptcomponentClient = new ReceiptcomponentClient();
 
-            RoomClient roomClient = new RoomClient();
+            
             GenericType<Room> roomType = new GenericType<Room>() {
             };
             Room room = roomClient.find_JSON(roomType, idRoom);
@@ -110,7 +150,7 @@ public class Booking_payment extends HttpServlet {
             
             // Receiptcomponent
             Receiptcomponent receiptcomponent = new Receiptcomponent();
-            receiptcomponent.setComponentName("Room -" + room.getRoomTypeId().getRoomTypeName() + "-" + room.getLocationId().getLocationName() +" "+ idRoom +"("+datenow+")");
+            receiptcomponent.setComponentName("Room -" + room.getRoomTypeId().getRoomTypeName() + "-" + room.getLocationId().getLocationName() +" "+ idRoom);
             receiptcomponent.setOrdererName(name);
             receiptcomponent.setPrice(priceSub);
             receiptcomponent.setQuantity(1);
@@ -143,6 +183,14 @@ public class Booking_payment extends HttpServlet {
             Date dateOut = df.parse(outDate);
             System.out.println("datein:"+dateIn);
             System.out.println("dateout:"+dateOut);
+            
+            Calendar calIn=Calendar.getInstance();
+            calIn.setTime(dateIn);
+            calIn.add(Calendar.HOUR, 9);
+            Calendar calOut=Calendar.getInstance();
+            calOut.setTime(dateOut);
+            calOut.add(Calendar.HOUR, 9);
+            
             //get Img QR
             String qrcodeImg = null;
             boolean checked = false;
@@ -165,11 +213,12 @@ public class Booking_payment extends HttpServlet {
             qrcode.setCustomerName(name);
             qrcode.setDeposits(Float.valueOf(price) / 10);
             qrcode.setEmailSendedTo(email);
-            qrcode.setCheckInDate(dateIn);
-            qrcode.setCheckOutDate(dateOut);
+            qrcode.setCheckInDate(calIn.getTime());
+            qrcode.setCheckOutDate(calOut.getTime());
             qrcode.setReceiptId(receipt);
             qrcode.setUrl(qrcodeImg + ".png");
             qrcode.setRoomId(room);
+            qrcode.setPhone(phone);
             qrcode.setStatus(false);
             qrcode.setCreateDate(datenow);
 
@@ -191,7 +240,7 @@ public class Booking_payment extends HttpServlet {
                     + "        </script>");
             
            
-            request.getRequestDispatcher("Haven").include(request, response);
+            request.getRequestDispatcher("Haven").include(request, response);}
 
         } catch (PayPalRESTException | ParseException | WriterException ex) {
             Logger.getLogger(Booking_payment.class.getName()).log(Level.SEVERE, null, ex);

@@ -46,7 +46,7 @@ public class HistoryCustomer extends HttpServlet {
                 HistoryClient historyClient = new HistoryClient();
                 GenericType<List<History>> historyType = new GenericType<List<History>>() {
                 };
-                List<History> listHis = historyClient.findAll_JSON(historyType);
+                List<History> listHis = historyClient.findHistory_JSON(historyType);
                 List<History> list = new ArrayList<>();
 
                 Accountcustomer cus = (Accountcustomer) session.getAttribute("user");
@@ -61,6 +61,7 @@ public class HistoryCustomer extends HttpServlet {
                 System.out.println(listHis);
                 System.out.println(list);
 
+                
                 
                 
                 request.setAttribute("list", list);

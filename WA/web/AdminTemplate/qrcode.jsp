@@ -55,12 +55,13 @@
                                         </div>
                                         <!-- /.card-header -->
                                         <div class="card-body">
-                                            <table id="example1" class="table table-bordered table-striped">
+                                            <table id="example3" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr>
-                                                        <th>QrCode Id</th>
+                                                        <th>Name Customer</th>
                                                         <th>Email sended to</th>
-                                                        <th>Create Date</th>
+                                                        <th>CheckIn Date</th>
+                                                        <th>CheckOut Date</th>
                                                         <th>Status</th>
                                                         <th>Action</th>
                                                     </tr>
@@ -71,7 +72,7 @@
                                                         <tr>
                                                             <td > 
                                                                 <a class="" href="Admin_QrCodeInfo?id=<c:out value="${c.getQrCodeId()}"/>">
-                                                                    <c:out value="${c.getQrCodeId()}"/>
+                                                                    <c:out value="${c.customerName}"/>
                                                                 </a>
                                                             </td>
                                                             <td>
@@ -79,7 +80,10 @@
                                                             </td>
 
                                                             <td>
-                                                                <fmt:formatDate value="${c.getCreateDate()}" pattern="dd/MM/yyyy"/>
+                                                                <fmt:formatDate value="${c.checkInDate}" pattern="dd/MM/yyyy"/>
+                                                            </td>
+                                                            <td>
+                                                                <fmt:formatDate value="${c.checkOutDate}" pattern="dd/MM/yyyy"/>
                                                             </td>
                                                             <td>
                                                                 <c:choose>
@@ -92,7 +96,7 @@
                                                                     <c:if test="${date.before(c.checkOutDate)||date==c.checkOutDate}">
                                                                         <c:choose>
                                                                             <c:when test="${c.getStatus()== true}">
-                                                                                <a class="btn btn-danger btn-sm" href="Admin_StatusQrcode?status=deactivate&id=<c:out value="${c.getQrCodeId()}"/>">
+                                                                                <a class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to checkout this Room?');" href="Admin_StatusQrcode?status=deactivate&id=<c:out value="${c.getQrCodeId()}"/>">
                                                                                     <i class="fas fa-times"></i> Deactivate                          
                                                                                 </a> 
                                                                             </c:when>
@@ -102,7 +106,7 @@
                                                                                         <i class="fas fa-check"></i> Active                          
                                                                                     </a> 
                                                                                 </c:if>
-                                                                                <a class="btn btn-dark btn-sm" href="Admin_StatusQrcode?status=cancel&id=<c:out value="${c.getQrCodeId()}"/>">
+                                                                                <a class="btn btn-dark btn-sm" onclick="return confirm('Are you sure you want to delete this Room?');" href="Admin_StatusQrcode?status=cancel&id=<c:out value="${c.getQrCodeId()}"/>">
                                                                                     <i class="fas fa-ban"></i> Cancel                          
                                                                                 </a> 
                                                                             </c:otherwise>
@@ -142,6 +146,29 @@
         <!-- jQuery -->
         <%@include file="jslink.jsp" %>
         ${msg}
+        <script>
+    $(function() {
+        $("#example3").DataTable({
+            "responsive": true,
+            "autoWidth": false,
+             "ordering": false,
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
+</script>
+      
     </body>
 
 </html>

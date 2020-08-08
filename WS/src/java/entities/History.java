@@ -40,6 +40,15 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "History.findByReceiptId", query = "SELECT h FROM History h WHERE h.receiptId = :receiptId"),
     @NamedQuery(name = "History.findByAccountCustomerId", query = "SELECT h FROM History h WHERE h.accountCustomerId = :accountCustomerId")})
 public class History implements Serializable {
+
+    @Column(name = "CreateDate")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createDate;
+
+    @Column(name = "Status")
+    private Boolean status;
+    @Column(name = "PayStatus")
+    private Boolean payStatus;
     private static final long serialVersionUID = 1L;
     @Size(max = 500)
     @Column(name = "url", length = 500)
@@ -164,6 +173,30 @@ public class History implements Serializable {
 
     public void setAccountCustomerId(Integer accountCustomerId) {
         this.accountCustomerId = accountCustomerId;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+
+    public Boolean getPayStatus() {
+        return payStatus;
+    }
+
+    public void setPayStatus(Boolean payStatus) {
+        this.payStatus = payStatus;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
     

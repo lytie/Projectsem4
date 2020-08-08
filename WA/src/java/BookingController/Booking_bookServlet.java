@@ -7,8 +7,13 @@ package BookingController;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,70 +37,68 @@ public class Booking_bookServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        try {
+            response.setContentType("text/html;charset=UTF-8");
 
-        String inDate = request.getParameter("start");
-        String outDate = request.getParameter("end");
-        int location = Integer.parseInt(request.getParameter("selectLocation"));
-        int adult = Integer.parseInt(request.getParameter("selectAdult"));
-        int children = Integer.parseInt(request.getParameter("selectChildren"));
-        if (request.getParameter("end").isEmpty() || request.getParameter("end").isEmpty()) {
-            request.setAttribute("check", "false");
-        }else{
-            request.setAttribute("check", "true");
-        }
-        HttpSession session = request.getSession();
-//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");  
-//        Date date = new Date();  
-//
-//        if (session.getAttribute("inDate") == null) {
+            String inDate = request.getParameter("start");
+            String outDate = request.getParameter("end");
+            int location = Integer.parseInt(request.getParameter("selectLocation"));
+            int adult = Integer.parseInt(request.getParameter("selectAdult"));
+            int children = Integer.parseInt(request.getParameter("selectChildren"));
+            if (request.getParameter("end").isEmpty() || request.getParameter("end").isEmpty()) {
+                request.setAttribute("check", "false");
+            } else {
+                request.setAttribute("check", "true");
+            }
+            HttpSession session = request.getSession();
+
             session.setAttribute("inDate", inDate);
-//            request.setAttribute("inDate", formatter.format(date));
-//        } else {
-//            session.setAttribute("inDate", inDate);
-//            request.setAttribute("inDate", (String) session.getAttribute("inDate"));
-//        }
+
 //
-//        if (session.getAttribute("outDate") == null) {
             session.setAttribute("outDate", outDate);
-//            request.setAttribute("outDate", formatter.format(date));
-//        } else {
-//            session.setAttribute("outDate", outDate);
-//            request.setAttribute("outDate", (String) session.getAttribute("outDate"));
-//        }
-//
-//        if (session.getAttribute("location") == null) {
+
             session.setAttribute("location", location);
-//            request.setAttribute("location", 1);
-//        } else {
-//            session.setAttribute("location", location);
-//            request.setAttribute("location", Integer.valueOf(String.valueOf(session.getAttribute("location"))));
-//        }
-//
-//        if (session.getAttribute("adult") == null) {
+
             session.setAttribute("adult", adult);
-//            request.setAttribute("adult", 1);
-//        } else {
-//            session.setAttribute("adult", adult);
-//            request.setAttribute("adult", Integer.valueOf(String.valueOf(session.getAttribute("adult"))));
-//        }
-//
-//        if (session.getAttribute("children") == null) {
+
             session.setAttribute("children", children);
-//            request.setAttribute("children", 1);
-//        } else {
-//            session.setAttribute("children", children);
-//            request.setAttribute("children", Integer.valueOf(String.valueOf(session.getAttribute("children"))));
-//        }
-//
-//        if (session.getAttribute("capation") == null) {
-            session.setAttribute("capation", adult*2 + children);
-//            request.setAttribute("capation", 3);
-//        } else {
-//            session.setAttribute("capation", adult + children);
-//            request.setAttribute("capation", Integer.valueOf(String.valueOf(session.getAttribute("capation"))));
-//        }
-        request.getRequestDispatcher("Booking/booking.jsp").forward(request, response);
+
+            session.setAttribute("capation", adult * 2 + children);
+
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            Date inD = df.parse(inDate);
+            Date outD = df.parse(outDate);
+            System.out.println("ngay in:" + inD);
+            System.out.println("ngay out:" + outD);
+            System.out.println("so sanh ngay:" + inD.compareTo(outD));
+
+            boolean error = true;
+            if (inD.compareTo(outD) == 0) {
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(outD);
+                cal.add(Calendar.DATE, 1);
+                //session.setAttribute("outDate", cal.getTime());
+//                error=false;
+
+                request.setAttribute("error", "<div class=\"err\"></div><script type=\"text/javascript\">\n"
+                        + "            $('.err').each(function () {\n"
+                        + "                swal(\"The checkin date cannot be the same as the checkout date \", \"\", \"error\");\n"
+                        + "            });\n"
+                        + "        </script>");
+
+                outD = cal.getTime();
+                outDate = df.format(outD);
+
+            }
+
+            System.out.println("outDate: " + outDate);
+            session.setAttribute("inDate", inDate);
+            session.setAttribute("outDate", outDate);
+
+            request.getRequestDispatcher("Booking/booking.jsp").forward(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(Booking_bookServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 

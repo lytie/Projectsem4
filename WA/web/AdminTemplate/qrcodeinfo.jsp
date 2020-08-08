@@ -56,7 +56,7 @@
                                     <div class="card-body" style="background-color: #f6e3e338">
                                         <div class="row">
                                             <div class="col-md-3">
-                                                <img src="images/qrcode/image.png" style="width: 100%"/>
+                                                <img src="images/qrcode/${qrcode.url}" style="width: 100%"/>
                                             </div>
                                             <div class="col-md-9" style="border-color: #ffc107;border-style: solid;border-radius: 20px">
                                                 <div class="row">
@@ -97,14 +97,7 @@
                                                     </div>
                                                     <div class="col-md-6" style="padding: 20px;">
                                                         <a href="Admin_ReceiptInfo?receiptid=${qrcode.getReceiptId().getReceiptId()}" class="btn btn-warning" style="border-radius: 10px;color: white;margin: 10px"><i class="fas fa-shopping-bag"></i> Click to see Bill</a>
-                                                        <c:choose>
-                                                                <c:when test="${qrcode.getStatus()==true}">
-                                                                    <button class="btn btn-danger" style="border-radius: 10px;color: white;margin: 10px"><i class="fas fa-times"></i>Click to De-Active</button>
-                                                                </c:when>
-                                                                <c:otherwise>
-                                                                    <button class="btn btn-success" style="border-radius: 10px;color: white;margin: 10px"><i class="fas fa-check"></i>Click to Active</button>
-                                                                </c:otherwise>
-                                                            </c:choose>
+                                                       
                                                     </div>
                                                     <div class="col-md-6" style="padding: 20px;">
                                                         <img src="images/img/newlogo1.png" style="max-width: 100%" alt="newlogo1"/>

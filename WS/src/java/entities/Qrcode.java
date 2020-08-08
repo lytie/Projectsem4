@@ -48,6 +48,11 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Qrcode.findByAccountCustomerId", query = "SELECT q FROM Qrcode q WHERE q.accountCustomerId = :accountCustomerId"),
     @NamedQuery(name = "Qrcode.findByStatus", query = "SELECT q FROM Qrcode q WHERE q.status = :status")})
 public class Qrcode implements Serializable {
+
+    // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
+    @Size(max = 45)
+    @Column(name = "Phone", length = 45)
+    private String phone;
     @OneToMany(mappedBy = "buyerID")
     private List<Ticket> ticketList;
     private static final long serialVersionUID = 1L;
@@ -255,6 +260,14 @@ public class Qrcode implements Serializable {
 
     public void setTicketList(List<Ticket> ticketList) {
         this.ticketList = ticketList;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
     
 }

@@ -60,7 +60,7 @@ public class Admin_StatusQrcode extends HttpServlet {
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date date = new Date();
-
+           
             Calendar cal = Calendar.getInstance();
             cal.setTime(date);
             cal.add(Calendar.DATE, -1);
@@ -80,8 +80,9 @@ public class Admin_StatusQrcode extends HttpServlet {
 
                 if (realpay == receipt.getSubtotal()) {
                     qrcode.setStatus(Boolean.FALSE);
-                    qrcode.setCheckOutDate(cal.getTime());
+                    qrcode.setCheckOutDate(new Date());
                     receipt.setPayDate(new Date());
+                    receipt.setPayStatus(Boolean.TRUE);
                     receiptClient.edit_JSON(receipt, receipt.getReceiptId().toString());
                     request.setAttribute("msg", "<div class='success'></div>"
                             + "         <script type=\"text/javascript\">\n"

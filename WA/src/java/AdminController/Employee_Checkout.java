@@ -44,6 +44,7 @@ public class Employee_Checkout extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             String qrcodeid = request.getParameter("qrcodeid");
             String action = request.getParameter("action");
+            
             QrcodeClient qrcodeClient = new QrcodeClient();
             ReceiptClient receiptClient = new ReceiptClient();
             ReceiptcomponentClient receiptcomponentClient = new ReceiptcomponentClient();
@@ -67,8 +68,12 @@ public class Employee_Checkout extends HttpServlet {
                     }
                 }
                 if (action != null && action.equals("deactive")) {
+
                     if (realpay == receipt.getSubtotal()) {
+                        qrcode.setStatus(Boolean.FALSE);
+                        qrcode.setCheckOutDate(new Date());
                         receipt.setPayDate(new Date());
+                        receipt.setPayStatus(Boolean.TRUE);
                         receiptClient.edit_JSON(receipt, receipt.getReceiptId().toString());
                         request.setAttribute("msg", "<div class='success'></div>"
                                 + "         <script type=\"text/javascript\">\n"

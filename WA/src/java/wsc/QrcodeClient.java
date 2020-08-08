@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package wsc;
 
 import javax.ws.rs.ClientErrorException;
@@ -21,9 +20,10 @@ import javax.ws.rs.client.WebTarget;
  *        client.close();
  * </pre>
  *
- * @author Admin
+ * @author longly
  */
 public class QrcodeClient {
+
     private WebTarget webTarget;
     private Client client;
     private static final String BASE_URI = "http://localhost:8080/WS/webresources";
@@ -45,6 +45,18 @@ public class QrcodeClient {
 
     public void edit_JSON(Object requestEntity, String id) throws ClientErrorException {
         webTarget.path(java.text.MessageFormat.format("{0}", new Object[]{id})).request(javax.ws.rs.core.MediaType.APPLICATION_JSON).put(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
+    }
+
+    public <T> T findQrcode_XML(javax.ws.rs.core.GenericType<T> responseType) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path("findQrcode");
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
+    }
+
+    public <T> T findQrcode_JSON(javax.ws.rs.core.GenericType<T> responseType) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path("findQrcode");
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
     public <T> T find_XML(javax.ws.rs.core.GenericType<T> responseType, String id) throws ClientErrorException {

@@ -8,7 +8,9 @@ package AdminController;
 import entities.Qrcode;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -40,21 +42,31 @@ public class Admin_QrCode extends HttpServlet {
             QrcodeClient qrcodeClient = new QrcodeClient();
             GenericType<List<Qrcode>> genericType = new GenericType<List<Qrcode>>() {
             };
-            List<Qrcode> listQrcode = qrcodeClient.findAll_JSON(genericType);
+            List<Qrcode> listQrcode = qrcodeClient.findQrcode_JSON(genericType);
             Date datenow = new Date();
+             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = new Date();
+           
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            cal.add(Calendar.DATE, -1);
             for (Qrcode qrcode : listQrcode) {
                 if (qrcode.getCheckOutDate() != null) {
                     if (qrcode.getCheckOutDate().before(datenow)) {
                         qrcode.setStatus(Boolean.FALSE);
+                qrcode.setAccountCustomerId(null);
+                qrcode.setCheckInDate(cal.getTime());
+                qrcode.setCheckOutDate(cal.getTime());
+                       
                         qrcodeClient.edit_JSON(qrcode, qrcode.getQrCodeId());
                     }
                 }
             }
-            List<Qrcode> newlistQrcode = qrcodeClient.findAll_JSON(genericType);
+            
             System.out.println(datenow);
 
             request.setAttribute("date", datenow);
-            request.setAttribute("listQrcode", newlistQrcode);
+            request.setAttribute("listQrcode", listQrcode);
             request.getRequestDispatcher("AdminTemplate/qrcode.jsp").forward(request, response);
         }
     }

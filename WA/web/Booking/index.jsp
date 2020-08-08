@@ -86,7 +86,7 @@
 
                             <form action="Booking_bookServlet" method="">
                                 <div class="booking-wrap d-flex justify-content-between align-items-center" id="range">
-                                  
+
                                     <!-- select in date -->
                                     <div class="single-select-box mb-30">
                                         <!-- select out date -->
@@ -110,7 +110,7 @@
                                             <input id="datepicker2"  name="end" value="${outDate}"/>
                                         </div>
                                     </div>
-                                
+
                                     <!-- Single Select Box -->
                                     <div class="single-select-box mb-30">
                                         <div class="boking-tittle">
@@ -313,8 +313,9 @@
             <!-- Gallery img End-->
         </main>
 
-                                ${error}
+        ${error}
         ${success}
+        ${exists}
         <!-- Footer Start-->
         <%@include file="footer.html" %>
         <!-- JS here -->
@@ -394,29 +395,15 @@
             });
 
         </script>
-
-        <script type="text/javascript">
-               
-//            $(document).on("focusout", "#datepicker1", function() {             // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
-//                $.get('CheckinoutDate?inDate='+ $('#datepicker1').val() + '&outDate=' + $('#datepicker2').val(), function(responseXml) {                // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response XML...
-//               //
-//
-//    });
-//            });
-//            $(document).on("focusout", "#datepicker2", function() {             // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
-//                $.get('CheckinoutDate?inDate='+ $('#datepicker1').val() + '&outDate=' + $('#datepicker2').val(), function(responseXml) {                // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response XML...
-//    //
-//
-//    });
-            });
-        </script>
+       
+     
         <script src="dist/js/datepicker.min.js">
         </script>
         <script src="dist/js/locales/fr.min.js">
         </script>
         <script src="dist/js/datepicker-full.min.js">
         </script>
-
+        <script src="https://momentjs.com/downloads/moment.js"></script>
 
     </body>
 </html>

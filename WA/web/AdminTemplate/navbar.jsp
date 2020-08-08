@@ -92,7 +92,7 @@
                         <li class="nav-item">
                             <a href="Admin_Room" class="nav-link">
                                 <i class="fa fa-sort-down nav-icon"></i>
-                                <p>List Room</p>
+                                <p>Room Booking</p>
                             </a>
                         </li>
                     </ul>
@@ -102,6 +102,14 @@
                             <a href="Admin_RoomType" class="nav-link">
                                 <i class="fa fa-sort-down nav-icon"></i>
                                 <p>Room Type</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="Admin_ListRoom" class="nav-link">
+                                <i class="fa fa-sort-down nav-icon"></i>
+                                <p>List Room</p>
                             </a>
                         </li>
                     </ul>

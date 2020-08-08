@@ -301,6 +301,10 @@
         <servlet-name>CheckinoutDate</servlet-name>
         <servlet-class>BookingController.CheckinoutDate</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Admin_ListRoom</servlet-name>
+        <servlet-class>AdminController.Admin_ListRoom</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CustomerPageMenuServlet</servlet-name>
         <url-pattern>/CustomerPageMenuServlet</url-pattern>
@@ -596,6 +600,10 @@
     <servlet-mapping>
         <servlet-name>CheckinoutDate</servlet-name>
         <url-pattern>/CheckinoutDate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Admin_ListRoom</servlet-name>
+        <url-pattern>/Admin_ListRoom</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

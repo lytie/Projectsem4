@@ -3,20 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package AdminController;
 
+import bean.UploadServlet;
 import entities.ImgHero;
+import entities.Location;
 import entities.Room;
+import entities.Roomimage;
+import entities.Roomtype;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.GenericType;
 import wsc.ImgHeroClient;
+import wsc.LocationClient;
 import wsc.RoomClient;
+import wsc.RoomimageClient;
+import wsc.RoomtypeClient;
 
 /**
  *
@@ -37,34 +46,32 @@ public class Admin_UpdateRoom extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            
-            
-//            int id=Integer.parseInt(request.getParameter("IdRoom"));
-//            float price=Float.valueOf(request.getParameter("priceUp"));
-            RoomClient roomClient=new RoomClient();
-            GenericType<Room> gtRoom=new GenericType<Room>(){};
-//            Room room=roomClient.find_JSON(gtRoom, 2);
-//            out.println(room.getPrice());
-//            room.setPrice(60.0f);
-//            out.println(room.getPrice());
-//            roomClient.edit_JSON(room, room.getRoomId().toString());
-//            
-//            out.println(room.getPrice());
-//            
-//             Room room1=roomClient.find_JSON(gtRoom, 2);
-//             out.println(room1.getPrice());
+            String id = request.getParameter("id");
+            RoomClient roomClient = new RoomClient();
+            RoomtypeClient roomtypeClient = new RoomtypeClient();
+            LocationClient client = new LocationClient();
+            RoomimageClient roomimageClient = new RoomimageClient();
+            GenericType<Room> genRoom = new GenericType<Room>() {
+            };
+            GenericType<List<Location>> genListLocation = new GenericType<List<Location>>() {
+            };
+            GenericType<List<Roomtype>> genListRoomtype = new GenericType<List<Roomtype>>() {
+            };
+            GenericType<List<Roomimage>> genListRoomimage = new GenericType<List<Roomimage>>() {
+            };
+            Room room = roomClient.find_JSON(genRoom, id);
+            List<Location> listLocation = client.findAll_JSON(genListLocation);
+            List<Roomtype> listRoomType = roomtypeClient.findAll_JSON(genListRoomtype);
+            List<Roomimage> listRoomimage = roomimageClient.getImg_JSON(genListRoomimage, Integer.parseInt(id));
+            for (Roomimage roomimage : listRoomimage) {
+                System.out.println("url:" + roomimage.getUrl());
+            }
 
-
-//                ImgHeroClient client=new ImgHeroClient();
-//                GenericType<ImgHero> gtHero=new GenericType<ImgHero>(){};
-//                ImgHero img=client.find_JSON(gtHero, 1);
-//                img.setTextTitle("maybe");
-//                client.edit_JSON(img, img.getIdHero().toString());
-//                
-//                ImgHero img1=client.find_JSON(gtHero, 1);
-//               
-//                out.print(img.getTextTitle());
+            request.setAttribute("listRoomimage", listRoomimage);
+            request.setAttribute("listLocation", listLocation);
+            request.setAttribute("listRoomType", listRoomType);
+            request.setAttribute("room", room);
+            request.getRequestDispatcher("AdminTemplate/updateroom.jsp").forward(request, response);
         }
     }
 
@@ -94,7 +101,129 @@ public class Admin_UpdateRoom extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        RoomClient roomClient = new RoomClient();
+        RoomtypeClient roomtypeClient = new RoomtypeClient();
+        LocationClient locationClient = new LocationClient();
+        RoomimageClient roomimageClient = new RoomimageClient();
+        GenericType<Room> genRoom = new GenericType<Room>() {
+        };
+        GenericType<Location> genLocation = new GenericType<Location>() {
+        };
+        GenericType<Roomtype> genRoomtype = new GenericType<Roomtype>() {
+        };
+        GenericType<List<Roomimage>> genListRoomimage = new GenericType<List<Roomimage>>() {
+        };
+        UploadServlet upload = new UploadServlet();
+        Map<String, Object> form = upload.Upload(request, "images");
+        String roomid = null;
+        String locationid = null;
+        String roomtypeid = null;
+        String price = null;
+        String capacity = null;
+        String description = null;
+        String bedoption = null;
+        String size = null;
+        String view = null;
+        String demo = null;
+        for (Map.Entry<String, Object> entry : form.entrySet()) {
+            if (entry.getKey().equals("roomid")) {
+                roomid = (String) entry.getValue();
+            }
+            if (entry.getKey().equals("locationid")) {
+                locationid = (String) entry.getValue();
+            }
+            if (entry.getKey().equals("roomtypeid")) {
+                roomtypeid = (String) entry.getValue();
+            }
+            if (entry.getKey().equals("price")) {
+                price = (String) entry.getValue();
+            }
+            if (entry.getKey().equals("capacity")) {
+                capacity = (String) entry.getValue();
+            }
+            if (entry.getKey().equals("description")) {
+                description = (String) entry.getValue();
+            }
+            if (entry.getKey().equals("bedoption")) {
+                bedoption = (String) entry.getValue();
+            }
+            if (entry.getKey().equals("size")) {
+                size = (String) entry.getValue();
+            }
+            if (entry.getKey().equals("view")) {
+                view = (String) entry.getValue();
+            }
+            if (entry.getKey().equals("demo")) {
+                demo = (String) entry.getValue();
+            }
+        }
+        List<String> listImg = new ArrayList<>();
+        if (demo != null) {
+            for (Map.Entry<String, Object> entry : form.entrySet()) {
+                for (int i = 0; i < Integer.parseInt(demo); i++) {
+                    if (entry.getKey().equals("image" + i)) {
+                        listImg.add((String) entry.getValue());
+                    }
+                }
+            }
+        }
+        Room room = roomClient.find_JSON(genRoom, roomid);
+        List<Roomimage> listRoomimage = roomimageClient.getImg_JSON(genListRoomimage, Integer.parseInt(roomid));
+        for (Map.Entry<String, Object> entry : form.entrySet()) {
+            for (int i = 0; i < listRoomimage.size(); i++) {
+                if (entry.getKey().equals("currentfile" + i)) {
+                    listImg.add((String) entry.getValue());
+                }
+                if (entry.getKey().equals("existedFile" + i)) {
+                    listImg.add((String) entry.getValue());
+                }
+            }
+        }
+        System.out.println(roomid);
+        System.out.println(locationid);
+        System.out.println(roomtypeid);
+        System.out.println(price);
+        System.out.println(capacity);
+        System.out.println(description);
+        System.out.println(bedoption);
+        System.out.println(size);
+        System.out.println(view);
+        System.out.println(demo);
+        System.out.println(form);
+        System.out.println(listImg);
+
+        room.setLocationId(locationClient.find_JSON(genLocation, Integer.parseInt(locationid)));
+        room.setRoomTypeId(roomtypeClient.find_JSON(genRoomtype, roomtypeid));
+        room.setPrice(Float.parseFloat(price));
+        room.setStatus(Boolean.TRUE);
+        room.setCapacity(Integer.parseInt(capacity));
+        room.setDescription(description);
+        room.setBedOption(bedoption);
+        room.setSize(size);
+        room.setView(view);
+
+        for (Roomimage roomimage : listRoomimage) {
+            roomimageClient.remove(roomimage.getRoomImageId().toString());
+        }
+        Roomimage roomimage = new Roomimage();
+        for (int i = 0; i < listImg.size(); i++) {
+            roomimage.setRoomId(room);
+            roomimage.setUrl(listImg.get(i));
+            roomimageClient.create_JSON(roomimage);
+        }
+        System.out.println("locationid:" + room.getLocationId());
+        System.out.println("RoomTypeId:" + room.getRoomTypeId());
+        System.out.println("price:" + room.getPrice());
+        System.out.println("capacity:" + room.getCapacity());
+        System.out.println("description:" + room.getDescription());
+        System.out.println("description lenght"+room.getDescription().length());
+        System.out.println("bedoption:" + room.getBedOption());
+        System.out.println("size:" + room.getSize());
+        System.out.println("view:" + room.getView());
+
+        roomClient.edit_XML(room, roomid);
+        //processRequest(request, response);
     }
 
     /**

@@ -50,6 +50,7 @@ public class UploadServlet extends HttpServlet {
         try {
             List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
             for (FileItem item : items) {
+                int count = 0;
                 if (item.isFormField()) {
                     // Process regular form field (input type="text|radio|checkbox|etc", select, etc).
                     String fieldName = item.getFieldName();
@@ -60,6 +61,7 @@ public class UploadServlet extends HttpServlet {
 
                     // ... (do your job here)
                 } else {
+
                     // Process form file field (input type="file").
                     String fieldName = item.getFieldName();
                     String fileName = FilenameUtils.getName(item.getName());
@@ -68,18 +70,18 @@ public class UploadServlet extends HttpServlet {
                     InputStream fileContent = item.getInputStream();
                     File file = new File(("/" + outputFile + url + "/" + fileName).trim());
                     if (file.exists() && file.isFile()) {
-                        listrequest.put("existedFile", file.getName());
+                        listrequest.put("existedFile" + count, file.getName());
                         System.out.println("file exists rồi");
-                        
+                        fileContent.close();
+                    } else {
+                        fileContent.close();
+                        Thread.sleep(10000);
+                        item.write(file);
                     }
-                    
-                    item.write(file);
 
-                    fileContent.close();
-                    Thread.sleep(10000);
 //                    System.out.println(outputFile+url+"/"+fileName);
                     listrequest.put(fieldName, fileName);
-
+                    count++;
                     // ... (do your job here)
                 }
 

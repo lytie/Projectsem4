@@ -41,7 +41,7 @@
                         <form action="Employee_Room" method="post">
                             <div class="row mb-2">
                                 <div class="col-sm-12" style="margin-bottom: 20px">
-                                    <h1 class="m-0 text-dark text-center">List Room </h1>
+                                    <h1 class="m-0 text-dark text-center">Room Booking Management</h1>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="row" id="range">

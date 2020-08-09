@@ -83,13 +83,13 @@
                                                 <tr>
                                                     <td class="mailbox-star"><a href=""><i class="fas fa-star text-warning"></i></a></td>
                                                     <td class="mailbox-name"> <a class="" href="Admin_ReadFB?feedbackid=<c:out value="${fb.getFeedBackId()}"/>">
-                                                            <c:out value="${fb.getQrCodeId().getCustomerName()}"/>
+                                                            <c:out value="${fb.getQrCodeId().getEmailSendedTo()}"/>
                                                         </a></td>
                                                         <td class="mailbox-subject">
                                             <fmt:formatDate value="${fb.getFeedBackTime()}" pattern="dd/MM/yyyy"/>
                                             </td>
                                             <td class="mailbox-attachment">
-                                                <c:out value="${fb.getQrCodeId().getQrCodeId()}"/>
+                                                <c:out value="${fb.getQrCodeId().getCustomerName()}"/>
                                             </td>
                                             <td class="mailbox-date">
 

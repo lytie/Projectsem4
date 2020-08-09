@@ -19,7 +19,21 @@
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
-
+                <section class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h4>
+                                    <a class="btn btn-info btn-sm" href="Admin_ListRoom">
+                                        <i class=" fa fa-plus">
+                                        </i> Back to list
+                                    </a>   
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.container-fluid -->
+                </section>
 
                 <!-- Main content -->
                 <section class="content">
@@ -41,18 +55,18 @@
                                                 <label for="exampleInputPassword1">RoomType Name :</label>
                                                 <input type="text" name="name" value="${roomtype.getRoomTypeName()}" class="form-control" id="" placeholder="Location Name" required="">
                                             </div>
-                                            
+
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Decription :</label>
                                                 <textarea type="textarea" name="description" class="form-control" id="textarea" placeholder="Information Decription" rows="5" required="">${roomtype.getDescription()}</textarea>
                                             </div>
                                             <div class="form-group col-md-6">
-                                                                                          
+
                                                 <img id='output' width='200' src="images/img/${roomtype.getUrl()}"/>	
 
                                                 <input type='file' class="form-control"  accept='image/*' name='file' id='file'  onchange='loadFile(event)' >
                                                 <script>
-                                                    var loadFile = function (event) {
+                                                    var loadFile = function(event) {
                                                         var image = document.getElementById('output');
                                                         image.src = URL.createObjectURL(event.target.files[0]);
                                                     };
@@ -84,12 +98,7 @@
                 <!-- /.content -->
             </div>
             <!-- /.content-wrapper -->
-            <footer class="main-footer">
-                <div class="float-right d-none d-sm-block">
-                    <b>Version</b> 3.0.5
-                </div>
-                <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-            </footer>
+            <%@include file="footer.jsp" %>
 
             <!-- Control Sidebar -->
             <aside class="control-sidebar control-sidebar-dark">

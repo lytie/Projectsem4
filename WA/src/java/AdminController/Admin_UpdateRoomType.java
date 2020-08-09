@@ -113,9 +113,11 @@ public class Admin_UpdateRoomType extends HttpServlet {
             roomtype.setRoomTypeName(name);
             roomtype.setDescription(description);
             if (file != null) {
-                roomtype.setUrl(file);
-            }else{
-                roomtype.setDescription(existedFile);
+                if (existedFile !=null) {
+                    roomtype.setUrl(existedFile);
+                }else{
+                    roomtype.setUrl(file);
+                }
             }
 
             roomtypeClient.edit_JSON(roomtype, ids);

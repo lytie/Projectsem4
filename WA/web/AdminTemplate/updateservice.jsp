@@ -1,14 +1,3 @@
-<%-- 
-    Document   : addfood
-    Created on : Jul 13, 2020, 4:06:19 PM
-    Author     : ADMIN
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
-
 <!DOCTYPE html>
 <html>
 
@@ -30,7 +19,21 @@
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
-
+                <section class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h4>
+                                    <a class="btn btn-info btn-sm" href="Admin_ListRoom">
+                                        <i class=" fa fa-plus">
+                                        </i> Back to list
+                                    </a>   
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.container-fluid -->
+                </section>
 
                 <!-- Main content -->
                 <section class="content">
@@ -41,40 +44,40 @@
                                 <!-- jquery validation -->
                                 <div class="card card-primary">
                                     <div class="card-header">
-                                        <h3 class="card-title">Edit Service</h3>
+                                        <h3 class="card-title">Edit Service</small></h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <!-- form start -->
                                     <form role="form" id="quickForm" action="Admin_UpdateService" method="post" enctype="multipart/form-data">
                                         <div class="card-body">
-                                            <div class="form-group col-md-6">
-                                                <label for="inputState">Service Type ID</label>
-                                                <select id="inputState" class="form-control">
-                                                    <option selected>--Select Option--</option>
-                                                    <option>Food</option>
-                                                    <option>Drink</option>
-                                                    <option>Entertainment</option>
-                                                </select>
-                                            </div>
+                                            <input type="hidden" name="id" value="${service.getServiceId()}" >
                                             <div class="form-group">
                                                 <label for="exampleInputPassword1">Service Name :</label>
-                                                <input type="text" name="text" class="form-control" id="exampleInputFullName" placeholder="Full Name">
+                                                <input type="text" name="name" value="${service.getServiceName()}" class="form-control" id="" placeholder="Location Name" required="">
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputPassword1">Price :</label>
-                                                <input type="number" name="number" class="form-control" id="exampleInputFullName" placeholder="Enter your Phone">
-                                            </div>
-
+                                                <input type="number" name="price" class="form-control" value="${service.getServicePrice()}">
+                                            </div>  
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Decription :</label>
-                                                <textarea type="textarea" name="textarea" class="form-control" id="textarea" placeholder="Information Decription" rows="5" ></textarea> 
+                                                <textarea type="textarea" name="description" class="form-control" id="textarea" placeholder="Information Decription" rows="5" required="">${service.getServiceDescription()}</textarea>
+                                            </div>
+                                            <div class="form-group col-md-6">
+
+                                                <img id='output' width='200' src="images/services/${service.getServiceurl()}"/>	
+
+                                                <input type='file' class="form-control"  accept='image/*' name='file' id='file'  onchange='loadFile(event)' >
+                                                <script>
+                                                    var loadFile = function(event) {
+                                                        var image = document.getElementById('output');
+                                                        image.src = URL.createObjectURL(event.target.files[0]);
+                                                    };
+                                                </script>
                                             </div>
 
-                                            <div class="custom-file">
-                                                <input type="file" name="file" class="custom-file-input" id="customFile">
-                                                <label class="custom-file-label" for="customFile">Choose file Image</label>
-                                            </div>
-                                            
+                                            <div style="color: red;font-size: 18px"> ${error}</div>
+
                                         </div>
                                         <!-- /.card-body -->
                                         <div class="card-footer">
@@ -98,12 +101,7 @@
                 <!-- /.content -->
             </div>
             <!-- /.content-wrapper -->
-            <footer class="main-footer">
-                <div class="float-right d-none d-sm-block">
-                    <b>Version</b> 3.0.5
-                </div>
-                <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-            </footer>
+            <%@include file="footer.jsp" %>
 
             <!-- Control Sidebar -->
             <aside class="control-sidebar control-sidebar-dark">

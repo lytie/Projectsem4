@@ -51,7 +51,7 @@
                                                 <label for="inputState">Service Type</label>
                                                 <select id="inputState" class="form-control" name="serviceType">
                                                     <c:forEach items="${serviceType}" var="se">
-                                                    
+
                                                         <option value="${se.serviceTypeId}">${se.typeName}</option>
                                                     </c:forEach>
                                                 </select>
@@ -71,18 +71,15 @@
                                             </div>
 
                                             <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="customFile" accept='image/*' onchange='loadFile(event)' name='file'>
+                                                <input type="file" class="custom-file-input" id="customFile" required accept='image/*' onchange='loadFile(event)' name='file'>
                                                 <label class="custom-file-label" for="customFile">Choose file Image</label>
-                                                
+
                                             </div>
                                             <div>
                                                 <img id='output' width='200' />	
-
                                             </div>
-
-
                                             <script>
-                                                var loadFile = function (event) {
+                                                var loadFile = function(event) {
                                                     var image = document.getElementById('output');
                                                     image.src = URL.createObjectURL(event.target.files[0]);
                                                 };
@@ -112,12 +109,7 @@
                 <!-- /.content -->
             </div>
             <!-- /.content-wrapper -->
-            <footer class="main-footer">
-                <div class="float-right d-none d-sm-block">
-                    <b>Version</b> 3.0.5
-                </div>
-                <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-            </footer>
+            <%@include file="footer.jsp" %>
 
             <!-- Control Sidebar -->
             <aside class="control-sidebar control-sidebar-dark">

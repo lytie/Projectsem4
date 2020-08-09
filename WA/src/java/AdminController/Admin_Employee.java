@@ -58,7 +58,24 @@ public class Admin_Employee extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String id = request.getParameter("id");
+        String action = request.getParameter("action");
+        if (action != null) {
+            AccountemployeeClient accountemployeeClient = new AccountemployeeClient();
+            GenericType<Accountemployee> genAccountemployeee = new GenericType<Accountemployee>() {
+            };
+            Accountemployee accountemployee = accountemployeeClient.find_JSON(genAccountemployeee, id);
+            if (action.equals("deactive")) {
+                accountemployee.setStatus(Boolean.FALSE);
+            }
+            if (action.equals("active")) {
+                accountemployee.setStatus(Boolean.TRUE);
+            }
+            accountemployeeClient.edit_JSON(accountemployee, accountemployee.getAccountId().toString());
+            processRequest(request, response);
+        }else{
+            processRequest(request, response);
+        }   
     }
 
     /**

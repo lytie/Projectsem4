@@ -115,7 +115,17 @@ public class Admin_AddEmployee extends HttpServlet {
                 
             } while (check);
             
-            
+            for (Accountemployee acc : listAcc) {
+                    if(email.equals(acc.getEmail())){
+                         request.setAttribute("success", "<div class='success'></div>"
+                        + "         <script type=\"text/javascript\">\n"
+                        + "            $('.success').each(function () {\n"
+                        + "                swal(\"Email already exists!!!\", \"\", \"error\");\n"
+                        + "            });\n"
+                        + "        </script>");
+                         processRequest(request, response);
+                    }
+                }
             Accountemployee accountemployee=new Accountemployee();
             accountemployee.setDateOfBirth(dob);
             accountemployee.setEmail(email);

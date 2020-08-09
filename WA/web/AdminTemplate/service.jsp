@@ -89,18 +89,27 @@
                                                                 <td><c:out value="${s.getServiceName()}"/></td>
                                                                 <td><c:out value="${s.getServicePrice()}"/></td>
                                                                 <td><c:out value="${s.getServiceDescription()}"/></td>
-                                                                <td width="100"><img src="images/customerpageimg/${s.getServiceurl()}" width="80" height="70" /></td>
+                                                                <td width="100"><img src="images/services/${s.getServiceurl()}" width="80" height="70" /></td>
 
                                                                 <td>
 
-                                                                    <a class="btn btn-info btn-sm" href="Admin_UpdateService">
+                                                                    <a class="btn btn-info btn-sm" href="Admin_UpdateService?id=${s.getServiceId()}">
                                                                         <i class="fas fa-pencil-alt">
                                                                         </i> Edit
                                                                     </a>
-                                                                    <a class="btn btn-danger btn-sm" href="#">
-                                                                        <i class="fas fa-trash">
-                                                                        </i> Delete
-                                                                    </a>
+                                                                    <c:if test="${s.getStatus()==true}">
+                                                                        <a class="btn btn-danger btn-sm" href="Admin_UpdateService?id=${s.getServiceId()}&action=deactive">
+                                                                            <i class="fas fa-ban">
+                                                                            </i> De-active 
+                                                                        </a>
+                                                                    </c:if>
+                                                                    <c:if test="${s.getStatus()!=true}">
+                                                                        <a class="btn btn-success btn-sm" href="Admin_UpdateService?id=${s.getServiceId()}&action=active">
+                                                                            <i class="fas fa-check">
+                                                                            </i> Active 
+                                                                        </a>
+                                                                    </c:if>
+
                                                                 </td>
 
                                                             </tr>

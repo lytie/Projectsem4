@@ -74,8 +74,8 @@ public class Admin_AddService extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-        try {
+       
+       
             UploadServlet uploadServlet = new UploadServlet();
             ServiceClient serviceClient=new ServiceClient();
             
@@ -87,7 +87,7 @@ public class Admin_AddService extends HttpServlet {
             String decription=null;
             String file=null;
             String existedFile = null;
-            Map<String,Object> listService=uploadServlet.Upload(request, "customerpageimg");
+            Map<String,Object> listService=uploadServlet.Upload(request, "services");
             
             for (Map.Entry<String, Object> entry : listService.entrySet()) {
                 if(entry.getKey().equals("serviceType")){
@@ -126,15 +126,7 @@ public class Admin_AddService extends HttpServlet {
             }
             
             serviceClient.create_JSON(service);
-            request.getRequestDispatcher("Admin_Services").forward(request, response);
-            
-
-        } catch (Exception e) {
-            request.setAttribute("error", e);
-           processRequest(request, response);
-
-        }
-
+            response.sendRedirect("Admin_Services");
     }
 
     /**

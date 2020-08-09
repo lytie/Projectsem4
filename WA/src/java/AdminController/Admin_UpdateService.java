@@ -8,13 +8,17 @@ package AdminController;
 
 import bean.UploadImg;
 import bean.UploadServlet;
+import entities.Service;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.GenericType;
+import wsc.ServiceClient;
 
 /**
  *
@@ -35,7 +39,11 @@ public class Admin_UpdateService extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+             String id = request.getParameter("id");
+             ServiceClient serviceClient = new ServiceClient();
+             GenericType<Service> genService = new GenericType<Service>(){};
+             Service service = serviceClient.find_JSON(genService, id);
+             request.setAttribute("service", service);
              request.getRequestDispatcher("AdminTemplate/updateservice.jsp").forward(request, response);
         }
     }
@@ -52,7 +60,23 @@ public class Admin_UpdateService extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String id = request.getParameter("id");
+        String action = request.getParameter("action");
+        if (action != null) {
+            ServiceClient serviceClient = new ServiceClient();
+            GenericType<Service> genService = new GenericType<Service>(){};
+            Service service = serviceClient.find_JSON(genService, id);
+            if (action.equals("deactive")) {
+                service.setStatus(Boolean.FALSE);
+            }
+            if (action.equals("active")) {
+                service.setStatus(Boolean.TRUE);
+            }
+            serviceClient.edit_JSON(service, service.getServiceId().toString());
+            request.getRequestDispatcher("Admin_Services").forward(request, response);
+        }else{
+            processRequest(request, response);
+        }
     }
 
     /**
@@ -66,11 +90,64 @@ public class Admin_UpdateService extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        UploadImg uploadImg = new UploadImg();
-        //uploadImg.Upload(request, "qrcode");
-        UploadServlet uploadServlet = new UploadServlet();
-        uploadServlet.Upload(request, "ticket");
-        processRequest(request, response);
+        
+        try (PrintWriter out = response.getWriter()) {
+            UploadServlet uploadServlet = new UploadServlet();
+
+            ServiceClient serviceClient = new ServiceClient();
+            GenericType<Service> genService = new GenericType<Service>(){};
+            
+            String id = null;
+            String name = null;
+            String price = null;
+            String description = null;
+            String file = null;
+            String existedFile = null;
+            Map<String, Object> listrequest = uploadServlet.Upload(request, "services");
+            for (Map.Entry<String, Object> entry : listrequest.entrySet()) {
+                if (entry.getKey().equals("id")) {
+                    id = (String) entry.getValue();
+                }
+                if (entry.getKey().equals("name")) {
+                    name = (String) entry.getValue();
+                }
+                if (entry.getKey().equals("price")) {
+                    price = (String) entry.getValue();
+                }
+                if (entry.getKey().equals("description")) {
+                    description = (String) entry.getValue();
+                }
+                if (entry.getKey().equals("file")) {
+                    file = (String) entry.getValue();
+                }
+                if (entry.getKey().equals("existedFile")) {
+                    existedFile = (String) entry.getValue();
+                }
+            }
+            System.out.println("id:" + id);
+            System.out.println("name:" + name);
+            System.out.println("price:" + price);
+            System.out.println("description:" + description);
+            System.out.println("file:" + file);
+            System.out.println(listrequest);
+            Service service = serviceClient.find_JSON(genService, id);
+
+            service.setServiceName(name);
+            service.setServicePrice(Float.parseFloat(price));
+            service.setServiceDescription(description);
+            if (file != null) {
+                if (existedFile !=null) {
+                    service.setServiceurl(existedFile);
+                }else{
+                    service.setServiceurl(file);
+                }
+            }
+            serviceClient.edit_JSON(service, id);
+            request.getRequestDispatcher("Admin_Services").forward(request, response);
+        } catch (Exception ex) {
+            processRequest(request, response);
+            System.out.println(ex.getMessage());
+        }
     }
 
     /**

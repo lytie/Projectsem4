@@ -35,7 +35,7 @@ public class Booking_Logout extends HttpServlet {
         HttpSession session=request.getSession();
         
         session.removeAttribute("user");
-        request.getRequestDispatcher("Booking/index.jsp").forward(request, response);
+        request.getRequestDispatcher("Haven").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -110,7 +110,7 @@ public class Login extends HttpServlet {
                     session.setAttribute("user", accsession);
                 }
                 
-            request.getRequestDispatcher("Booking/index.jsp").forward(request, response);
+            request.getRequestDispatcher("Haven").forward(request, response);
             }
         } else {
             request.setAttribute("err", "Username or password incorrect");

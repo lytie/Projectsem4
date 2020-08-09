@@ -309,6 +309,10 @@
         <servlet-name>Admin_AddImgHero</servlet-name>
         <servlet-class>AdminController.Admin_AddImgHero</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Login_Google</servlet-name>
+        <servlet-class>BookingController.Login_Google</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CustomerPageMenuServlet</servlet-name>
         <url-pattern>/CustomerPageMenuServlet</url-pattern>
@@ -612,6 +616,10 @@
     <servlet-mapping>
         <servlet-name>Admin_AddImgHero</servlet-name>
         <url-pattern>/Admin_AddImgHero</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Login_Google</servlet-name>
+        <url-pattern>/Login_Google</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

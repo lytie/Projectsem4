@@ -108,7 +108,7 @@
 
                                                 <div class="form-group col-md-4">
                                                     <label >Size room:</label>
-                                                    <input type="number" min="10" name="size" class="form-control"  placeholder="Enter Size Room" required="">
+                                                    <input type="number" min="10"   name="size" class="form-control"  placeholder="Enter Size Room" required="">
                                                 </div>
 
                                                 <div class="form-group col-md-4">

@@ -70,20 +70,16 @@ public class Admin_AddLocation extends HttpServlet {
             throws ServletException, IOException {
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
-            if (session.getAttribute("accountemployeeid") != null) {
-                int accountId =  (int) session.getAttribute("accountemployeeid");
-                AccountemployeeClient accountemployeeClient = new AccountemployeeClient();
-                GenericType<Accountemployee> genAccountemployee = new GenericType<Accountemployee>() {
-                };
-                Accountemployee accountemployee = accountemployeeClient.find_JSON(genAccountemployee, String.valueOf(accountId));
-                if (accountemployee != null && accountemployee.getRoleId().getRoleId() == 1) {
-                    //do your job
+            Accountemployee sessionAccountemployee = (Accountemployee) session.getAttribute("accountemployee");
+            if (sessionAccountemployee != null) {
+                if (sessionAccountemployee.getRoleId().getRoleId() == 1) {
+                    //do your job here
                     processRequest(request, response);
                     //end your job
                 } else {
                     out.print("<h1>You do not have permission</h1>");
                 }
-            }else{
+            } else {
                 request.getRequestDispatcher("Admin_Login").forward(request, response);
             }
         }

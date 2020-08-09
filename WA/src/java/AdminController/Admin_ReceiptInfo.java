@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package AdminController;
 
 import entities.Accountemployee;
@@ -11,6 +10,7 @@ import entities.Receipt;
 import entities.Receiptcomponent;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -41,17 +41,53 @@ public class Admin_ReceiptInfo extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            HttpSession session = request.getSession();
+            Accountemployee sessionAccountemployee = (Accountemployee) session.getAttribute("accountemployee");
+            if (sessionAccountemployee != null) {
+                if (sessionAccountemployee.getRoleId().getRoleId() == 1) {
+                    //do your job here
+                    request.setAttribute("navbar", true);
+                   
+                    //end your job
+                } else {
+                    request.setAttribute("navbar", false);
+
+                   
+                }
+            
+            
             /* TODO output your page here. You may use following sample code. */
             String receiptid = request.getParameter("receiptid");
             ReceiptcomponentClient receiptcomponentClient = new ReceiptcomponentClient();
             ReceiptClient receiptClient = new ReceiptClient();
-            GenericType<List<Receiptcomponent>> genListReceiptcomponent = new GenericType<List<Receiptcomponent>>(){};
-            GenericType<Receipt> genReceipt = new GenericType<Receipt>(){};
+            GenericType<List<Receiptcomponent>> genListReceiptcomponent = new GenericType<List<Receiptcomponent>>() {
+            };
+            GenericType<Receipt> genReceipt = new GenericType<Receipt>() {
+            };
             List<Receiptcomponent> listReceiptcomponent = receiptcomponentClient.findbyReceiptID_JSON(genListReceiptcomponent, receiptid);
             Receipt receipt = receiptClient.find_JSON(genReceipt, receiptid);
+            float Prepayment = 0;
+            boolean o = false;
+            for (Receiptcomponent receiptcomponent : listReceiptcomponent) {
+
+                if (receiptcomponent.getStatus()) {
+                    Prepayment = Prepayment + receiptcomponent.getSubtotal() + receiptcomponent.getSubtotal() / 10;
+                    System.out.println("Prepayment" + Prepayment);
+                    o = true;
+                }
+            }
+
+            if (!o) {
+                Prepayment = Prepayment + 50;
+            }
+
+            request.setAttribute("prepayment", Prepayment);
             request.setAttribute("listReceiptcomponent", listReceiptcomponent);
             request.setAttribute("receipt", receipt);
             request.getRequestDispatcher("AdminTemplate/receiptinfo.jsp").forward(request, response);
+            } else {
+                request.getRequestDispatcher("Admin_Login").forward(request, response);
+            }
         }
     }
 
@@ -68,19 +104,9 @@ public class Admin_ReceiptInfo extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try (PrintWriter out = response.getWriter()) {
-            HttpSession session = request.getSession();
-            Accountemployee sessionAccountemployee = (Accountemployee) session.getAttribute("accountemployee");
-            if (sessionAccountemployee != null) {
-                if (sessionAccountemployee.getRoleId().getRoleId() == 1) {
-                    //do your job here
-                    processRequest(request, response);
-                    //end your job
-                } else {
-                    out.print("<h1>You do not have permission</h1>");
-                }
-            } else {
-                request.getRequestDispatcher("Admin_Login").forward(request, response);
-            }
+
+             processRequest(request, response);
+
         }
     }
 
@@ -95,7 +121,47 @@ public class Admin_ReceiptInfo extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String id = request.getParameter("receiptid");
+        ReceiptClient receiptClient = new ReceiptClient();
+
+        System.out.println("id=" + id);
+
+        ReceiptcomponentClient receiptcomponentClient = new ReceiptcomponentClient();
+
+        GenericType<List<Receiptcomponent>> genListReceiptcomponent = new GenericType<List<Receiptcomponent>>() {
+        };
+        GenericType<Receipt> genReceipt = new GenericType<Receipt>() {
+        };
+        List<Receiptcomponent> listReceiptcomponent = receiptcomponentClient.findbyReceiptID_JSON(genListReceiptcomponent, id);
+        Receipt re = receiptClient.find_JSON(genReceipt, id);
+
+        for (Receiptcomponent receiptcomponent : listReceiptcomponent) {
+            receiptcomponent.setPayDate(new Date());
+            receiptcomponent.setStatus(Boolean.TRUE);
+            receiptcomponentClient.edit_JSON(receiptcomponent, receiptcomponent.getReceiptComponentId().toString());
+        }
+
+        float Prepayment = 0;
+        boolean o = false;
+        for (Receiptcomponent receiptcomponent : listReceiptcomponent) {
+
+            if (receiptcomponent.getStatus()) {
+                Prepayment = Prepayment + receiptcomponent.getSubtotal() + receiptcomponent.getSubtotal() / 10;
+                System.out.println("Prepayment" + Prepayment);
+                o = true;
+            }
+        }
+
+        if (!o) {
+            Prepayment = Prepayment + 50;
+        }
+
+        request.setAttribute("prepayment", Prepayment);
+
+        request.setAttribute("listReceiptcomponent", listReceiptcomponent);
+        request.setAttribute("receipt", re);
+        request.getRequestDispatcher("AdminTemplate/receiptinfo.jsp").forward(request, response);
+
     }
 
     /**

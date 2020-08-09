@@ -98,7 +98,7 @@ public class SignUp extends HttpServlet {
             String errConfirmPass = null;
 
             //bat loi
-            if (name.isEmpty()) {
+            if (name.trim().isEmpty()) {
                 errName = "Please enter Full Name";
             } else {
                 errName = null;

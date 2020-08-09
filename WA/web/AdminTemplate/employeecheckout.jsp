@@ -74,6 +74,8 @@
                                             <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Deposits: $${qrcode.getDeposits()}</div>
                                             <div style="padding: 20px">
                                                 <a class="btn btn-warning" style="color: white" href="Employee_Checkout?qrcodeid=${qrcode.getQrCodeId()}&action=deactive">Checkout</a>
+                                                <a class="btn btn-warning" style="color: white" href="Admin_ReceiptInfo?receiptid=${qrcode.receiptId.receiptId}">Pay</a>
+
                                             </div>
                                         </div>
                                     </c:if>
@@ -117,7 +119,7 @@
                     ++countResults;
                     lastResult = qrCodeMessage;
                     resultContainer.innerHTML
-                    += ` < div > [${countResults}] - ${qrCodeMessage} < /div>`;
+                            += ` < div > [${countResults}] - ${qrCodeMessage} < /div>`;
                 }
             }
 
@@ -126,18 +128,18 @@
             html5QrcodeScanner.render(onScanSuccess);
         </script>
         <script type="text/javascript">
-            $(document).on("search", "#qr-reader-results", function() {             // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
-                $.get('Employee_Checkout?qrcodeid=' + $('#qr-reader-results').val(), function(responseXml) {                // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response XML...
+            $(document).on("search", "#qr-reader-results", function () {             // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
+                $.get('Employee_Checkout?qrcodeid=' + $('#qr-reader-results').val(), function (responseXml) {                // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response XML...
                     $("#result").html($(responseXml).find("data").html()); // Parse XML, find <data> element and append its HTML to HTML DOM element with ID "somediv".
                 });
             });
-            $(document).on("input", "#qr-reader-results", function() {             // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
-                $.get('Employee_Checkout?qrcodeid=' + $('#qr-reader-results').val(), function(responseXml) {                // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response XML...
+            $(document).on("input", "#qr-reader-results", function () {             // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
+                $.get('Employee_Checkout?qrcodeid=' + $('#qr-reader-results').val(), function (responseXml) {                // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response XML...
                     $("#result").html($(responseXml).find("data").html()); // Parse XML, find <data> element and append its HTML to HTML DOM element with ID "somediv".
                 });
             });
-            $(document).on("change", "#qr-reader-results", function() {             // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
-                $.get('Employee_Checkout?qrcodeid=' + $('#qr-reader-results').val(), function(responseXml) {                // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response XML...
+            $(document).on("change", "#qr-reader-results", function () {             // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
+                $.get('Employee_Checkout?qrcodeid=' + $('#qr-reader-results').val(), function (responseXml) {                // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response XML...
                     $("#result").html($(responseXml).find("data").html()); // Parse XML, find <data> element and append its HTML to HTML DOM element with ID "somediv".
                 });
             });

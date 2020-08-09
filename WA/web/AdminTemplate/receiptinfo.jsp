@@ -27,7 +27,17 @@
 
     <body class="hold-transition sidebar-mini">
         <div class="wrapper">
-            <%@include file="navbar.jsp" %>
+
+            <c:choose>
+                <c:when test="${navbar}">
+                    <%@include file="navbar.jsp" %>
+                </c:when>
+                <c:otherwise>
+                    <%@include file="navbar2.jsp" %>
+                </c:otherwise>
+            </c:choose>
+
+
 
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
@@ -86,17 +96,27 @@
                                                         </table>
                                                     </div>
                                                     <div class="col-md-6" style="padding: 20px;">
-                                                        
+
                                                         <div>Subtotal:<fmt:formatNumber maxFractionDigits="3" type="currency" value="${receipt.getSubtotal()}"/> </div>
                                                         <div>Tax:<fmt:formatNumber maxFractionDigits="3" type="currency" value="${receipt.getTax()}"/> </div>
                                                         <div>Deposits:<fmt:formatNumber maxFractionDigits="3" type="currency" value="${receipt.getSubtotal()+receipt.getTax()-receipt.getTotal()}"/></div>
                                                         <div>Total:<fmt:formatNumber maxFractionDigits="3" type="currency" value="${receipt.getTotal()}"/></div>
+                                                        <div style="border-bottom-color: #60686f;border: 1px solid"></div>
+
+                                                        <div>Prepayment:<fmt:formatNumber maxFractionDigits="3" type="currency" value="${prepayment-50}"/></div>
+                                                        <div>Amount to be paid:<fmt:formatNumber maxFractionDigits="3" type="currency" value="${receipt.getTotal()-prepayment+50}"/></div>
+
+
                                                         <c:choose>
                                                             <c:when test="${receipt.getPayStatus()==true}">
                                                                 <button class="btn btn-success col-12" style="margin-top: 10px">Paid</button>
                                                             </c:when>
                                                             <c:otherwise>
-                                                                <button class="btn btn-danger col-12" style="margin-top: 10px">Unpaid</button>
+                                                                <form action="Admin_ReceiptInfo" method="post">
+                                                                    <input type="hidden" value="${receipt.receiptId}" name="receiptid"/>
+                                                                    <button class="btn btn-danger col-12" style="margin-top: 10px">Pay</button>
+
+                                                                </form>
                                                             </c:otherwise>
                                                         </c:choose>
                                                     </div>
@@ -136,19 +156,19 @@
         <script src="https://kendo.cdn.telerik.com/2017.2.621/js/kendo.all.min.js"></script>
 
         <script>
-                                    function ExportPdf() {
-                                        kendo.drawing
-                                                .drawDOM("#myCanvas",
-                                                        {
-                                                            paperSize: "A4",
-                                                            margin: {top: "1cm", bottom: "1cm"},
-                                                            scale: 0.8,
-                                                            height: 500
-                                                        })
-                                                .then(function(group) {
-                                                    kendo.drawing.pdf.saveAs(group, "Exported.pdf")
-                                                });
-                                    }
+                                        function ExportPdf() {
+                                            kendo.drawing
+                                                    .drawDOM("#myCanvas",
+                                                            {
+                                                                paperSize: "A4",
+                                                                margin: {top: "1cm", bottom: "1cm"},
+                                                                scale: 0.8,
+                                                                height: 500
+                                                            })
+                                                    .then(function (group) {
+                                                        kendo.drawing.pdf.saveAs(group, "Exported.pdf")
+                                                    });
+                                        }
 
         </script>
     </body>

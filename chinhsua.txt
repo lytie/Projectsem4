@@ -1,26 +1,2 @@
-Trang Booking: Sửa logo
-+Home: 
-	-Xóa Find the best food near you
-	-Xóa thằng mặt cười review
-	-Xóa blog	
-	-Thêm THINGS TO EXPERIENCE (customerpage)
-+Confirm:
-	-Xóa Indentity card
-	-Sửa nút back to Booking
-
-Trang customerpage:
-+Index:
-	-Xóa THINGS TO EXPERIENCE
-	-Xóa Events
-	-Xóa reservation
-	-Xóa review
-
-Trang admin:
-+Thêm Location
-+Thêm Room 
-+Sửa trang service:
-	-Sửa nút add
-+Thêm trang chat
-+Mỗi trang thêm nút search qrcode
-+Check giỏ hàng
-+Thêm dịch vụ cho khách hàng(Employee)
+Create room 
+Create location 

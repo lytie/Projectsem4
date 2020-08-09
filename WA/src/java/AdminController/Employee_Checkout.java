@@ -72,6 +72,7 @@ public class Employee_Checkout extends HttpServlet {
                     if (realpay == receipt.getSubtotal()) {
                         qrcode.setStatus(Boolean.FALSE);
                         qrcode.setCheckOutDate(new Date());
+                        qrcodeClient.edit_JSON(qrcode, qrcodeid);
                         receipt.setPayDate(new Date());
                         receipt.setPayStatus(Boolean.TRUE);
                         receiptClient.edit_JSON(receipt, receipt.getReceiptId().toString());

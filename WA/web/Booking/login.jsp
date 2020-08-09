@@ -78,8 +78,26 @@
                         <c:if test="${err!=null}">${err}</c:if>
 
                     </div>
+                        
+                        <div class="p-t-20">
+                            <div style="border-bottom: 1px solid #60686f;margin: 0 15%;position: relative">
+                                    <div style="border-radius: 25px;background-color: #ffffff;position: absolute;top:-10px;margin: 0 42%;padding: 0 5px">OR</div>
+                            </div>
+                            
+                        </div>
+                        
 
-                    <div class="flex-col-c p-t-120 p-b-40">
+                    <div class="container-login100-form-btn p-t-60 ">
+                        <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/WA/Login_Google&response_type=code
+    &client_id=36930052363-fuhk6est0r9sdqddua4ebjodi79175v2.apps.googleusercontent.com&approval_prompt=force" class="google btn btn-danger" style="border-radius: 25px;padding: 3% 24%"><i class="fa fa-google fa-fw">
+                            </i> Login with Google+
+                        </a>
+                        
+                    </div>
+                    <div>
+
+                    </div>
+                    <div class="flex-col-c p-t-90 p-b-40">
                         <a href="http://localhost:8080/WA/SignUp" class="txt1 p-b-9">
                             Don’t have an account? <span class="txt3">Sign up</span>
                         </a>
@@ -93,7 +111,7 @@
         </div>
 
 
-                        <div class="${success}"></div>
+        <div class="${success}"></div>
 
         <!--===============================================================================================-->
         <script src="<%=common.url%>/vendor/jquery/jquery-3.2.1.min.js"></script>

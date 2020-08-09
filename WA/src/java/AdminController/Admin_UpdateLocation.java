@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package AdminController;
 
 import bean.UploadServlet;
@@ -38,15 +37,16 @@ public class Admin_UpdateLocation extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            
-            String id=request.getParameter("id");
-            LocationClient client=new LocationClient();
-            GenericType<Location> type=new GenericType<Location>(){};
-            Location location=client.find_JSON(type, Integer.parseInt(id));
-            
+
+            String id = request.getParameter("id");
+            LocationClient client = new LocationClient();
+            GenericType<Location> type = new GenericType<Location>() {
+            };
+            Location location = client.find_JSON(type, Integer.parseInt(id));
+
             request.setAttribute("location", location);
-            
-             request.getRequestDispatcher("AdminTemplate/updatelocation.jsp").forward(request, response);
+
+            request.getRequestDispatcher("AdminTemplate/updatelocation.jsp").forward(request, response);
         }
     }
 
@@ -76,19 +76,20 @@ public class Admin_UpdateLocation extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id=request.getParameter("id");
-       try (PrintWriter out = response.getWriter()){
+        String id = request.getParameter("id");
+        try (PrintWriter out = response.getWriter()) {
             UploadServlet uploadServlet = new UploadServlet();
 
             LocationClient locationClient = new LocationClient();
-            GenericType<Location> type=new GenericType<Location>(){};
+            GenericType<Location> type = new GenericType<Location>() {
+            };
             String ids = null;
             String name = null;
             String address = null;
             String introduce = null;
             String file = null;
-            String existedFile = null ;
-            Map<String,Object> listrequest = uploadServlet.Upload(request, "img");
+            String existedFile = null;
+            Map<String, Object> listrequest = uploadServlet.Upload(request, "img");
             for (Map.Entry<String, Object> entry : listrequest.entrySet()) {
                 if (entry.getKey().equals("id")) {
                     ids = (String) entry.getValue();
@@ -109,13 +110,13 @@ public class Admin_UpdateLocation extends HttpServlet {
                     existedFile = (String) entry.getValue();
                 }
             }
-             System.out.println("id:"+ids);
-            System.out.println("name:"+name);
-            System.out.println("address:"+address);
-            System.out.println("introduce:"+introduce);
-            System.out.println("file:"+file);
-             System.out.println("existedFile:"+existedFile);
-         
+            System.out.println("id:" + ids);
+            System.out.println("name:" + name);
+            System.out.println("address:" + address);
+            System.out.println("introduce:" + introduce);
+            System.out.println("file:" + file);
+            System.out.println("existedFile:" + existedFile);
+
             System.out.println(listrequest);
             Location location = locationClient.find_JSON(type, Integer.parseInt(ids));
 
@@ -123,19 +124,21 @@ public class Admin_UpdateLocation extends HttpServlet {
             location.setIntroduce(introduce);
             location.setLocationName(name);
             if (file != null) {
-               location.setLocationUrl(file);
-           } else {
-               location.setLocationUrl(existedFile);
-           }
+                if (existedFile != null) {
+                    location.setLocationUrl(existedFile);
+                } else {
+                    location.setLocationUrl(file);
+                }
+            }
 
             locationClient.edit_JSON(location, ids);
             request.getRequestDispatcher("Admin_Location").forward(request, response);
         } catch (Exception ex) {
-             LocationClient client=new LocationClient();
-            GenericType<Location> type=new GenericType<Location>(){};
-            Location location=client.find_JSON(type, Integer.parseInt(id));
-            
-           
+            LocationClient client = new LocationClient();
+            GenericType<Location> type = new GenericType<Location>() {
+            };
+            Location location = client.find_JSON(type, Integer.parseInt(id));
+
             request.setAttribute("location", location);
             request.setAttribute("error", ex.getMessage());
             request.getRequestDispatcher("AdminTemplate/addlocation.jsp").forward(request, response);

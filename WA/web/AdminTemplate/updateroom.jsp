@@ -130,7 +130,7 @@
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label for="exampleInputPassword1">Room Convenient</label>
-                                                    <div id="rRoomImage" class="row">
+                                                    <div id="rRoomCovenient" class="row">
                                                         <input type="hidden" name="totalconvenients" value="${listConvenients.size()}"/>
                                                         <c:forEach items="${listConvenients}" var="s">
                                                             <div class="col-md-1" style="padding: 10px">

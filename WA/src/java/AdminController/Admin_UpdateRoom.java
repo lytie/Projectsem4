@@ -107,21 +107,26 @@ public class Admin_UpdateRoom extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-//        String id = request.getParameter("id");
-//        String action = request.getParameter("action");
-//        RoomClient roomClient = new RoomClient();
-//        GenericType<Room> genRoom = new GenericType<Room>() {
-//        };
-//        Room room = roomClient.find_JSON(genRoom, id);
-//        if (action.equals("deactive")) {
-//            room.setStatus(Boolean.FALSE);
-//        }
-//        if (action.equals("active")) {
-//            room.setStatus(Boolean.TRUE);
-//        }
-//        roomClient.edit_JSON(room, room.getRoomId().toString());
-//        request.getRequestDispatcher("Admin_ListRoom").forward(request, response);
+        
+        String id = request.getParameter("id");
+        String action = request.getParameter("action");
+        if (action != null) {
+            RoomClient roomClient = new RoomClient();
+            GenericType<Room> genRoom = new GenericType<Room>() {
+            };
+            Room room = roomClient.find_JSON(genRoom, id);
+            if (action.equals("deactive")) {
+                room.setStatus(Boolean.FALSE);
+            }
+            if (action.equals("active")) {
+                room.setStatus(Boolean.TRUE);
+            }
+            roomClient.edit_JSON(room, room.getRoomId().toString());
+            request.getRequestDispatcher("Admin_ListRoom").forward(request, response);
+        }else{
+            processRequest(request, response);
+        }
+
     }
 
     /**

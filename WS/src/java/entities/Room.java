@@ -7,6 +7,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,9 +18,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -39,6 +42,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Room.findByView", query = "SELECT r FROM Room r WHERE r.view = :view"),
     @NamedQuery(name = "Room.findByCapacity", query = "SELECT r FROM Room r WHERE r.capacity = :capacity")})
 public class Room implements Serializable {
+    @OneToMany(mappedBy = "roomId")
+    private List<Qrcode> qrcodeList;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -181,6 +186,15 @@ public class Room implements Serializable {
     @Override
     public String toString() {
         return "entities.Room[ roomId=" + roomId + " ]";
+    }
+
+    @XmlTransient
+    public List<Qrcode> getQrcodeList() {
+        return qrcodeList;
+    }
+
+    public void setQrcodeList(List<Qrcode> qrcodeList) {
+        this.qrcodeList = qrcodeList;
     }
     
 }

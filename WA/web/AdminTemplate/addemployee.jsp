@@ -120,6 +120,7 @@
 
         <!-- jQuery -->
         <%@include file="jslink.jsp" %>
+        ${success}
     </body>
     <script src="<%=common.url%>/dist/js/datepicker-full.js">
     </script>
@@ -135,10 +136,5 @@
         });
         
       </script>
-    <script src="dist/js/datepicker.min.js">
-    </script>
-    <script src="dist/js/locales/fr.min.js">
-    </script>
-    <script src="dist/js/datepicker-full.min.js">
-    </script>
+
 </html>

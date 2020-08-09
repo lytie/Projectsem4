@@ -40,7 +40,7 @@
                             <div class="col-sm-6">
                                 <h1>Feedback</h1>
                             </div>
-                            
+
                         </div>
                     </div>
                     <!-- /.container-fluid -->
@@ -50,75 +50,80 @@
                 <section class="content">
 
                     <!-- /.col -->
-                    <div class="col-md-12">
+                    <div class="col-md-12" id="myCanvas">
                         <div class="card card-primary card-outline">
                             <div class="card-header">
                                 <h3 class="card-title">Read Feedback</h3>
 
-                                <div class="card-tools">
-                                    <a href="#" class="btn btn-tool" data-toggle="tooltip" title="Previous"><i class="fas fa-chevron-left"></i></a>
-                                    <a href="#" class="btn btn-tool" data-toggle="tooltip" title="Next"><i class="fas fa-chevron-right"></i></a>
-                                </div>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body p-0">
                                 <div class="mailbox-read-info">
-                                    <h5>Message Subject Is Placed Here</h5>
-                                    <h6>From: <c:out value="${feedbacklist.getQrCodeId().getQrCodeId()}"/>
+
+                                    <h6>From: <c:out value="${feedbacklist.getQrCodeId().getEmailSendedTo()}"/>
                                         <span class="mailbox-read-time float-right"> <fmt:formatDate value="${feedbacklist.getFeedBackTime()}" pattern="dd/MM/yyyy"/></span></h6>
                                 </div>
-                                <!-- /.mailbox-read-info -->
-                                <div class="mailbox-controls with-border text-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="Delete">
-                                            <i class="far fa-trash-alt"></i></button>
-                                        <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="Reply">
-                                            <i class="fas fa-reply"></i></button>
-                                        <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="Forward">
-                                            <i class="fas fa-share"></i></button>
-                                    </div>
-                                    <!-- /.btn-group -->
-                                    <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print">
-                                        <i class="fas fa-print"></i></button>
-                                </div>
-                                <!-- /.mailbox-controls -->
+
                                 <div class="mailbox-read-message">
                                     <c:out value="${feedbacklist.getFeedBackMessage()}" />
                                 </div>
                                 <!-- /.mailbox-read-message -->
                             </div>
                             <!-- /.card-body -->
-                           
+
                             <!-- /.card-footer -->
                             <div class="card-footer">
-                                <div class="float-right">
-                                    
-                                    <button type="button" class="btn btn-default"><i class="fas fa-share"></i> Forward</button>
+                                <!-- /.mailbox-read-info -->
+                                <div class="mailbox-controls with-border text-center">
+
+                                    <!-- /.btn-group -->
+                                    <button type="button" onclick="ExportPdf()" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print">
+                                        <i class="fas fa-print"></i></button>
                                 </div>
-                          
+                                <!-- /.mailbox-controls -->
+
+
                             </div>
                             <!-- /.card-footer -->
                         </div>
                         <!-- /.card -->
                     </div>
                     <!-- /.col -->
+
+                    <!-- /.row -->
+                </section>
+                <!-- /.content -->
             </div>
-            <!-- /.row -->
-        </section>
-        <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-    <%@include file="footer.jsp" %>
-    <!-- Control Sidebar -->
-<aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-</aside>
-<!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
+            <!-- /.content-wrapper -->
+            <%@include file="footer.jsp" %>
+            <!-- Control Sidebar -->
+            <aside class="control-sidebar control-sidebar-dark">
+                <!-- Control sidebar content goes here -->
+            </aside>
+            <!-- /.control-sidebar -->
+        </div>
+        <!-- ./wrapper -->
 
-<!-- jQuery -->
-<%@include file="jslink.jsp" %>
-</body>
+        <!-- jQuery -->
+        <%@include file="jslink.jsp" %>
+        <script src="https://kendo.cdn.telerik.com/2017.2.621/js/jszip.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/2017.2.621/js/kendo.all.min.js"></script>
 
+        <script>
+            function ExportPdf() {
+                kendo.drawing
+                        .drawDOM("#myCanvas",
+                                {
+                                    paperSize: "A4",
+                                    margin: {top: "1cm", bottom: "1cm"},
+                                    scale: 0.8,
+                                    height: 500
+                                })
+                        .then(function(group) {
+                            kendo.drawing.pdf.saveAs(group, "Exported.pdf")
+                        });
+            }
+
+        </script>
+    </body>
 </html>

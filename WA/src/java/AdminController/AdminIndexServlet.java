@@ -6,6 +6,7 @@
 package AdminController;
 
 import entities.Accountcustomer;
+import entities.Accountemployee;
 import entities.Feedback;
 import entities.Qrcode;
 import entities.Receipt;
@@ -27,8 +28,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.GenericType;
 import wsc.AccountcustomerClient;
+import wsc.AccountemployeeClient;
 import wsc.AdminIndexClient;
 import wsc.QrcodeClient;
 import wsc.ReceiptClient;
@@ -98,16 +101,16 @@ public class AdminIndexServlet extends HttpServlet {
             List<Qrcode> listAllRoomBooked = qrcodeClient.findAll_JSON(genListQrcode);
             List<Receiptcomponent> listAllReceiptcomponents = receiptcomponentClient.findAll_JSON(genListReceiptcomponent);
             List<Receipt> listAllReceipt = receiptClient.findAll_JSON(genListReceipt);
-            
+
             List<Qrcode> listCustomRoomBooked = new ArrayList<>();
             List<Receiptcomponent> listCustomReceiptcomponents = new ArrayList<>();
             List<Receiptcomponent> listCustomPaidReceiptcomponents = new ArrayList<>();
-            System.out.println("from"+from);
-            System.out.println("to"+to);
+            System.out.println("from" + from);
+            System.out.println("to" + to);
             if (from != null || to != null) {
                 listCustomRoomBooked = adminIndexClient.getnewRoomBooked(genListQrcode, from, to);
                 listCustomReceiptcomponents = adminIndexClient.getnewPaidReceiptComponent(genListReceiptcomponent, from, to);
-                listCustomPaidReceiptcomponents = adminIndexClient.getnewPaidReceiptComponent(genListReceiptcomponent, from, to);     
+                listCustomPaidReceiptcomponents = adminIndexClient.getnewPaidReceiptComponent(genListReceiptcomponent, from, to);
             } else {
                 listCustomRoomBooked = adminIndexClient.getnewRoomBooked(genListQrcode, today, nextday);
                 listCustomReceiptcomponents = adminIndexClient.getnewPaidReceiptComponent(genListReceiptcomponent, today, nextday);
@@ -233,7 +236,21 @@ public class AdminIndexServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try (PrintWriter out = response.getWriter()) {
+            HttpSession session = request.getSession();
+            Accountemployee sessionAccountemployee = (Accountemployee) session.getAttribute("accountemployee");
+            if (sessionAccountemployee != null) {               
+                if (sessionAccountemployee.getRoleId().getRoleId() == 1) {
+                    //do your job here
+                    processRequest(request, response);
+                    //end your job
+                } else {
+                    out.print("<h1>You do not have permission</h1>");
+                }
+            }else{
+                request.getRequestDispatcher("Admin_Login").forward(request, response);
+            }
+        }
     }
 
     @Override

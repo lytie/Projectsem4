@@ -123,7 +123,7 @@
                             <tr>
                         <input type="hidden" value="<%=item.getService().getServiceId()%>"/>
                         <td class="product-thumbnail">
-                            <img src="./images/customerpageimg/<%= item.getService().getServiceurl()%>" alt="Image" class="img-fluid">
+                            <img src="./images/services/<%= item.getService().getServiceurl()%>" alt="Image" class="img-fluid">
                         </td>
                         <td class="product-name">
                             <h2 class="h5 text-black"><%= item.getService().getServiceName()%></h2>

@@ -6,6 +6,7 @@
 package AdminController;
 
 import com.google.gson.Gson;
+import entities.Accountemployee;
 import entities.Location;
 import entities.Qrcode;
 import entities.Room;
@@ -23,7 +24,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.GenericType;
+import wsc.AccountemployeeClient;
 import wsc.AdminIndexClient;
 import wsc.LocationClient;
 
@@ -63,82 +66,96 @@ public class Admin_Room extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try (PrintWriter out = response.getWriter()) {
-            String locationid = request.getParameter("locationid");
-            String start = request.getParameter("start");
-            String end = request.getParameter("end");
-            out.println(locationid);
-            out.println(start);
-            out.println(end);
-            Calendar calendar1 = Calendar.getInstance();
-            calendar1.setTime(dateFormat.parse(dateFormat.format(now)));
-            Calendar calendar2 = Calendar.getInstance();
-            List<Location> listLocation = locationClient.findAll_JSON(genListLocation);
-            List<Qrcode> listQrcodeInUse;
-            List<Room> listRoomNotInUse;
+            HttpSession session = request.getSession();
+            Accountemployee sessionAccountemployee = (Accountemployee) session.getAttribute("accountemployee");
+            if (sessionAccountemployee != null) {
+                if (sessionAccountemployee.getRoleId().getRoleId() == 1) {
+                    //do your job here
+                    try {
+                        String locationid = request.getParameter("locationid");
+                        String start = request.getParameter("start");
+                        String end = request.getParameter("end");
+                        out.println(locationid);
+                        out.println(start);
+                        out.println(end);
+                        Calendar calendar1 = Calendar.getInstance();
+                        calendar1.setTime(dateFormat.parse(dateFormat.format(now)));
+                        Calendar calendar2 = Calendar.getInstance();
+                        List<Location> listLocation = locationClient.findAll_JSON(genListLocation);
+                        List<Qrcode> listQrcodeInUse;
+                        List<Room> listRoomNotInUse;
 
-            if (start == null || end == null) {
-                request.setAttribute("listLocation", listLocation);
-                request.getRequestDispatcher("AdminTemplate/roombooking.jsp").forward(request, response);
-                listQrcodeInUse = adminIndexClient.getQrcodeInUse(genListQrcode, "2020-01-01", dateFormat.format(now));
-                listRoomNotInUse = adminIndexClient.getRoomNotInUse(genListRoom, "2020-01-01", dateFormat.format(now));
-            } else {
-                listQrcodeInUse = adminIndexClient.getQrcodeInUse(genListQrcode, start, end);
-                listRoomNotInUse = adminIndexClient.getRoomNotInUse(genListRoom, start, end);
-            }
+                        if (start == null || end == null) {
+                            request.setAttribute("listLocation", listLocation);
+                            request.getRequestDispatcher("AdminTemplate/roombooking.jsp").forward(request, response);
+                            listQrcodeInUse = adminIndexClient.getQrcodeInUse(genListQrcode, "2020-01-01", dateFormat.format(now));
+                            listRoomNotInUse = adminIndexClient.getRoomNotInUse(genListRoom, "2020-01-01", dateFormat.format(now));
+                        } else {
+                            listQrcodeInUse = adminIndexClient.getQrcodeInUse(genListQrcode, start, end);
+                            listRoomNotInUse = adminIndexClient.getRoomNotInUse(genListRoom, start, end);
+                        }
 
-            List<Qrcode> listQrcodeInUse2 = new ArrayList<Qrcode>();
-            List<Room> listClear = new ArrayList<Room>();
-            List<Qrcode> listInUse = new ArrayList<Qrcode>();
-            List<Qrcode> listReserved = new ArrayList<Qrcode>();
-            List<Qrcode> listPrepareToCheckout = new ArrayList<Qrcode>();
-            if (locationid == null || locationid.equals("findall")) {
-                for (Qrcode qrcode : listQrcodeInUse) {
-                    listQrcodeInUse2.add(qrcode);
-                }
-                for (Room room : listRoomNotInUse) {
-                    listClear.add(room);
-                }
-            } else {
-                for (Qrcode qrcode : listQrcodeInUse) {
-                    if (qrcode.getRoomId().getLocationId().getLocationId().equals(Integer.valueOf(locationid))) {
-                        listQrcodeInUse2.add(qrcode);
-                    }
-                }
-                for (Room room : listRoomNotInUse) {
-                    if (room.getLocationId().getLocationId().equals(Integer.valueOf(locationid))) {
-                        listClear.add(room);
-                    }
-                }
-            }
+                        List<Qrcode> listQrcodeInUse2 = new ArrayList<Qrcode>();
+                        List<Room> listClear = new ArrayList<Room>();
+                        List<Qrcode> listInUse = new ArrayList<Qrcode>();
+                        List<Qrcode> listReserved = new ArrayList<Qrcode>();
+                        List<Qrcode> listPrepareToCheckout = new ArrayList<Qrcode>();
+                        if (locationid == null || locationid.equals("findall")) {
+                            for (Qrcode qrcode : listQrcodeInUse) {
+                                listQrcodeInUse2.add(qrcode);
+                            }
+                            for (Room room : listRoomNotInUse) {
+                                listClear.add(room);
+                            }
+                        } else {
+                            for (Qrcode qrcode : listQrcodeInUse) {
+                                if (qrcode.getRoomId().getLocationId().getLocationId().equals(Integer.valueOf(locationid))) {
+                                    listQrcodeInUse2.add(qrcode);
+                                }
+                            }
+                            for (Room room : listRoomNotInUse) {
+                                if (room.getLocationId().getLocationId().equals(Integer.valueOf(locationid))) {
+                                    listClear.add(room);
+                                }
+                            }
+                        }
 
-            for (Qrcode qrcode : listQrcodeInUse2) {
-                if (qrcode.getStatus()) {
-                    //Check if checkout time tomorrow;
-                    calendar2.setTime(dateFormat.parse(dateFormat.format(qrcode.getCheckOutDate())));
-                    calendar2.add(Calendar.DATE, -1);
-                    if (calendar2.getTime().equals(calendar1.getTime())) {
-                        listPrepareToCheckout.add(qrcode);
-                    } else {
-                        listInUse.add(qrcode);
+                        for (Qrcode qrcode : listQrcodeInUse2) {
+                            if (qrcode.getStatus()) {
+                                //Check if checkout time tomorrow;
+                                calendar2.setTime(dateFormat.parse(dateFormat.format(qrcode.getCheckOutDate())));
+                                calendar2.add(Calendar.DATE, -1);
+                                if (calendar2.getTime().equals(calendar1.getTime())) {
+                                    listPrepareToCheckout.add(qrcode);
+                                } else {
+                                    listInUse.add(qrcode);
+                                }
+                            } else {
+                                listReserved.add(qrcode);
+                            }
+                        }
+
+                        request.setAttribute("listLocation", listLocation);
+                        request.setAttribute("listClear", listClear);
+                        request.setAttribute("listInUse", listInUse);
+                        request.setAttribute("listReserved", listReserved);
+                        request.setAttribute("listPrepareToCheckout", listPrepareToCheckout);
+                        request.getRequestDispatcher("AdminTemplate/roombooking.jsp").forward(request, response);
+                    } catch (ParseException ex) {
+                        System.out.println("error:" + ex.getMessage());
+                        Logger.getLogger(Employee_Room.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    //end your job
                 } else {
-                    listReserved.add(qrcode);
+                    out.print("<h1>You do not have permission</h1>");
                 }
+            } else {
+                request.getRequestDispatcher("Admin_Login").forward(request, response);
             }
-
-            request.setAttribute("listLocation", listLocation);
-            request.setAttribute("listClear", listClear);
-            request.setAttribute("listInUse", listInUse);
-            request.setAttribute("listReserved", listReserved);
-            request.setAttribute("listPrepareToCheckout", listPrepareToCheckout);
-            request.getRequestDispatcher("AdminTemplate/roombooking.jsp").forward(request, response);
-        } catch (ParseException ex) {
-            System.out.println("error:" + ex.getMessage());
-            Logger.getLogger(Employee_Room.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         //processRequest(request, response);
-    } 
+    }
 
     /**
      * Handles the HTTP <code>POST</code> method.

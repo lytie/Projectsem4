@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.GenericType;
 import wsc.AccountemployeeClient;
 
@@ -58,24 +59,39 @@ public class Admin_Employee extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("id");
-        String action = request.getParameter("action");
-        if (action != null) {
-            AccountemployeeClient accountemployeeClient = new AccountemployeeClient();
-            GenericType<Accountemployee> genAccountemployeee = new GenericType<Accountemployee>() {
-            };
-            Accountemployee accountemployee = accountemployeeClient.find_JSON(genAccountemployeee, id);
-            if (action.equals("deactive")) {
-                accountemployee.setStatus(Boolean.FALSE);
+        try (PrintWriter out = response.getWriter()) {
+            HttpSession session = request.getSession();
+            Accountemployee sessionAccountemployee = (Accountemployee) session.getAttribute("accountemployee");
+            if (sessionAccountemployee != null) {               
+                if (sessionAccountemployee.getRoleId().getRoleId() == 1) {
+                    //do your job here
+                    String id = request.getParameter("id");
+                    String action = request.getParameter("action");
+                    if (action != null) {
+                        AccountemployeeClient accountemployeeClient = new AccountemployeeClient();
+                        GenericType<Accountemployee> genAccountemployeee = new GenericType<Accountemployee>() {
+                        };
+                        Accountemployee accountemployee = accountemployeeClient.find_JSON(genAccountemployeee, id);
+                        if (action.equals("deactive")) {
+                            accountemployee.setStatus(Boolean.FALSE);
+                        }
+                        if (action.equals("active")) {
+                            accountemployee.setStatus(Boolean.TRUE);
+                        }
+                        accountemployeeClient.edit_JSON(accountemployee, accountemployee.getAccountId().toString());
+                        processRequest(request, response);
+                    } else {
+                        processRequest(request, response);
+                    }
+                    //end your job
+                } else {
+                    out.print("<h1>You do not have permission</h1>");
+                }
+            }else{
+                request.getRequestDispatcher("Admin_Login").forward(request, response);
             }
-            if (action.equals("active")) {
-                accountemployee.setStatus(Boolean.TRUE);
-            }
-            accountemployeeClient.edit_JSON(accountemployee, accountemployee.getAccountId().toString());
-            processRequest(request, response);
-        }else{
-            processRequest(request, response);
-        }   
+        }
+       
     }
 
     /**

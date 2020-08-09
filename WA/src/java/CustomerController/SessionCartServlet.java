@@ -155,7 +155,7 @@ public class SessionCartServlet extends HttpServlet {
                     ticket.setTicketName(item.getService().getServiceName());
                     ticket.setTicketId(stringGenerator.generate(200));
                     qrcodeGen.createQr(ticket.getTicketId(), "ticket", "ticket" + String.valueOf(Integer.valueOf(ticketClient.countREST()) + 1), "png");
-                    ticket.setTicketUrl("ticket" + String.valueOf(Integer.valueOf(ticketClient.countREST()) + 1));
+                    ticket.setTicketUrl("ticket" + String.valueOf(Integer.valueOf(ticketClient.countREST()) + 1)+".png");
                     ticket.setBuyerID(qrcode);
                     ticket.setBuyDate(new Date());
                     ticketClient.create_JSON(ticket);

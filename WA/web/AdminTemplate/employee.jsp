@@ -86,15 +86,11 @@
 
                                                             <td>
 
-                                                                <a class="btn btn-info btn-sm" href="Admin_UpdateEmployee">
-                                                                    <i class="fas fa-pencil-alt">
-                                                                    </i>
-                                                                    Edit
-                                                                </a>
+                                                                
                                                                 <a class="btn btn-danger btn-sm" href="#">
                                                                     <i class="fas fa-trash">
                                                                     </i>
-                                                                    Delete
+                                                                    Deactive
                                                                 </a>
                                                             </td>
                                                         </tr>

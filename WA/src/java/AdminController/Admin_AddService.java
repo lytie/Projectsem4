@@ -6,17 +6,21 @@
 package AdminController;
 
 import bean.UploadServlet;
+import entities.Accountemployee;
 import entities.Service;
 import entities.Servicetype;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.GenericType;
+import wsc.AccountemployeeClient;
 import wsc.ServiceClient;
 import wsc.ServicetypeClient;
 
@@ -42,7 +46,13 @@ public class Admin_AddService extends HttpServlet {
             ServicetypeClient servicetypeClient=new ServicetypeClient();
             GenericType<List<Servicetype>> genericType=new GenericType<List<Servicetype>>(){};
             List<Servicetype> servicetypes=servicetypeClient.findAll_JSON(genericType);
-            request.setAttribute("serviceType", servicetypes);
+            List<Servicetype> listServicetype = new ArrayList<>();
+            for (Servicetype servicetype : servicetypes) {
+                if (servicetype.getServiceTypeId()<4) {
+                    listServicetype.add(servicetype);
+                }
+            }
+            request.setAttribute("serviceType", listServicetype);
             /* TODO output your page here. You may use following sample code. */
             request.getRequestDispatcher("AdminTemplate/addservice.jsp").forward(request, response);
         }
@@ -60,7 +70,21 @@ public class Admin_AddService extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try (PrintWriter out = response.getWriter()) {
+            HttpSession session = request.getSession();
+            Accountemployee sessionAccountemployee = (Accountemployee) session.getAttribute("accountemployee");
+            if (sessionAccountemployee != null) {               
+                if (sessionAccountemployee.getRoleId().getRoleId() == 1) {
+                    //do your job here
+                    processRequest(request, response);
+                    //end your job
+                } else {
+                    out.print("<h1>You do not have permission</h1>");
+                }
+            }else{
+                request.getRequestDispatcher("Admin_Login").forward(request, response);
+            }
+        }
     }
 
     /**

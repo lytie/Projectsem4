@@ -6,6 +6,7 @@
 package AdminController;
 
 import bean.UploadServlet;
+import entities.Accountemployee;
 import entities.Convenient;
 import entities.ImgHero;
 import entities.Location;
@@ -23,7 +24,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.GenericType;
+import wsc.AccountemployeeClient;
 import wsc.ConvenientClient;
 import wsc.ImgHeroClient;
 import wsc.LocationClient;
@@ -107,24 +110,37 @@ public class Admin_UpdateRoom extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String id = request.getParameter("id");
-        String action = request.getParameter("action");
-        if (action != null) {
-            RoomClient roomClient = new RoomClient();
-            GenericType<Room> genRoom = new GenericType<Room>() {
-            };
-            Room room = roomClient.find_JSON(genRoom, id);
-            if (action.equals("deactive")) {
-                room.setStatus(Boolean.FALSE);
+        try (PrintWriter out = response.getWriter()) {
+            HttpSession session = request.getSession();
+            Accountemployee sessionAccountemployee = (Accountemployee) session.getAttribute("accountemployee");
+            if (sessionAccountemployee != null) {
+                if (sessionAccountemployee.getRoleId().getRoleId() == 1) {
+                    //do your job here
+                    String id = request.getParameter("id");
+                    String action = request.getParameter("action");
+                    if (action != null) {
+                        RoomClient roomClient = new RoomClient();
+                        GenericType<Room> genRoom = new GenericType<Room>() {
+                        };
+                        Room room = roomClient.find_JSON(genRoom, id);
+                        if (action.equals("deactive")) {
+                            room.setStatus(Boolean.FALSE);
+                        }
+                        if (action.equals("active")) {
+                            room.setStatus(Boolean.TRUE);
+                        }
+                        roomClient.edit_JSON(room, room.getRoomId().toString());
+                        request.getRequestDispatcher("Admin_ListRoom").forward(request, response);
+                    } else {
+                        processRequest(request, response);
+                    }
+                    //end your job
+                } else {
+                    out.print("<h1>You do not have permission</h1>");
+                }
+            } else {
+                request.getRequestDispatcher("Admin_Login").forward(request, response);
             }
-            if (action.equals("active")) {
-                room.setStatus(Boolean.TRUE);
-            }
-            roomClient.edit_JSON(room, room.getRoomId().toString());
-            request.getRequestDispatcher("Admin_ListRoom").forward(request, response);
-        }else{
-            processRequest(request, response);
         }
 
     }

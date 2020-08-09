@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package AdminController;
 
 import bean.UploadImg;
 import bean.UploadServlet;
+import entities.Accountemployee;
 import entities.Service;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,7 +17,9 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.GenericType;
+import wsc.AccountemployeeClient;
 import wsc.ServiceClient;
 
 /**
@@ -39,12 +41,13 @@ public class Admin_UpdateService extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-             String id = request.getParameter("id");
-             ServiceClient serviceClient = new ServiceClient();
-             GenericType<Service> genService = new GenericType<Service>(){};
-             Service service = serviceClient.find_JSON(genService, id);
-             request.setAttribute("service", service);
-             request.getRequestDispatcher("AdminTemplate/updateservice.jsp").forward(request, response);
+            String id = request.getParameter("id");
+            ServiceClient serviceClient = new ServiceClient();
+            GenericType<Service> genService = new GenericType<Service>() {
+            };
+            Service service = serviceClient.find_JSON(genService, id);
+            request.setAttribute("service", service);
+            request.getRequestDispatcher("AdminTemplate/updateservice.jsp").forward(request, response);
         }
     }
 
@@ -60,23 +63,39 @@ public class Admin_UpdateService extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("id");
-        String action = request.getParameter("action");
-        if (action != null) {
-            ServiceClient serviceClient = new ServiceClient();
-            GenericType<Service> genService = new GenericType<Service>(){};
-            Service service = serviceClient.find_JSON(genService, id);
-            if (action.equals("deactive")) {
-                service.setStatus(Boolean.FALSE);
+        try (PrintWriter out = response.getWriter()) {
+            HttpSession session = request.getSession();
+            Accountemployee sessionAccountemployee = (Accountemployee) session.getAttribute("accountemployee");
+            if (sessionAccountemployee != null) {
+                if (sessionAccountemployee.getRoleId().getRoleId() == 1) {
+                    //do your job here
+                    String id = request.getParameter("id");
+                    String action = request.getParameter("action");
+                    if (action != null) {
+                        ServiceClient serviceClient = new ServiceClient();
+                        GenericType<Service> genService = new GenericType<Service>() {
+                        };
+                        Service service = serviceClient.find_JSON(genService, id);
+                        if (action.equals("deactive")) {
+                            service.setStatus(Boolean.FALSE);
+                        }
+                        if (action.equals("active")) {
+                            service.setStatus(Boolean.TRUE);
+                        }
+                        serviceClient.edit_JSON(service, service.getServiceId().toString());
+                        request.getRequestDispatcher("Admin_Services").forward(request, response);
+                    } else {
+                        processRequest(request, response);
+                    }
+                    //end your job
+                } else {
+                    out.print("<h1>You do not have permission</h1>");
+                }
+            } else {
+                request.getRequestDispatcher("Admin_Login").forward(request, response);
             }
-            if (action.equals("active")) {
-                service.setStatus(Boolean.TRUE);
-            }
-            serviceClient.edit_JSON(service, service.getServiceId().toString());
-            request.getRequestDispatcher("Admin_Services").forward(request, response);
-        }else{
-            processRequest(request, response);
         }
+        
     }
 
     /**
@@ -90,13 +109,14 @@ public class Admin_UpdateService extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         try (PrintWriter out = response.getWriter()) {
             UploadServlet uploadServlet = new UploadServlet();
 
             ServiceClient serviceClient = new ServiceClient();
-            GenericType<Service> genService = new GenericType<Service>(){};
-            
+            GenericType<Service> genService = new GenericType<Service>() {
+            };
+
             String id = null;
             String name = null;
             String price = null;
@@ -136,9 +156,9 @@ public class Admin_UpdateService extends HttpServlet {
             service.setServicePrice(Float.parseFloat(price));
             service.setServiceDescription(description);
             if (file != null) {
-                if (existedFile !=null) {
+                if (existedFile != null) {
                     service.setServiceurl(existedFile);
-                }else{
+                } else {
                     service.setServiceurl(file);
                 }
             }

@@ -58,12 +58,22 @@ public class CustomerPageMenuServlet extends HttpServlet {
                 ServiceClient serviceClient = new ServiceClient();
                 GenericType<List<Service>> genericListService = new GenericType<List<Service>>() {
                 };
-                List<Service> listfood = new ArrayList<Service>();
-                List<Service> listdrink = new ArrayList<Service>();
-                listfood = serviceClient.listfood_JSON(genericListService);
-                listdrink = serviceClient.listdrink_JSON(genericListService);
-                request.setAttribute("listfood", listfood);
-                request.setAttribute("listdrink", listdrink);
+                List<Service> listfood2 = new ArrayList<Service>();
+                List<Service> listdrink2 = new ArrayList<Service>();
+                List<Service> listfood = serviceClient.listfood_JSON(genericListService);
+                List<Service> listdrink = serviceClient.listdrink_JSON(genericListService);
+                for (Service service : listfood) {
+                    if (service.getStatus()) {
+                        listfood2.add(service);
+                    }
+                }
+                for (Service service : listdrink) {
+                    if (!service.getStatus()) {
+                        listdrink2.add(service);
+                    }
+                }
+                request.setAttribute("listfood", listfood2);
+                request.setAttribute("listdrink", listdrink2);
                 request.getRequestDispatcher("/customerpage/menu.jsp").forward(request, response);
             }
         }

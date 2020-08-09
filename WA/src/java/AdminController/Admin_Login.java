@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package AdminController;
 
 import entities.Accountemployee;
@@ -37,9 +36,9 @@ public class Admin_Login extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
-            if (session.getAttribute("accountemployeeid")!=null) {
-                response.sendRedirect("Haven");
-            }else{
+            if (session.getAttribute("accountemployee") != null) {
+                out.print("You already login");
+            } else {
                 request.getRequestDispatcher("AdminTemplate/login.jsp").forward(request, response);
             }
         }
@@ -57,6 +56,10 @@ public class Admin_Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        if (request.getParameter("action")!=null && request.getParameter("action").equals("logout")) {
+            HttpSession session = request.getSession();
+            session.removeAttribute("accountemployee");
+        }
         processRequest(request, response);
     }
 
@@ -74,23 +77,25 @@ public class Admin_Login extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         AccountemployeeClient accountemployeeClient = new AccountemployeeClient();
-        GenericType<Accountemployee> genAccountemployee = new GenericType<Accountemployee>(){};
+        GenericType<Accountemployee> genAccountemployee = new GenericType<Accountemployee>() {
+        };
         Accountemployee accountemployee = accountemployeeClient.login_JSON(genAccountemployee, email, password);
-        if (accountemployee !=null) {
+        if (accountemployee != null) {
+            accountemployee.setPassword("1");
             HttpSession session = request.getSession();
-            session.setAttribute("accountemployeeid", accountemployee.getAccountId());
+            session.setAttribute("accountemployee", accountemployee);
             if (accountemployee.getRoleId().getRoleId() == 1) {
                 response.sendRedirect("AdminIndexServlet");
                 //request.getRequestDispatcher("AdminIndexServlet").forward(request, response);
-            }else{
+            } else {
                 response.sendRedirect("EmployeeIndexServlet");
             }
             System.out.println("true");
-        }else{
+        } else {
             request.setAttribute("error", "Email or password wrong");
             System.out.println("false");
             request.getRequestDispatcher("AdminTemplate/login.jsp").forward(request, response);
-        } 
+        }
     }
 
     /**

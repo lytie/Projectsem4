@@ -7,6 +7,7 @@ package AdminController;
 
 import bean.UploadImg;
 import bean.UploadServlet;
+import entities.Accountemployee;
 import entities.Location;
 import java.io.File;
 import java.io.IOException;
@@ -21,11 +22,14 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.ws.rs.core.GenericType;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
+import wsc.AccountemployeeClient;
 import wsc.LocationClient;
 
 /**
@@ -64,7 +68,25 @@ public class Admin_AddLocation extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try (PrintWriter out = response.getWriter()) {
+            HttpSession session = request.getSession();
+            if (session.getAttribute("accountemployeeid") != null) {
+                int accountId =  (int) session.getAttribute("accountemployeeid");
+                AccountemployeeClient accountemployeeClient = new AccountemployeeClient();
+                GenericType<Accountemployee> genAccountemployee = new GenericType<Accountemployee>() {
+                };
+                Accountemployee accountemployee = accountemployeeClient.find_JSON(genAccountemployee, String.valueOf(accountId));
+                if (accountemployee != null && accountemployee.getRoleId().getRoleId() == 1) {
+                    //do your job
+                    processRequest(request, response);
+                    //end your job
+                } else {
+                    out.print("<h1>You do not have permission</h1>");
+                }
+            }else{
+                request.getRequestDispatcher("Admin_Login").forward(request, response);
+            }
+        }
     }
 
     /**

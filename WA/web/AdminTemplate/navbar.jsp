@@ -32,7 +32,9 @@
         </div>
     </form>
     <!-- Right navbar links -->
-
+    <ul class="navbar-nav ml-auto">
+        <a href="Admin_Login?action=logout" class="btn btn-warning" style="color: white">Log out</a>
+    </ul>
 </nav>
 <!-- /.navbar -->
 

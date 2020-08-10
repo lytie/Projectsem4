@@ -103,8 +103,20 @@
                                                         <div>Total:<fmt:formatNumber maxFractionDigits="3" type="currency" value="${receipt.getTotal()}"/></div>
                                                         <div style="border-bottom-color: #60686f;border: 1px solid"></div>
 
-                                                        <div>Prepayment:<fmt:formatNumber maxFractionDigits="3" type="currency" value="${prepayment-50}"/></div>
-                                                        <div>Amount to be paid:<fmt:formatNumber maxFractionDigits="3" type="currency" value="${receipt.getTotal()-prepayment+50}"/></div>
+                                                        <c:if test="${!o}">
+
+                                                            <div>Real Pay:<fmt:formatNumber maxFractionDigits="3" type="currency" value=" ${receipt.getSubtotal()+receipt.getTax()-receipt.getTotal()}"/></div>
+                                                            <div>Unpaid:<fmt:formatNumber maxFractionDigits="3" type="currency" value="${receipt.getTotal()-prepayment}"/></div>
+
+
+                                                        </c:if>
+                                                        <c:if test="${o}">
+
+                                                            <div>Real Pay:<fmt:formatNumber maxFractionDigits="3" type="currency" value=" ${prepayment-(receipt.getSubtotal()+receipt.getTax()-receipt.getTotal())}"/></div>
+                                                            <div>Unpaid:<fmt:formatNumber maxFractionDigits="3" type="currency" value="${receipt.getTotal()-prepayment+(receipt.getSubtotal()+receipt.getTax()-receipt.getTotal())}"/></div>
+
+
+                                                        </c:if>
 
 
                                                         <c:choose>

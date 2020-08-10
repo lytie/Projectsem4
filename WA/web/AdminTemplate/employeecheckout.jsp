@@ -74,7 +74,7 @@
                                             <div style="border-bottom-color: #eaeaea;border-bottom-style: solid">Deposits: $${qrcode.getDeposits()}</div>
                                             <div style="padding: 20px">
                                                 <a class="btn btn-warning" style="color: white" href="Employee_Checkout?qrcodeid=${qrcode.getQrCodeId()}&action=deactive">Checkout</a>
-                                                <a class="btn btn-warning" style="color: white" href="Admin_ReceiptInfo?receiptid=${qrcode.receiptId.receiptId}">Pay</a>
+                                                <a class="btn btn-warning" style="color: white" href="Admin_ReceiptInfo?receiptid=${qrcode.receiptId.receiptId}">Payment</a>
 
                                             </div>
                                         </div>

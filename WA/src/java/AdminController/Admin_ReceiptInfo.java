@@ -77,10 +77,8 @@ public class Admin_ReceiptInfo extends HttpServlet {
                 }
             }
 
-            if (!o) {
-                Prepayment = Prepayment + 50;
-            }
-
+            
+            request.setAttribute("o", o);
             request.setAttribute("prepayment", Prepayment);
             request.setAttribute("listReceiptcomponent", listReceiptcomponent);
             request.setAttribute("receipt", receipt);
@@ -140,27 +138,28 @@ public class Admin_ReceiptInfo extends HttpServlet {
             receiptcomponent.setStatus(Boolean.TRUE);
             receiptcomponentClient.edit_JSON(receiptcomponent, receiptcomponent.getReceiptComponentId().toString());
         }
+        
+        
 
-        float Prepayment = 0;
-        boolean o = false;
-        for (Receiptcomponent receiptcomponent : listReceiptcomponent) {
-
-            if (receiptcomponent.getStatus()) {
-                Prepayment = Prepayment + receiptcomponent.getSubtotal() + receiptcomponent.getSubtotal() / 10;
-                System.out.println("Prepayment" + Prepayment);
-                o = true;
-            }
-        }
-
-        if (!o) {
-            Prepayment = Prepayment + 50;
-        }
-
-        request.setAttribute("prepayment", Prepayment);
-
-        request.setAttribute("listReceiptcomponent", listReceiptcomponent);
-        request.setAttribute("receipt", re);
-        request.getRequestDispatcher("AdminTemplate/receiptinfo.jsp").forward(request, response);
+//        float Prepayment = 0;
+//        boolean o = false;
+//        for (Receiptcomponent receiptcomponent : listReceiptcomponent) {
+//
+//            if (receiptcomponent.getStatus()) {
+//                Prepayment = Prepayment + receiptcomponent.getSubtotal() + receiptcomponent.getSubtotal() / 10;
+//                System.out.println("Prepayment" + Prepayment);
+//                o = true;
+//            }
+//        }
+//
+//       
+//
+//        request.setAttribute("prepayment", Prepayment);
+//        request.setAttribute("o", o);
+//        request.setAttribute("listReceiptcomponent", listReceiptcomponent);
+//        request.setAttribute("receipt", re);
+//        request.getRequestDispatcher("Admin_QrCode").forward(request, response);
+processRequest(request, response);
 
     }
 

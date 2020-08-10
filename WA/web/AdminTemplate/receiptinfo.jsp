@@ -112,7 +112,7 @@
                                                         </c:if>
                                                         <c:if test="${o}">
 
-                                                            <div>Real Pay:<fmt:formatNumber maxFractionDigits="3" type="currency" value=" ${prepayment-(receipt.getSubtotal()+receipt.getTax()-receipt.getTotal())}"/></div>
+                                                            <div>Real Pay:<fmt:formatNumber maxFractionDigits="3" type="currency" value=" ${prepayment}"/></div>
                                                             <div>Unpaid:<fmt:formatNumber maxFractionDigits="3" type="currency" value="${receipt.getTotal()-prepayment+(receipt.getSubtotal()+receipt.getTax()-receipt.getTotal())}"/></div>
 
 

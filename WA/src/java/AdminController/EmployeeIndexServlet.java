@@ -24,6 +24,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.GenericType;
 import wsc.AdminIndexClient;
 
@@ -167,7 +168,21 @@ public class EmployeeIndexServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try (PrintWriter out = response.getWriter()) {
+            HttpSession session = request.getSession();
+            Accountemployee sessionAccountemployee = (Accountemployee) session.getAttribute("accountemployee");
+            if (sessionAccountemployee != null) {
+                if (sessionAccountemployee.getStatus()) {
+                    //do your job here
+                    processRequest(request, response);
+                    //end your job
+                } else {
+                    out.print("<h1>You do not have permission</h1>");
+                }
+            } else {
+                request.getRequestDispatcher("Admin_Login").forward(request, response);
+            }
+        }
     }
 
     /**

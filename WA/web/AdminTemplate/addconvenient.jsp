@@ -27,7 +27,20 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
-            
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h4>
+                                <a class="btn btn-info btn-sm" href="Admin_Convenient">
+                                    <i class=" fa fa-plus">
+                                    </i> Back to Convenient List
+                                </a>
+                            </h4>
+                        </div>
+                    </div>
+                    <!-- /.container-fluid -->
+            </section>
 
             <!-- Main content -->
             <section class="content">

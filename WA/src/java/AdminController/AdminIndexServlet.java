@@ -73,6 +73,8 @@ public class AdminIndexServlet extends HttpServlet {
             };
             GenericType<List<Receipt>> genListReceipt = new GenericType<List<Receipt>>() {
             };
+            GenericType<List<Accountemployee>> genListAccountemployee = new GenericType<List<Accountemployee>>() {
+            };
             //List<Accountcustomer> listAccountcustomers = accountcustomerClient.findAll_JSON(typ);
             Date date = new Date();
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -87,13 +89,21 @@ public class AdminIndexServlet extends HttpServlet {
             String yesterday = dateFormat.format(calyesterday.getTime());
             String from = request.getParameter("from");
             String to = request.getParameter("to");
-
+            String toplus1 = null;
+            if (to!= null) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(dateFormat.parse(to));
+                calendar.add(Calendar.DATE, 1);
+                toplus1 = dateFormat.format(calendar.getTime());
+            }
             List<Receiptcomponent> listNewFoodandDrinksOrders = adminIndexClient.getnewFoodandDrinkOrders(genListReceiptcomponent, today, nextday);
             List<Receiptcomponent> listNewPaidReceiptcomponents = adminIndexClient.getnewPaidReceiptComponent(genListReceiptcomponent, today, nextday);
             List<Qrcode> listNewRoomBooked = adminIndexClient.getnewRoomBooked(genListQrcode, today, nextday);
             List<Feedback> listNewFeedbacks = adminIndexClient.getnewFeedBack(genListFeedback, today, nextday);
             List<Ticket> listNewTickets = adminIndexClient.getnewTicketSold(genListTicket, today, nextday);
             List<Accountcustomer> listNewAccountcustomers = adminIndexClient.getnewUserRegistrations(genListAccountcustomer, today, nextday);
+            List<Receiptcomponent> listNewTicket = adminIndexClient.getnewTicket(genListReceiptcomponent, today, nextday);
+            List<Accountemployee> listAccountemployees = adminIndexClient.getActiveAccountEmployee(genListAccountemployee);
 
             List<Qrcode> listYesterdayRoomBooked = adminIndexClient.getnewRoomBooked(genListQrcode, yesterday, today);
             List<Receiptcomponent> listYesterdayReceiptcomponents = adminIndexClient.getnewPaidReceiptComponent(genListReceiptcomponent, yesterday, today);
@@ -107,10 +117,11 @@ public class AdminIndexServlet extends HttpServlet {
             List<Receiptcomponent> listCustomPaidReceiptcomponents = new ArrayList<>();
             System.out.println("from" + from);
             System.out.println("to" + to);
+            System.out.println("to+1:"+toplus1);
             if (from != null || to != null) {
-                listCustomRoomBooked = adminIndexClient.getnewRoomBooked(genListQrcode, from, to);
-                listCustomReceiptcomponents = adminIndexClient.getnewPaidReceiptComponent(genListReceiptcomponent, from, to);
-                listCustomPaidReceiptcomponents = adminIndexClient.getnewPaidReceiptComponent(genListReceiptcomponent, from, to);
+                listCustomRoomBooked = adminIndexClient.getnewRoomBooked(genListQrcode, from, toplus1);
+                listCustomReceiptcomponents = adminIndexClient.getnewPaidReceiptComponent(genListReceiptcomponent, from, toplus1);
+                listCustomPaidReceiptcomponents = adminIndexClient.getnewPaidReceiptComponent(genListReceiptcomponent, from, toplus1);
             } else {
                 listCustomRoomBooked = adminIndexClient.getnewRoomBooked(genListQrcode, today, nextday);
                 listCustomReceiptcomponents = adminIndexClient.getnewPaidReceiptComponent(genListReceiptcomponent, today, nextday);
@@ -199,7 +210,16 @@ public class AdminIndexServlet extends HttpServlet {
             unpaidRevenue = estimatedRevenue - allRealRevenue;
             out.println("</br>UnPaid Revenue:" + unpaidRevenue);
             out.println("</br>Estimated Revenue:" + estimatedRevenue);
-
+            int numberoftickets = 0;
+            for (Receiptcomponent receiptcomponent : listNewTicket) {
+                numberoftickets += receiptcomponent.getQuantity();
+            }
+            int numberoffnd = 0;
+            for (Receiptcomponent receiptcomponent : listNewFoodandDrinksOrders) {
+                System.out.println(receiptcomponent.getComponentName());
+                System.out.println(receiptcomponent.getQuantity());
+                numberoffnd += receiptcomponent.getQuantity();
+            }
             request.setAttribute("customRevenue", customRevenue);
             request.setAttribute("customServiceRevenue", customServiceRevenue);
             request.setAttribute("customBookingDepositsRevenue", customBookingDepositsRevenue);
@@ -218,6 +238,9 @@ public class AdminIndexServlet extends HttpServlet {
             request.setAttribute("listNewAccountcustomers", listNewAccountcustomers);
             request.setAttribute("listNewFeedbacks", listNewFeedbacks);
             request.setAttribute("listNewTickets", listNewTickets);
+            request.setAttribute("numberoftickets", numberoftickets);
+            request.setAttribute("numberoffnd", numberoffnd);
+            request.setAttribute("listAccountemployees", listAccountemployees);
             request.getRequestDispatcher("AdminTemplate/index.jsp").forward(request, response);
         } catch (ParseException ex) {
             Logger.getLogger(AdminIndexServlet.class.getName()).log(Level.SEVERE, null, ex);

@@ -64,7 +64,7 @@
                                             <h3 class="card-title">Banner Image</h3>
                                         </div>
                                         <form action="Admin_ImgHero" method="post">
-                                            <div style="float: right;margin-right: 5%">
+                                            <div style="float: right;margin-right: 5%;padding: 10px">
                                                 <a class="btn btn-info btn-sm" href="Admin_AddImgHero">
                                                     <i class=" fa fa-plus">
                                                     </i> Add Banner

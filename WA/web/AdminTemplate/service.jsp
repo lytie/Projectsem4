@@ -74,11 +74,11 @@
                                                 <table id="example1" class="table table-bordered table-striped">
                                                     <thead>
                                                         <tr>
-                                                            <th>Service Name</th>
-                                                            <th>Price</th>
-                                                            <th>Description</th>
-                                                            <th>URL</th>
-                                                            <th>Action</th>
+                                                            <th width="15%">Service Name</th>
+                                                            <th width="10%">Price</th>
+                                                            <th width="35%">Description</th>
+                                                            <th width="20%">URL</th>
+                                                            <th width="20%">Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>

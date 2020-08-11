@@ -85,18 +85,18 @@
                                                     <td class="mailbox-name"> <a class="" href="Admin_ReadFB?feedbackid=<c:out value="${fb.getFeedBackId()}"/>">
                                                             <c:out value="${fb.getQrCodeId().getEmailSendedTo()}"/>
                                                         </a></td>
-                                                        <td class="mailbox-subject">
-                                            <fmt:formatDate value="${fb.getFeedBackTime()}" pattern="dd/MM/yyyy"/>
-                                            </td>
-                                            <td class="mailbox-attachment">
-                                                <c:out value="${fb.getQrCodeId().getCustomerName()}"/>
-                                            </td>
-                                            <td class="mailbox-date">
+                                                    <td class="mailbox-subject">
+                                                        <fmt:formatDate value="${fb.getFeedBackTime()}" pattern="dd/MM/yyyy"/>
+                                                    </td>
+                                                    <td class="mailbox-attachment">
+                                                        <c:out value="${fb.getQrCodeId().getCustomerName()}"/>
+                                                    </td>
+                                                    <td class="mailbox-date">
 
-                                            </td>
-                                            </tr>
+                                                    </td>
+                                                </tr>
 
-                                        </c:forEach>
+                                            </c:forEach>
 
                                         </tbody>
                                     </table>
@@ -146,6 +146,7 @@
 
 <!-- jQuery -->
 <%@include file="jslink.jsp" %>
+
 </body>
 
 </html>

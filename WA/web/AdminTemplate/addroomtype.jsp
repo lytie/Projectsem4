@@ -20,7 +20,20 @@
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
-
+<section class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h4>
+                                    <a class="btn btn-info btn-sm" href="Admin_RoomType">
+                                        <i class=" fa fa-plus">
+                                        </i> Back to Room Type List
+                                    </a>
+                                </h4>
+                            </div>
+                        </div>
+                        <!-- /.container-fluid -->
+                </section>
 
                 <!-- Main content -->
                 <section class="content">
@@ -90,12 +103,7 @@
                 <!-- /.content -->
             </div>
             <!-- /.content-wrapper -->
-            <footer class="main-footer">
-                <div class="float-right d-none d-sm-block">
-                    <b>Version</b> 3.0.5
-                </div>
-                <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-            </footer>
+            <%@include file="footer.jsp" %>
 
             <!-- Control Sidebar -->
             <aside class="control-sidebar control-sidebar-dark">

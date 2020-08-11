@@ -68,7 +68,7 @@ public class CustomerPageMenuServlet extends HttpServlet {
                     }
                 }
                 for (Service service : listdrink) {
-                    if (!service.getStatus()) {
+                    if (service.getStatus()) {
                         listdrink2.add(service);
                     }
                 }

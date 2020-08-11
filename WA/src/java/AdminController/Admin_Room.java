@@ -75,9 +75,19 @@ public class Admin_Room extends HttpServlet {
                         String locationid = request.getParameter("locationid");
                         String start = request.getParameter("start");
                         String end = request.getParameter("end");
+                        String endplus1 = null;
                         out.println(locationid);
                         out.println(start);
                         out.println(end);
+                        if (end != null) {
+                            Calendar calendar = Calendar.getInstance();
+                            calendar.setTime(dateFormat.parse(end));
+                            calendar.add(Calendar.DATE, 2);
+                            endplus1 = dateFormat.format(calendar.getTime());
+                        }
+                        System.out.println("start" + start);
+                        System.out.println("end" + end);
+                        System.out.println("endplus1" + endplus1);
                         Calendar calendar1 = Calendar.getInstance();
                         calendar1.setTime(dateFormat.parse(dateFormat.format(now)));
                         Calendar calendar2 = Calendar.getInstance();
@@ -88,11 +98,11 @@ public class Admin_Room extends HttpServlet {
                         if (start == null || end == null) {
                             request.setAttribute("listLocation", listLocation);
                             request.getRequestDispatcher("AdminTemplate/roombooking.jsp").forward(request, response);
-                            listQrcodeInUse = adminIndexClient.getQrcodeInUse(genListQrcode, "2020-01-01", dateFormat.format(now));
-                            listRoomNotInUse = adminIndexClient.getRoomNotInUse(genListRoom, "2020-01-01", dateFormat.format(now));
+                            listQrcodeInUse = adminIndexClient.getQrcodeInUse(genListQrcode, "2020-01-01", dateFormat.format(now), dateFormat.format(now));
+                            listRoomNotInUse = adminIndexClient.getRoomNotInUse(genListRoom, "2020-01-01", dateFormat.format(now), dateFormat.format(now));
                         } else {
-                            listQrcodeInUse = adminIndexClient.getQrcodeInUse(genListQrcode, start, end);
-                            listRoomNotInUse = adminIndexClient.getRoomNotInUse(genListRoom, start, end);
+                            listQrcodeInUse = adminIndexClient.getQrcodeInUse(genListQrcode, start, end, endplus1);
+                            listRoomNotInUse = adminIndexClient.getRoomNotInUse(genListRoom, start, end, endplus1);
                         }
 
                         List<Qrcode> listQrcodeInUse2 = new ArrayList<Qrcode>();
@@ -153,7 +163,7 @@ public class Admin_Room extends HttpServlet {
                 request.getRequestDispatcher("Admin_Login").forward(request, response);
             }
         }
-        
+
         //processRequest(request, response);
     }
 

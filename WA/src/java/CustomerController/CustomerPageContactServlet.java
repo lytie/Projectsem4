@@ -98,7 +98,13 @@ public class CustomerPageContactServlet extends HttpServlet {
             feedback.setFeedBackMessage(message);
             feedback.setFeedBackTime(Date.from(Instant.now()));
             feedbackClient.create_JSON(feedback);
-            request.getRequestDispatcher("CustomerPageIndexServlet").forward(request, response);
+            request.setAttribute("success", "<div class='success'></div>"
+                        + "         <script type=\"text/javascript\">\n"
+                        + "            $('.success').each(function () {\n"
+                        + "                swal(\"Feedback successfully!!!\", \"\", \"success\");\n"
+                        + "            });\n"
+                        + "        </script>");
+            processRequest(request, response);
         }
     }
 

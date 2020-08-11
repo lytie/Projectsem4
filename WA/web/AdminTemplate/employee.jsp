@@ -47,92 +47,93 @@
                                     </a></h4>
 
                             </div>
-                            <!-- /.container-fluid -->
-                            </section>
-
-                            <!-- Main content -->
-                            <section class="content">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="card">
-
-                                                <!-- /.card-header -->
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <h3 class="card-title">List Employee</h3>
-                                                    </div>
-                                                    <!-- /.card-header -->
-                                                    <div class="card-body">
-                                                        <table id="example1" class="table table-bordered table-striped">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Full Name</th>
-                                                                    <th>Email</th>
-                                                                    <th>Phone</th>
-                                                                    <th>Date Of Birth</th>
-                                                                    <th>Role</th>
-                                                                    <th>Action</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <c:forEach items="${listAccE}" var="s">
-                                                                    <tr>
-                                                                        <td width="15%">${s.getFullName()}</td>
-                                                                        <td width="15%">${s.getEmail()}</td>
-                                                                        <td width="15%">${s.getPhone()}</td>
-                                                                        <td width="20%"><fmt:formatDate value="${s.getDateOfBirth()}" pattern="dd/MM/yyyy"/></td>
-                                                                        <td width="10%">${s.getRoleId().getRoleName()}</td>
-                                                                        <td>
-                                                                            <c:if test="${s.getRoleId().getRoleId()!=1}">
-                                                                                <c:if test="${s.getStatus()==true}">
-                                                                                    <a class="btn btn-danger btn-sm" href="Admin_Employee?id=${s.getAccountId()}&action=deactive">
-                                                                                        <i class="fas fa-ban">
-                                                                                        </i> De-active 
-                                                                                    </a>
-                                                                                </c:if>
-                                                                                <c:if test="${s.getStatus()!=true}">
-                                                                                    <a class="btn btn-success btn-sm" href="Admin_Employee?id=${s.getAccountId()}&action=active">
-                                                                                        <i class="fas fa-check">
-                                                                                        </i> Active 
-                                                                                    </a>
-                                                                                </c:if>
-                                                                            </c:if>
-                                                                        </td>
-                                                                    </tr>
-                                                                </c:forEach>
-                                                            </tbody>
-
-                                                        </table>
-                                                    </div>
-                                                    <!-- /.card-body -->
-                                                </div>
-                                                <!-- /.card -->
-                                            </div>
-                                            <!-- /.col -->
-                                        </div>
-                                        <!-- /.row -->
-                                    </div>
-                                    <!-- /.container-fluid -->
-                            </section>
-                            <!-- /.content -->
                         </div>
-                        <!-- /.content-wrapper -->
-                        <%@include file="footer.jsp" %>
+                        <!-- /.container-fluid -->
+                </section>
 
-                        <!-- Control Sidebar -->
-                        <aside class="control-sidebar control-sidebar-dark">
-                            <!-- Control sidebar content goes here -->
-                        </aside>
-                        <!-- /.control-sidebar -->
-                    </div>
-                    <!-- ./wrapper -->
+                <!-- Main content -->
+                <section class="content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
 
-                    <!-- jQuery -->
-                    <%@include file="jslink.jsp" %>
+                                    <!-- /.card-header -->
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3 class="card-title">List Employee</h3>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <div class="card-body">
+                                            <table id="example1" class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Full Name</th>
+                                                        <th>Email</th>
+                                                        <th>Phone</th>
+                                                        <th>Date Of Birth</th>
+                                                        <th>Role</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <c:forEach items="${listAccE}" var="s">
+                                                        <tr>
+                                                            <td width="15%">${s.getFullName()}</td>
+                                                            <td width="15%">${s.getEmail()}</td>
+                                                            <td width="15%">${s.getPhone()}</td>
+                                                            <td width="20%"><fmt:formatDate value="${s.getDateOfBirth()}" pattern="dd/MM/yyyy"/></td>
+                                                            <td width="10%">${s.getRoleId().getRoleName()}</td>
+                                                            <td>
+                                                                <c:if test="${s.getRoleId().getRoleId()!=1}">
+                                                                    <c:if test="${s.getStatus()==true}">
+                                                                        <a class="btn btn-danger btn-sm" href="Admin_Employee?id=${s.getAccountId()}&action=deactive">
+                                                                            <i class="fas fa-ban">
+                                                                            </i> De-active 
+                                                                        </a>
+                                                                    </c:if>
+                                                                    <c:if test="${s.getStatus()!=true}">
+                                                                        <a class="btn btn-success btn-sm" href="Admin_Employee?id=${s.getAccountId()}&action=active">
+                                                                            <i class="fas fa-check">
+                                                                            </i> Active 
+                                                                        </a>
+                                                                    </c:if>
+                                                                </c:if>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+                                        <!-- /.card-body -->
+                                    </div>
+                                    <!-- /.card -->
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- /.row -->
+                        </div>
+                        <!-- /.container-fluid -->
+                </section>
+                <!-- /.content -->
+            </div>
+            <!-- /.content-wrapper -->
+            <%@include file="footer.jsp" %>
+
+            <!-- Control Sidebar -->
+            <aside class="control-sidebar control-sidebar-dark">
+                <!-- Control sidebar content goes here -->
+            </aside>
+            <!-- /.control-sidebar -->
+        </div>
+        <!-- ./wrapper -->
+
+        <!-- jQuery -->
+        <%@include file="jslink.jsp" %>
 
 
 
-                    </body>
+    </body>
 
-                    </html>
+</html>

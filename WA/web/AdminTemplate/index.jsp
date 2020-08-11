@@ -124,7 +124,7 @@
                                 <!-- small box -->
                                 <div class="small-box bg-info">
                                     <div class="inner">
-                                        <h3>${listNewFoodandDrinksOrders.size()}</h3>
+                                        <h3>${numberoffnd}</h3>
 
                                         <p>New Food and Drinks Orders</p>
                                     </div>
@@ -185,7 +185,7 @@
                                 <!-- small box -->
                                 <div class="small-box bg-gradient-teal">
                                     <div class="inner">
-                                        <h3>${listNewTickets.size()}</h3>
+                                        <h3>${numberoftickets}</h3>
 
                                         <p>Ticket sold</p>
                                     </div>
@@ -200,7 +200,7 @@
                                 <!-- small box -->
                                 <div class="small-box bg-gradient-fuchsia">
                                     <div class="inner">
-                                        <h3>15</h3>
+                                        <h3>${listAccountemployees.size()}</h3>
 
                                         <p>Working Employee</p>
                                     </div>
@@ -217,11 +217,11 @@
                         <div class="row" id="range">
                             <div class="col-5">
                                 From:
-                                <input type="text" required id="datepicker1" name="from" class="form-control" />
+                                <input type="text" required id="datepicker1" autocomplete="off" name="from" class="form-control" />
                             </div>
                             <div class="col-5">
                                 To:
-                                <input type="text" required id="datepicker2" name="to" class="form-control" />
+                                <input type="text" required id="datepicker2" autocomplete="off" name="to" class="form-control" />
                             </div>
                             <div class="col-2">
                                 <button class="btn btn-warning btn-sm" style="padding: 10%" onclick="ExportPdf()">

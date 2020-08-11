@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -23,6 +23,10 @@
    
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
+        <c:if test="${sessionScope.accountemployee.getRoleId().getRoleId() == 1}">
+            <a href="AdminIndexServlet" class="btn btn-info" style="color: white;margin-right: 10px">To admin page</a>
+        </c:if>
+        
         <a href="Admin_Login?action=logout" class="btn btn-warning" style="color: white">Log out</a>
     </ul>
 </nav>
@@ -42,7 +46,7 @@
         <!-- Sidebar user (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="info col-12">
-                <a href="EmployeeIndexServlet" class="d-block">Reception/<span style="color: #c59636">Trinh Thiem Bao</span></a>
+                <a href="EmployeeIndexServlet" class="d-block">${sessionScope.accountemployee.getRoleId().getRoleName()}/<span style="color: #c59636">${sessionScope.accountemployee.getFullName()}</span></a>
             </div>
         </div>
 
@@ -53,7 +57,7 @@
        with font-awesome or any other icon font library -->
 
                 <li class="nav-item has-treeview">
-                    <a href="Employee_Information?id=1" class="nav-link">
+                    <a href="Employee_Information?id=${sessionScope.accountemployee.getAccountId()}" class="nav-link">
                         <i class="nav-icon fa fa-user"></i>
                         <p>
                             Your Information

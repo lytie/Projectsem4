@@ -48,7 +48,7 @@
                             <div class="col-sm-6">
                                 <h4>
                                     <button class="btn btn-warning btn-sm" onclick="ExportPdf()">
-                                        <i class="fa fa-download"></i> Download Receipt 
+                                        <i class="fa fa-download"></i> Print Receipt 
                                     </button>
                                 </h4>
                             </div>

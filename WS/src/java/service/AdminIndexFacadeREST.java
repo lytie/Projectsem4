@@ -88,6 +88,26 @@ public class AdminIndexFacadeREST {
     }
 
     @GET
+    @Path("getnewticket/{today}/{nextday}")
+    @Produces("application/json")
+    public List<Receiptcomponent> getnewTicket(@PathParam("today") String today, @PathParam("nextday") String nextday) {
+        String query = "SELECT * FROM receiptcomponent where ServiceTypeId = 3 and OrderDate >= ? and OrderDate < ?";
+        List<Receiptcomponent> listReceiptcomponent = (List<Receiptcomponent>) em.createNativeQuery(query, Receiptcomponent.class)
+                .setParameter(1, today)
+                .setParameter(2, nextday)
+                .getResultList();
+        return listReceiptcomponent;
+    }
+    @GET
+    @Path("getactiveaccountemployee")
+    @Produces("application/json")
+    public List<Accountemployee> getActiveAccountEmployee() {
+        String query = "Select * from accountemployee where Status = 1;";
+        List<Accountemployee> listAccountemployees = (List<Accountemployee>) em.createNativeQuery(query, Accountemployee.class).getResultList();
+        return listAccountemployees;
+    }
+    
+    @GET
     @Path("getnewroombooked/{today}/{nextday}")
     @Produces("application/json")
     public List<Qrcode> getnewRoomBooked(@PathParam("today") String today, @PathParam("nextday") String nextday) {
@@ -145,9 +165,9 @@ public class AdminIndexFacadeREST {
     }
 
     @GET
-    @Path("getqrcodeinuse/{from}/{to}")
+    @Path("getqrcodeinuse/{from}/{to}/{toplus1}")
     @Produces("application/json")
-    public List<Qrcode> getQrcodeInUse(@PathParam("from") String from, @PathParam("to") String to) {
+    public List<Qrcode> getQrcodeInUse(@PathParam("from") String from, @PathParam("to") String to, @PathParam("toplus1") String toplus1) {
         try {
             String query = "select * from qrcode where QrCodeId in\n"
                     + "                        (\n"
@@ -160,7 +180,7 @@ public class AdminIndexFacadeREST {
                     .setParameter(1, from)
                     .setParameter(2, to)
                     .setParameter(3, from)
-                    .setParameter(4, to)
+                    .setParameter(4, toplus1)
                     .setParameter(5, from)
                     .getResultList();
             return listQrcode;
@@ -172,9 +192,9 @@ public class AdminIndexFacadeREST {
     }
 
     @GET
-    @Path("getroomnotinuse/{from}/{to}")
+    @Path("getroomnotinuse/{from}/{to}/{toplus1}")
     @Produces("application/json")
-    public List<Room> getRoomNotInUse(@PathParam("from") String from, @PathParam("to") String to) {
+    public List<Room> getRoomNotInUse(@PathParam("from") String from, @PathParam("to") String to, @PathParam("toplus1") String toplus1) {
         try {
             String query = "select * from room where RoomId not in \n"
                     + "		(\n"
@@ -190,7 +210,7 @@ public class AdminIndexFacadeREST {
                     .setParameter(1, from)
                     .setParameter(2, to)
                     .setParameter(3, from)
-                    .setParameter(4, to)
+                    .setParameter(4, toplus1)
                     .setParameter(5, from)
                     .getResultList();
             return listRoom;

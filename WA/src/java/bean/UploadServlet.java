@@ -68,7 +68,7 @@ public class UploadServlet extends HttpServlet {
 //                    System.out.println(fieldName);
 //                    System.out.println(fileName);
                     InputStream fileContent = item.getInputStream();
-                    File file = new File(("/" + outputFile + url + "/" + fileName).trim());
+                    File file = new File((outputFile + url + "/" + fileName).trim());
                     if (file.exists() && file.isFile()) {
                         listrequest.put("existedFile" + count, file.getName());
                         System.out.println("file exists rồi");

@@ -107,7 +107,7 @@ public class PaymentServices {
 
     private RedirectUrls getRedirectURLs() {
         RedirectUrls redirectUrls = new RedirectUrls();
-        redirectUrls.setCancelUrl("http://localhost:8080/WA/cancel.jsp");
+        redirectUrls.setCancelUrl("http://localhost:8080/WA/CustomerPageIndexServlet");
         redirectUrls.setReturnUrl("http://localhost:8080/WA/ReviewPaymentServlet");
 
         return redirectUrls;

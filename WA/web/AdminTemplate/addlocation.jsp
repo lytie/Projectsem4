@@ -30,7 +30,21 @@
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h4>
+                                    <a class="btn btn-info btn-sm" href="Admin_Location">
+                                        <i class=" fa fa-plus"></i> Back to location
+                                    </a>
+                                </h4>
+                            </div>
 
+                        </div>
+                    </div>
+                    <!-- /.container-fluid -->
+                </section>
 
                 <!-- Main content -->
                 <section class="content">
@@ -47,27 +61,27 @@
                                     <!-- form start -->
                                     <form role="form" id="quickForm" action="Admin_AddLocation" method="post" enctype="multipart/form-data">
                                         <div class="card-body">
-                                            
+
                                             <div class="form-group ">
                                                 <label >Location Name :</label>
                                                 <input type="text" name="name" class="form-control" id="" placeholder="Location Name" required="">
                                             </div>
-                                          <div class="form-group ">
+                                            <div class="form-group ">
                                                 <label >Address :</label>
                                                 <input type="text" name="address" class="form-control" id="" placeholder="Address" required="">
                                             </div>
-                                             <div class="form-group">
+                                            <div class="form-group">
                                                 <label >Introduce :</label>
                                                 <textarea cols="100" rows="4" class="form-control" name="introduce" required=""></textarea>
                                             </div>
-                                                
+
                                             <div class="form-group col-md-6">
-                                                                                          
+
                                                 <img id='output' width='200' />	
 
                                                 <input type='file' class="form-control"  accept='image/*' name='file' id='file'  onchange='loadFile(event)' >
                                                 <script>
-                                                    var loadFile = function (event) {
+                                                    var loadFile = function(event) {
                                                         var image = document.getElementById('output');
                                                         image.src = URL.createObjectURL(event.target.files[0]);
                                                     };
@@ -109,7 +123,8 @@
         <!-- ./wrapper -->
 
         <!-- jQuery -->
-          <%@include file="jslink.jsp" %>
+        <%@include file="jslink.jsp" %>
+        ${success}
     </body>
 
 </html>

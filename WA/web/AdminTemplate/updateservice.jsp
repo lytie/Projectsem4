@@ -24,9 +24,9 @@
                         <div class="row mb-2">
                             <div class="col-sm-6">
                                 <h4>
-                                    <a class="btn btn-info btn-sm" href="Admin_ListRoom">
+                                    <a class="btn btn-info btn-sm" href="Admin_Services">
                                         <i class=" fa fa-plus">
-                                        </i> Back to list
+                                        </i> Back to Services list
                                     </a>   
                                 </h4>
                             </div>

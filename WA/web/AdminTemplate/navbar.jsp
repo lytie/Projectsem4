@@ -33,7 +33,8 @@
     </form>
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-        <a href="Admin_Login?action=logout" class="btn btn-warning" style="color: white">Log out</a>
+        <a href="EmployeeIndexServlet" class="btn btn-info" style="color: white;margin-right: 10px">To employee page</a>
+        <a href="Admin_Login?action=logout" class="btn btn-warning" style="color: white">Log out</a> 
     </ul>
 </nav>
 <!-- /.navbar -->
@@ -52,7 +53,7 @@
         <!-- Sidebar user (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="info col-12">
-                <a href="AdminIndexServlet" class="d-block">HOME PAGE/<span style="color: #c59636">Trinh Thiem Bao</span></a>
+                <a href="AdminIndexServlet" class="d-block">HOME PAGE/<span style="color: #c59636">${sessionScope.accountemployee.getFullName()}</span></a>
             </div>
         </div>
 

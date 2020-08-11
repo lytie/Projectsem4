@@ -140,7 +140,16 @@ public class Admin_AddLocation extends HttpServlet {
             }
 
             locationClient.create_JSON(location);
-            request.getRequestDispatcher("Admin_Location").forward(request, response);
+            request.setAttribute("success", "<div class='success'></div>"
+                        + "         <script type=\"text/javascript\">\n"
+                        + "            $('.success').each(function () {\n"
+                        + "                swal(\"Add Location success!!!\", \"\", \"success\");\n"
+                        + "            });\n"
+                        + "        </script>");
+            request.getRequestDispatcher("AdminTemplate/addlocation.jsp").forward(request, response);
+            //request.getRequestDispatcher("Admin_Location").forward(request, response);
+            //Thread.sleep(1000);
+            //response.sendRedirect("Admin_Location");
         } catch (Exception ex) {
             request.setAttribute("error", ex.getMessage());
             request.getRequestDispatcher("AdminTemplate/addlocation.jsp").forward(request, response);

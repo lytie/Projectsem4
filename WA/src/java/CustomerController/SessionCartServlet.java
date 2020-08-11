@@ -127,7 +127,7 @@ public class SessionCartServlet extends HttpServlet {
     }
 
     protected void doGet_Confirm(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, WriterException {
+            throws ServletException, IOException, WriterException, InterruptedException {
         HttpSession session = request.getSession();
         TicketClient ticketClient = new TicketClient();
         ReceiptcomponentClient receiptcomponentClient = new ReceiptcomponentClient();
@@ -154,8 +154,9 @@ public class SessionCartServlet extends HttpServlet {
                     ticket.setQuantity(Integer.valueOf(request.getParameter("quantity" + cart.indexOf(item))));
                     ticket.setTicketName(item.getService().getServiceName());
                     ticket.setTicketId(stringGenerator.generate(200));
-                    qrcodeGen.createQr(ticket.getTicketId(), "ticket", "ticket" + String.valueOf(Integer.valueOf(ticketClient.countREST()) + 1), "png");
-                    ticket.setTicketUrl("ticket" + String.valueOf(Integer.valueOf(ticketClient.countREST()) + 1)+".png");
+                    String random = stringGenerator.generate(30);
+                    qrcodeGen.createQr(ticket.getTicketId(), "ticket", "ticket" + random, "png");
+                    ticket.setTicketUrl("ticket" + random+".png");
                     ticket.setBuyerID(qrcode);
                     ticket.setBuyDate(new Date());
                     ticketClient.create_JSON(ticket);
@@ -210,7 +211,7 @@ public class SessionCartServlet extends HttpServlet {
             } else if (action.equalsIgnoreCase("confirm")) {
                 try {
                     doGet_Confirm(request, response);
-                } catch (WriterException ex) {
+                } catch (WriterException | InterruptedException ex) {
                     Logger.getLogger(SessionCartServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }

@@ -138,10 +138,6 @@
         <servlet-class>AdminController.Admin_AddRoom</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Admin_AddRoomImage</servlet-name>
-        <servlet-class>AdminController.Admin_AddRoomImage</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>Admin_AddRoomType</servlet-name>
         <servlet-class>AdminController.Admin_AddRoomType</servlet-class>
     </servlet>
@@ -270,10 +266,6 @@
         <servlet-class>AdminController.Employee_Room</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Employee_RoomInfo</servlet-name>
-        <servlet-class>AdminController.Employee_RoomInfo</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>Employee_Checkin</servlet-name>
         <servlet-class>AdminController.Employee_Checkin</servlet-class>
     </servlet>
@@ -312,6 +304,10 @@
     <servlet>
         <servlet-name>Login_Google</servlet-name>
         <servlet-class>BookingController.Login_Google</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Admin_AddRoomImage</servlet-name>
+        <servlet-class>AdminController.Admin_AddRoomImage</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>CustomerPageMenuServlet</servlet-name>
@@ -454,10 +450,6 @@
         <url-pattern>/Admin_AddRoom</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Admin_AddRoomImage</servlet-name>
-        <url-pattern>/Admin_AddRoomImage</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>Admin_AddRoomType</servlet-name>
         <url-pattern>/Admin_AddRoomType</url-pattern>
     </servlet-mapping>
@@ -576,10 +568,6 @@
     <servlet-mapping>
         <servlet-name>Employee_Room</servlet-name>
         <url-pattern>/Employee_Room</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Employee_RoomInfo</servlet-name>
-        <url-pattern>/Employee_RoomInfo</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Employee_Checkin</servlet-name>

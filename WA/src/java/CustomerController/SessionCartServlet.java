@@ -88,7 +88,7 @@ public class SessionCartServlet extends HttpServlet {
             request.setAttribute("msg", "<div class='error'></div>"
                     + "         <script type=\"text/javascript\">\n"
                     + "            $('.error').each(function () {\n"
-                    + "                swal(\"You have to check-in first to order!!!\", \"\", \"error\");\n"
+                    + "                swal(\"Please active your account to order!!!\", \"\", \"error\");\n"
                     + "            });\n"
                     + "        </script>");
             request.getRequestDispatcher("/CustomerPageIndexServlet").forward(request, response);

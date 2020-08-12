@@ -70,7 +70,7 @@
                             </span>
 
                             <span class="txt22 m-t-20">
-                                $${d.getServicePrice()}<a href="SessionCartServlet?action=add&serviceid=${d.getServiceId()}" class="btn btn-outline-warning "  >Add to orders</a>
+                                $${d.getServicePrice()}<a href="SessionCartServlet?action=add&serviceid=${d.getServiceId()}" style="margin-left: 10px" class="btn btn-outline-warning "  >Add to orders</a>
                             </span>
                         </div>
                     </div>

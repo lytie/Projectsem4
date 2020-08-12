@@ -320,8 +320,8 @@
         kendo.drawing
                 .drawDOM("#result",
                         {
-                            paperSize: "A3",
-                            margin: {top: "1cm", bottom: "1cm"},
+                            paperSize: "A2",
+                            margin: {top: "1cm", bottom: "1cm",left:"5cm"},
                             scale: 0.8,
                             height: 300
                         })

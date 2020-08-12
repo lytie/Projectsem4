@@ -123,7 +123,7 @@ public class SignUp extends HttpServlet {
                 errPhone = null;
             }
 
-            if (pass.isEmpty()) {
+            if (pass.trim().isEmpty()) {
                 errPass = "Please enter Password";
             } else if (pass.length() < 8) {
                 errPass = "Password length must be at least 8 characters";

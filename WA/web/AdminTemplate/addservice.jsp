@@ -75,7 +75,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputPassword1">Price :</label>
-                                                <input type="number" name="price" min="0" class="form-control" id="exampleInputFullName" placeholder="Price" required="">
+                                                <input type="number" name="price" min="0" max="10000" class="form-control" id="exampleInputFullName" placeholder="Price" required="">
                                             </div>
 
                                             <div class="form-group">

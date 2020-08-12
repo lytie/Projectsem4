@@ -83,7 +83,7 @@
                                             <div class="row">
                                                 <div class="form-group col-md-4">
                                                     <label >Price ($):</label>
-                                                    <input type="number" min="0" name="price" class="form-control"  placeholder="Enter Price" required="">
+                                                    <input type="number" min="0" max="10000" name="price" class="form-control"  placeholder="Enter Price" required="">
                                                 </div>
 
                                                 <div class="form-group col-md-4">
